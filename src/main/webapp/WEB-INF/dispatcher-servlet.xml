@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- 扫描controller（controller层注入） -->
+    <!--com.mark.java.controller是我们在我们自己的java包里创建的包-->
+    <!-- 自动扫描包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <!--启用spring的一些annotation -->
+    <context:annotation-config/>
+
+
+    <context:component-scan base-package="com.world.ico.controller">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <!--排除@service注解的类-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+
+
+    <mvc:annotation-driven />
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--关联pages页面-->
+        <property name="prefix" value="/WEB-INF/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 扫描controller,service（controller,service层注入） -->
+
+
+    <!-- 开启注解 -->
+    <mvc:annotation-driven />
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="2000000"/>
+    </bean>
+
+    <mvc:resources mapping="pages/**" location="/WEB-INF/pages/" />
+    <mvc:resources mapping="pages/css/**" location="/WEB-INF/pages/css" />
+    <mvc:resources mapping="pages/fonts/**" location="/WEB-INF/pages/fonts" />
+    <mvc:resources mapping="pages/images/**" location="/WEB-INF/pages/images" />
+    <mvc:resources mapping="pages/js/**" location="/WEB-INF/pages/js" />
+
+    <mvc:default-servlet-handler />
+
+</beans>
