@@ -1,6 +1,64 @@
 /**
  * Created by lsb on 2018/9/8.
  */
+
+
+var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;//手机号正则
+var count = 60; //间隔函数，1秒执行
+var InterValObj1; //timer变量，控制时间
+var curCount1;//当前剩余秒数
+
+function sendSMS() {
+    curCount1 = count;
+    var phone = $.trim($('#registerPhone').val());
+    if (!phoneReg.test(phone )) {
+        alert(" 请输入有效的手机号码");
+        return false;
+    }
+    $.ajax({
+        type: 'POST',
+        dataType: "text",
+        contentType:"application/json;charset=utf-8",
+        url: "/sendRegisterSMS",
+
+        data: JSON.stringify({"sid": $("#loginUser").val(), "token": $.sha1($("#loginPassword").val()),"appid":1,"templateid":1,"param":1,"mobile":1,"uid":1}),
+        success: function (data, textStatus) {
+            if(data=="success"){
+                alert("登录成功！");
+                window.location.href="/index";
+
+            }else if(data=="error"){
+                alert("登录失败：账户密码错误！");
+                window.location.href="/pages/login.html";
+            }
+        },
+        error: function (data, textStatus) {
+            alert("error");
+            console.log(data)
+
+        }
+
+    });
+    //设置button效果，开始计时
+    $("#btnSendCode1").attr("disabled", "true");
+    $("#btnSendCode1").val( + curCount1 + "秒再获取");
+    InterValObj1 = window.setInterval(SetRemainTime1, 1000); //启动计时器，1秒执行一次
+    //向后台发送处理数据
+
+}
+function SetRemainTime1() {
+    if (curCount1 == 0) {
+        window.clearInterval(InterValObj1);//停止计时器
+        $("#btnSendCode1").removeAttr("disabled");//启用按钮
+        $("#btnSendCode1").val("重新发送");
+    }
+    else {
+        curCount1--;
+        $("#btnSendCode1").val( + curCount1 + "秒再获取");
+    }
+}
+
+
 //按钮单击时执行
 function  loginUser() {
 
