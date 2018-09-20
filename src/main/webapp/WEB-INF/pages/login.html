@@ -1,207 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<html lang="en" class="login-content" data-ng-app="materialAdmin">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="Generator" content="EditPlus®">
-	<meta name="Author" content="">
-	<meta name="Keywords" content="">
-	<meta name="Description" content="">
-	<title>Material Admin</title>
-	<!--
-        作者：561568157@qq.com
-        时间：2016-01-07
-        描述：ICO
-    -->
-	<link rel="shortcut icon" href="images/logo.png">
+    <head>
 
-	<!-- Vendor CSS -->
-	<link href="css/logincss/material-design-iconic-font/css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css">
-	<!-- CSS -->
-	<link href="css/logincss/app.min.1.css" rel="stylesheet" type="text/css">
-</head>
-<body class="login-content" data-ng-controller="loginCtrl as lctrl">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Bootstrap Flat Registration Form Template</title>
 
-<div class="lc-block" id="l-login" data-ng-class="{'toggled':lctrl.login === 1}">
-	<h1 class="lean">Triangle</h1>
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/form-elements.css">
+        <link rel="stylesheet" href="assets/css/style.css">
 
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-account"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="loginUser" type="text" class="form-control" placeholder="电话号码" regex="^\w{3,16}$"/>
-		</div>
-	</div>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-male"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="loginPassword" type="password" class="form-control" placeholder="密码" regex="^\w+"/>
-		</div>
-	</div>
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="assets/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
-	<div class="clearfix"></div>
+    </head>
 
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" value="" />
-			<i class="input-helper">
-				保持登录状态
-			</i>
-		</label>
-	</div>
+    <body>
 
-	<a id="login" onclick="loginUser()" class="btn btn-login btn-danger btn-float">
-		<i class="zmdi zmdi-arrow-forward"></i>
-	</a>
-
-	<ul class="login-navigation">
-		<li class="bgm-red" data-ng-click="lctrl.login = 0; lctrl.register = 1">Register</li>
-		<li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.login = 0; lctrl.forgot = 1">Forgot Password?</li>
-	</ul>
-</div>
-
-<div class="lc-block" id="l-register" data-ng-class="{ 'toggled': lctrl.register === 1 }" data-ng-if="lctrl.register === 1">
-	<h1 class="lean">Triangle</h1>
-
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-account"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="registerPhone" type="text" class="form-control" placeholder="电话号码" regex="^\w{3,16}$"/>
-		</div>
-	</div>
-	<table border="0">
-		<tr>
-			<td align="right">
-				<div class="input-group m-b-20">
-					<span class="input-group-addon">
-						<i class="zmdi zmdi-account"></i>
-					</span>
-					<div class="fg-line">
-						<input id="registerVerCode" type="text" class="form-control" placeholder="验证码" regex="^\w{3,16}$" />
-					</div>
-
+		<!-- Top menu -->
+		<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html">Bootstrap Flat Registration Form Template</a>
 				</div>
-			</td>
-
-			<td align="left">
-				<div class="input-group m-b-20">
-
-					<div class="fg-line">
-						<input id="btnSendCode1" style="color: #fceff3;background-color:#3680ff" type="button" class="btn btn-default" value="获取验证码" onClick="sendSMS()" />
-					</div>
-
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="top-navbar-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<span class="li-text">
+								Put some text or
+							</span> 
+							<a href="#"><strong>links</strong></a> 
+							<span class="li-text">
+								here, or some icons: 
+							</span> 
+							<span class="li-social">
+								<a href="#"><i class="fa fa-facebook"></i></a> 
+								<a href="#"><i class="fa fa-twitter"></i></a> 
+								<a href="#"><i class="fa fa-envelope"></i></a> 
+								<a href="#"><i class="fa fa-skype"></i></a>
+							</span>
+						</li>
+					</ul>
 				</div>
+			</div>
+		</nav>
 
-			</td>
-		</tr>
-	</table>
+        <!-- Top content -->
+        <div class="top-content">
+        	
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>Bootstrap</strong> Flat Registration Form</h1>
+                            <div class="description">
+                            	<p>
+	                            	This is a free responsive flat registration form made with Bootstrap. 
+	                            	Download it on <a href="#"><strong>AZMIND</strong></a>, customize and use it as you like!
+                            	</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="login_box">
+                        <div class="col-sm-6 col-sm-offset-3  form-box">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>Get our eBook</h3>
+                            		<p>Fill in the form below to get instant access:</p>
+                        		</div>
+                        		<div class="form-top-right">
+                        			<i class="fa fa-pencil"></i>
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form role="form" action="" method="post" class="registration-form">
+			                    	<div class="form-group">
+			                        	<input type="text" name="loginEmail" placeholder="输入Email..." class="form-control" id="loginEmail">
+			                        </div>
+			                        <div class="form-group row">
+										<div class="col-sm-8">
+											<input type="text" name="loginCode" placeholder="输入验证码..." class="form-email form-control" id="loginCode">
+										</div>
+										<div class="col-sm-4"><img src="./images/home/client1.png"/></div>
+			                        </div>
+			                        <div class="form-group">
+			                        	<input type="password" name="loginPwd" placeholder="输入密码..." class="form-control" id="loginPwd">
+			                        </div>
+			                        <button type="submit" class="btn">登陆</button>
+									<a href="javascript:void(0)" onclick="change('reg')">注册账号</a>
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
 
 
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-account"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="registerUser" type="text" class="form-control" placeholder="用户名" regex="^\w{3,16}$"/>
+					<div class="row" id="reg_box" style="display: none;">
+						<div class="col-sm-6 col-sm-offset-3  form-box">
+							<div class="form-top">
+								<div class="form-top-left">
+									<h3>Get our eBook</h3>
+									<p>Fill in the form below to get instant access:</p>
+								</div>
+								<div class="form-top-right">
+									<i class="fa fa-pencil"></i>
+								</div>
+							</div>
+							<div class="form-bottom">
+								<form role="form" action="" method="post" class="registration-form">
+									<div class="form-group">
+										<input type="text" name="regEmail" placeholder="输入Email..." class="form-control" id="regEmail">
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-8">
+											<input type="text" name="regCode" placeholder="输入验证码..." class="form-last-name form-control" id="regCode">
+										</div>
+										<div class="col-sm-4"><img src="./images/home/client1.png" /></div>
+									</div>
+									<div class="form-group row">
+										<div class="col-sm-8">
+											<input type="text" name="regECode" placeholder="输入邮箱验证码..." class="form-last-name form-control" id="regECode">
+										</div>
+										<div class="col-sm-4"><button class="btn">点击获取验证码</button></div>
+									</div>
+									<div class="form-group">
+										<input type="password" name="regPwd" placeholder="输入密码..." class="form-control" id="regPwd">
+									</div>
+									<div class="form-group">
+										<input type="password" name="regPwd" placeholder="重复输入密码..." class="form-control" id="regRPwd">
+									</div>
+									<button type="submit" class="btn">注册</button>
+									<a href="javascript:void(0)" onclick="change('login')">登录账号</a>
+								</form>
+							</div>
+						</div>
+					</div>
+                </div>
+            </div>
 		</div>
-	</div>
 
 
+        <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/retina-1.1.0.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+        
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-male"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="registerPassword" type="password" class="form-control" placeholder="Password" regex="^\w+"/>
-		</div>
-	</div>
-
-	<div class="input-group m-b-20">
-    		<span class="input-group-addon">
-    			<i class="zmdi zmdi-male"></i>
-    		</span>
-		<div class="fg-line">
-			<input id="registerPassword2" type="password" class="form-control" placeholder="Password Again" regex="^\w+"/>
-		</div>
-	</div>
-
-	<div class="clearfix"></div>
-
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" value=""/>
-			<i class="input-helper"></i>
-			接受许可协议
-		</label>
-	</div>
-	<a id="registerUsers" onclick="registerUser()" class="btn btn-login btn-danger btn-float">
-		<i class="zmdi zmdi-arrow-forward"></i>
-	</a>
-
-	<ul class="login-navigation">
-		<li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.register = 0; lctrl.login = 1">Login</li>
-		<li data-block="#l-forget-password" class="bgm-orange" data-ng-click="lctrl.register = 0; lctrl.forgot = 1">Forgot Password?</li>
-	</ul>
-</div>
-
-<div class="lc-block" id="l-forget-password" data-ng-class="{ 'toggled': lctrl.forgot === 1 }" data-ng-if="lctrl.forgot === 1">
-	<h1 class="lean">Triangle</h1>
-	<p class="text-left">feugiat commodo sed ac lacus.</p>
-	<div class="input-group m-b-20">
-		<span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-		<div class="fg-line">
-			<input id="forgetEmail" type="text" class="form-control" placeholder="Email Address" regex="^\w+@\w+\.[a-zA-Z]+(\.[a-zA-Z]+)?$"/>
-		</div>
-	</div>
-
-	<a id="forget" onclick="forgetpassword()" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-	<ul class="login-navigation">
-		<li data-block="#l-login" class="bgm-green" data-ng-click="lctrl.forgot = 0; lctrl.login = 1">Login</li>
-		<li data-block="#l-register" class="bgm-red" data-ng-click="lctrl.forgot = 0; lctrl.register = 1">Register</li>
-	</ul>
-</div>
-</body>
-
-<script type="text/javascript" src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
-<!-- Angular -->
-<script type="text/javascript" src="js/login_js/bower_components/angular/angular.min.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/angular-resource/angular-resource.min.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/angular-animate/angular-animate.min.js"></script>
-
-
-<!-- Angular Modules -->
-<script type="text/javascript" src="js/login_js/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/angular-loading-bar/src/loading-bar.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/oclazyload/dist/ocLazyLoad.min.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-<!-- Common js -->
-<script type="text/javascript" src="js/login_js/bower_components/angular-nouislider/src/nouislider.min.js"></script>
-<script type="text/javascript" src="js/login_js/bower_components/ng-table/dist/ng-table.min.js"></script>
-
-<!-- Placeholder for IE9 -->
-<!--[if IE 9 ]>
-<script src="js/login_js/bower_components/jquery-placeholder/jquery.placeholder.min.js"></script>
-<![endif]-->
-<!-- App level -->
-<script type="text/javascript" src="js/login_js/app.js"></script>
-<script type="text/javascript" src="js/MD5.js"></script>
-<script type="text/javascript" src="js/login_js/controllers/main.js"></script>
-<script type="text/javascript" src="js/login_js/controllers/ui-bootstrap.js"></script>
-<script type="text/javascript" src="js/login_js/controllers/ui-bootstrap.js"></script>
-
-
-<!-- Template Modules -->
-<script type="text/javascript" src="js/login_js/modules/form.js"></script>
-
-<script type="text/javascript" src="js/login.js"></script>
+    </body>
 
 </html>
