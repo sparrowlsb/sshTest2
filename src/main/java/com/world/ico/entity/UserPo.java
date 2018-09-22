@@ -9,21 +9,25 @@ import javax.persistence.*;
 @Table(name="USER")
 public class UserPo {
     @Id
-    @Column(name = "id")
+    @Column(name = "user_id")
     @GeneratedValue
-    Integer id;
+    Integer user_id;
 
     @Column(name = "email")
     String email;
 
-    @Column(name = "user_name")
-    String user;
+    @Column(name = "name")
+    String name;
 
-    @Column(name = "user_password")
+    @Column(name = "password")
     String password;
 
-    public Integer getId() {
-        return id;
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getEmail() {
@@ -34,16 +38,12 @@ public class UserPo {
         this.email = email;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -53,8 +53,4 @@ public class UserPo {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
-
 }

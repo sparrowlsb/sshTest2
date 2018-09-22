@@ -5,12 +5,17 @@ package com.world.ico.service;
  */
 
 public interface LoginService {
-    public int findUser(String  user,String password);
-    public int findEmail(String  user,String password);
-    public int findUserByUsername(String user);
-    public int findUserByEmail(String eamil);
 
+    public int findUser(String  email,String password);
+    public int findEmailIdByEmail(String eamil);
 
     public void addUser(String eamil, String  user,String password);
+
+    public void addUserInfo(Integer userId);
+
+    public void addUserWallet(Integer userId);
+
+//    public void addUserLog(String eamil, String  user,String password);
+
 
 }

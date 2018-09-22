@@ -7,6 +7,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Timestamp;
 import java.util.List;
 
 
@@ -16,21 +18,28 @@ import java.util.List;
 
 public interface LoginDao extends PagingAndSortingRepository<UserPo, Integer> {
 
-    @Query(value = "select * from USER as t where t.user_name = :user and t.user_password = :password", nativeQuery = true)
-    List<Object[]> getUserByUserAndPassword(@Param("user") String user,@Param("password") String password);
 
-    @Query(value = "select * from USER as t where t.email = :email and t.user_password = :password", nativeQuery = true)
-    List<Object[]> getUserByEmailAndPassword(@Param("email") String email,@Param("password") String password);
+    @Query(value = "select * from USER as t where t.email = :email and t.password = :password", nativeQuery = true)
+    List<UserPo> getUserByEmailAndPassword(@Param("email") String email,@Param("password") String password);
 
-    @Query(value = "select * from USER as t where t.email = :email", nativeQuery = true)
-    List<Object[]> getUserByEmail( @Param("email") String email);
-
-    @Query(value = "select * from USER as t where t.user_name = :user", nativeQuery = true)
-    List<Object[]> getUserByUser( @Param("user") String user);
-
+    @Query(value = "select user_id from USER as t where t.email = :email", nativeQuery = true)
+    List<Integer> getUserIdByEmail( @Param("email") String email);
 
     @Modifying
-    @Query(value = "INSERT INTO USER (email,user_name,user_password) values (:email,:user,:password) ", nativeQuery = true)
-    void insertUserByEmailUserAndPassword(@Param("email") String email, @Param("user") String user,@Param("password") String password);
+    @Query(value = "INSERT INTO USER (email,name,password) values (:email,:name,:password) ", nativeQuery = true)
+    void insertUserByEmailNameAndPassword(@Param("email") String email, @Param("name") String name,@Param("password") String password);
+
+    @Modifying
+    @Query(value = "INSERT INTO USER_INFO (user_id) values (:user_id) ", nativeQuery = true)
+    void insertUserInfoByUserId(@Param("user_id") Integer user_id);
+
+    @Modifying
+    @Query(value = "INSERT INTO USER_WALLET (user_id,total_assets,rmb,fund_id,fund_money) values (:user_id,:total_assets,:rmb,:fund_id,:fund_money) ", nativeQuery = true)
+    void insertUserWallet(@Param("user_id") Integer user_id, @Param("total_assets") Double total_assets,@Param("rmb") Double rmb,@Param("fund_id") Integer fund_id,@Param("fund_money") Double fund_money);
+
+
+//    @Modifying
+//    @Query(value = "INSERT INTO USER_LOG (user_id,log_date,active) values (:user_id,:log_date,:active) ", nativeQuery = true)
+//    void insertUserLog(@Param("user_id") Integer user_id, @Param("log_date") Timestamp log_date, @Param("active") String active);
 
 }

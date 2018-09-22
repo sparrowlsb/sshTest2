@@ -6,7 +6,7 @@ package com.world.ico.dto;
 
 public class User {
 
-    String user;
+    String name;
     String password;
     String email;
 
@@ -18,12 +18,12 @@ public class User {
         this.email = email;
     }
 
-    public String getUser() {
-        return user;
+    public String getName() {
+        return name;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

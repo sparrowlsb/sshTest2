@@ -1,6 +1,7 @@
 package com.world.ico.service.serviceImpl;
 
 import com.world.ico.dao.LoginDao;
+import com.world.ico.entity.UserPo;
 import com.world.ico.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,25 +21,12 @@ public class LoginServiceImpl extends BaseImpl implements LoginService{
     public LoginDao loginDao;
 
     @Override
-    public int findUser(String user, String password) {
-//        String passwordSha1=hash(password,"SHA1");
-        List<Object[]> iterable =loginDao.getUserByUserAndPassword(user,password);
+    public int findUser(String email, String password) {
+        List<UserPo> iterable =loginDao.getUserByEmailAndPassword(email,password);
         if(iterable.size()==1){
             return 1;
         }else if(iterable.size()>=2){
-            return 2;
-        }else {
-            return 0;
-        }
-    }
-
-    @Override
-    public int findEmail(String email, String password) {
-        List<Object[]> iterable =loginDao.getUserByEmailAndPassword(email,password);
-        if(iterable.size()==1){
-            return 1;
-        }else if(iterable.size()>=2){
-            return 2;
+            return -1;
         }else {
             return 0;
         }
@@ -46,24 +34,14 @@ public class LoginServiceImpl extends BaseImpl implements LoginService{
 
 
     @Override
-    public int findUserByUsername(String user) {
-        List<Object[]> iterable =loginDao.getUserByUser(user);
-        if(iterable.size()==1){
-            return 1;
-        }else if(iterable.size()>=2){
-            return 2;
-        }else {
-            return 0;
-        }
-    }
+    public int findEmailIdByEmail(String eamil) {
+        List<Integer> iterable =loginDao.getUserIdByEmail(eamil);
 
-    @Override
-    public int findUserByEmail(String eamil) {
-        List<Object[]> iterable =loginDao.getUserByEmail(eamil);
         if(iterable.size()==1){
-            return 1;
+            Integer emailId= iterable.get(0);
+            return emailId;
         }else if(iterable.size()>=2){
-            return 2;
+            return -1;
         }else {
             return 0;
         }
@@ -72,8 +50,20 @@ public class LoginServiceImpl extends BaseImpl implements LoginService{
 
     @Override
     public void addUser(String eamil, String user, String password) {
-        loginDao.insertUserByEmailUserAndPassword(eamil,user,password);
 
+        loginDao.insertUserByEmailNameAndPassword(eamil,user,password);
+
+
+    }
+
+    @Override
+    public void addUserInfo(Integer userId) {
+        loginDao.insertUserInfoByUserId(userId);
+    }
+
+    @Override
+    public void addUserWallet(Integer userId) {
+        loginDao.insertUserWallet(userId,0.0,0.0,0,0.0);
     }
 
 

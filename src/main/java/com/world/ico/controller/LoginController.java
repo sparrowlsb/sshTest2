@@ -14,16 +14,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * Created by lsb on 2018/9/7.1
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired
     private LoginService loginService;
-    @RequestMapping(value = "index", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "", method = RequestMethod.GET)
 
     public String login() {
 
-        return "redirect:pages/index.html";
+        return "redirect:pages/login.html";
     }
 
 
@@ -32,33 +34,49 @@ public class LoginController {
     @ResponseBody
     public String loginByPassword(@RequestBody User user) {
 
-
-        Integer count=loginService.findUser(user.getUser(),user.getPassword());
+        if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()){
+            return "please enter email and password";
+        }
+        Integer count=loginService.findUser(user.getEmail(),user.getPassword());
         if(count==1){
             return "success";
         }
-        Integer count2=loginService.findEmail(user.getUser(),user.getPassword());
-        if(count2==1){
-            return "success";
+        return "error";
+
+    }
+
+    @RequestMapping(value = "existenceUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
+    @ResponseBody
+    public String existenceUser(@RequestBody User user) {
+
+        if(user.getEmail().isEmpty()){
+            return "please enter email";
+        }
+        Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
+        if(counByEmail!=0){
+            return "emailExistence";
         }
 
-        return "error";
+        return "success";
 
     }
 
     @RequestMapping(value = "registerUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
     @ResponseBody
     public String registerUser(@RequestBody User user) {
-
-        Integer counByEmail=loginService.findUserByEmail(user.getEmail());
+        if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){
+            return "please enter email name and password";
+        }
+        Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
         if(counByEmail!=0){
-            return "emailerror";
+            return "emailExistence";
         }
-        Integer counByUser=loginService.findUserByUsername(user.getUser());
-        if(counByUser!=0){
-            return "usernameerror";
-        }
-        loginService.addUser(user.getEmail(),user.getUser(),user.getPassword());
+
+
+        loginService.addUser(user.getEmail(),user.getName(),user.getPassword());
+        Integer emailId=loginService.findEmailIdByEmail(user.getEmail());
+        loginService.addUserInfo(emailId);
+        loginService.addUserWallet(emailId);
 
         return "success";
 
