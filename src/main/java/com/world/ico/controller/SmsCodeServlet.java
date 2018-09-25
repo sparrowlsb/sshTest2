@@ -28,7 +28,7 @@ public class SmsCodeServlet {
     private ByteArrayInputStream inputStream;
 
 
-    @RequestMapping(value = "/VerifyCode", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @RequestMapping(value = "/VerifyCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
     public void VerifyCode(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
             response.setHeader("Pragma", "No-cache");

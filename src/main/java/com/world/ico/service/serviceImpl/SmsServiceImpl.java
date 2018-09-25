@@ -3,7 +3,7 @@ package com.world.ico.service.serviceImpl;
 import com.alibaba.fastjson.JSONObject;
 import com.world.ico.dto.SmsInfo;
 import com.world.ico.service.SmsService;
-import com.world.ico.stms.HttpClientUtil;
+import com.world.ico.util.HttpClientUtil;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

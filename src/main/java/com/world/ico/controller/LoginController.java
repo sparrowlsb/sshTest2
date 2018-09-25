@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by lsb on 2018/9/7.1
  */
@@ -20,6 +23,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
+    private String RULE_EMAIL ="/^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$/";
 
     @RequestMapping(value = "", method = RequestMethod.GET)
 
@@ -34,8 +38,14 @@ public class LoginController {
     @ResponseBody
     public String loginByPassword(@RequestBody User user) {
 
+        Pattern p = Pattern.compile(RULE_EMAIL);
+        Matcher m = p.matcher(user.getEmail());
+
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()){
-            return "please enter email and password";
+            return "enter email or password is empty";
+        }
+        if(!m.matches()){
+            return "error email";
         }
         Integer count=loginService.findUser(user.getEmail(),user.getPassword());
         if(count==1){
@@ -49,8 +59,15 @@ public class LoginController {
     @ResponseBody
     public String existenceUser(@RequestBody User user) {
 
+
+        Pattern p = Pattern.compile(RULE_EMAIL);
+        Matcher m = p.matcher(user.getEmail());
+
         if(user.getEmail().isEmpty()){
-            return "please enter email";
+            return "email is empty";
+        }
+        if(!m.matches()){
+            return "error email";
         }
         Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
         if(counByEmail!=0){
@@ -64,8 +81,13 @@ public class LoginController {
     @RequestMapping(value = "registerUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
     @ResponseBody
     public String registerUser(@RequestBody User user) {
+        Pattern p = Pattern.compile(RULE_EMAIL);
+        Matcher m = p.matcher(user.getEmail());
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){
-            return "please enter email name and password";
+            return "enter email or password is empty";
+        }
+        if(!m.matches()){
+            return "error email";
         }
         Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
         if(counByEmail!=0){

@@ -1,4 +1,4 @@
-package com.world.ico.stms;
+package com.world.ico.util;
 
 import org.apache.commons.lang.StringUtils;
 

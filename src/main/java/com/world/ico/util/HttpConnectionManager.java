@@ -1,4 +1,4 @@
-package com.world.ico.stms;
+package com.world.ico.util;
 
 import org.apache.http.config.Registry;
 import org.apache.http.config.RegistryBuilder;
