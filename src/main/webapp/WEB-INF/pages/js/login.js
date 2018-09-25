@@ -64,7 +64,7 @@ function  loginUser() {
             contentType:"application/json;charset=utf-8",
             url: "/loginByPassword",
 
-            data: JSON.stringify({"user": $("#loginUser").val(), "password": $.sha1($("#loginPassword").val())}),
+            data: JSON.stringify({"user": user, "password": password}),
             success: function (data, textStatus) {
                 if(data=="success"){
                     alert("登录成功！");
@@ -111,7 +111,7 @@ function registerUser() {
             contentType:"application/json;charset=utf-8",
             url: "/registerUser",
 
-            data: JSON.stringify({"user": $("#registerUser").val(),"email": $("#registerEmail").val(),"password": $.sha1($("#registerPassword").val())}),
+            data: JSON.stringify({"user": user,"email": email,"password": password}),
             success: function (data, textStatus) {
                 if(data=="success"){
                     alert("注册成功！");
@@ -151,7 +151,7 @@ function forgetpassword() {
             contentType:"application/json;charset=utf-8",
             url: "/loginByPassword",
 
-            data: JSON.stringify({"user": $("#loginUser").val(), "password": $.sha1($("#loginPassword").val())}),
+            data: JSON.stringify({"user": user, "password": password}),
             success: function (data, textStatus) {
                 if(data=="success"){
                     window.location.href="/index";
@@ -174,5 +174,69 @@ function forgetpassword() {
     }
     if(!userPatt.test(user)&&passwordPatt.test(password)){
         alert("请输入正确账号！");
+    }
+}
+
+//点击刷新验证码图片
+function verifyClick() {
+    var time = new Date().getTime();
+    var url = config.api_prefix + config.api_verify + "?" + time;
+    $('.verifyImg').attr("src",url);
+}
+
+//页面加载
+jQuery(document).ready(function() {
+    //验证码
+    verifyClick();
+
+    /*
+     Fullscreen background
+     */
+    $.backstretch("assets/img/backgrounds/1.jpg");
+
+    $('#top-navbar-1').on('shown.bs.collapse', function(){
+        $.backstretch("resize");
+    });
+    $('#top-navbar-1').on('hidden.bs.collapse', function(){
+        $.backstretch("resize");
+    });
+
+    /*
+     Form validation
+     */
+    $('.registration-form input[type="text"], .registration-form input[type="password"], .registration-form textarea').on('focus', function() {
+        $(this).removeClass('input-error');
+    });
+
+    $('.registration-form').on('submit', function(e) {
+
+        $(this).find('input[type="text"], input[type="password"], textarea').each(function(){
+            if( $(this).val() == "" ) {
+                e.preventDefault();
+                $(this).addClass('input-error');
+            }
+            else {
+                $(this).removeClass('input-error');
+            }
+        });
+
+    });
+
+
+});
+
+function change(type){
+    if (type == 'login'){
+        $('#reg_box').fadeOut().delay(1000);
+        setTimeout(function () {
+            $('#login_box').fadeIn();
+        },500)
+
+    }else {
+        $('#login_box').fadeOut();
+        setTimeout(function () {
+            $('#reg_box').fadeIn();
+        },500)
+
     }
 }

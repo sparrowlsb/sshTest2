@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_cn">
 
     <head>
 
@@ -51,9 +51,9 @@
 						<li>
 							<!--Bootstrap Flat Registration Form-->
 							<span class="li-social">
-								<a href="#"><i class="fa fa-facebook"></i></a> 
-								<a href="#"><i class="fa fa-twitter"></i></a> 
-								<a href="#"><i class="fa fa-envelope"></i></a> 
+								<a href="#"><i class="fa fa-facebook"></i></a>
+								<a href="#"><i class="fa fa-twitter"></i></a>
+								<a href="#"><i class="fa fa-envelope"></i></a>
 								<a href="#"><i class="fa fa-skype"></i></a>
 							</span>
 						</li>
@@ -99,7 +99,7 @@
 										<div class="col-sm-8">
 											<input type="text" name="loginCode" placeholder="输入验证码..." class="form-email form-control" id="loginCode">
 										</div>
-										<div class="col-sm-4"><img src="./images/home/client1.png"/></div>
+										<div class="col-sm-4"><img class="verifyImg" src="" onclick="verifyClick()"/></div>
 			                        </div>
 			                        <div class="form-group">
 			                        	<input type="password" name="loginPwd" placeholder="输入密码..." class="form-control" id="loginPwd">
@@ -132,7 +132,7 @@
 										<div class="col-sm-8">
 											<input type="text" name="regCode" placeholder="输入验证码..." class="form-last-name form-control" id="regCode">
 										</div>
-										<div class="col-sm-4"><img src="./images/home/client1.png" /></div>
+										<div class="col-sm-4"><img class="verifyImg" src="" onclick="verifyClick()"/></div>
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-8">
@@ -162,16 +162,11 @@
 
 
         <!-- Javascript -->
+		<script src="js/common/config.js"></script>
         <script src="assets/js/jquery-1.11.1.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/retina-1.1.0.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
 		<script src="js/login.js"></script>
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
-
     </body>
 
 </html>
