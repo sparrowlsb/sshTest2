@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional
 @Service
 
-public class LoginServiceImpl extends BaseImpl implements LoginService{
+public class LoginServiceImpl implements LoginService{
 
     @Autowired
     public LoginDao loginDao;
