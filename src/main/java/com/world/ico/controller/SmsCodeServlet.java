@@ -1,8 +1,7 @@
 package com.world.ico.controller;
 
-import com.world.ico.service.SmsService;
+import com.world.ico.util.CreateSimpleMail;
 import com.world.ico.util.VerifyCodeUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-
 /**
  * Created by lsb on 2018/9/19.
  */
@@ -22,10 +19,7 @@ import java.io.IOException;
 
 public class SmsCodeServlet {
 
-    @Autowired
-    private SmsService smsService;
 
-    private ByteArrayInputStream inputStream;
 
 
     @RequestMapping(value = "/VerifyCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
@@ -49,4 +43,16 @@ public class SmsCodeServlet {
 
         }
 
+    @RequestMapping(value = "/VerifyEmailCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public void VerifyEmailCode(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
+        CreateSimpleMail.mail(verifyCode);
+        session.removeAttribute("verEmailCode");
+        session.setAttribute("verEmailCode", verifyCode.toLowerCase());
+
+
     }
+
+
+}
