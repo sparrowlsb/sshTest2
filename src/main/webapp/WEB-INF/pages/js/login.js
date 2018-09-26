@@ -13,16 +13,40 @@ var InterValObj1; //timer变量，控制时间
 var curCount1;//当前剩余秒数
 
 function sendSMS() {
+    var code = $('#regCode').val();
+    if (!code){
+        alert('请输入验证码');
+        return;
+    }
     curCount1 = count;
     var mail = $.trim($('#regEmail').val());
     if (!emailReg.test(mail )) {
         alert(" 请输入有效的邮箱号");
-        return false;
+        return;
     }
+    var url = config.api_prefix + config.api_sendEmailVerify;
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        contentType:"application/json;charset=utf-8",
+        url: url,
+        data: mail,
+        success: function (data) {
+            // if(data=="success"){
+                alert("发送成功！请登陆邮箱查看验证码！");
+            // }else if(data=="error"){
+            //     alert("发送失败！");
+            // }
+        },
+        error: function (data) {
+            alert("error");
+            console.log(data)
+        }
+    });
 
     //设置button效果，开始计时
     $("#btnSendCode1").attr("disabled", "true");
-    $("#btnSendCode1").val( + curCount1 + "秒再获取");
+    $("#btnSendCode1").html( + curCount1 + "秒再获取");
     InterValObj1 = window.setInterval(SetRemainTime1, 1000); //启动计时器，1秒执行一次
     //向后台发送处理数据
 
@@ -31,11 +55,11 @@ function SetRemainTime1() {
     if (curCount1 == 0) {
         window.clearInterval(InterValObj1);//停止计时器
         $("#btnSendCode1").removeAttr("disabled");//启用按钮
-        $("#btnSendCode1").val("重新发送");
+        $("#btnSendCode1").html("重新发送");
     }
     else {
         curCount1--;
-        $("#btnSendCode1").val( + curCount1 + "秒再获取");
+        $("#btnSendCode1").html( + curCount1 + "秒再获取");
     }
 }
 
@@ -180,7 +204,7 @@ function forgetpassword() {
 //点击刷新验证码图片
 function verifyClick() {
     var time = new Date().getTime();
-    var url = config.api_prefix + config.api_verify + "?" + time;
+    var url = config.api_prefix + config.api_getVerifyImg + "?" + time;
     $('.verifyImg').attr("src",url);
 }
 
