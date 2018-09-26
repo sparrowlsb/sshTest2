@@ -3,6 +3,7 @@ package com.world.ico.controller;
 import com.world.ico.util.CreateSimpleMail;
 import com.world.ico.util.VerifyCodeUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,11 +44,11 @@ public class SmsCodeServlet {
 
         }
 
-    @RequestMapping(value = "/VerifyEmailCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @RequestMapping(value = "/VerifyEmailCode", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public void VerifyEmailCode(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+    public void VerifyEmailCode(@RequestBody String emailAddress, HttpSession session) throws Exception {
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
-        CreateSimpleMail.mail(verifyCode);
+        CreateSimpleMail.mail(verifyCode,emailAddress);
         session.removeAttribute("verEmailCode");
         session.setAttribute("verEmailCode", verifyCode.toLowerCase());
 

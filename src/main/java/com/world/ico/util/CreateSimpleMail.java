@@ -18,7 +18,7 @@ import java.util.Properties;
  */
 
 public class CreateSimpleMail {
-    public static void mail(String verifyCode) throws Exception {
+    public static void mail(String verifyCode,String emailAddress) throws Exception {
         Properties props = new Properties();
 
         // 开启debug调试
@@ -51,7 +51,7 @@ public class CreateSimpleMail {
 
         List<String> list=new ArrayList<>();
         //实现群发，下面的方法也是可以实现群发，但是不太理想
-        transport.sendMessage(msg, InternetAddress.parse("1158362548@qq.com"));
+        transport.sendMessage(msg, InternetAddress.parse(emailAddress));
 
         transport.close();
 
