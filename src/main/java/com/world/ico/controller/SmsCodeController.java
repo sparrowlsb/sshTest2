@@ -1,6 +1,7 @@
 package com.world.ico.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.world.ico.dto.EmailAddress;
 import com.world.ico.service.serviceImpl.BaseImpl;
 import com.world.ico.util.CreateSimpleMail;
 import com.world.ico.util.VerifyCodeUtils;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -20,13 +20,13 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/sms")
 
-public class SmsCodeServlet extends BaseImpl{
+public class SmsCodeController extends BaseImpl{
 
 
 
     @RequestMapping(value = "/VerifyCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject VerifyCode(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
+    public JSONObject VerifyCode(HttpServletResponse response,HttpSession session) throws IOException {
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");
         response.setDateHeader("Expires", 0);
@@ -51,13 +51,32 @@ public class SmsCodeServlet extends BaseImpl{
 
     @RequestMapping(value = "/VerifyEmailCode", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject VerifyEmailCode(@RequestBody String emailAddress, HttpSession session) throws Exception {
+    public JSONObject VerifyEmailCode(@RequestBody EmailAddress emailAddress, HttpSession session) throws Exception {
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
-        CreateSimpleMail.mail(verifyCode,emailAddress);
+        CreateSimpleMail.mail(verifyCode,emailAddress.getAddress());
         session.removeAttribute("verEmailCode");
         session.setAttribute("verEmailCode", verifyCode.toLowerCase());
 
         JSONObject jsonObject=new JSONObject();
+        return getSuccess(jsonObject,"");
+
+    }
+    @RequestMapping(value = "/VerifyUserInfoCode", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject VerifyUserInfoCode( HttpSession session) throws Exception {
+
+        JSONObject jsonObject=new JSONObject();
+        String email= (String)session.getAttribute("email");
+        if(email.isEmpty()){
+            return getError(jsonObject,"please login first");
+        }
+
+        String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
+        CreateSimpleMail.mail(verifyCode,email);
+        session.removeAttribute("userInfoCode");
+        session.setAttribute("userInfoCode", verifyCode.toLowerCase());
+
+
         return getSuccess(jsonObject,"");
 
     }

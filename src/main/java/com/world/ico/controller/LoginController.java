@@ -1,8 +1,10 @@
 package com.world.ico.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.world.ico.dto.User;
 import com.world.ico.service.LoginService;
+import com.world.ico.service.serviceImpl.BaseImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,12 +21,12 @@ import java.util.regex.Pattern;
  */
 @Controller
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseImpl{
 
     @Autowired
     private LoginService loginService;
 
-    private String RULE_EMAIL ="/^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$/";
+    private String RULE_EMAIL ="^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$";
 
     @RequestMapping(value = "", method = RequestMethod.GET)
 
@@ -36,62 +39,94 @@ public class LoginController {
 
     @RequestMapping(value = "loginByPassword", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
     @ResponseBody
-    public String loginByPassword(@RequestBody User user) {
+    public JSONObject loginByPassword(@RequestBody User user,HttpSession session) {
 
+
+        String verCode=(String) session.getAttribute("verCode");
+        JSONObject jsonObject=new JSONObject();
+        System.out.println(verCode);
+        if(verCode.isEmpty()){
+            return getError(jsonObject,"the vercode not get");
+        }
+        if(!user.getVerCode().equalsIgnoreCase(verCode)){
+
+            return getError(jsonObject,"the vercode not right");
+        }
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
 
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()){
-            return "enter email or password is empty";
+            return getError(jsonObject,"enter email or password is empty");
         }
         if(!m.matches()){
-            return "error email";
+            return getError(jsonObject,"error email");
+
         }
         Integer count=loginService.findUser(user.getEmail(),user.getPassword());
         if(count==1){
-            return "success";
+            session.setAttribute("email",user.getEmail());
+            return getSuccess(jsonObject,"");
+
         }
-        return "error";
+        return getError(jsonObject,"error");
+
 
     }
 
     @RequestMapping(value = "existenceUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
     @ResponseBody
-    public String existenceUser(@RequestBody User user) {
-
+    public JSONObject existenceUser(@RequestBody User user) {
+        JSONObject jsonObject=new JSONObject();
 
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
 
         if(user.getEmail().isEmpty()){
-            return "email is empty";
+            return getError(jsonObject,"email is empty");
         }
         if(!m.matches()){
-            return "error email";
+            return getError(jsonObject,"error email");
         }
         Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
         if(counByEmail!=0){
-            return "emailExistence";
+            return getError(jsonObject,"emailExistence");
         }
 
-        return "success";
+        return getSuccess(jsonObject,"");
 
     }
 
     @RequestMapping(value = "registerUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
     @ResponseBody
-    public String registerUser(@RequestBody User user) {
+    public JSONObject registerUser(@RequestBody User user,HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String verCode=(String) session.getAttribute("verCode");
+        String verEamilCode=(String) session.getAttribute("verEmailCode");
+        if(verCode.isEmpty()){
+            return getError(jsonObject,"the vercode not get");
+        }
+        if(verEamilCode.isEmpty()){
+            return getError(jsonObject,"the verEmailCode not get");
+        }
+        if(!user.getVerCode().equalsIgnoreCase(verCode)){
+
+            return getError(jsonObject,"the verCode not right");
+        }
+        if(!user.getVerEmailCode().equalsIgnoreCase(verEamilCode)){
+
+            return getError(jsonObject,"the verEmailCode not right");
+        }
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){
-            return "enter email or password is empty";
+            return getError(jsonObject,"enter email or password is empty");
         }
         if(!m.matches()){
-            return "error email";
+            return getError(jsonObject,"error email");
         }
         Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
         if(counByEmail!=0){
-            return "emailExistence";
+            return getError(jsonObject,"emailExistence");
         }
 
 
@@ -99,8 +134,8 @@ public class LoginController {
         Integer emailId=loginService.findEmailIdByEmail(user.getEmail());
         loginService.addUserInfo(emailId);
         loginService.addUserWallet(emailId);
-
-        return "success";
+        session.setAttribute("email",user.getEmail());
+        return getSuccess(jsonObject,"");
 
     }
 }
