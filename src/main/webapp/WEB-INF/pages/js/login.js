@@ -30,7 +30,7 @@ function sendSMS() {
         dataType: "json",
         contentType:"application/json;charset=utf-8",
         url: url,
-        data: mail,
+        data: JSON.stringify({address: mail}),
         success: function (data) {
             // if(data=="success"){
                 alert("发送成功！请登陆邮箱查看验证码！");
@@ -82,11 +82,12 @@ function  loginUser() {
     } else if(userPatt.test(user)&&passwordPatt.test(password)) {
         //取Ajax返回结果
         //为了简单，这里简单地从文件中读取内容作为返回数据
+        var url = config.api_prefix + config.api_login;
         $.ajax({
             type: 'POST',
             dataType: "text",
             contentType:"application/json;charset=utf-8",
-            url: "/loginByPassword",
+            url: url,
 
             data: JSON.stringify({"user": user, "password": password}),
             success: function (data, textStatus) {
@@ -111,31 +112,31 @@ function  loginUser() {
 };
 function registerUser() {
 
-    alert("657657！");
-    var user=$("#registerUser").val();
-    var email=$("#registerEmail").val();
-    var password=$("#registerPassword").val();
-    var password2=$("#registerPassword2").val();
-    var userPatt=new RegExp(/^\w{3,16}$/);
-    var passwordPatt=new RegExp(/^\w+/);
+    var email=$("#regEmail").val();
+    var regCode=$("#regCode").val();
+    var regECode=$("#regECode").val();
+    var regPwd=$("#regPwd").val();
+    var regRPwd=$("#regRPwd").val();
     var emailPatt=new RegExp(/^\w+@\w+\.[a-zA-Z]+(\.[a-zA-Z]+)?$/);
-    console.log(userPatt.test(user)+"--"+passwordPatt.test(password)+"--"+emailPatt.test(email));
-    if(user==""||email==""||password==""){
+    if(email==""||regPwd==""||regRPwd==""||regCode==""||regECode==""){
         alert("请输入完整信息！");
-    }else if(!userPatt.test(user)||!passwordPatt.test(password)||!emailPatt.test(email)){
-        alert("填写格式不正确！");
-    }else if(password!=password2){
+    }else if(!emailPatt.test(email)){
+        alert("填写邮箱格式不正确！");
+    }else if(regPwd.length < 6){
+        alert("密码必须大于6位！");
+    }else if(regPwd!=regRPwd){
         alert("密码输入不一致！");
-    }else if(userPatt.test(user)&&passwordPatt.test(password)&&emailPatt.test(email)) {
+    }else{
         //取Ajax返回结果
         //为了简单，这里简单地从文件中读取内容作为返回数据
+        var url = config.api_prefix + config.api_regist;
         $.ajax({
             type: 'POST',
             dataType: "text",
             contentType:"application/json;charset=utf-8",
-            url: "/registerUser",
+            url: url,
 
-            data: JSON.stringify({"user": user,"email": email,"password": password}),
+            data: JSON.stringify({"verEmailCode": regECode,"verCode": regCode,"email": email,"password": regPwd}),
             success: function (data, textStatus) {
                 if(data=="success"){
                     alert("注册成功！");
