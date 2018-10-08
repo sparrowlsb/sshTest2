@@ -10,9 +10,9 @@ import java.security.Timestamp;
 @Table(name="FUND_PRICE")
 public class FundPricePo {
     @Id
-    @Column(name = "id")
+    @Column(name = "fund_id")
     @GeneratedValue
-    Integer id;
+    Integer fundId;
 
     @Column(name = "date")
     Timestamp date;
@@ -35,12 +35,12 @@ public class FundPricePo {
     @Column(name = "today_outmoney")
     Double todayOutmoney;
 
-    public Integer getId() {
-        return id;
+    public Integer getFundId() {
+        return fundId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setFundId(Integer fundId) {
+        this.fundId = fundId;
     }
 
     public Timestamp getDate() {

@@ -31,7 +31,6 @@ public class UserInfoController extends BaseImpl{
     public JSONObject updateInfo(@RequestBody UserInfo userInfo, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         try {
-            System.out.print("!111");
 
             String email = (String)session.getAttribute("email");
             if(email.isEmpty()){
@@ -54,8 +53,6 @@ public class UserInfoController extends BaseImpl{
 
             }
 
-            System.out.print(userInfo.getUserId()+"--"+userId);
-            System.out.print(userInfo.getEmail()+"--"+email);
             if(userInfo.getUserId()==userId && userInfo.getEmail().equals(email)){
                 if(!userInfo.getBankId().isEmpty()&&!userInfo.getBankName().isEmpty()){
                     userInfoService.updateBankInfo(userInfo.getBankName(),userInfo.getBankId(),userId);
