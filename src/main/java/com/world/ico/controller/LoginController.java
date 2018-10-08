@@ -124,8 +124,8 @@ public class LoginController extends BaseImpl{
         if(!m.matches()){
             return getError(jsonObject,"error email");
         }
-        Integer counByEmail=loginService.findEmailIdByEmail(user.getEmail());
-        if(counByEmail!=0){
+        Integer countByEmail=loginService.findEmailIdByEmail(user.getEmail());
+        if(countByEmail!=0){
             return getError(jsonObject,"emailExistence");
         }
 

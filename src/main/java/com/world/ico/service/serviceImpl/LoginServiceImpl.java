@@ -34,8 +34,8 @@ public class LoginServiceImpl implements LoginService{
 
 
     @Override
-    public int findEmailIdByEmail(String eamil) {
-        List<Integer> iterable =loginDao.getUserIdByEmail(eamil);
+    public int findEmailIdByEmail(String email) {
+        List<Integer> iterable =loginDao.getUserIdByEmail(email);
 
         if(iterable.size()==1){
             Integer emailId= iterable.get(0);
