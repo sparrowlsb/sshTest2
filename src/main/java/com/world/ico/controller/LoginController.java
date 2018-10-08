@@ -26,7 +26,7 @@ public class LoginController extends BaseImpl{
     @Autowired
     private LoginService loginService;
 
-    private String RULE_EMAIL ="^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$";
+    private final String RULE_EMAIL ="^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$";
 
     @RequestMapping(value = "", method = RequestMethod.GET)
 
