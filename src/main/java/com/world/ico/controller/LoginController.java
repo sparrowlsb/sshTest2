@@ -129,13 +129,15 @@ public class LoginController extends BaseImpl{
             return getError(jsonObject,"emailExistence");
         }
 
+        synchronized (this) {
+            loginService.addUser(user.getEmail(),user.getPassword());
+            Integer emailId = loginService.findEmailIdByEmail(user.getEmail());
+            loginService.addUserInfo(emailId);
+            loginService.addUserWallet(emailId);
+            session.setAttribute("email", user.getEmail());
+        }
 
-        loginService.addUser(user.getEmail(),user.getName(),user.getPassword());
-        Integer emailId=loginService.findEmailIdByEmail(user.getEmail());
-        loginService.addUserInfo(emailId);
-        loginService.addUserWallet(emailId);
-        session.setAttribute("email",user.getEmail());
-        return getSuccess(jsonObject,"");
+            return getSuccess(jsonObject, "");
 
     }
 }
