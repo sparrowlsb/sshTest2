@@ -9,7 +9,7 @@ public interface LoginService {
     public int findUser(String  email,String password);
     public int findEmailIdByEmail(String eamil);
 
-    public void addUser(String eamil, String  user,String password);
+    public void addUser(String eamil,String password);
 
     public void addUserInfo(Integer userId);
 

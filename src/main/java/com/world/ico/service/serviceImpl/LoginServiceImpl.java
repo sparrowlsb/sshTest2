@@ -49,9 +49,9 @@ public class LoginServiceImpl implements LoginService{
 
 
     @Override
-    public void addUser(String eamil, String user, String password) {
+    public void addUser(String eamil, String password) {
 
-        loginDao.insertUserByEmailNameAndPassword(eamil,user,password);
+        loginDao.insertUserByEmailNameAndPassword(eamil,password);
 
 
     }
