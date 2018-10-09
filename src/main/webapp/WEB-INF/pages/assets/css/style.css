@@ -185,8 +185,8 @@ ul.navbar-nav {
 	height: 100px;
 }
 
-.form-bottom form .input-error {
-	border-color: #66d6c5;
+.form-bottom .input-error {
+	border-color: #f77066;
 }
 
 .verifyImg{

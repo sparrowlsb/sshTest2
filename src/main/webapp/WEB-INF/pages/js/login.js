@@ -110,6 +110,36 @@ function  loginUser() {
     }
 
 };
+
+function checkEmailExists() {
+    var email=$("#regEmail").val();
+    if (email!=""){
+        var url = config.api_prefix + config.api_checkEmail;
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            contentType:"application/json;charset=utf-8",
+            url: url,
+
+            data: JSON.stringify({"email": email}),
+            success: function (data, textStatus) {
+                if(data.result==1){
+                    $("#regEmail").removeClass('input-error');
+                }else if(data.result==0){
+                    $("#regEmail").addClass('input-error');
+                    alert(data.message)
+                }
+            },
+            error: function (data, textStatus) {
+                alert("error");
+                console.log(data)
+
+            }
+
+        });
+    }
+}
+
 function registerUser() {
 
     var email=$("#regEmail").val();
@@ -132,21 +162,17 @@ function registerUser() {
         var url = config.api_prefix + config.api_regist;
         $.ajax({
             type: 'POST',
-            dataType: "text",
+            dataType: "json",
             contentType:"application/json;charset=utf-8",
             url: url,
 
-            data: JSON.stringify({"verEmailCode": regECode,"verCode": regCode,"email": email,"password": regPwd}),
+            data: JSON.stringify({"verEmailCode": regECode,"verCode": regCode,"email": email,"password": $.md5(regPwd)}),
             success: function (data, textStatus) {
-                if(data=="success"){
+                if(data.result==1){
                     alert("注册成功！");
                     window.location.href="/index";
-                }else if(data=="emailerror"){
-                    alert("注册失败：存在已有的email！");
-                    window.location.href="/pages/login.html";
-                }else if(data=="usernameerror"){
-                    alert("注册失败：存在已有的username！");
-                    window.location.href="/pages/login.html";
+                }else if(data.result==0){
+                    alert(data.message);
                 }
             },
             error: function (data, textStatus) {
@@ -157,6 +183,16 @@ function registerUser() {
 
         });
     }
+
+    $("#reg_box").find('input[type="text"], input[type="password"], textarea').each(function(){
+        if( $(this).val() == "" ) {
+            e.preventDefault();
+            $(this).addClass('input-error');
+        }
+        else {
+            $(this).removeClass('input-error');
+        }
+    });
 
 };
 function forgetpassword() {
@@ -229,11 +265,11 @@ jQuery(document).ready(function() {
     /*
      Form validation
      */
-    $('.registration-form input[type="text"], .registration-form input[type="password"], .registration-form textarea').on('focus', function() {
+    $('.form-bottom input[type="text"], .registration-form input[type="password"], .registration-form textarea').on('focus', function() {
         $(this).removeClass('input-error');
     });
 
-    $('.registration-form').on('submit', function(e) {
+    $('.form-bottom').on('submit', function(e) {
 
         $(this).find('input[type="text"], input[type="password"], textarea').each(function(){
             if( $(this).val() == "" ) {
