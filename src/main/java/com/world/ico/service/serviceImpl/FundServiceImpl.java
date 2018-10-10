@@ -28,7 +28,6 @@ public class FundServiceImpl implements FundService {
         ArrayList<FundPrice> fundPriceArrayList=new ArrayList<>();
         for(Object[] object:fundPriceList){
             FundPrice fundPrice=new FundPrice();
-            System.out.println((Integer) object[0]);
             fundPrice.setFundId((Integer) object[0]);
             fundPrice.setFundPrice((Double) object[1]);
             fundPrice.setFundTotalMoney((Double) object[2]);

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,6 +39,9 @@ public class FundController extends BaseImpl {
         JSONObject jsonObject = new JSONObject();
         List<FundPrice> fundPriceArrayList=fundService.getFundDailyPrice();
 
+        for (FundPrice fundPrice:fundPriceArrayList){
+            System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
+        }
 
         return getSuccess(jsonObject, "");
     }
@@ -46,10 +51,23 @@ public class FundController extends BaseImpl {
     @ResponseBody
     public JSONObject fundInfo(HttpSession session) {
 
-        JSONObject jsonObject = new JSONObject();
-        fundService.getFundInfo(1);
+        ArrayList<String> list = new ArrayList<>();
+        List<FundPrice> fundPriceArrayList=fundService.getFundInfo(1);
 
-        return getSuccess(jsonObject, "");
+        String data[][]=new String[fundPriceArrayList.size()][6];
+        int j=0;
+        for (FundPrice fundPrice:fundPriceArrayList){
+            data[j][0]=fundPrice.getFundDate();
+            data[j][1]=String.valueOf(fundPrice.getFundId());
+            data[j][2]=String.valueOf(fundPrice.getFundPrice());
+            data[j][3]=String.valueOf(fundPrice.getFundTotalMoney());
+            data[j][4]=String.valueOf(fundPrice.getFundInMoney());
+            data[j][5]=String.valueOf(fundPrice.getFundOutMoney());
+            j++;
+            System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
+        }
+        System.out.print(data);
+        return getDataSuccess(data, "");
     }
 
     @RequestMapping(value = "fundNarrowInfo", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
@@ -57,8 +75,14 @@ public class FundController extends BaseImpl {
     public JSONObject fundNarrowInfo(HttpSession session) {
 
         JSONObject jsonObject = new JSONObject();
-        fundService.getFundNarrowInfo();
-
+        HashMap<Integer,ArrayList<FundPrice>> fundPriceArrayMAP=fundService.getFundNarrowInfo();
+        for (HashMap.Entry<Integer,ArrayList<FundPrice>> fundPrice2:fundPriceArrayMAP.entrySet()){
+            System.out.print("基金id："+fundPrice2.getKey());
+            List<FundPrice> fundPriceArrayList=fundPrice2.getValue();
+            for (FundPrice fundPrice:fundPriceArrayList){
+                System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
+            }
+        }
         return getSuccess(jsonObject, "");
     }
 

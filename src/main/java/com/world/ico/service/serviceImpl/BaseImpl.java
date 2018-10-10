@@ -19,7 +19,15 @@ public abstract class BaseImpl {
 
         return json;
     }
+    public JSONObject getDataSuccess(String[][] obj, String message) {
+        JSONObject json = new JSONObject();
 
+        json.put("result", 1);
+        json.put("data", obj);
+        json.put("message", message);
+
+        return json;
+    }
 
     public JSONObject getError(JSON obj,String message) {
         JSONObject json = new JSONObject();
@@ -30,6 +38,7 @@ public abstract class BaseImpl {
 
         return json;
     }
+
 
 
 }
