@@ -66,44 +66,34 @@ function SetRemainTime1() {
 
 //按钮单击时执行
 function  loginUser() {
+    var email=$("#loginEmail").val();
+    var loginCode=$("#loginCode").val();
+    var loginPwd=$("#loginPwd").val();
 
-    var user=$("#loginUser").val();
-    var password=$("#loginPassword").val();
-    var userPatt=new RegExp(/^\w{3,16}$/);
-    var passwordPatt=new RegExp(/^\w+/);
-
-    console.log(userPatt.test(user)+"--"+passwordPatt.test(password));
-    if(user==""&&password==""){
-        alert("填写完整登录信息！");
-    } else if(userPatt.test(user)&&!passwordPatt.test(password)){
-        alert("请输入正确格式密码！");
-    } else if(!userPatt.test(user)&&passwordPatt.test(password)){
-        alert("请输入正确格式账号！");
-    } else if(userPatt.test(user)&&passwordPatt.test(password)) {
+    if(email==""||regPwd==""||regCode==""){
+        alert("请输入完整信息！");
+    } else {
         //取Ajax返回结果
         //为了简单，这里简单地从文件中读取内容作为返回数据
         var url = config.api_prefix + config.api_login;
         $.ajax({
             type: 'POST',
-            dataType: "text",
+            dataType: "json",
             contentType:"application/json;charset=utf-8",
             url: url,
 
-            data: JSON.stringify({"user": user, "password": password}),
-            success: function (data, textStatus) {
-                if(data=="success"){
+            data: JSON.stringify({"verCode": loginCode,"email": email,"password": $.md5(loginPwd)}),
+            success: function (data) {
+                if(data.result==1){
                     alert("登录成功！");
-                    window.location.href="/index";
-
-                }else if(data=="error"){
+                    window.location.href="/pages/index.html";
+                }else if(data.result==0){
                     alert("登录失败：账户密码错误！");
-                    window.location.href="/pages/login.html";
                 }
             },
             error: function (data, textStatus) {
                 alert("error");
                 console.log(data)
-
             }
 
         });
@@ -170,7 +160,7 @@ function registerUser() {
             success: function (data, textStatus) {
                 if(data.result==1){
                     alert("注册成功！");
-                    window.location.href="/index";
+                    window.location.href="/pages/index.html";
                 }else if(data.result==0){
                     alert(data.message);
                 }
