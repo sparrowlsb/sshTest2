@@ -86,6 +86,8 @@ function  loginUser() {
             success: function (data) {
                 if(data.result==1){
                     alert("登录成功！");
+                    //set cookie
+                    setCookie('email',email,1);
                     window.location.href="/pages/index.html";
                 }else if(data.result==0){
                     alert("登录失败：账户密码错误！");
@@ -160,6 +162,8 @@ function registerUser() {
             success: function (data, textStatus) {
                 if(data.result==1){
                     alert("注册成功！");
+                    //set cookie
+                    setCookie('email',email,1);
                     window.location.href="/pages/index.html";
                 }else if(data.result==0){
                     alert(data.message);
