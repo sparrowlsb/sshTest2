@@ -40,6 +40,7 @@
     <mvc:resources mapping="pages/fonts/**" location="/WEB-INF/pages/fonts" />
     <mvc:resources mapping="pages/images/**" location="/WEB-INF/pages/images" />
     <mvc:resources mapping="pages/js/**" location="/WEB-INF/pages/js" />
+    <mvc:resources mapping="pages/finance/**" location="/WEB-INF/pages/finance" />
 
     <mvc:default-servlet-handler />
 
