@@ -14,7 +14,7 @@ $.ajax({
         console.log(2222+JSON.stringify(data.data));
 		// rawData=JSON.stringify(data.data);
         var dom = document.getElementById("container");
-        var myChart = echarts.init(dom,'dark');
+        var myChart = echarts.init(dom,'infographic');
         var app = {};
         option = null;
 
@@ -48,7 +48,6 @@ $.ajax({
             return [+item[1], +item[2], +item[3], +item[4], +item[5]];
         });
         option = {
-            backgroundColor: '#2c343c',
             animation: false,
             legend: {
                 data: [ '基金1',"成交量"],
@@ -220,13 +219,12 @@ $.ajax({
 
 
         var dom2 = document.getElementById("bingtu");
-        var myChart2 = echarts.init(dom2,'dark');
+        var myChart2 = echarts.init(dom2,'infographic');
         var app2 = {};
         option2 = null;
         app2.title = '折柱混合';
 
         option2 = {
-            backgroundColor: '#2c343c',
             visualMap: {
                 show: false,
                 min: 80,
@@ -251,14 +249,15 @@ $.ajax({
                     label: {
                         normal: {
                             textStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
+                                fontSize: 10,
+                                color: '#235894'
                             }
                         }
                     },
                     labelLine: {
                         normal: {
                             lineStyle: {
-                                color: 'rgba(255, 255, 255, 0.3)'
+                                color: '#235894'
                             }
                         }
                     },
@@ -277,7 +276,7 @@ $.ajax({
         }
 
         var dom3 = document.getElementById("zhuzhuangtu");
-        var myChart3 = echarts.init(dom3,'dark');
+        var myChart3 = echarts.init(dom3,'infographic');
         var app3 = {};
 
         app3.title = '2015 年上证指数';
@@ -310,12 +309,11 @@ $.ajax({
             return result;
         }
         var option3 = {
-            backgroundColor: '#2c343c',
             legend: {
                 data: [ '总交易量','买入', '卖出'],
                 inactiveColor: '#777',
                 textStyle: {
-                    color: '#fff'
+                    color: '#ffe325'
                 }
             },
             tooltip: {
@@ -325,6 +323,7 @@ $.ajax({
                     type: 'cross',
                     lineStyle: {
                         color: '#376df4',
+
                         width: 2,
                         opacity: 1
                     }
