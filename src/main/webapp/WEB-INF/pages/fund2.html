@@ -1,20 +1,63 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>基于jquery和Bootstrap3的隐藏侧边栏|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
-	<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
-	<link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
-        <link rel="stylesheet" href="css/custom.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基于jquery和Bootstrap3的隐藏侧边栏|DEMO_jQuery之家-自由分享jQuery、html5、css3的插件库</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css" />
+    <link rel="stylesheet" href="css/custom.css">
 </head>
 <body style="height: 100%; margin: 0 ;background-color: #2c343c">
-	<div class="page-wrapper">
-            <nav id="sidebar" class="sidebar-wrapper">
-              <div class="sidebar-content">
+<div id="header">
+    <h1>基金1 今日涨跌幅，</h1>
+</div>
+
+<div id="nav1">
+    <div class="page-wrapper">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+            {
+                "symbols": [
+
+                {
+                    "title": "BTC/USD",
+                    "proName": "BITFINEX:BTCUSD"
+                },
+                {
+                    "title": "ETH/USD",
+                    "proName": "BITFINEX:ETHUSD"
+                },
+                {
+                    "title": "EOS/USD",
+                    "proName": "BITFINEX:EOSUSD"
+                },
+                {
+                    "title": "XRP/USD",
+                    "proName": "BITFINEX:XRPUSD"
+                },
+                {
+                    "title": "EUR/USD",
+                    "proName": "FX_IDC:EURUSD"
+                }
+
+            ],
+                "locale": "zh_CN"
+            }
+        </script>
+
+    </div>
+
+
+</div>
+<div id="section">
+    <div class="page-wrapper">
+
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
                 <a href="#" id="toggle-sidebar"><i class="fa fa-bars"></i></a>
                 <div class="sidebar-brand">
                     <a href="#">pro sidebar</a>
@@ -32,12 +75,12 @@
                     </div>
                 </div><!-- sidebar-header  -->
                 <!--<div class="sidebar-search">-->
-                    <!--<div>                   -->
-                        <!--<div class="input-group">                          -->
-                            <!--<input type="text" class="form-control search-menu" placeholder="Search for...">-->
-                            <!--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
-                        <!--</div>-->
-                    <!--</div>                    -->
+                <!--<div>                   -->
+                <!--<div class="input-group">                          -->
+                <!--<input type="text" class="form-control search-menu" placeholder="Search for...">-->
+                <!--<span class="input-group-addon"><i class="fa fa-search"></i></span>-->
+                <!--</div>-->
+                <!--</div>                    -->
                 <!--</div>&lt;!&ndash; sidebar-search  &ndash;&gt;-->
                 <div class="sidebar-menu">
                     <ul>
@@ -45,34 +88,34 @@
                         <li class="sidebar-dropdown">
                             <a  href="#" ><i class="fa fa-tv"></i><span>基金 1</span><span class="label label-danger">-1.5%</span></a>
                             <!--<div class="sidebar-submenu">-->
-                                <!--<ul>-->
-                                    <!--<li><a href="#">submenu 1 <span class="label label-success">10</span></a> </li>-->
-                                    <!--<li><a href="#">submenu 2</a></li>-->
-                                    <!--<li><a href="#">submenu 3</a></li>-->
-                                    <!--<li><a href="#">submenu 4</a></li>-->
-                                <!--</ul>-->
+                            <!--<ul>-->
+                            <!--<li><a href="#">submenu 1 <span class="label label-success">10</span></a> </li>-->
+                            <!--<li><a href="#">submenu 2</a></li>-->
+                            <!--<li><a href="#">submenu 3</a></li>-->
+                            <!--<li><a href="#">submenu 4</a></li>-->
+                            <!--</ul>-->
                             <!--</div>-->
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#"><i class="fa fa-photo"></i><span>基金 2</span><span class="label label-success">1.5%</span></a>
                             <!--<div class="sidebar-submenu">-->
-                                <!--<ul>-->
-                                    <!--<li><a href="#">submenu 1 <span class="badge">2</span></a></li>-->
-                                    <!--<li><a href="#">submenu 2</a></li>-->
-                                    <!--<li><a href="#">submenu 3</a></li>-->
-                                    <!--<li><a href="#">submenu 4</a></li>-->
-                                <!--</ul>-->
+                            <!--<ul>-->
+                            <!--<li><a href="#">submenu 1 <span class="badge">2</span></a></li>-->
+                            <!--<li><a href="#">submenu 2</a></li>-->
+                            <!--<li><a href="#">submenu 3</a></li>-->
+                            <!--<li><a href="#">submenu 4</a></li>-->
+                            <!--</ul>-->
                             <!--</div>-->
                         </li>
                         <li class="sidebar-dropdown">
                             <a href="#"><i class="fa fa-bar-chart-o"></i><span>基金 3</span></a>
                             <!--<div class="sidebar-submenu">-->
-                                <!--<ul>-->
-                                    <!--<li><a href="#">submenu 1</a></li>-->
-                                    <!--<li><a href="#">submenu 2</a></li>-->
-                                    <!--<li><a href="#">submenu 3</a></li>-->
-                                    <!--<li><a href="#">submenu 4</a></li>-->
-                                <!--</ul>-->
+                            <!--<ul>-->
+                            <!--<li><a href="#">submenu 1</a></li>-->
+                            <!--<li><a href="#">submenu 2</a></li>-->
+                            <!--<li><a href="#">submenu 3</a></li>-->
+                            <!--<li><a href="#">submenu 4</a></li>-->
+                            <!--</ul>-->
                             <!--</div>-->
                         </li>
 
@@ -81,88 +124,78 @@
                         <li><a href="#"><i class="fa fa-photo"></i><span>历史交易记录</span></a></li>
                         <li><a href="#"><i class="fa fa-bar-chart-o"></i><span>历史充值记录</span></a></li>
                         <li><a href="#"><i class="fa fa-diamond"></i><span>Menu 4</span></a></li>
+
                     </ul>
-                   </div><!-- sidebar-menu  -->            
-                </div><!-- sidebar-content  -->
-        
-                <div class="sidebar-footer">
-                    <a href="#"><i class="fa fa-bell"></i><span class="label label-warning notification">3</span></a>
-                    <a href="#"><i class="fa fa-envelope"></i><span class="label label-success notification">7</span></a>
-                    <a href="#"><i class="fa fa-gear"></i></a>
-                    <a href="#"><i class="fa fa-power-off"></i></a>
+                </div><!-- sidebar-menu  -->
+            </div><!-- sidebar-content  -->
+
+            <div class="sidebar-footer">
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                    <div class="tradingview-widget-container__widget"></div>
+                    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                        {
+                            "symbol": "BITFINEX:BTCUSD",
+                            "width": "300",
+                            "height": "200",
+                            "locale": "zh_CN",
+                            "dateRange": "1y",
+                            "colorTheme": "dark",
+                            "trendLineColor": "rgba(255, 152, 0, 1)",
+                            "underLineColor": "rgba(55, 166, 239, 0.15)",
+                            "isTransparent": false,
+                            "autosize": false,
+                            "largeChartUrl": ""
+                        }
+                    </script>
                 </div>
-            </nav><!-- sidebar-wrapper  -->
-
-            <main class="page-content">
-
                 <!-- TradingView Widget END -->
-                <!-- TradingView Widget END -->
-                <div class="container-fluid">
+            </div>
 
-                    <header class="htmleaf-header">
-                        <div class="tradingview-widget-container">
-                            <div class="tradingview-widget-container__widget"></div>
-                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-                                {
-                                    "symbols": [
+        </nav><!-- sidebar-wrapper  -->
+        <main class="page-content">
 
-                                    {
-                                        "title": "BTC/USD",
-                                        "proName": "BITFINEX:BTCUSD"
-                                    },
-                                    {
-                                        "title": "ETH/USD",
-                                        "proName": "BITFINEX:ETHUSD"
-                                    },
-                                    {
-                                        "title": "EOS/USD",
-                                        "proName": "BITFINEX:EOSUSD"
-                                    },
-                                    {
-                                        "title": "XRP/USD",
-                                        "proName": "BITFINEX:XRPUSD"
-                                    },
-                                    {
-                                        "title": "EUR/USD",
-                                        "proName": "FX_IDC:EURUSD"
-                                    }
+            <!-- TradingView Widget END -->
+            <!-- TradingView Widget END -->
+            <div class="container-fluid">
 
-                                ],
-                                    "locale": "zh_CN"
-                                }
-                            </script>
-                        </div>
-                        <h1>基金交易一：短线交易 <span>数字货币有了几年的投资经验，擅长突破操作</span></h1>
+                <header class="htmleaf-header">
 
-                    </header>
-                    <h1 style="text-align:center;">交易量： 涨跌幅：</h1>
-                </div>
-                <div class="container-fluid">
-                    <div id="container" style="height: 600px"></div>
-                    <!--<div id="zhuzhuangtu" style="height: 100%"></div>-->
-                    <table width="100%" style="height: 500px">
+                    <h1>基金交易一：短线交易 <span>数字货币有了几年的投资经验，擅长突破操作</span></h1>
 
-                        <tr>
-                            <td width="50%">
-                                <div id="bingtu" style="height: 100%"></div>
-                            </td>
-                            <td>
-                                <div id="zhuzhuangtu" style="height: 100%"></div>
-                            </td>
-                        </tr>
-                    </table>
+                </header>
+                <h1 style="text-align:center;">交易量： 涨跌幅：</h1>
+            </div>
+            <div class="container-fluid">
+                <div id="container" style="height: 600px"></div>
+                <!--<div id="zhuzhuangtu" style="height: 100%"></div>-->
+                <table width="100%" style="height: 500px">
 
-                </div>
+                    <tr>
+                        <td width="50%">
+                            <div id="bingtu" style="height: 100%"></div>
+                        </td>
+                        <td>
+                            <div id="zhuzhuangtu" style="height: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
 
-            </main><!-- page-content" -->
-        </div><!-- page-wrapper -->
+            </div>
 
-    <script type="text/javascript" src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/finance/echarts.min.js"></script>
-	<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
-	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/custom.js"></script>
-    <script src="js/fund.js"></script>
+        </main><!-- page-content" -->
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript" src="http://www.jq22.com/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/finance/echarts.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/fund.js"></script>
 
 
 </body>

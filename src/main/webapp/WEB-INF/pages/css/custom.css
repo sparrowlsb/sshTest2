@@ -1,3 +1,35 @@
+#header {
+    background-color: #2c343c;
+    height:60px;
+    width:100%;
+    text-align: right;
+    padding:5px;
+}
+#nav1 {
+    line-height:30px;
+    background-color:#2c343c;
+    height:100px;
+    width:100%;
+    float:left;
+    padding:5px;
+}
+#section {
+    line-height:30px;
+    background-color:#2c343c;
+    height:100%;
+    width:100%;
+    float:left;
+    padding:5px;
+}
+#footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+
 .sidebar-wrapper,
 .sidebar-wrapper .sidebar-dropdown > a:after,
 .sidebar-wrapper ul li a i,
@@ -303,7 +335,7 @@
     width: 6px;
 }
 .mCSB_inside>.mCSB_container{
-    margin-right: 0px; 
+    margin-right: 0px;
 }
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar,
 .mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar,
