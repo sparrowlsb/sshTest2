@@ -2,11 +2,9 @@
  * Created by Jayson on 2018/10/11.
  */
 var vm = new Vue({
-    el: '#vue_det',
+    el: '#user-info',
     data: {
-        site: "菜鸟教程",
-        url: "www.runoob.com",
-        alexa: "10000"
+        user: {email:"464147349@qq.com",name:"Jason"}
     },
     methods: {
         details: function() {
@@ -14,3 +12,4 @@ var vm = new Vue({
         }
     }
 })
+

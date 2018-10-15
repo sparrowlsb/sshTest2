@@ -167,7 +167,7 @@
 
 #header{
   margin-bottom: 0;
-  padding: 30px 0 60px 0;
+  padding: 20px 0 30px 0;
 }
 
 #header .navbar-inverse .container{
@@ -1670,6 +1670,10 @@ a.read-more:hover{
 /*****************************
 Blog with right sidebar
 *****************************/
+
+#blog{
+  padding-top: 20px;
+}
 
 .single-blog{
   padding-bottom: 30px;
