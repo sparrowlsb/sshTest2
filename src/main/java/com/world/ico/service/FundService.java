@@ -20,4 +20,12 @@ public interface FundService {
     public void buyFund();
 
     public void sellFund();
+
+
+    public Double totalMoney(Integer userId,String type);
+
+
+    public void sellMoney(Integer userId,String type ,Double money);
+
+
 }

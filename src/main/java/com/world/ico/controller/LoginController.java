@@ -43,6 +43,7 @@ public class LoginController extends BaseImpl{
 
 
         String verCode=(String) session.getAttribute("verCode");
+        session.removeAttribute("verCode");
         JSONObject jsonObject=new JSONObject();
         System.out.println(verCode);
         if(verCode.isEmpty()){
@@ -102,6 +103,8 @@ public class LoginController extends BaseImpl{
         JSONObject jsonObject=new JSONObject();
         String verCode=(String) session.getAttribute("verCode");
         String verEamilCode=(String) session.getAttribute("verEmailCode");
+        String verEamil=(String) session.getAttribute("verEmail");
+        session.removeAttribute("verCode");
         if(verCode.isEmpty()){
             return getError(jsonObject,"the vercode not get");
         }
@@ -116,6 +119,11 @@ public class LoginController extends BaseImpl{
 
             return getError(jsonObject,"the verEmailCode not right");
         }
+        if(!user.getEmail().equalsIgnoreCase(verEamil)){
+
+            return getError(jsonObject,"the verEmail not right");
+        }
+        session.removeAttribute("verEmail");
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){

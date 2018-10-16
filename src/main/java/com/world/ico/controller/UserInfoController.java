@@ -33,6 +33,7 @@ public class UserInfoController extends BaseImpl{
         try {
 
             String email = (String)session.getAttribute("email");
+            String userInfoEmail = (String)session.getAttribute("userInfoEmail");
             if(email.isEmpty()){
                 return getError(jsonObject,"no email please login first");
 
@@ -46,7 +47,10 @@ public class UserInfoController extends BaseImpl{
             if(!userInfoCode.equalsIgnoreCase(userInfo.getUserInfoCode())){
                 return getError(jsonObject,"the code is error");
             }
-
+            if(!userInfoEmail.equalsIgnoreCase(email)){
+                return getError(jsonObject,"the email is error");
+            }
+            session.removeAttribute("userInfoEmail");
             int userId=loginService.findEmailIdByEmail(email);
             if(userId==0){
                 return getError(jsonObject,"no userID");

@@ -34,8 +34,8 @@ public interface LoginDao extends PagingAndSortingRepository<UserPo, Integer> {
     void insertUserInfoByUserId(@Param("user_id") Integer user_id);
 
     @Modifying
-    @Query(value = "INSERT INTO USER_WALLET (user_id,total_assets,rmb,fund_id,fund_money) values (:user_id,:total_assets,:rmb,:fund_id,:fund_money) ", nativeQuery = true)
-    void insertUserWallet(@Param("user_id") Integer user_id, @Param("total_assets") Double total_assets,@Param("rmb") Double rmb,@Param("fund_id") Integer fund_id,@Param("fund_money") Double fund_money);
+    @Query(value = "INSERT INTO USER_WALLET (user_id,type,count) values (:user_id,:type,:count) ", nativeQuery = true)
+    void insertUserWallet(@Param("user_id") Integer user_id,@Param("type") String type, @Param("count") Double count);
 
 
 //    @Modifying

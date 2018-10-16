@@ -16,17 +16,11 @@ public class UserWalletPo {
     @Column(name = "user_id")
     Integer userId;
 
-    @Column(name = "total_assets")
-    Double totalAssets;
+    @Column(name = "type")
+    Double type;
 
-    @Column(name = "rmb")
-    Double rmb;
-
-    @Column(name = "fund_id")
-    Integer fundId;
-
-    @Column(name = "fund_money")
-    Double fundMoney;
+    @Column(name = "count")
+    Double count;
 
     public Integer getId() {
         return id;
@@ -44,35 +38,19 @@ public class UserWalletPo {
         this.userId = userId;
     }
 
-    public Double getTotalAssets() {
-        return totalAssets;
+    public Double getType() {
+        return type;
     }
 
-    public void setTotalAssets(Double totalAssets) {
-        this.totalAssets = totalAssets;
+    public void setType(Double type) {
+        this.type = type;
     }
 
-    public Double getRmb() {
-        return rmb;
+    public Double getCount() {
+        return count;
     }
 
-    public void setRmb(Double rmb) {
-        this.rmb = rmb;
-    }
-
-    public Integer getFundId() {
-        return fundId;
-    }
-
-    public void setFundId(Integer fundId) {
-        this.fundId = fundId;
-    }
-
-    public Double getFundMoney() {
-        return fundMoney;
-    }
-
-    public void setFundMoney(Double fundMoney) {
-        this.fundMoney = fundMoney;
+    public void setCount(Double count) {
+        this.count = count;
     }
 }

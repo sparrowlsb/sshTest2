@@ -3,6 +3,7 @@ package com.world.ico.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.UserInfo;
+import com.world.ico.dto.UserWallet;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
 import com.world.ico.service.serviceImpl.BaseImpl;
@@ -121,6 +122,25 @@ public class FundController extends BaseImpl {
         fundService.getFundNarrowInfo();
 
         return getSuccess(jsonObject, "");
+
+    }
+    @RequestMapping(value = "sellMoney", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject sellMoney(@RequestBody UserWallet userWallet, HttpSession session) {
+        JSONObject jsonObject = new JSONObject();
+        fundService.getFundNarrowInfo();
+
+        if(userWallet.getSellMoney()<=0){
+            return getError(jsonObject, "please sell >0 money");
+        }
+        Double totalMoney=fundService.totalMoney(userWallet.getUserId(),"RMB");
+        if(totalMoney<userWallet.getSellMoney()){
+            return getError(jsonObject, "total money not enough");
+        }
+        Double count= totalMoney-userWallet.getSellMoney();
+        fundService.sellMoney(userWallet.getUserId(),"RMB",count);
+        return getSuccess(jsonObject,"" );
+
 
     }
 }

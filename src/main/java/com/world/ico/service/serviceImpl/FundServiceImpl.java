@@ -1,6 +1,7 @@
 package com.world.ico.service.serviceImpl;
 
 import com.world.ico.dao.FundDao;
+import com.world.ico.dao.WalletDao;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class FundServiceImpl implements FundService {
     @Autowired
     public FundDao fundDao;
 
+    @Autowired
+    public WalletDao walletDao;
 
     @Override
     public List<FundPrice> getFundDailyPrice() {
@@ -114,5 +117,15 @@ public class FundServiceImpl implements FundService {
     @Override
     public void sellFund() {
 
+    }
+
+    @Override
+    public Double totalMoney(Integer userId, String type) {
+        return walletDao.totalMoney(userId,type);
+    }
+
+    @Override
+    public void sellMoney(Integer userId,String type ,Double money) {
+        walletDao.sellMoney(userId,type,money);
     }
 }

@@ -54,7 +54,9 @@ public class SmsCodeController extends BaseImpl{
     public JSONObject VerifyEmailCode(@RequestBody EmailAddress emailAddress, HttpSession session) throws Exception {
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
         CreateSimpleMail.mail(verifyCode,emailAddress.getAddress());
+        session.removeAttribute("verEmail");
         session.removeAttribute("verEmailCode");
+        session.setAttribute("verEmail", emailAddress);
         session.setAttribute("verEmailCode", verifyCode.toLowerCase());
 
         JSONObject jsonObject=new JSONObject();
@@ -73,12 +75,16 @@ public class SmsCodeController extends BaseImpl{
 
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
         CreateSimpleMail.mail(verifyCode,email);
+        session.removeAttribute("userInfoEmail");
         session.removeAttribute("userInfoCode");
+        session.setAttribute("userInfoEmail",email);
         session.setAttribute("userInfoCode", verifyCode.toLowerCase());
 
 
         return getSuccess(jsonObject,"");
 
     }
+
+
 
 }
