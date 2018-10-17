@@ -1,12 +1,12 @@
 package com.world.ico.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by lsb on 2018/9/22.
  */
+@Entity
+@Table(name="USER_WALLET")
 public class UserWalletPo {
     @Id
     @Column(name = "id")

@@ -3,6 +3,7 @@ package com.world.ico.dto;
 /**
  * Created by lsb on 2018/10/16.
  */
+
 public class UserPassword {
     String name;
     String entryPassword;
