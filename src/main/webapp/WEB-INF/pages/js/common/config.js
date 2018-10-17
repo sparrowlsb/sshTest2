@@ -4,5 +4,8 @@ var config = {
     api_sendEmailVerify: "sms/VerifyEmailCode",
     api_regist: "login/registerUser",
     api_login: "login/loginByPassword",
-    api_checkEmail: "login/existenceUser"
+    api_checkEmail: "login/existenceUser",
+    api_changePwd: "password/passwordForget",
+    api_changeFinaPwd: "password/financePasswordSet",
+    api_updateUser: "password/updateInfo"
 };

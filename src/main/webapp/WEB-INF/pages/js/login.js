@@ -85,7 +85,7 @@ function  loginUser() {
             data: JSON.stringify({"verCode": loginCode,"email": email,"password": $.md5(loginPwd)}),
             success: function (data) {
                 if(data.result==1){
-                    alert("登录成功！");
+                    // alert("登录成功！");
                     //set cookie
                     setCookie('email',email,1);
                     window.location.href="/pages/index.html";
