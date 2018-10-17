@@ -56,7 +56,7 @@ public class SmsCodeController extends BaseImpl{
         CreateSimpleMail.mail(verifyCode,emailAddress.getAddress());
         session.removeAttribute("verEmail");
         session.removeAttribute("verEmailCode");
-        session.setAttribute("verEmail", emailAddress);
+        session.setAttribute("verEmail", emailAddress.getAddress());
         session.setAttribute("verEmailCode", verifyCode.toLowerCase());
 
         JSONObject jsonObject=new JSONObject();

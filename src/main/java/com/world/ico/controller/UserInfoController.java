@@ -50,13 +50,13 @@ public class UserInfoController extends BaseImpl{
             if(!userInfoEmail.equalsIgnoreCase(email)){
                 return getError(jsonObject,"the email is error");
             }
-            session.removeAttribute("userInfoEmail");
+
             int userId=loginService.findEmailIdByEmail(email);
             if(userId==0){
                 return getError(jsonObject,"no userID");
 
             }
-
+            session.removeAttribute("userInfoEmail");
             if(userInfo.getUserId()==userId && userInfo.getEmail().equals(email)){
                 if(!userInfo.getBankId().isEmpty()&&!userInfo.getBankName().isEmpty()){
                     userInfoService.updateBankInfo(userInfo.getBankName(),userInfo.getBankId(),userId);

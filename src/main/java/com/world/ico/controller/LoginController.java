@@ -43,9 +43,9 @@ public class LoginController extends BaseImpl{
 
 
         String verCode=(String) session.getAttribute("verCode");
-        session.removeAttribute("verCode");
+
         JSONObject jsonObject=new JSONObject();
-        System.out.println(verCode);
+        System.out.println(user.getPassword());
         if(verCode.isEmpty()){
             return getError(jsonObject,"the vercode not get");
         }
@@ -64,7 +64,11 @@ public class LoginController extends BaseImpl{
 
         }
         Integer count=loginService.findUser(user.getEmail(),user.getPassword());
+
+
+        session.removeAttribute("verCode");
         if(count==1){
+
             session.setAttribute("email",user.getEmail());
             return getSuccess(jsonObject,"");
 
@@ -104,7 +108,7 @@ public class LoginController extends BaseImpl{
         String verCode=(String) session.getAttribute("verCode");
         String verEamilCode=(String) session.getAttribute("verEmailCode");
         String verEamil=(String) session.getAttribute("verEmail");
-        session.removeAttribute("verCode");
+
         if(verCode.isEmpty()){
             return getError(jsonObject,"the vercode not get");
         }
@@ -123,7 +127,7 @@ public class LoginController extends BaseImpl{
 
             return getError(jsonObject,"the verEmail not right");
         }
-        session.removeAttribute("verEmail");
+
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
         if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){
@@ -136,7 +140,8 @@ public class LoginController extends BaseImpl{
         if(countByEmail!=0){
             return getError(jsonObject,"emailExistence");
         }
-
+        session.removeAttribute("verCode");
+        session.removeAttribute("verEmail");
         synchronized (this) {
             loginService.addUser(user.getEmail(),user.getPassword());
             Integer emailId = loginService.findEmailIdByEmail(user.getEmail());
