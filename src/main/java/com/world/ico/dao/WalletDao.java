@@ -15,12 +15,14 @@ import java.util.List;
 public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Integer> {
 
     @Query(value = "select t.count from USER_WALLET t where user_id=:user_id and type=:type ", nativeQuery = true)
-    Double totalMoney(@Param("user_id") Integer user_id, @Param("type") String type);
-
+    Double totalCount(@Param("user_id") Integer user_id, @Param("type") String type);
 
     @Modifying
-    @Query(value = "update USER_WALLET set count=:money where user_id=:user_id and type=:type ", nativeQuery = true)
-    void sellMoney(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") Double money);
+    @Query(value = "update USER_WALLET set count=count-:count where user_id=:user_id and type=:type ", nativeQuery = true)
+    void sellCount(@Param("user_id") Integer user_id, @Param("type") String type, @Param("count") Double count);
 
+    @Modifying
+    @Query(value = "update USER_WALLET set money=money+:money where user_id=:user_id and type=:type ", nativeQuery = true)
+    void updateMoney(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") Double money);
 
 }

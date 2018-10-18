@@ -1,8 +1,12 @@
 package com.world.ico.service.serviceImpl;
 
 import com.world.ico.dao.FundDao;
+import com.world.ico.dao.FundTransactionDao;
+import com.world.ico.dao.ManagementFeeDao;
 import com.world.ico.dao.WalletDao;
 import com.world.ico.dto.FundPrice;
+import com.world.ico.dto.FundTransaction;
+import com.world.ico.entity.FundTransactionPo;
 import com.world.ico.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,12 @@ public class FundServiceImpl implements FundService {
 
     @Autowired
     public WalletDao walletDao;
+
+    @Autowired
+    public ManagementFeeDao managementFeeDao;
+
+    @Autowired
+    public FundTransactionDao fundTransactionDao;
 
     @Override
     public List<FundPrice> getFundDailyPrice() {
@@ -109,23 +119,101 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void buyFund() {
+    public void buyFund(Integer userId, Double traderMoney, Integer fundId) {
 
+        Double managementFee= managementFeeDao.getManagementFee();
+        Double managementCost=managementFee*traderMoney;
+        Double fundPrice =Double.valueOf(-1);
+        Double fundCount =Double.valueOf(-1);
 
+        Double totalMoney=walletDao.totalCount(userId,"RMB");
+        if(totalMoney-traderMoney>=0){
+            synchronized (this){
+                walletDao.sellCount(userId,"RMB",totalMoney-traderMoney);
+                walletDao.updateMoney(userId,"FUND_"+fundId,traderMoney);
+                fundTransactionDao.insertFundTransaction(userId,"BUY",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
+            }
+        }
+
+        //整点时间定时更新insertFundTransaction 和walletDao中fund_id的price 和count；
+        //以及walletDao扣除手续费之后的user_id下的tradermoney=今日price*fundcount
     }
 
     @Override
-    public void sellFund() {
+    public void sellFund(Integer userId, Double fundCount, Integer fundId) {
+        Double managementFee = managementFeeDao.getManagementFee();
+        Double totalCount = walletDao.totalCount(userId, "FUND_" + fundId);
 
+        Double traderMoney = Double.valueOf(-1);
+        Double fundPrice = Double.valueOf(-1);
+        Double managementCost = Double.valueOf(-1);
+
+        if(totalCount-fundCount>=0){
+            synchronized (this){
+                walletDao.sellCount(userId,"FUND_"+fundId,totalCount-fundCount);
+                fundTransactionDao.insertFundTransaction(userId,"SELL",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
+            }
+        }
     }
+
+        @Override
+    public ArrayList<FundTransaction> getSellFundHistory(Integer userId) {
+        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findSellFundTransaction(userId);
+        ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
+        for (FundTransactionPo f :fundTransactionPos){
+            FundTransaction fundTransaction=new FundTransaction();
+            fundTransaction.setId(f.getId());
+            fundTransaction.setUserId(f.getUserId());
+            fundTransaction.setType(f.getType());
+            fundTransaction.setStatus(f.getStatus());
+            fundTransaction.setFundCount(f.getFundCount());
+            fundTransaction.setFundId(f.getFundId());
+            fundTransaction.setManagementCost(f.getManagementCost());
+            fundTransaction.setTransactionDate(f.getTransactionDate());
+            fundTransactions.add(fundTransaction);
+
+        }
+
+        return fundTransactions;
+    }
+
+    @Override
+    public ArrayList<FundTransaction> getBuyFundHistory(Integer userId) {
+        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findBuyFundTransaction(userId);
+        ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
+        for (FundTransactionPo f :fundTransactionPos){
+            FundTransaction fundTransaction=new FundTransaction();
+            fundTransaction.setId(f.getId());
+            fundTransaction.setUserId(f.getUserId());
+            fundTransaction.setType(f.getType());
+            fundTransaction.setStatus(f.getStatus());
+            fundTransaction.setTraderMoney(f.getTraderMoney());
+            fundTransaction.setFundId(f.getFundId());
+            fundTransaction.setManagementCost(f.getManagementCost());
+            fundTransaction.setTransactionDate(f.getTransactionDate());
+            fundTransactions.add(fundTransaction);
+
+        }
+
+        return fundTransactions;
+    }
+
+    @Override
+    public void revokeFundTransaction(Integer transactionId) {
+        fundTransactionDao.updateFundTransactionStatus(transactionId);
+    }
+
+
 
     @Override
     public Double totalMoney(Integer userId, String type) {
-        return walletDao.totalMoney(userId,type);
+
+        return walletDao.totalCount(userId,type);
     }
 
     @Override
     public void sellMoney(Integer userId,String type ,Double money) {
-        walletDao.sellMoney(userId,type,money);
+
+        walletDao.sellCount(userId,type,money);
     }
 }

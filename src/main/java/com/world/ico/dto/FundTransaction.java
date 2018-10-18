@@ -1,48 +1,19 @@
-package com.world.ico.entity;
+package com.world.ico.dto;
 
-import javax.persistence.*;
 import java.security.Timestamp;
 
 /**
- * Created by lsb on 2018/9/22.
+ * Created by lsb on 2018/10/18.
  */
-@Entity
-@Table(name="FUND_TRANSACTION")
-public class FundTransactionPo {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
+public class FundTransaction {
     Integer id;
-
-    @Column(name = "user_id")
     Integer userId;
-
-    @Column(name = "type")
     String type;
-
-    @Column(name = "status")
     Integer status;
-
-    @Column(name = "trader_money")
     Double traderMoney;
-
-    @Column(name = "fund_id")
     Integer fundId;
-
-    @Column(name = "fund_price")
-    Double fundPrice;
-
-    @Column(name = "fund_count")
     Double fundCount;
-
-    @Column(name = "management_fee")
-    Double managementFee;
-
-    @Column(name = "management_cost")
     Double managementCost;
-
-    @Column(name = "transaction_date")
     Timestamp transactionDate;
 
     public Integer getId() {
@@ -93,28 +64,12 @@ public class FundTransactionPo {
         this.fundId = fundId;
     }
 
-    public Double getFundPrice() {
-        return fundPrice;
-    }
-
-    public void setFundPrice(Double fundPrice) {
-        this.fundPrice = fundPrice;
-    }
-
     public Double getFundCount() {
         return fundCount;
     }
 
     public void setFundCount(Double fundCount) {
         this.fundCount = fundCount;
-    }
-
-    public Double getManagementFee() {
-        return managementFee;
-    }
-
-    public void setManagementFee(Double managementFee) {
-        this.managementFee = managementFee;
     }
 
     public Double getManagementCost() {
