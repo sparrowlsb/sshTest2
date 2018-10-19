@@ -63,10 +63,10 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public void addUserWallet(Integer userId) {
-        loginDao.insertUserWallet(userId,"RMB",0.0);
-        loginDao.insertUserWallet(userId,"FUND:1",0.0);
-        loginDao.insertUserWallet(userId,"FUND:2",0.0);
-        loginDao.insertUserWallet(userId,"FUND:3",0.0);
+        loginDao.insertUserWallet(userId,0.0,"RMB",0.0);
+        loginDao.insertUserWallet(userId,0.0,"FUND:1",0.0);
+        loginDao.insertUserWallet(userId,0.0,"FUND:2",0.0);
+        loginDao.insertUserWallet(userId,0.0,"FUND:3",0.0);
     }
 
 

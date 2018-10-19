@@ -9,10 +9,55 @@
   <title>Kode - Premium Bootstrap Admin Template</title>
 
   <!-- ========== Css Files ========== -->
-  <link href="finance/css/root.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/gm.css">
 
-</head>
+  <link href="finance/css/root.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/gm.css">
+  <script type="text/javascript" src="js/gm.js"></script>
+  <style>
+    html, body{
+      width: 100%;
+      height: 100%;
+      overflow-x:hidden;
+      margin: 0;
+      padding: 0;
+    }
+    h2{
+      font-size:22px;
+      padding:10px 30px;
+      color:#333;
+    }
+    p{
+      font-size:14px;
+      padding:10px 30px;
+      color:#333;
+      text-indent:2em;
+      margin: 0;
+    }
+    hr{
+      margin-top: 18px;
+      margin-bottom: 18px;
+      border: 0;
+      border-top: 1px solid #eee;
+    }
+    .bottom-bar{
+      background: #f8f8f8;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .bottom-bar button{
+      padding: 5px 20px;
+      margin-right: 10px;
+    }
+    .bottom-bar a{
+      font-size: 12px;
+      padding: 5px 20px;
+      margin-right: 10px;
+    }
+  </style>
+  </head>
 <body>
+
 <!-- Start Page Loading -->
 <div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
 <!-- End Page Loading -->
@@ -177,7 +222,7 @@
 </div>
 <!-- END SIDEBAR -->
 <!-- //////////////////////////////////////////////////////////////////////////// -->
-
+<table id="example" class="display" style="color:rgb(0,0,0) " width="100%"></table>
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 <!-- START CONTENT -->
 <div class="content">
@@ -295,66 +340,56 @@
 
         </ul>
       </div>
-      <!-- End Top Stats -->
-      <!-- End Chart Daily -->
 
 
-      <!-- Start Files -->
-      <!--<div class="col-md-12 col-lg-4">-->
-      <!--<div class="panel panel-widget" style="height:600px;">-->
-      <!--<div class="panel-title">-->
-      <!--My Files <span class="label label-danger">29</span>-->
-      <!--<ul class="panel-tools">-->
-      <!--<li><a class="icon"><i class="fa fa-refresh"></i></a></li>-->
-      <!--<li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>-->
-      <!--</ul>-->
-      <!--</div>-->
-      <!--<div class="panel-body table-responsive">-->
+      <!-- End Today Activity -->
+    </div>
+      <!-- Start Top Stats -->
+      <div class="col-md-12">
+        <ul class="topstats clearfix">
+          <li><span class="label label-default">历史记录</span></li>
+          <li><table grid-manager="cccc"></table>
 
-      <!--<table class="table table-dic table-hover ">-->
-      <!--<tbody>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-folder-o"></i>Projects</td>-->
-      <!--<td>Folder</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-file-archive-o"></i>Backup</td>-->
-      <!--<td>Zip</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-file-code-o"></i>Kode Theme</td>-->
-      <!--<td>Html</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-file-pdf-o"></i>Documents</td>-->
-      <!--<td>Pdf</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-folder-o"></i>Themes</td>-->
-      <!--<td>Folder</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-folder-o"></i>Uploaded Files</td>-->
-      <!--<td>Folder</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--<tr>-->
-      <!--<td><i class="fa fa-folder-o"></i>Personal Files</td>-->
-      <!--<td>Folder</td>-->
-      <!--<td class="text-r">27/2/2015 12:34 AM</td>-->
-      <!--</tr>-->
-      <!--</tbody>-->
-      <!--</table>          -->
+          </li>
 
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-      <!-- End Files -->
+
+        </ul>
+      </div>
+    <div class="panel panel-transparent">
+
+      <div class="panel-title">
+        历史交易记录
+      </div>
+
+      <div class="panel-body">
+
+        <div role="tabpanel">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs tabcolor8-bg" role="tablist">
+            <li role="presentation" class="active"><a href="#home13" aria-controls="home13" role="tab" data-toggle="tab">Home</a></li>
+            <li role="presentation"><a href="#profile13" aria-controls="profile13" role="tab" data-toggle="tab">Profile</a></li>
+            <li role="presentation"><a href="#messages13" aria-controls="messages13" role="tab" data-toggle="tab">Messages</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home13">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile13">
+              <p>Ut in leo ut libero sodales feugiat</p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="messages13">
+              <p>Duis ac enim diam</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
     </div>
     <!-- End First Row -->
@@ -806,6 +841,9 @@ Moment.js
 <script type="text/javascript" src="finance/js/echarts.js"></script>
 <script type="text/javascript" src="finance/js/infographic.js"></script>
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/gm.js"></script>
+
 <!-- ================================================
 Below codes are only for index widgets
 ================================================ -->
@@ -901,3 +939,4 @@ Below codes are only for index widgets
 <script type="text/javascript" src="js/echarts.js"></script>
 <script type="text/javascript" src="js/infographic.js"></script>
 <script src="js/fund.js"></script>
+<script src="js/fundhist.js"></script>
