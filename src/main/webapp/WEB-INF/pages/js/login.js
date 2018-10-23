@@ -91,10 +91,12 @@ function  loginUser() {
                     window.location.href="/pages/index.html";
                 }else if(data.result==0){
                     alert("登录失败：账户密码错误！");
+                    verifyClick()
                 }
             },
             error: function (data, textStatus) {
                 alert("error");
+                verifyClick()
                 console.log(data)
             }
 
@@ -167,11 +169,13 @@ function registerUser() {
                     window.location.href="/pages/index.html";
                 }else if(data.result==0){
                     alert(data.message);
+                    verifyClick()
                 }
             },
             error: function (data, textStatus) {
                 alert("error");
                 console.log(data)
+                verifyClick()
 
             }
 
