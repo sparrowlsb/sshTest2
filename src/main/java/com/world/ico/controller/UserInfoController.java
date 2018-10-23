@@ -78,4 +78,32 @@ public class UserInfoController extends BaseImpl{
         return getError(jsonObject,"");
 
     }
+    @RequestMapping(value = "setPersonCode", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject setPersonCode(@RequestBody UserInfo userInfo, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        try {
+
+            String email = (String)session.getAttribute("email");
+            String personCode=userInfo.getPersonCode();
+            if(email.isEmpty()){
+                return getError(jsonObject,"no email please login first");
+
+            }
+            if(!userInfoService.getPersonCode(email).isEmpty()){
+                return getError(jsonObject,"have the personCode");
+            }
+
+            if(personCode.isEmpty()){
+                return getError(jsonObject,"please set the personcode");
+            }
+            userInfoService.setPersonCode(personCode,email);
+
+
+        }catch (Exception e){
+            return getError(jsonObject,e.toString());
+        }
+        return getError(jsonObject,"");
+
+    }
 }

@@ -33,4 +33,15 @@ public class UserInfoServiceImpl implements UserInfoService{
         userInfoDao.updateAlipayInfo(alipayName,alipayID,userId);
         return 1;
     }
+
+    @Override
+    public String getPersonCode(String email) {
+
+        return userInfoDao.getPersonCode(email);
+    }
+
+    @Override
+    public void setPersonCode(String personCode, String email) {
+        userInfoDao.setPersonCode(personCode,email);
+    }
 }

@@ -97,10 +97,7 @@ public class PasswordController extends BaseImpl {
         if(verEmailCode.isEmpty()){
             return getError(jsonObject,"please put the email address first");
         }
-        if(userPassword.getEntryPassword().isEmpty()){
-            return getError(jsonObject,"please put the login password first");
 
-        }
         if(userPassword.getPasswordFinance().isEmpty()){
             return getError(jsonObject,"please put the change finance password first");
 

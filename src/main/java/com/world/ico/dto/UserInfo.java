@@ -5,6 +5,8 @@ package com.world.ico.dto;
  */
 public class UserInfo {
 
+    String personCode;
+
     Integer userId;
 
     String email;
@@ -22,6 +24,14 @@ public class UserInfo {
     String bankName;
 
     String userInfoCode;
+
+    public String getPersonCode() {
+        return personCode;
+    }
+
+    public void setPersonCode(String personCode) {
+        this.personCode = personCode;
+    }
 
     public String getUserInfoCode() {
         return userInfoCode;

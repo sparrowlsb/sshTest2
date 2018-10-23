@@ -23,4 +23,12 @@ public interface UserInfoDao extends PagingAndSortingRepository<UserInfoPo, Inte
     @Query(value = "UPDATE  USER_INFO t set t.allipay_name = :allipay_name ,t.alipay_id= :alipay_id where t.user_id=:user_id", nativeQuery = true)
     void updateAlipayInfo(@Param("allipay_name") String allipay_name, @Param("alipay_id") String alipay_id,@Param("user_id") Integer user_id);
 
+    @Query(value = "select  PersonCode  from USER where email=:email", nativeQuery = true)
+    String getPersonCode(@Param("email") String email);
+
+
+    @Modifying
+    @Query(value = "UPDATE  USER t set t.person_code = :personCode  where email=:email", nativeQuery = true)
+    void setPersonCode(@Param("personCode") String personCode, @Param("email") String email);
+
 }
