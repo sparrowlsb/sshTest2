@@ -1,9 +1,10 @@
 package com.world.ico.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.world.ico.dto.FundPrice;
-import com.world.ico.dto.UserInfo;
-import com.world.ico.dto.UserWallet;
+import com.world.ico.dto.FundTransaction;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
 import com.world.ico.service.serviceImpl.BaseImpl;
@@ -90,57 +91,100 @@ public class FundController extends BaseImpl {
 
     @RequestMapping(value = "buyfund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject buyfund(@RequestBody UserInfo userInfo, HttpSession session) {
-
-
-        JSONObject jsonObject = new JSONObject();
+    public JSONObject buyfund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()) {
-            return getError(jsonObject, "no email please login first");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
 
         }
-
-
-        int userId = loginService.findEmailIdByEmail(email);
-        if (userId == 0) {
-            return getError(jsonObject, "no userID");
+        if (fundTransaction.getUserId()==0){
+            return getError(jsonObject,"can not find the userId");
 
         }
-        if (userInfo.getUserId() == userId && userInfo.getEmail().equals(email)) {
+        if (fundTransaction.getTraderMoney()==0){
+            return  getError(jsonObject,"please entry the trader money");
 
         }
-        fundService.getFundNarrowInfo();
+        if (fundTransaction.getFundId()==0){
+            return getError(jsonObject,"please entry the fundId");
 
-        return getSuccess(jsonObject, "");
+        }
+        fundService.buyFund(fundTransaction.getUserId(),fundTransaction.getTraderMoney(),fundTransaction.getFundId());
 
+        return  getSuccess(jsonObject,"");
     }
 
     @RequestMapping(value = "sellfund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject sellfund(@RequestBody UserInfo userInfo, HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
-        fundService.getFundNarrowInfo();
+    public JSONObject sellfund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
 
+        }
+        if (fundTransaction.getUserId()==0){
+            return getError(jsonObject,"can not find the userId");
+
+        }
+        if (fundTransaction.getFundCount()==0){
+            return  getError(jsonObject,"please entry the trader fund count");
+
+        }
+        if (fundTransaction.getFundId()==0){
+            return getError(jsonObject,"please entry the fundId");
+
+        }
+
+        fundService.sellFund(fundTransaction.getUserId(),fundTransaction.getFundCount(),fundTransaction.getFundId());
         return getSuccess(jsonObject, "");
 
     }
-    @RequestMapping(value = "sellMoney", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
-    @ResponseBody
-    public JSONObject sellMoney(@RequestBody UserWallet userWallet, HttpSession session) {
-        JSONObject jsonObject = new JSONObject();
-        fundService.getFundNarrowInfo();
 
-        if(userWallet.getSellMoney()<=0){
-            return getError(jsonObject, "please sell >0 money");
+    @RequestMapping(value = "revokefund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject revokefund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
         }
-        Double totalMoney=fundService.totalMoney(userWallet.getUserId(),"RMB");
-        if(totalMoney<userWallet.getSellMoney()){
-            return getError(jsonObject, "total money not enough");
-        }
-        Double count= totalMoney-userWallet.getSellMoney();
-        fundService.sellMoney(userWallet.getUserId(),"RMB",count);
+
+        fundService.revokeFundTransaction(fundTransaction.getId());
         return getSuccess(jsonObject,"" );
 
 
     }
+
+    @RequestMapping(value = "getHistory", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject getHistory(@RequestBody FundTransaction fundTransaction, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
+        }
+        if (fundTransaction.getUserId()==0){
+            return getError(jsonObject,"can not find the userId");
+        }
+
+        ArrayList<FundTransaction> buyFundHists=fundService.getBuyFundHistory(fundTransaction.getUserId());
+        ArrayList<FundTransaction> sellFundHists=fundService.getSellFundHistory(fundTransaction.getUserId());
+
+
+        HashMap<String,ArrayList<FundTransaction>>histMap=new HashMap<>();
+        histMap.put("BUY",buyFundHists);
+        histMap.put("SELL",sellFundHists);
+
+        String jsArr= JSON.toJSONString(histMap, SerializerFeature.DisableCircularReferenceDetect);
+        jsonObject=JSON.parseObject(jsArr);
+        return getSuccess(jsonObject,"" );
+
+
+    }
+
+
 }

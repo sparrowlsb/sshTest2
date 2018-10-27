@@ -29,12 +29,24 @@ public class LoginController extends BaseImpl{
     private final String RULE_EMAIL ="^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$";
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-
     public String login() {
 
         return "redirect:pages/login.html";
     }
 
+    @RequestMapping(value = "loginUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject loginUser(HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
+        }
+        jsonObject.put("email",email);
+        return getSuccess(jsonObject,"");
+
+    }
 
 
     @RequestMapping(value = "loginByPassword", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)

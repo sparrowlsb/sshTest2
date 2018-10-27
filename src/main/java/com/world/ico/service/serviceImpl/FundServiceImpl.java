@@ -215,5 +215,6 @@ public class FundServiceImpl implements FundService {
     public void sellMoney(Integer userId,String type ,Double money) {
 
         walletDao.sellCount(userId,type,money);
+        walletDao.exchangeHist(userId,type,"RMB",money,0);
     }
 }

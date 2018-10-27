@@ -22,6 +22,10 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
     void sellCount(@Param("user_id") Integer user_id, @Param("type") String type, @Param("count") Double count);
 
     @Modifying
+    @Query(value = "Insert into CURB_EXCHANGE(user_id,exchange_type,type,money,status) values(:user_id,:exchange_type,:type,:money,:status)", nativeQuery = true)
+    void exchangeHist(@Param("user_id") Integer user_id, @Param("exchange_type") String exchange_type, @Param("type") String type,@Param("money") Double money,@Param("status") Integer status);
+
+    @Modifying
     @Query(value = "update USER_WALLET set money=money+:money where user_id=:user_id and type=:type ", nativeQuery = true)
     void updateMoney(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") Double money);
 
