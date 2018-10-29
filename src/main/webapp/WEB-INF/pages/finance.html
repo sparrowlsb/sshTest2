@@ -1,60 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
   <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
-  <title>Kode - Premium Bootstrap Admin Template</title>
-
-  <!-- ========== Css Files ========== -->
-  <link rel="stylesheet" type="text/css" href="css/gm.css">
+  <title>众庄交易大师</title>
 
   <link href="finance/css/root.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/gm.css">
+  <link rel="stylesheet" type="text/css" href="css/finance.css">
   <script type="text/javascript" src="js/gm.js"></script>
-  <style>
-    html, body{
-      width: 100%;
-      height: 100%;
-      overflow-x:hidden;
-      margin: 0;
-      padding: 0;
-    }
-    h2{
-      font-size:22px;
-      padding:10px 30px;
-      color:#333;
-    }
-    p{
-      font-size:14px;
-      padding:10px 30px;
-      color:#333;
-      text-indent:2em;
-      margin: 0;
-    }
-    hr{
-      margin-top: 18px;
-      margin-bottom: 18px;
-      border: 0;
-      border-top: 1px solid #eee;
-    }
-    .bottom-bar{
-      background: #f8f8f8;
-      padding: 10px;
-      margin-top: 10px;
-    }
-    .bottom-bar button{
-      padding: 5px 20px;
-      margin-right: 10px;
-    }
-    .bottom-bar a{
-      font-size: 12px;
-      padding: 5px 20px;
-      margin-right: 10px;
-    }
-  </style>
 </head>
 <body>
 
@@ -292,7 +249,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label form-label">买入金额</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="input11">
+                    <input type="text" class="form-control" id="buyNum">
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
@@ -311,7 +268,7 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label form-label">卖出数量</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="input11">
+                    <input type="text" class="form-control" id="saleNum">
                   </div>
                 </div>
 
@@ -700,8 +657,8 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#today" aria-controls="today" role="tab" data-toggle="tab">我的钱包</a></li>
-    <li role="presentation"><a href="#tasks" aria-controls="tasks" role="tab" data-toggle="tab">交易记录</a></li>
+    <li role="presentation" class="active"><a href="#myWallet" aria-controls="myWallet" role="tab" data-toggle="tab">我的钱包</a></li>
+    <li role="presentation"><a href="#tradeRecord" aria-controls="tradeRecord" role="tab" data-toggle="tab">交易记录</a></li>
     <!--<li role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">CHAT</a></li>-->
   </ul>
 
@@ -709,7 +666,7 @@
   <div class="tab-content">
 
     <!-- Start Today -->
-    <div role="tabpanel" class="tab-pane active" id="today">
+    <div role="tabpanel" class="tab-pane active" id="myWallet">
 
       <div class="sidepanel-m-title">
         我的钱包
@@ -719,39 +676,26 @@
 
       </div>
       <ul class="list-w-title">
-        <li>
-          <a href="#">
+        <li v-for="w in wallets">
+          <a href="javascript:void(0)">
 
-            <span class="label label-success">usdt</span>
-            <span class="date">10000</span>
-          </a>
-
-        </li>
-        <li>
-          <a href="#">
-            <span class="label label-success">基金1</span>
-            <span class="date">232</span>
+            <span class="label label-success">{{w.wallet}}</span>
+            <span class="date">{{w.num}}</span>
           </a>
         </li>
-        <li>
-          <a href="#">
-            <span class="label label-success">基金2</span>
-            <span class="date">23424<span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="label label-success">基金3</span>
-            <span class="date">12</span>
-          </a>
-        </li>
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
       </ul>
 
     </div>
     <!-- End Today -->
 
     <!-- Start Tasks -->
-    <div role="tabpanel" class="tab-pane" id="tasks">
+    <div role="tabpanel" class="tab-pane" id="tradeRecord">
 
       <div class="sidepanel-m-title">
         历史成交记录
@@ -762,27 +706,23 @@
       </div>
 
       <ul class="list-w-title">
-        <li>
+        <li v-for="r in records">
           <a href="#">
-            <span class="label label-danger">卖出</span>
-            <span class="date">2018-10-28 16：30：89</span>
-            <h4>交易订单： # 9652</h4>
-            <h4>卖出基金：基金1</h4>
-            <h4>卖出数量：1000个</h4>
-            <h4>成交情况：完全成交</h4>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <span class="label label-success">买入</span>
-            <span class="date">2018-10-28 16：30：89</span>
-            <h4>交易订单： # 9652</h4>
-            <h4>买入基金：基金1</h4>
-            <h4>买入金额：1000usdt</h4>
-            <h4>成交情况：完全成交</h4>
+            <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
+            <span class="date">{{r.date}}</span>
+            <h4>交易订单： # {{r.order}}</h4>
+            <h4>{{buySaleText(r.type)}}基金：{{r.fund}}</h4>
+            <h4>{{buySaleText(r.type)}}数量：{{r.num}}个</h4>
+            <h4>成交情况：{{r.status}}</h4>
           </a>
         </li>
 
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
       </ul>
     </div>
     <!-- End Tasks -->
@@ -823,14 +763,8 @@
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
 </body>
-<!-- ================================================
-jQuery Library
-================================================ -->
+</html>
 <script type="text/javascript" src="finance/js/jquery.min.js"></script>
-
-<!-- ================================================
-Bootstrap Core JavaScript File
-================================================ -->
 <script src="finance/js/bootstrap/bootstrap.min.js"></script>
 
 <!-- ================================================
@@ -990,14 +924,7 @@ Below codes are only for index widgets
         }
     } );
 </script>
-<script>
-    window.onload = function(){
-        $('#selltable').DataTable();
-        $('#buytable').DataTable();
-    }
-
-</script>
-<script type="text/javascript" src="js/echarts.js"></script>
-<script type="text/javascript" src="js/infographic.js"></script>
 <script src="js/fund.js"></script>
-<script src="js/fundhist.js"></script>
+<!--<script src="js/fundhist.js"></script>-->
+<script src="js/vue.min.js"></script>
+<script src="js/finance.js"></script>
