@@ -212,24 +212,21 @@
 
       <!-- Start Chart Daily -->
       <div class="col-md-12 col-lg-12">
-        <div class=" panel-widget widget chart-with-stats clearfix" style="height:600px;">
+        <div class=" panel-widget widget chart-with-stats clearfix" style="height:700px;">
 
-          <div class="col-sm-12" style="height:650px;">
-            <h4 class="title">TODAY SALES<small>Last update: 24 Hours ago</small></h4>
-            <div class="top-label"><h2>11.291</h2><h4>Today Total</h4></div>
+          <div class="col-sm-12" style="height:700px;">
+            <h4 class="title">行情<small>每天18：30更新</small></h4>
+            <!--<div class="top-label"><h2>1.28</h2><h4>Today Total</h4></div>-->
             <!--<div class="bigchart" id="todaysales"></div>-->
-            <div  class="bigchart" id="container"></div>
+            <p></p>
+            <p></p>
+            <div class="bigchart" id="container"></div>
           </div>
-          <!--<div class="right" style="height:450px;">-->
-          <!--<h4 class="title">PAGE VIEW</h4>-->
-          <!--&lt;!&ndash; start stats &ndash;&gt;-->
-          <!--<ul class="widget-inline-list clearfix">-->
-          <!--<li class="col-12"><span>962</span>Themeforest<i class="chart sparkline-green"></i></li>-->
-          <!--<li class="col-12"><span>367</span>Codecanyon<i class="chart sparkline-blue"></i></li>-->
-          <!--<li class="col-12"><span>92</span>Photodune<i class="chart sparkline-red"></i></li>-->
-          <!--</ul>-->
-          <!--&lt;!&ndash; end stats &ndash;&gt;-->
-          <!--</div>-->
+          <div class="right" style="height:450px;">
+            <div class="top-label"><h2>1.28</h2><h4>今日 价格</h4></div>
+
+          <!-- end stats -->
+          </div>
 
 
         </div>
@@ -247,9 +244,9 @@
               <form class="form-horizontal">
 
                 <div class="form-group">
-                  <label class="col-sm-3 control-label form-label">买入金额</label>
+                  <label class="col-sm-3 control-label form-label">买入金额：</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="buyNum">
+                    <input type="text"  placeholder="请输入买入金额" id="buyNum">
                   </div>
                 </div>
                 <button type="submit" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
@@ -266,9 +263,9 @@
               <form class="form-horizontal">
 
                 <div class="form-group">
-                  <label class="col-sm-3 control-label form-label">卖出数量</label>
+                  <label class="col-sm-3 control-label form-label">卖出数量：</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="saleNum">
+                    <input type="text"  placeholder="请输入卖出数量" id="saleNum">
                   </div>
                 </div>
 
