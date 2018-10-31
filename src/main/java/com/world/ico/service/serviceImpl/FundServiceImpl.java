@@ -221,7 +221,8 @@ public class FundServiceImpl implements FundService {
 
     @Override
     public ArrayList<FundTransaction> getDailyBuyFundTransaction(Integer userId) {
-        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findBuyFundTransaction(userId);
+        System.out.print("userId"+userId);
+        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findDailyBuyFundTransaction(userId);
         ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
         for (FundTransactionPo f :fundTransactionPos){
             FundTransaction fundTransaction=new FundTransaction();
