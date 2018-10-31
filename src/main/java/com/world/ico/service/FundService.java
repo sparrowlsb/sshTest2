@@ -24,7 +24,11 @@ public interface FundService {
 
     public ArrayList<FundTransaction> getSellFundHistory(Integer userId);
 
+    public ArrayList<FundTransaction> getDailySellFundTransaction(Integer userId);
+
     public ArrayList<FundTransaction> getBuyFundHistory(Integer userId);
+
+    public ArrayList<FundTransaction> getDailyBuyFundTransaction(Integer userId);
 
     public void revokeFundTransaction(Integer transactionId);
 

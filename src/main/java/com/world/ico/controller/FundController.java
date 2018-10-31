@@ -142,6 +142,64 @@ public class FundController extends BaseImpl {
 
     }
 
+    @RequestMapping(value = "getDailyBuyHistory", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject getDailyBuyHistory( HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
+        }
+        Integer userId=loginService.findEmailIdByEmail(email);
+        ArrayList<FundTransaction> buyFundHists=fundService.getDailyBuyFundTransaction(userId);
+
+        String data[][]=new String[buyFundHists.size()][6];
+        int j=0;
+        for (FundTransaction fundHist:buyFundHists){
+            data[j][0]= String.valueOf(fundHist.getId());
+            data[j][1]=String.valueOf(fundHist.getType());
+            data[j][2]=String.valueOf(fundHist.getFundId());
+            data[j][3]=String.valueOf(fundHist.getTraderMoney());
+            data[j][4]=String.valueOf(fundHist.getStatus());
+            data[j][5]=String.valueOf(fundHist.getTransactionDate());
+            j++;
+        }
+        System.out.print(data);
+        return getDataSuccess(data, "");
+
+
+
+    }
+
+    @RequestMapping(value = "getDailySellHistory", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject getDailySellHistory(HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
+        }
+        Integer userId=loginService.findEmailIdByEmail(email);
+        ArrayList<FundTransaction> sellFundHists=fundService.getSellFundHistory(userId);
+
+        String data[][]=new String[sellFundHists.size()][6];
+        int j=0;
+        for (FundTransaction fundHist:sellFundHists){
+            data[j][0]= String.valueOf(fundHist.getId());
+            data[j][1]=String.valueOf(fundHist.getType());
+            data[j][2]=String.valueOf(fundHist.getFundId());
+            data[j][3]=String.valueOf(fundHist.getTraderMoney());
+            data[j][4]=String.valueOf(fundHist.getStatus());
+            data[j][5]=String.valueOf(fundHist.getTransactionDate());
+            j++;
+        }
+        System.out.print(data);
+        return getDataSuccess(data, "");
+
+
+    }
     @RequestMapping(value = "revokefund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject revokefund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
@@ -167,12 +225,11 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
-        if (fundTransaction.getUserId()==0){
-            return getError(jsonObject,"can not find the userId");
-        }
+        Integer userId=loginService.findEmailIdByEmail(email);
 
-        ArrayList<FundTransaction> buyFundHists=fundService.getBuyFundHistory(fundTransaction.getUserId());
-        ArrayList<FundTransaction> sellFundHists=fundService.getSellFundHistory(fundTransaction.getUserId());
+
+        ArrayList<FundTransaction> buyFundHists=fundService.getBuyFundHistory(userId);
+        ArrayList<FundTransaction> sellFundHists=fundService.getSellFundHistory(userId);
 
 
         HashMap<String,ArrayList<FundTransaction>>histMap=new HashMap<>();
