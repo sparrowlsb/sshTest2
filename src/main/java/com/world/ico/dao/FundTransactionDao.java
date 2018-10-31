@@ -28,7 +28,7 @@ public interface FundTransactionDao  extends PagingAndSortingRepository<FundTran
     @Query(value = "UPDATE  FUND_TRANSACTION t set t.status = -1 where id=:id", nativeQuery = true)
     void updateFundTransactionStatus(@Param("id") Integer id);
 
-    @Query(value = "SELECT id,user_id,type,status,trader_money,fund_id,management_cost,transaction_date  from FUND_TRANSACTION where user_id=:userId and type='BUY' and status =0  ", nativeQuery = true)
+    @Query(value = "SELECT id,user_id,type,status,trader_money,fund_id,management_cost,transaction_date,fund_count,fund_price,management_fee  from FUND_TRANSACTION where user_id=:userId and type='BUY' and status =0  ", nativeQuery = true)
     ArrayList<FundTransactionPo> findDailyBuyFundTransaction(@Param("userId") Integer userId);
 
 

@@ -1,6 +1,6 @@
 package com.world.ico.dto;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 /**
  * Created by lsb on 2018/10/18.

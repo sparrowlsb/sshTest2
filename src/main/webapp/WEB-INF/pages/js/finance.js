@@ -110,7 +110,7 @@ $.ajax({
 
         });
     }
-}),
+})
 var sellDataSet=null;
 $.ajax({
     type: 'GET',
@@ -191,7 +191,7 @@ $.ajax({
 
         })
     }
-}),
+})
 
 //
 // $('#buytable').DataTable( {
