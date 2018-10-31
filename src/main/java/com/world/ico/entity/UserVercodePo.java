@@ -1,7 +1,7 @@
 package com.world.ico.entity;
 
 import javax.persistence.*;
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 /**
  * Created by lsb on 2018/9/19.

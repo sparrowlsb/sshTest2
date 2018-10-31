@@ -94,16 +94,22 @@ $.ajax({
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
                 console.log("id"+id);
+
+
+
                 $.ajax({
                     type: "POST",
-                    url: "<%=path%>/main/virtual/del?id="+id,
-                    //data: {id:$("#id").val(), title:$("#title").val(),title_en:$("#title_en").val()},
-                    dataType: "html",
-                    success: function(data){
-                        window.location.href=window.location.href;
+                    url: "/fund/revokefund",
+                    dataType: "json",
+                    contentType:"application/json;charset=utf-8",
+
+                    data: JSON.stringify({"id": id}),
+                    success: function (data, textStatus) {
+                        alert('撤销成功');
                     },
+
                     error:function(data){
-                        alert('删除错误');
+                        alert('撤销失败');
                     }
                 });
             }
@@ -193,144 +199,4 @@ $.ajax({
     }
 })
 
-//
-// $('#buytable').DataTable( {
-//     data: buyDataSet,
-//     columns: [
-//         {title: "订单号"},
-//         {title: "类型"},
-//         {title: "基金编号"},
-//         {title: "订单金额"},
-//         {title: "订单状态"},
-//         {title: "交易时间"},
-//         {title: "操作"}
-//     ],
-//     "columnDefs": [{
-//         // 定义操作列
-//         "targets": 6,
-//         "data": null,
-//         "render": function(data, type, row) {
-//             var html = '<a href="javascript:void(0);"  class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> 撤销</a>'
-//             return html;
-//         }
-//     }],
-//     language: {
-//         "processing": "处理中...",
-//         "lengthMenu": "显示 _MENU_ 项结果",
-//         "zeroRecords": "没有匹配结果",
-//         "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-//         "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-//         "infoFiltered": "(由 _MAX_ 项结果过滤)",
-//         "infoPostFix": "",
-//         "search": "搜索:",
-//         "url": "",
-//         "emptyTable": "表中数据为空",
-//         "loadingRecords": "载入中...",
-//         "infoThousands": ",",
-//         "paginate": {
-//             "first": "首页",
-//             "previous": "上页",
-//             "next": "下页",
-//             "last": "末页"
-//         },
-//         "aria": {
-//             "sortAscending": ": 以升序排列此列",
-//             "sortDescending": ": 以降序排列此列"
-//         }
-//     }
-// } );
-// // 初始化刪除按钮
-// $('#buytable tbody').on('click', 'a.delete', function(e) {
-//     e.preventDefault();
-//
-//     if (confirm("确定要删除该属性？")) {
-//         var table = $('#buytable').DataTable();
-//         table.row($(this).parents('tr')).remove().draw();
-//         var id = $('td', $(this).parents('tr')).eq(0).text();
-//         console.log("id"+id);
-//         $.ajax({
-//             type: "POST",
-//             url: "<%=path%>/main/virtual/del?id="+id,
-//             //data: {id:$("#id").val(), title:$("#title").val(),title_en:$("#title_en").val()},
-//             dataType: "html",
-//             success: function(data){
-//                 window.location.href=window.location.href;
-//             },
-//             error:function(data){
-//                 alert('删除错误');
-//             }
-//         });
-//     }
-//
-// });
-//
-// $('#selltable').DataTable( {
-//     data: sellDataSet,
-//     columns: [
-//         {title: "订单号"},
-//         {title: "类型"},
-//         {title: "基金编号"},
-//         {title: "订单金额"},
-//         {title: "订单状态"},
-//         {title: "交易时间"},
-//         {title: "操作"}
-//     ],
-//     "columnDefs": [{
-//         // 定义操作列
-//         "targets": 6,
-//         "data": null,
-//         "render": function(data, type, row) {
-//             var html = '<a href="javascript:void(0);"  class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> 撤销</a>'
-//             return html;
-//         }
-//     }],
-//     language: {
-//         "processing": "处理中...",
-//         "lengthMenu": "显示 _MENU_ 项结果",
-//         "zeroRecords": "没有匹配结果",
-//         "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-//         "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-//         "infoFiltered": "(由 _MAX_ 项结果过滤)",
-//         "infoPostFix": "",
-//         "search": "搜索:",
-//         "url": "",
-//         "emptyTable": "表中数据为空",
-//         "loadingRecords": "载入中...",
-//         "infoThousands": ",",
-//         "paginate": {
-//             "first": "首页",
-//             "previous": "上页",
-//             "next": "下页",
-//             "last": "末页"
-//         },
-//         "aria": {
-//             "sortAscending": ": 以升序排列此列",
-//             "sortDescending": ": 以降序排列此列"
-//         }
-//     }
-// } );
-// // 初始化刪除按钮
-// $('#selltable tbody').on('click', 'a.delete', function(e) {
-//     e.preventDefault();
-//
-//     if (confirm("确定要删除该属性？")) {
-//         var table = $('#selltable').DataTable();
-//         table.row($(this).parents('tr')).remove().draw();
-//         var id = $('td', $(this).parents('tr')).eq(0).text();
-//         console.log("id"+id);
-//         $.ajax({
-//             type: "POST",
-//             url: "<%=path%>/main/virtual/del?id="+id,
-//             //data: {id:$("#id").val(), title:$("#title").val(),title_en:$("#title_en").val()},
-//             dataType: "html",
-//             success: function(data){
-//                 window.location.href=window.location.href;
-//             },
-//             error:function(data){
-//                 alert('删除错误');
-//             }
-//         });
-//     }
-//
-// })
 
