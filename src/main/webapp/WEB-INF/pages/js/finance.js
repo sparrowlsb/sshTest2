@@ -41,6 +41,7 @@ $.ajax({
     success: function (data, textStatus) {
         buyDataSet=data.data;
         $('#buytable').DataTable( {
+            searching:false,
             data: buyDataSet,
             columns: [
                 {title: "订单号"},
