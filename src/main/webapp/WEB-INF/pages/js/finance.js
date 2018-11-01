@@ -121,7 +121,7 @@ $.ajax({
                     dataType: "json",
                     contentType:"application/json;charset=utf-8",
 
-                    data: JSON.stringify({"id": id,"type":"SELL"}),
+                    data: JSON.stringify({"id": id,"type":"BUY"}),
                     success: function (data, textStatus) {
                         alert('撤销成功');
                     },
