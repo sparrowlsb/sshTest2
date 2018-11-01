@@ -1,5 +1,7 @@
 package com.world.ico.dto;
 
+import java.math.BigDecimal;
+
 /**
  * Created by lsb on 2018/10/8.
  */
@@ -7,25 +9,19 @@ public class FundPrice {
 
     Integer fundId;
 
-    Double fundIncrease;
+    String  fundName;
 
-    Double fundPrice;
+    BigDecimal fundIncrease;
 
-    Double fundInMoney;
+    BigDecimal fundPrice;
 
-    Double fundOutMoney;
+    BigDecimal fundInMoney;
 
-    Double fundTotalMoney;
+    BigDecimal fundOutMoney;
+
+    BigDecimal fundTotalMoney;
 
     String fundDate;
-
-    public Double getFundIncrease() {
-        return fundIncrease;
-    }
-
-    public void setFundIncrease(Double fundIncrease) {
-        this.fundIncrease = fundIncrease;
-    }
 
     public Integer getFundId() {
         return fundId;
@@ -35,35 +31,51 @@ public class FundPrice {
         this.fundId = fundId;
     }
 
-    public Double getFundPrice() {
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
+    }
+
+    public BigDecimal getFundIncrease() {
+        return fundIncrease;
+    }
+
+    public void setFundIncrease(BigDecimal fundIncrease) {
+        this.fundIncrease = fundIncrease;
+    }
+
+    public BigDecimal getFundPrice() {
         return fundPrice;
     }
 
-    public void setFundPrice(Double fundPrice) {
+    public void setFundPrice(BigDecimal fundPrice) {
         this.fundPrice = fundPrice;
     }
 
-    public Double getFundInMoney() {
+    public BigDecimal getFundInMoney() {
         return fundInMoney;
     }
 
-    public void setFundInMoney(Double fundInMoney) {
+    public void setFundInMoney(BigDecimal fundInMoney) {
         this.fundInMoney = fundInMoney;
     }
 
-    public Double getFundOutMoney() {
+    public BigDecimal getFundOutMoney() {
         return fundOutMoney;
     }
 
-    public void setFundOutMoney(Double fundOutMoney) {
+    public void setFundOutMoney(BigDecimal fundOutMoney) {
         this.fundOutMoney = fundOutMoney;
     }
 
-    public Double getFundTotalMoney() {
+    public BigDecimal getFundTotalMoney() {
         return fundTotalMoney;
     }
 
-    public void setFundTotalMoney(Double fundTotalMoney) {
+    public void setFundTotalMoney(BigDecimal fundTotalMoney) {
         this.fundTotalMoney = fundTotalMoney;
     }
 

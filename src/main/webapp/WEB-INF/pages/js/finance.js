@@ -1,5 +1,7 @@
 var histDataSet
 
+
+
 var myWallet = new Vue({
     el: '#myWallet',
     data: {
@@ -30,6 +32,20 @@ var tradeRecord = new Vue({
     }
 })
 
+$.ajax({
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: "/fund/fundDailyPrice?fundId=1",
+    success: function (data, textStatus) {
+        var dailyPrice=data.data;
+        var fundDailyPrice = new Vue({
+            el: '#fundDailyPrice',
+
+            data: dailyPrice
+        })
+    }
+});
 
 var buyDataSet=null;
 $.ajax({
@@ -42,6 +58,7 @@ $.ajax({
         buyDataSet=data.data;
         $('#buytable').DataTable( {
             searching:false,
+            'order' : [5,'desc'],
             data: buyDataSet,
             columns: [
                 {title: "订单号"},
@@ -104,7 +121,7 @@ $.ajax({
                     dataType: "json",
                     contentType:"application/json;charset=utf-8",
 
-                    data: JSON.stringify({"id": id}),
+                    data: JSON.stringify({"id": id,"type":"SELL"}),
                     success: function (data, textStatus) {
                         alert('撤销成功');
                     },
@@ -129,6 +146,7 @@ $.ajax({
         sellDataSet=data.data;
         console.log(111+data.data);
         $('#selltable').DataTable( {
+            'order' : [5,'desc'],
             data: sellDataSet,
             columns: [
                 {title: "订单号"},
@@ -182,22 +200,27 @@ $.ajax({
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
                 console.log("id"+id);
+
+
+
                 $.ajax({
                     type: "POST",
-                    url: "<%=path%>/main/virtual/del?id="+id,
-                    //data: {id:$("#id").val(), title:$("#title").val(),title_en:$("#title_en").val()},
-                    dataType: "html",
-                    success: function(data){
-                        window.location.href=window.location.href;
+                    url: "/fund/revokefund",
+                    dataType: "json",
+                    contentType:"application/json;charset=utf-8",
+
+                    data: JSON.stringify({"id": id,"type":"SELL"}),
+                    success: function (data, textStatus) {
+                        alert('撤销成功');
                     },
+
                     error:function(data){
-                        alert('删除错误');
+                        alert('撤销失败');
                     }
                 });
             }
 
-        })
+        });
     }
 })
-
 

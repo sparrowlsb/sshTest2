@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -63,10 +64,10 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public void addUserWallet(Integer userId) {
-        loginDao.insertUserWallet(userId,0.0,"RMB",0.0);
-        loginDao.insertUserWallet(userId,0.0,"FUND:1",0.0);
-        loginDao.insertUserWallet(userId,0.0,"FUND:2",0.0);
-        loginDao.insertUserWallet(userId,0.0,"FUND:3",0.0);
+        loginDao.insertUserWallet(userId, BigDecimal.valueOf(0.0),"RMB",BigDecimal.valueOf(0.0));
+        loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND:1",BigDecimal.valueOf(0.0));
+        loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND:2",BigDecimal.valueOf(0.0));
+        loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND:3",BigDecimal.valueOf(0.0));
     }
 
 

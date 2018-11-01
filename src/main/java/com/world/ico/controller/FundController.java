@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,15 +37,22 @@ public class FundController extends BaseImpl {
 
     @RequestMapping(value = "fundDailyPrice", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject fundDailyPrice(HttpSession session) {
+    public JSONObject fundDailyPrice(Integer fundId ,HttpSession session) {
 
         JSONObject jsonObject = new JSONObject();
         List<FundPrice> fundPriceArrayList=fundService.getFundDailyPrice();
 
-        for (FundPrice fundPrice:fundPriceArrayList){
-            System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
+        int i=0;
+        for (int j=0;j<=5;j++){
+            if(fundPriceArrayList.get(j).getFundId().equals(fundId)){
+                i=j;
+                break;
+            }
         }
-
+        HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
+        fundDailyPriceMap.put("fund"+fundId,fundPriceArrayList.get(i));
+        String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
+        jsonObject=JSON.parseObject(jsArr);
         return getSuccess(jsonObject, "");
     }
 
@@ -53,7 +61,6 @@ public class FundController extends BaseImpl {
     @ResponseBody
     public JSONObject fundInfo(HttpSession session) {
 
-        ArrayList<String> list = new ArrayList<>();
         List<FundPrice> fundPriceArrayList=fundService.getFundInfo(1);
 
         String data[][]=new String[fundPriceArrayList.size()][6];
@@ -68,6 +75,7 @@ public class FundController extends BaseImpl {
             j++;
             System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
         }
+
         System.out.print(data);
         return getDataSuccess(data, "");
     }
@@ -94,15 +102,11 @@ public class FundController extends BaseImpl {
     public JSONObject buyfund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
-        if (fundTransaction.getUserId()==0){
-            return getError(jsonObject,"can not find the userId");
-
-        }
-        if (fundTransaction.getTraderMoney()==0){
+        if (fundTransaction.getTraderMoney().compareTo(BigDecimal.valueOf(0.0))==0){
             return  getError(jsonObject,"please entry the trader money");
 
         }
@@ -110,7 +114,8 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please entry the fundId");
 
         }
-        fundService.buyFund(fundTransaction.getUserId(),fundTransaction.getTraderMoney(),fundTransaction.getFundId());
+        Integer userId=loginService.findEmailIdByEmail(email);
+        fundService.buyFund(userId,fundTransaction.getTraderMoney(),fundTransaction.getFundId());
 
         return  getSuccess(jsonObject,"");
     }
@@ -120,15 +125,11 @@ public class FundController extends BaseImpl {
     public JSONObject sellfund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
-        if (fundTransaction.getUserId()==0){
-            return getError(jsonObject,"can not find the userId");
-
-        }
-        if (fundTransaction.getFundCount()==0){
+        if (fundTransaction.getFundCount().compareTo(BigDecimal.valueOf(0.0))==0){
             return  getError(jsonObject,"please entry the trader fund count");
 
         }
@@ -136,8 +137,8 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please entry the fundId");
 
         }
-
-        fundService.sellFund(fundTransaction.getUserId(),fundTransaction.getFundCount(),fundTransaction.getFundId());
+        Integer userId=loginService.findEmailIdByEmail(email);
+        fundService.sellFund(userId,fundTransaction.getFundCount(),fundTransaction.getFundId());
         return getSuccess(jsonObject, "");
 
     }
@@ -147,10 +148,10 @@ public class FundController extends BaseImpl {
     public JSONObject getDailyBuyHistory( HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-//        if (email.isEmpty()){
-//            return getError(jsonObject,"please login first");
-//
-//        }
+        if (email==null){
+            return getError(jsonObject,"please login first");
+
+        }
         Integer userId=loginService.findEmailIdByEmail("1158362548@qq.com");
         ArrayList<FundTransaction> buyFundHists=fundService.getDailyBuyFundTransaction(userId);
 
@@ -161,7 +162,15 @@ public class FundController extends BaseImpl {
             data[j][1]=String.valueOf(fundHist.getType());
             data[j][2]=String.valueOf(fundHist.getFundId());
             data[j][3]=String.valueOf(fundHist.getTraderMoney());
-            data[j][4]=String.valueOf(fundHist.getStatus());
+            if(fundHist.getStatus()==0){
+                data[j][4]="待完成交易";
+            }else if(fundHist.getStatus()==-1){
+                data[j][4]="已撤销交易";
+            }else if(fundHist.getStatus()==1){
+                data[j][4]="完全成交";
+            }else {
+                data[j][4]="";
+            };
             data[j][5]=String.valueOf(fundHist.getTransactionDate());
             j++;
         }
@@ -176,11 +185,11 @@ public class FundController extends BaseImpl {
     @ResponseBody
     public JSONObject getDailySellHistory(HttpSession session) {
         JSONObject jsonObject=new JSONObject();
-//        String email = (String) session.getAttribute("email");
-//        if (email.isEmpty()){
-//            return getError(jsonObject,"please login first");
-//
-//        }
+        String email = (String) session.getAttribute("email");
+        if (email==null){
+            return getError(jsonObject,"please login first");
+
+        }
         Integer userId=loginService.findEmailIdByEmail("1158362548@qq.com");
         ArrayList<FundTransaction> sellFundHists=fundService.getDailySellFundTransaction(userId);
 
@@ -205,12 +214,12 @@ public class FundController extends BaseImpl {
     public JSONObject revokefund(@RequestBody FundTransaction fundTransaction, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
 
-        fundService.revokeFundTransaction(fundTransaction.getId());
+        fundService.revokeFundTransaction(fundTransaction.getId(),fundTransaction.getType());
         return getSuccess(jsonObject,"" );
 
 

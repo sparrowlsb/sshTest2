@@ -1,6 +1,7 @@
 package com.world.ico.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -25,22 +26,22 @@ public class FundTransactionPo {
     Integer status;
 
     @Column(name = "trader_money")
-    Double traderMoney;
+    BigDecimal traderMoney;
 
     @Column(name = "fund_id")
     Integer fundId;
 
     @Column(name = "fund_price")
-    Double fundPrice;
+    BigDecimal fundPrice;
 
     @Column(name = "fund_count")
-    Double fundCount;
+    BigDecimal fundCount;
 
     @Column(name = "management_fee")
-    Double managementFee;
+    BigDecimal managementFee;
 
     @Column(name = "management_cost")
-    Double managementCost;
+    BigDecimal managementCost;
 
     @Column(name = "transaction_date")
     Timestamp transactionDate;
@@ -77,11 +78,11 @@ public class FundTransactionPo {
         this.status = status;
     }
 
-    public Double getTraderMoney() {
+    public BigDecimal getTraderMoney() {
         return traderMoney;
     }
 
-    public void setTraderMoney(Double traderMoney) {
+    public void setTraderMoney(BigDecimal traderMoney) {
         this.traderMoney = traderMoney;
     }
 
@@ -93,35 +94,35 @@ public class FundTransactionPo {
         this.fundId = fundId;
     }
 
-    public Double getFundPrice() {
+    public BigDecimal getFundPrice() {
         return fundPrice;
     }
 
-    public void setFundPrice(Double fundPrice) {
+    public void setFundPrice(BigDecimal fundPrice) {
         this.fundPrice = fundPrice;
     }
 
-    public Double getFundCount() {
+    public BigDecimal getFundCount() {
         return fundCount;
     }
 
-    public void setFundCount(Double fundCount) {
+    public void setFundCount(BigDecimal fundCount) {
         this.fundCount = fundCount;
     }
 
-    public Double getManagementFee() {
+    public BigDecimal getManagementFee() {
         return managementFee;
     }
 
-    public void setManagementFee(Double managementFee) {
+    public void setManagementFee(BigDecimal managementFee) {
         this.managementFee = managementFee;
     }
 
-    public Double getManagementCost() {
+    public BigDecimal getManagementCost() {
         return managementCost;
     }
 
-    public void setManagementCost(Double managementCost) {
+    public void setManagementCost(BigDecimal managementCost) {
         this.managementCost = managementCost;
     }
 

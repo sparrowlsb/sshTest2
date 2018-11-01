@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 
 /**
  * Created by lsb on 2018/10/27.
@@ -40,14 +41,14 @@ public class CurbExchangeController extends BaseImpl {
 
         Integer userId=loginService.findEmailIdByEmail(email);
 
-        if(userWallet.getSellMoney()<=0){
+        if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==-1){
             return getError(jsonObject, "please sell >0 money");
         }
-        Double totalMoney=fundService.totalMoney(userId,"RMB");
-        if(totalMoney<userWallet.getSellMoney()){
+        BigDecimal totalMoney=fundService.totalMoney(userId,"RMB");
+        if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
-        Double count= totalMoney-userWallet.getSellMoney();
+        BigDecimal count= totalMoney.subtract(userWallet.getSellMoney());
         fundService.sellMoney(userId,"RMB",count);
         return getSuccess(jsonObject,"" );
 
@@ -67,14 +68,14 @@ public class CurbExchangeController extends BaseImpl {
 
         Integer userId=loginService.findEmailIdByEmail(email);
 
-        if(userWallet.getSellMoney()<=0){
+        if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==0){
             return getError(jsonObject, "please sell >0 money");
         }
-        Double totalMoney=fundService.totalMoney(userId,"RMB");
-        if(totalMoney<userWallet.getSellMoney()){
+        BigDecimal totalMoney=fundService.totalMoney(userId,"RMB");
+        if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
-        Double count= totalMoney-userWallet.getSellMoney();
+        BigDecimal count= totalMoney.subtract(userWallet.getSellMoney());
         fundService.sellMoney(userId,"RMB",count);
         return getSuccess(jsonObject,"" );
 

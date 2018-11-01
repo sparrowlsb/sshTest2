@@ -1,11 +1,12 @@
 package com.world.ico.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.math.BigDecimal;
 
 /**
  * Created by lsb on 2018/9/22.
  */
+
 @Entity
 @Table(name="FUND_PRICE")
 public class FundPricePo {
@@ -14,26 +15,20 @@ public class FundPricePo {
     @GeneratedValue
     Integer fundId;
 
-    @Column(name = "date")
-    Timestamp date;
-
     @Column(name = "today_price")
-    Double todayPrice;
-
-    @Column(name = "today_increase")
-    Double todayIncrease;
-
-    @Column(name = "hist_increase")
-    Double histIncrease;
+    BigDecimal todayPrice;
 
     @Column(name = "total_money")
-    Double totalMoney;
+    BigDecimal totalMoney;
+
+    @Column(name = "date")
+    String date;
 
     @Column(name = "today_inmoney")
-    Double todayInmoney;
+    BigDecimal todayInmoney;
 
     @Column(name = "today_outmoney")
-    Double todayOutmoney;
+    BigDecimal todayOutmoney;
 
     public Integer getFundId() {
         return fundId;
@@ -43,59 +38,43 @@ public class FundPricePo {
         this.fundId = fundId;
     }
 
-    public Timestamp getDate() {
-        return date;
-    }
-
-    public void setDate(Timestamp date) {
-        this.date = date;
-    }
-
-    public Double getTodayPrice() {
+    public BigDecimal getTodayPrice() {
         return todayPrice;
     }
 
-    public void setTodayPrice(Double todayPrice) {
+    public void setTodayPrice(BigDecimal todayPrice) {
         this.todayPrice = todayPrice;
     }
 
-    public Double getTodayIncrease() {
-        return todayIncrease;
-    }
-
-    public void setTodayIncrease(Double todayIncrease) {
-        this.todayIncrease = todayIncrease;
-    }
-
-    public Double getHistIncrease() {
-        return histIncrease;
-    }
-
-    public void setHistIncrease(Double histIncrease) {
-        this.histIncrease = histIncrease;
-    }
-
-    public Double getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
     }
 
-    public Double getTodayInmoney() {
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public BigDecimal getTodayInmoney() {
         return todayInmoney;
     }
 
-    public void setTodayInmoney(Double todayInmoney) {
+    public void setTodayInmoney(BigDecimal todayInmoney) {
         this.todayInmoney = todayInmoney;
     }
 
-    public Double getTodayOutmoney() {
+    public BigDecimal getTodayOutmoney() {
         return todayOutmoney;
     }
 
-    public void setTodayOutmoney(Double todayOutmoney) {
+    public void setTodayOutmoney(BigDecimal todayOutmoney) {
         this.todayOutmoney = todayOutmoney;
     }
 }

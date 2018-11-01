@@ -7,5 +7,8 @@ var config = {
     api_checkEmail: "login/existenceUser",
     api_changePwd: "password/passwordForget",
     api_changeFinaPwd: "password/financePasswordSet",
-    api_updateUser: "password/updateInfo"
+    api_updateUser: "password/updateInfo",
+
+    api_buyFund: "fund/buyfund",
+    api_sellFund: "fund/sellfund"
 };

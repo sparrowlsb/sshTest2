@@ -1,5 +1,6 @@
 package com.world.ico.dto;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -7,13 +8,21 @@ import java.sql.Timestamp;
  */
 public class FundTransaction {
     Integer id;
+
     Integer userId;
+
     String type;
+
     Integer status;
-    Double traderMoney;
+
+    BigDecimal traderMoney;
+
     Integer fundId;
-    Double fundCount;
-    Double managementCost;
+
+    BigDecimal fundCount;
+
+    BigDecimal managementCost;
+
     Timestamp transactionDate;
 
     public Integer getId() {
@@ -48,11 +57,11 @@ public class FundTransaction {
         this.status = status;
     }
 
-    public Double getTraderMoney() {
+    public BigDecimal getTraderMoney() {
         return traderMoney;
     }
 
-    public void setTraderMoney(Double traderMoney) {
+    public void setTraderMoney(BigDecimal traderMoney) {
         this.traderMoney = traderMoney;
     }
 
@@ -64,19 +73,19 @@ public class FundTransaction {
         this.fundId = fundId;
     }
 
-    public Double getFundCount() {
+    public BigDecimal getFundCount() {
         return fundCount;
     }
 
-    public void setFundCount(Double fundCount) {
+    public void setFundCount(BigDecimal fundCount) {
         this.fundCount = fundCount;
     }
 
-    public Double getManagementCost() {
+    public BigDecimal getManagementCost() {
         return managementCost;
     }
 
-    public void setManagementCost(Double managementCost) {
+    public void setManagementCost(BigDecimal managementCost) {
         this.managementCost = managementCost;
     }
 

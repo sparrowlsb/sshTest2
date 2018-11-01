@@ -3,6 +3,7 @@ package com.world.ico.service;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,9 +19,9 @@ public interface FundService {
 
     public List<FundPrice> getFundInfo(Integer fundId);
 
-    public void buyFund(Integer userId,Double traderMoney,Integer fundId);
+    public void buyFund(Integer userId,BigDecimal traderMoney,Integer fundId);
 
-    public void sellFund(Integer userId,Double fundCount,Integer fundId);
+    public void sellFund(Integer userId,BigDecimal fundCount,Integer fundId);
 
     public ArrayList<FundTransaction> getSellFundHistory(Integer userId);
 
@@ -30,11 +31,11 @@ public interface FundService {
 
     public ArrayList<FundTransaction> getDailyBuyFundTransaction(Integer userId);
 
-    public void revokeFundTransaction(Integer transactionId);
+    public void revokeFundTransaction(Integer transactionId,String type);
 
-    public Double totalMoney(Integer userId,String type);
+    public BigDecimal totalMoney(Integer userId,String type);
 
-    public void sellMoney(Integer userId,String type ,Double money);
+    public void sellMoney(Integer userId,String type ,BigDecimal money);
 
 
 }

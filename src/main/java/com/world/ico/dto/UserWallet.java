@@ -1,12 +1,14 @@
 package com.world.ico.dto;
 
+import java.math.BigDecimal;
+
 /**
  * Created by lsb on 2018/10/16.
  */
 public class UserWallet {
     Integer  userId;
-    Double sellMoney;
-    Double totalMoney;
+    BigDecimal sellMoney;
+    BigDecimal totalMoney;
 
     public Integer getUserId() {
         return userId;
@@ -16,19 +18,19 @@ public class UserWallet {
         this.userId = userId;
     }
 
-    public Double getSellMoney() {
+    public BigDecimal getSellMoney() {
         return sellMoney;
     }
 
-    public void setSellMoney(Double sellMoney) {
+    public void setSellMoney(BigDecimal sellMoney) {
         this.sellMoney = sellMoney;
     }
 
-    public Double getTotalMoney() {
+    public BigDecimal getTotalMoney() {
         return totalMoney;
     }
 
-    public void setTotalMoney(Double totalMoney) {
+    public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
     }
 }

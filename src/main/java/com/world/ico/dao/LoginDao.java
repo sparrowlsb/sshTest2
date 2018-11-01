@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
-import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Timestamp;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -35,7 +33,7 @@ public interface LoginDao extends PagingAndSortingRepository<UserPo, Integer> {
 
     @Modifying
     @Query(value = "INSERT INTO USER_WALLET (user_id,money ,type,count) values (:user_id,:money,:type,:count) ", nativeQuery = true)
-    void insertUserWallet(@Param("user_id") Integer user_id,@Param("money") Double money,@Param("type") String type, @Param("count") Double count);
+    void insertUserWallet(@Param("user_id") Integer user_id, @Param("money") BigDecimal money, @Param("type") String type, @Param("count") BigDecimal count);
 
 
 //    @Modifying

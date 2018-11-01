@@ -1,6 +1,7 @@
 package com.world.ico.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 /**
  * Created by lsb on 2018/9/22.
@@ -17,10 +18,10 @@ public class UserWalletPo {
     Integer userId;
 
     @Column(name = "type")
-    Double type;
+    String type;
 
     @Column(name = "count")
-    Double count;
+    BigDecimal count;
 
     public Integer getId() {
         return id;
@@ -38,19 +39,20 @@ public class UserWalletPo {
         this.userId = userId;
     }
 
-    public Double getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Double type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public Double getCount() {
+    public BigDecimal getCount() {
         return count;
     }
 
-    public void setCount(Double count) {
+    public void setCount(BigDecimal count) {
         this.count = count;
     }
+
 }

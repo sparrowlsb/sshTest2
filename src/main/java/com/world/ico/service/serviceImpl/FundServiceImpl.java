@@ -1,17 +1,17 @@
 package com.world.ico.service.serviceImpl;
 
-import com.world.ico.dao.FundDao;
-import com.world.ico.dao.FundTransactionDao;
-import com.world.ico.dao.ManagementFeeDao;
-import com.world.ico.dao.WalletDao;
+import com.world.ico.dao.*;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
+import com.world.ico.entity.FundPo;
+import com.world.ico.entity.FundPricePo;
 import com.world.ico.entity.FundTransactionPo;
 import com.world.ico.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +22,9 @@ import java.util.List;
 @Transactional
 @Service
 public class FundServiceImpl implements FundService {
+    @Autowired
+    public FundPriceDao fundPriceDao;
+
     @Autowired
     public FundDao fundDao;
 
@@ -34,20 +37,29 @@ public class FundServiceImpl implements FundService {
     @Autowired
     public FundTransactionDao fundTransactionDao;
 
+
     @Override
     public List<FundPrice> getFundDailyPrice() {
-        ArrayList<Object[]> fundPriceList= (ArrayList<Object[]>) fundDao.getFundDailyPrice();
+        ArrayList<FundPricePo> fundPriceList= (ArrayList<FundPricePo>) fundPriceDao.getFundDailyPrice();
         System.out.println(fundPriceList);
         ArrayList<FundPrice> fundPriceArrayList=new ArrayList<>();
-        for(Object[] object:fundPriceList){
+        for(FundPricePo fundPricePo:fundPriceList){
             FundPrice fundPrice=new FundPrice();
-            fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((Double) object[1]);
-            fundPrice.setFundTotalMoney((Double) object[2]);
-            fundPrice.setFundDate((String) object[5]);
+            fundPrice.setFundId(fundPricePo.getFundId());
+            fundPrice.setFundPrice(fundPricePo.getTodayPrice());
+            fundPrice.setFundTotalMoney(fundPricePo.getTotalMoney());
+            fundPrice.setFundInMoney(fundPricePo.getTodayInmoney());
+            fundPrice.setFundOutMoney(fundPricePo.getTodayOutmoney());
+            fundPrice.setFundDate(String.valueOf(fundPricePo.getDate()));
+
+            FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundPrice.setFundName(fundName);
+            }
             fundPriceArrayList.add(fundPrice);
         }
-
+        System.out.println(fundPriceArrayList.size());
         System.out.println(fundPriceArrayList);
         return fundPriceArrayList;
     }
@@ -55,15 +67,15 @@ public class FundServiceImpl implements FundService {
     @Override
     public HashMap<Integer, ArrayList<FundPrice>> getFundNarrowInfo() {
         HashMap<Integer,ArrayList<FundPrice>> fundPriceHashMap=new HashMap<>();
-        ArrayList<Object[]> fundPriceList1= (ArrayList<Object[]>) fundDao.getFundNarrowInfo(1);
-        ArrayList<Object[]> fundPriceList2= (ArrayList<Object[]>) fundDao.getFundNarrowInfo(2);
-        ArrayList<Object[]> fundPriceList3= (ArrayList<Object[]>) fundDao.getFundNarrowInfo(3);
+        ArrayList<Object[]> fundPriceList1= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(1);
+        ArrayList<Object[]> fundPriceList2= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(2);
+        ArrayList<Object[]> fundPriceList3= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(3);
 
         ArrayList<FundPrice> fundPriceArrayList1=new ArrayList<>();
         for(Object[] object:fundPriceList1){
             FundPrice fundPrice=new FundPrice();
             fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((Double) object[1]);
+            fundPrice.setFundPrice((BigDecimal) object[1]);
 
             fundPrice.setFundDate((String) object[2]);
             fundPriceArrayList1.add(fundPrice);
@@ -73,7 +85,7 @@ public class FundServiceImpl implements FundService {
         for(Object[] object:fundPriceList2){
             FundPrice fundPrice=new FundPrice();
             fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((Double) object[1]);
+            fundPrice.setFundPrice((BigDecimal) object[1]);
 
             fundPrice.setFundDate((String) object[2]);
             fundPriceArrayList2.add(fundPrice);
@@ -83,7 +95,7 @@ public class FundServiceImpl implements FundService {
         for(Object[] object:fundPriceList3){
             FundPrice fundPrice=new FundPrice();
             fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((Double) object[1]);
+            fundPrice.setFundPrice((BigDecimal) object[1]);
 
             fundPrice.setFundDate((String) object[2]);
             fundPriceArrayList3.add(fundPrice);
@@ -99,17 +111,17 @@ public class FundServiceImpl implements FundService {
     @Override
     public List<FundPrice> getFundInfo(Integer fundId) {
 
-        ArrayList<Object[]> fundPriceList= (ArrayList<Object[]>) fundDao.getFundInfo(fundId);
+        ArrayList<Object[]> fundPriceList= (ArrayList<Object[]>) fundPriceDao.getFundInfo(fundId);
 
 
         ArrayList<FundPrice> fundPriceArrayList=new ArrayList<>();
         for(Object[] object:fundPriceList){
             FundPrice fundPrice=new FundPrice();
             fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((Double) object[1]);
-            fundPrice.setFundTotalMoney((Double) object[2]);
-            fundPrice.setFundInMoney((Double) object[3]);
-            fundPrice.setFundOutMoney((Double) object[4]);
+            fundPrice.setFundPrice((BigDecimal) object[1]);
+            fundPrice.setFundTotalMoney((BigDecimal) object[2]);
+            fundPrice.setFundInMoney((BigDecimal) object[3]);
+            fundPrice.setFundOutMoney((BigDecimal) object[4]);
             fundPrice.setFundDate((String) object[5]);
             fundPriceArrayList.add(fundPrice);
         }
@@ -119,17 +131,17 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void buyFund(Integer userId, Double traderMoney, Integer fundId) {
+    public void buyFund(Integer userId, BigDecimal traderMoney, Integer fundId) {
 
-        Double managementFee= managementFeeDao.getManagementFee();
-        Double managementCost=managementFee*traderMoney;
-        Double fundPrice =Double.valueOf(-1);
-        Double fundCount =Double.valueOf(-1);
+        BigDecimal managementFee= managementFeeDao.getManagementFee();
+        BigDecimal managementCost=managementFee.multiply(traderMoney);
+        BigDecimal fundPrice =BigDecimal.valueOf(-1);
+        BigDecimal fundCount =BigDecimal.valueOf(-1);
 
-        Double totalMoney=walletDao.totalCount(userId,"RMB");
-        if(totalMoney-traderMoney>=0){
+        BigDecimal totalMoney=walletDao.totalCount(userId,"RMB");
+        if(totalMoney.compareTo(traderMoney)==1){
             synchronized (this){
-                walletDao.sellCount(userId,"RMB",totalMoney-traderMoney);
+                walletDao.sellCount(userId,"RMB",traderMoney);
                 walletDao.updateMoney(userId,"FUND_"+fundId,traderMoney);
                 fundTransactionDao.insertFundTransaction(userId,"BUY",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
             }
@@ -140,17 +152,17 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void sellFund(Integer userId, Double fundCount, Integer fundId) {
-        Double managementFee = managementFeeDao.getManagementFee();
-        Double totalCount = walletDao.totalCount(userId, "FUND_" + fundId);
+    public void sellFund(Integer userId, BigDecimal fundCount, Integer fundId) {
+        BigDecimal managementFee = managementFeeDao.getManagementFee();
+        BigDecimal totalCount = walletDao.totalCount(userId, "FUND_" + fundId);
 
-        Double traderMoney = Double.valueOf(-1);
-        Double fundPrice = Double.valueOf(-1);
-        Double managementCost = Double.valueOf(-1);
+        BigDecimal traderMoney = BigDecimal.valueOf(-1);
+        BigDecimal fundPrice = BigDecimal.valueOf(-1);
+        BigDecimal managementCost = BigDecimal.valueOf(-1);
 
-        if(totalCount-fundCount>=0){
+        if(totalCount.compareTo(fundCount)==1){
+
             synchronized (this){
-                walletDao.sellCount(userId,"FUND_"+fundId,totalCount-fundCount);
                 fundTransactionDao.insertFundTransaction(userId,"SELL",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
             }
         }
@@ -242,20 +254,30 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void revokeFundTransaction(Integer transactionId) {
-        fundTransactionDao.updateFundTransactionStatus(transactionId);
+    public void revokeFundTransaction(Integer transactionId,String type) {
+        synchronized (this) {
+            FundTransactionPo fundTransactionPo = fundTransactionDao.findRevokeFundTransactionInfo(transactionId, type, 0);
+
+            if(fundTransactionPo.getType()=="BUY") {
+                walletDao.revokeMoney(fundTransactionPo.getUserId(), "RMB", fundTransactionPo.getTraderMoney());
+
+                walletDao.revokeFund(fundTransactionPo.getUserId(), "FUND_" + fundTransactionPo.getFundId(), fundTransactionPo.getTraderMoney());
+            }
+            fundTransactionDao.updateFundTransactionStatus(transactionId);
+
+        }
     }
 
 
 
     @Override
-    public Double totalMoney(Integer userId, String type) {
+    public BigDecimal totalMoney(Integer userId, String type) {
 
         return walletDao.totalCount(userId,type);
     }
 
     @Override
-    public void sellMoney(Integer userId,String type ,Double money) {
+    public void sellMoney(Integer userId,String type ,BigDecimal money) {
 
         walletDao.sellCount(userId,type,money);
         walletDao.exchangeHist(userId,type,"RMB",money,0);

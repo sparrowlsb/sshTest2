@@ -1,6 +1,7 @@
 package com.world.ico.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
@@ -27,7 +28,7 @@ public class CurbExchangePo {
     String type;
 
     @Column(name = "money")
-    Double money;
+    BigDecimal money;
 
     @Column(name = "status")
     Integer status;
@@ -72,11 +73,11 @@ public class CurbExchangePo {
         this.type = type;
     }
 
-    public Double getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(Double money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 
