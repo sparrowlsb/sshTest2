@@ -41,9 +41,50 @@ $.ajax({
         var dailyPrice=data.data;
         var fundDailyPrice = new Vue({
             el: '#fundDailyPrice',
-
             data: dailyPrice
         })
+        var price = new Vue({
+            el: '#daliyprice',
+            data: dailyPrice
+        })
+    }
+});
+
+
+
+$.ajax({
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: "/fund/totalCount?type=FUND_1",
+    success: function (data, textStatus) {
+        var totalCount=data.data;
+        if(totalCount==null) {
+            totalCount = JSON.stringify({"totalcount": 0});
+        }
+        var count = new Vue({
+            el: '#totalFundCount',
+            data: totalCount
+        })
+
+    }
+});
+
+$.ajax({
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: "/fund/totalCount?type=RMB",
+    success: function (data, textStatus) {
+        var totalCount=data.data;
+        if(totalCount==null) {
+            totalCount = JSON.stringify({"totalcount": 0});
+        }
+        var count = new Vue({
+            el: '#totalMoney',
+            data: totalCount
+        })
+
     }
 });
 

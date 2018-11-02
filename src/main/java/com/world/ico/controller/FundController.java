@@ -96,6 +96,23 @@ public class FundController extends BaseImpl {
         return getSuccess(jsonObject, "");
     }
 
+    @RequestMapping(value = "totalCount", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject totalMoney( String type, HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email==null){
+            return getError(jsonObject,"please login first");
+
+        }
+
+        Integer userId=loginService.findEmailIdByEmail(email);
+        BigDecimal totalcount=fundService.totalMoney(userId,type);
+
+        jsonObject.put("totalcount",totalcount);
+        return  getSuccess(jsonObject,"");
+    }
+
 
     @RequestMapping(value = "buyfund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
