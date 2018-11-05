@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
+import com.world.ico.entity.UserWalletPo;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
 import com.world.ico.service.serviceImpl.BaseImpl;
@@ -112,7 +113,22 @@ public class FundController extends BaseImpl {
         jsonObject.put("totalcount",totalcount);
         return  getSuccess(jsonObject,"");
     }
+    @RequestMapping(value = "fundsDetails", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject fundsDetails( HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email==null){
+            return getError(jsonObject,"please login first");
 
+        }
+
+        Integer userId=loginService.findEmailIdByEmail(email);
+        ArrayList<UserWalletPo> userWalletPos=fundService.getFundsDetails(userId);
+
+        jsonObject.put("fundsDetails",userWalletPos);
+        return  getSuccess(jsonObject,"");
+    }
 
     @RequestMapping(value = "buyfund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
@@ -246,7 +262,7 @@ public class FundController extends BaseImpl {
     @ResponseBody
     public JSONObject getHistory(Integer pages, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
-        String email = "1158362548@qq.com";
+        String email = (String) session.getAttribute("email");
         if (email==null){
             return getError(jsonObject,"please login first");
 
