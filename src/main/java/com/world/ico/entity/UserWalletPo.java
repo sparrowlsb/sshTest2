@@ -26,15 +26,6 @@ public class UserWalletPo {
     @Column(name = "count")
     BigDecimal count;
 
-
-    public BigDecimal getMoney() {
-        return money;
-    }
-
-    public void setMoney(BigDecimal money) {
-        this.money = money;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -49,6 +40,14 @@ public class UserWalletPo {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
     }
 
     public String getType() {

@@ -3,6 +3,7 @@ package com.world.ico.service.serviceImpl;
 import com.world.ico.dao.*;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
+import com.world.ico.dto.UserWallet;
 import com.world.ico.entity.FundPo;
 import com.world.ico.entity.FundPricePo;
 import com.world.ico.entity.FundTransactionPo;
@@ -267,8 +268,46 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public ArrayList<UserWalletPo> getFundsDetails(Integer userId) {
-        return walletDao.getFundsDetails(userId);
+    public ArrayList<UserWallet> getFundsDetails(Integer userId) {
+
+        ArrayList<UserWalletPo> userWalletPos=walletDao.getFundsDetails(userId);
+
+        ArrayList<UserWallet>userWallets=new ArrayList<>();
+        for (UserWalletPo userWalletPo:userWalletPos) {
+            UserWallet userWallet = new UserWallet();
+            userWallet.setType(userWalletPo.getType());
+            if (userWalletPo.getType().equalsIgnoreCase("FUND_1")) {
+                FundPo fundInfo = fundDao.getFundInfo(1);
+                if (fundInfo!=null) {
+                    userWallet.setType(fundInfo.getFundName());
+                }
+
+            }
+            if (userWalletPo.getType().equalsIgnoreCase("FUND_2")) {
+                FundPo fundInfo = fundDao.getFundInfo(2);
+                if (fundInfo!=null) {
+                    userWallet.setType(fundInfo.getFundName());
+                }
+
+            }
+            if (userWalletPo.getType().equalsIgnoreCase("FUND_3")) {
+                FundPo fundInfo = fundDao.getFundInfo(3);
+                if (fundInfo!=null) {
+                    userWallet.setType(fundInfo.getFundName());
+                }
+
+            }
+            if (userWalletPo.getType().equalsIgnoreCase("FUND_4")) {
+                FundPo fundInfo = fundDao.getFundInfo(4);
+                if (fundInfo!=null) {
+                    userWallet.setType(fundInfo.getFundName());
+                }
+
+            }
+            userWallets.add(userWallet);
+        }
+        return userWallets;
+
     }
 
     @Override

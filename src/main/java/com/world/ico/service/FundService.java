@@ -2,7 +2,7 @@ package com.world.ico.service;
 
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
-import com.world.ico.entity.UserWalletPo;
+import com.world.ico.dto.UserWallet;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public interface FundService {
 
     public BigDecimal totalMoney(Integer userId,String type);
 
-    public ArrayList<UserWalletPo> getFundsDetails(Integer userId);
+    public ArrayList<UserWallet> getFundsDetails(Integer userId);
 
     public void sellMoney(Integer userId,String type ,BigDecimal money);
 

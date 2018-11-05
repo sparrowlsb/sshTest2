@@ -9,9 +9,36 @@ public class UserWallet {
     Integer  userId;
     BigDecimal sellMoney;
     BigDecimal totalMoney;
+    String type;
+    BigDecimal money;
+    BigDecimal count;
 
     public Integer getUserId() {
         return userId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
+
+    public BigDecimal getCount() {
+        return count;
+    }
+
+    public void setCount(BigDecimal count) {
+        this.count = count;
     }
 
     public void setUserId(Integer userId) {

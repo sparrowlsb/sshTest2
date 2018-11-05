@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
-import com.world.ico.entity.UserWalletPo;
+import com.world.ico.dto.UserWallet;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
 import com.world.ico.service.serviceImpl.BaseImpl;
@@ -117,16 +117,20 @@ public class FundController extends BaseImpl {
     @ResponseBody
     public JSONObject fundsDetails( HttpSession session) {
         JSONObject jsonObject=new JSONObject();
-        String email = (String) session.getAttribute("email");
+        String email = "1158362548@qq.com";
         if (email==null){
             return getError(jsonObject,"please login first");
 
         }
 
         Integer userId=loginService.findEmailIdByEmail(email);
-        ArrayList<UserWalletPo> userWalletPos=fundService.getFundsDetails(userId);
+        ArrayList<UserWallet> userWallets=fundService.getFundsDetails(userId);
 
-        jsonObject.put("fundsDetails",userWalletPos);
+
+        jsonObject.put("fundsDetails",userWallets);
+
+        jsonObject.put("totalPages",1);
+        jsonObject.put("totalCount",4);
         return  getSuccess(jsonObject,"");
     }
 
