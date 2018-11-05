@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  * Created by lsb on 2018/10/16.
@@ -15,6 +16,10 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
 
     @Query(value = "select t.count from USER_WALLET t where user_id=:user_id and type=:type ", nativeQuery = true)
     BigDecimal totalCount(@Param("user_id") Integer user_id, @Param("type") String type);
+
+
+    @Query(value = "select * from USER_WALLET t where user_id=:user_id  ", nativeQuery = true)
+    ArrayList<UserWalletPo> getFundsDetails(@Param("user_id") Integer user_id);
 
     @Modifying
     @Query(value = "update USER_WALLET set count=count-:count,money=money-:count where user_id=:user_id and type=:type ", nativeQuery = true)

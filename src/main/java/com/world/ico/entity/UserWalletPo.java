@@ -14,6 +14,9 @@ public class UserWalletPo {
     @GeneratedValue
     Integer id;
 
+    @Column(name = "money")
+    BigDecimal money;
+
     @Column(name = "user_id")
     Integer userId;
 
@@ -22,6 +25,15 @@ public class UserWalletPo {
 
     @Column(name = "count")
     BigDecimal count;
+
+
+    public BigDecimal getMoney() {
+        return money;
+    }
+
+    public void setMoney(BigDecimal money) {
+        this.money = money;
+    }
 
     public Integer getId() {
         return id;

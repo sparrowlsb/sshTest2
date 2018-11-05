@@ -6,6 +6,7 @@ import com.world.ico.dto.FundTransaction;
 import com.world.ico.entity.FundPo;
 import com.world.ico.entity.FundPricePo;
 import com.world.ico.entity.FundTransactionPo;
+import com.world.ico.entity.UserWalletPo;
 import com.world.ico.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -263,6 +264,11 @@ public class FundServiceImpl implements FundService {
     public BigDecimal totalMoney(Integer userId, String type) {
 
         return walletDao.totalCount(userId,type);
+    }
+
+    @Override
+    public ArrayList<UserWalletPo> getFundsDetails(Integer userId) {
+        return walletDao.getFundsDetails(userId);
     }
 
     @Override
