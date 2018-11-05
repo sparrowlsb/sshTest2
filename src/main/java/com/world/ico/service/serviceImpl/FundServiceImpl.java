@@ -169,8 +169,8 @@ public class FundServiceImpl implements FundService {
     }
 
         @Override
-    public ArrayList<FundTransaction> getSellFundHistory(Integer userId) {
-        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findSellFundTransaction(userId);
+    public ArrayList<FundTransaction> getFundHistory(Integer userId,Integer page1,Integer page2) {
+        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findHistFundTransaction(userId,page1,page2);
         ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
         for (FundTransactionPo f :fundTransactionPos){
             FundTransaction fundTransaction=new FundTransaction();
@@ -187,6 +187,14 @@ public class FundServiceImpl implements FundService {
         }
 
         return fundTransactions;
+    }
+
+    @Override
+    public Integer getFundHistoryCount(Integer userId) {
+        Integer fundTransactionCount=fundTransactionDao.findHistFundTransactionCount(userId);
+
+
+        return fundTransactionCount;
     }
 
     @Override
@@ -210,26 +218,7 @@ public class FundServiceImpl implements FundService {
         return fundTransactions;
     }
 
-    @Override
-    public ArrayList<FundTransaction> getBuyFundHistory(Integer userId) {
-        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findBuyFundTransaction(userId);
-        ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
-        for (FundTransactionPo f :fundTransactionPos){
-            FundTransaction fundTransaction=new FundTransaction();
-            fundTransaction.setId(f.getId());
-            fundTransaction.setUserId(f.getUserId());
-            fundTransaction.setType(f.getType());
-            fundTransaction.setStatus(f.getStatus());
-            fundTransaction.setTraderMoney(f.getTraderMoney());
-            fundTransaction.setFundId(f.getFundId());
-            fundTransaction.setManagementCost(f.getManagementCost());
-            fundTransaction.setTransactionDate(f.getTransactionDate());
-            fundTransactions.add(fundTransaction);
 
-        }
-
-        return fundTransactions;
-    }
 
     @Override
     public ArrayList<FundTransaction> getDailyBuyFundTransaction(Integer userId) {

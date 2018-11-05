@@ -23,11 +23,11 @@ public interface FundService {
 
     public void sellFund(Integer userId,BigDecimal fundCount,Integer fundId);
 
-    public ArrayList<FundTransaction> getSellFundHistory(Integer userId);
+    public ArrayList<FundTransaction> getFundHistory(Integer userId,Integer page1,Integer page2);
+
+    public Integer getFundHistoryCount(Integer userId);
 
     public ArrayList<FundTransaction> getDailySellFundTransaction(Integer userId);
-
-    public ArrayList<FundTransaction> getBuyFundHistory(Integer userId);
 
     public ArrayList<FundTransaction> getDailyBuyFundTransaction(Integer userId);
 

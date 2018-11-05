@@ -17,6 +17,8 @@ public class FundTransaction {
 
     BigDecimal traderMoney;
 
+    BigDecimal fundPrice;
+
     Integer fundId;
 
     BigDecimal fundCount;
@@ -24,6 +26,14 @@ public class FundTransaction {
     BigDecimal managementCost;
 
     Timestamp transactionDate;
+
+    public BigDecimal getFundPrice() {
+        return fundPrice;
+    }
+
+    public void setFundPrice(BigDecimal fundPrice) {
+        this.fundPrice = fundPrice;
+    }
 
     public Integer getId() {
         return id;
