@@ -242,28 +242,38 @@ public class FundController extends BaseImpl {
 
     }
 
-    @RequestMapping(value = "getHistory", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
+    @RequestMapping(value = "getHistory", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getHistory(@RequestBody FundTransaction fundTransaction, HttpSession session) {
+    public JSONObject getHistory(Integer pages, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
-        String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        String email = "1158362548@qq.com";
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
         Integer userId=loginService.findEmailIdByEmail(email);
+        Integer page1=5*(pages-1);
+        Integer page2=5;
 
+        ArrayList<FundTransaction> fundHists=fundService.getFundHistory(userId,page1,page2);
+        Integer fundCount=fundService.getFundHistoryCount(userId);
 
-        ArrayList<FundTransaction> buyFundHists=fundService.getBuyFundHistory(userId);
-        ArrayList<FundTransaction> sellFundHists=fundService.getSellFundHistory(userId);
+        Integer totalPages=(fundCount-1)/5+1;
+        Integer currentPage=pages;
+        Integer pageSizes=5;
+        Integer totalCount=fundCount;
+
 
 
         HashMap<String,ArrayList<FundTransaction>>histMap=new HashMap<>();
-        histMap.put("BUY",buyFundHists);
-        histMap.put("SELL",sellFundHists);
+        histMap.put("HIST",fundHists);
 
         String jsArr= JSON.toJSONString(histMap, SerializerFeature.DisableCircularReferenceDetect);
         jsonObject=JSON.parseObject(jsArr);
+        jsonObject.put("totalPages",totalPages);
+        jsonObject.put("currentPage",currentPage);
+        jsonObject.put("pageSizes",pageSizes);
+        jsonObject.put("totalCount",totalCount);
         return getSuccess(jsonObject,"" );
 
 
