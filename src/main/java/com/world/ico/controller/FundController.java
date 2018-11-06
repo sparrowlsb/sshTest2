@@ -264,7 +264,7 @@ public class FundController extends BaseImpl {
 
     @RequestMapping(value = "getHistory", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getHistory(Integer pages, HttpSession session) {
+    public JSONObject getHistory(Integer page, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
         if (email==null){
@@ -272,14 +272,14 @@ public class FundController extends BaseImpl {
 
         }
         Integer userId=loginService.findEmailIdByEmail(email);
-        Integer page1=5*(pages-1);
+        Integer page1=5*(page-1);
         Integer page2=5;
 
         ArrayList<FundTransaction> fundHists=fundService.getFundHistory(userId,page1,page2);
         Integer fundCount=fundService.getFundHistoryCount(userId);
 
         Integer totalPages=(fundCount-1)/5+1;
-        Integer currentPage=pages;
+        Integer currentPage=page;
         Integer pageSizes=5;
         Integer totalCount=fundCount;
 
@@ -292,7 +292,7 @@ public class FundController extends BaseImpl {
         jsonObject=JSON.parseObject(jsArr);
         jsonObject.put("totalPages",totalPages);
         jsonObject.put("currentPage",currentPage);
-        jsonObject.put("pageSizes",pageSizes);
+        jsonObject.put("pageSize",pageSizes);
         jsonObject.put("totalCount",totalCount);
         return getSuccess(jsonObject,"" );
 

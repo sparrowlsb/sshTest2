@@ -12,25 +12,70 @@ var myWallet = new Vue({
 var tradeRecord = new Vue({
     el: '#tradeRecord',
     data: {
-        records: [{type:"2",date:"2018-10-28 16：30：89",order:"9652",fund:"基金1",num:"1000",status:"完全成交"},{type:"1",date:"2018-10-28 16：30：89",order:"9652",fund:"基金1",num:"1000",status:"完全成交"}]
+        records: [],
+        currentPage:0,
+        pageSize:0,
+        totalCount:0,
+        totalPages:0
     },
     methods: {
         buySaleClass: function (type) {
-            if (type == 1){
+            if (type == "BUY"){
                 return 'label-success'
-            }else if (type == 2){
+            }else if (type == "SELL"){
                 return "label-danger"
             }
         },
         buySaleText: function (type) {
-            if (type == 1){
+            if (type == "BUY"){
                 return "买入"
-            }else if (type == 2){
+            }else if (type == "SELL"){
                 return "卖出"
             }
+        },
+        nextPage: function () {
+            if (this.currentPage < this.totalPages) {
+                this.ajaxData(this.currentPage+1)
+            }
+        },
+        prePage: function () {
+            if (this.currentPage >1) {
+                this.ajaxData(this.currentPage-1)
+            }
+        },
+        ajaxData: function (page) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/getHistory?page="+page,
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.records = data.data.HIST;
+                        self.currentPage = data.data.currentPage;
+                        self.pageSize = data.data.pageSize;
+                        self.totalCount = data.data.totalCount;
+                        self.totalPages = data.data.totalPages;
+                    }
+                }
+            });
         }
+    },
+    mounted: function(){
+        this.ajaxData(1)
     }
 })
+
+// var main = new Vue({
+//     el: '#main',
+//     data: {
+//         fund1: [],
+//         totalCount: 0,
+//
+//     },
+//
+// })
 
 $.ajax({
     type: 'GET',

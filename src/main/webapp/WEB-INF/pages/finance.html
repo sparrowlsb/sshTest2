@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -137,7 +137,7 @@
 <table id="example" class="display" style="color:rgb(0,0,0) " width="100%"></table>
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 <!-- START CONTENT -->
-<div class="content">
+<div class="content" id="main">
   <div class="page-header">
     <div class="tradingview-widget-container__widget"></div>
     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
@@ -607,12 +607,6 @@
             <span class="date">{{w.num}}</span>
           </a>
         </li>
-        <nav aria-label="...">
-          <ul class="pager">
-            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
-          </ul>
-        </nav>
       </ul>
 
     </div>
@@ -633,18 +627,19 @@
         <li v-for="r in records">
           <a href="#">
             <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
-            <span class="date">{{r.date}}</span>
-            <h4>交易订单： # {{r.order}}</h4>
-            <h4>{{buySaleText(r.type)}}基金：{{r.fund}}</h4>
-            <h4>{{buySaleText(r.type)}}数量：{{r.num}}个</h4>
+            <span class="date">{{r.transactionDate}}</span>
+            <h4>交易订单： # {{r.id}}</h4>
+            <h4>{{buySaleText(r.type)}}基金：{{r.fundId}}</h4>
+            <h4>{{buySaleText(r.type)}}数量：{{r.fundCount}}个</h4>
             <h4>成交情况：{{r.status}}</h4>
           </a>
         </li>
 
         <nav aria-label="...">
           <ul class="pager">
-            <li class="previous disabled"><a href="#"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-            <li class="next"><a href="#">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+            <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </nav>
       </ul>

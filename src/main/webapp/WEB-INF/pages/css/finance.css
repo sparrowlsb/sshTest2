@@ -41,3 +41,9 @@ hr{
 .pager li{
     margin: 0 10px;
 }
+.pager li.page-num-text{
+    position: absolute;
+    left:50%;
+    margin-left:-10px;
+    margin-top:5px;
+}
