@@ -632,7 +632,8 @@
             <span class="date">{{r.transactionDate}}</span>
             <h4>交易订单： # {{r.id}}</h4>
             <h4>{{buySaleText(r.type)}}基金：{{r.fundId}}</h4>
-            <h4>{{buySaleText(r.type)}}数量：{{r.fundCount}}个</h4>
+            <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
+              <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.managementCost}} RMB</h4>
             <h4>成交情况：{{r.status}}</h4>
           </a>
         </li>
