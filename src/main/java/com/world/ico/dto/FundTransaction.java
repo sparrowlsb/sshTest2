@@ -1,7 +1,6 @@
 package com.world.ico.dto;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 
 /**
  * Created by lsb on 2018/10/18.
@@ -11,9 +10,13 @@ public class FundTransaction {
 
     Integer userId;
 
+    String fundName;
+
     String type;
 
     Integer status;
+
+    String transactionStatus;
 
     BigDecimal traderMoney;
 
@@ -25,7 +28,15 @@ public class FundTransaction {
 
     BigDecimal managementCost;
 
-    Timestamp transactionDate;
+    String transactionDate;
+
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
+    }
 
     public BigDecimal getFundPrice() {
         return fundPrice;
@@ -99,11 +110,19 @@ public class FundTransaction {
         this.managementCost = managementCost;
     }
 
-    public Timestamp getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Timestamp transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public String getTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(String transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 }

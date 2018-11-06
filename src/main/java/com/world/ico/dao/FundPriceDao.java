@@ -19,11 +19,11 @@ public interface FundPriceDao extends PagingAndSortingRepository<FundPricePo, In
             "where DATE_FORMAT(s.`date`,'%Y-%m-%d') = (select max(DATE_FORMAT(`date`,'%Y-%m-%d')) from `FUND_PRICE`)", nativeQuery = true)
     List<FundPricePo> getFundDailyPrice();
 
-    @Query(value = "select s.fund_id,s.today_price,s.total_money,s.today_inmoney,s.today_outmoney,DATE_FORMAT(s.`date`,'%Y-%m-%d') from `FUND_PRICE` s where s.fund_id=:fund_id  order by s.date asc", nativeQuery = true)
-    List<Object[]> getFundInfo(@Param("fund_id") Integer fundId);
+    @Query(value = "select s.fund_id,s.today_price,s.total_money,s.today_inmoney,s.today_outmoney,DATE_FORMAT(s.`date`,'%Y-%m-%d') date from `FUND_PRICE` s where s.fund_id=:fund_id  order by s.date asc", nativeQuery = true)
+    List<FundPricePo> getFundInfo(@Param("fund_id") Integer fundId);
 
-    @Query(value = "select s.fund_id,s.today_price,DATE_FORMAT(s.`date`,'%Y-%m-%d') from `FUND_PRICE` s where s.fund_id=:fund_id  order by s.date asc", nativeQuery = true)
-    List<Object[]> getFundNarrowInfo(@Param("fund_id") Integer fundId);
+    @Query(value = "select s.fund_id,s.today_price,s.total_money,s.today_inmoney,s.today_outmoney,DATE_FORMAT(s.`date`,'%Y-%m-%d') date from `FUND_PRICE` s where s.fund_id=:fund_id  order by s.date asc", nativeQuery = true)
+    List<FundPricePo> getFundNarrowInfo(@Param("fund_id") Integer fundId);
 
 
 

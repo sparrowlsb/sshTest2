@@ -69,63 +69,80 @@ public class FundServiceImpl implements FundService {
     @Override
     public HashMap<Integer, ArrayList<FundPrice>> getFundNarrowInfo() {
         HashMap<Integer,ArrayList<FundPrice>> fundPriceHashMap=new HashMap<>();
-        ArrayList<Object[]> fundPriceList1= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(1);
-        ArrayList<Object[]> fundPriceList2= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(2);
-        ArrayList<Object[]> fundPriceList3= (ArrayList<Object[]>) fundPriceDao.getFundNarrowInfo(3);
+        ArrayList<FundPricePo> fundPriceList1= (ArrayList<FundPricePo>) fundPriceDao.getFundNarrowInfo(1);
+        ArrayList<FundPricePo> fundPriceList2= (ArrayList<FundPricePo>) fundPriceDao.getFundNarrowInfo(2);
+        ArrayList<FundPricePo> fundPriceList3= (ArrayList<FundPricePo>) fundPriceDao.getFundNarrowInfo(3);
 
         ArrayList<FundPrice> fundPriceArrayList1=new ArrayList<>();
-        for(Object[] object:fundPriceList1){
+        for(FundPricePo fundPricePo:fundPriceList1){
             FundPrice fundPrice=new FundPrice();
-            fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((BigDecimal) object[1]);
-
-            fundPrice.setFundDate((String) object[2]);
+            fundPrice.setFundId( fundPricePo.getFundId());
+            fundPrice.setFundPrice( fundPricePo.getTodayPrice());
+            FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundPrice.setFundName(fundName);
+            }
+            fundPrice.setFundDate( fundPricePo.getDate());
             fundPriceArrayList1.add(fundPrice);
         }
 
         ArrayList<FundPrice> fundPriceArrayList2=new ArrayList<>();
-        for(Object[] object:fundPriceList2){
+        for(FundPricePo fundPricePo:fundPriceList2){
             FundPrice fundPrice=new FundPrice();
-            fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((BigDecimal) object[1]);
-
-            fundPrice.setFundDate((String) object[2]);
+            fundPrice.setFundId( fundPricePo.getFundId());
+            fundPrice.setFundPrice( fundPricePo.getTodayPrice());
+            FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundPrice.setFundName(fundName);
+            }
+            fundPrice.setFundDate( fundPricePo.getDate());
             fundPriceArrayList2.add(fundPrice);
         }
 
         ArrayList<FundPrice> fundPriceArrayList3=new ArrayList<>();
-        for(Object[] object:fundPriceList3){
+        for(FundPricePo fundPricePo:fundPriceList3){
             FundPrice fundPrice=new FundPrice();
-            fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((BigDecimal) object[1]);
-
-            fundPrice.setFundDate((String) object[2]);
+            fundPrice.setFundId( fundPricePo.getFundId());
+            fundPrice.setFundPrice( fundPricePo.getTodayPrice());
+            FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundPrice.setFundName(fundName);
+            }
+            fundPrice.setFundDate( fundPricePo.getDate());
             fundPriceArrayList3.add(fundPrice);
         }
+
         fundPriceHashMap.put(1,fundPriceArrayList1);
         fundPriceHashMap.put(2,fundPriceArrayList2);
         fundPriceHashMap.put(3,fundPriceArrayList3);
         System.out.println(fundPriceHashMap);
-
         return fundPriceHashMap;
     }
 
     @Override
     public List<FundPrice> getFundInfo(Integer fundId) {
 
-        ArrayList<Object[]> fundPriceList= (ArrayList<Object[]>) fundPriceDao.getFundInfo(fundId);
+        ArrayList<FundPricePo> fundPriceList= (ArrayList<FundPricePo>) fundPriceDao.getFundInfo(fundId);
 
 
         ArrayList<FundPrice> fundPriceArrayList=new ArrayList<>();
-        for(Object[] object:fundPriceList){
+        for(FundPricePo fundPricePo:fundPriceList){
             FundPrice fundPrice=new FundPrice();
-            fundPrice.setFundId((Integer) object[0]);
-            fundPrice.setFundPrice((BigDecimal) object[1]);
-            fundPrice.setFundTotalMoney((BigDecimal) object[2]);
-            fundPrice.setFundInMoney((BigDecimal) object[3]);
-            fundPrice.setFundOutMoney((BigDecimal) object[4]);
-            fundPrice.setFundDate((String) object[5]);
+            fundPrice.setFundId(fundPricePo.getFundId());
+            fundPrice.setFundPrice(fundPricePo.getTodayPrice());
+            fundPrice.setFundTotalMoney(fundPricePo.getTotalMoney());
+            fundPrice.setFundInMoney(fundPricePo.getTodayInmoney());
+            fundPrice.setFundOutMoney(fundPricePo.getTodayInmoney());
+            fundPrice.setFundDate(fundPricePo.getDate());
             fundPriceArrayList.add(fundPrice);
+            FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundPrice.setFundName(fundName);
+            }
         }
         System.out.println(fundPriceArrayList);
 
@@ -143,7 +160,7 @@ public class FundServiceImpl implements FundService {
         BigDecimal totalMoney=walletDao.totalCount(userId,"RMB");
         if(totalMoney.compareTo(traderMoney)==1){
             synchronized (this){
-                walletDao.sellCount(userId,"RMB",traderMoney);
+                walletDao.sellCount(userId,"RMB",traderMoney,traderMoney);
                 walletDao.updateMoney(userId,"FUND_"+fundId,traderMoney);
                 fundTransactionDao.insertFundTransaction(userId,"BUY",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
             }
@@ -165,7 +182,9 @@ public class FundServiceImpl implements FundService {
         if(totalCount.compareTo(fundCount)==1){
 
             synchronized (this){
+                walletDao.sellCount(userId,"FUND_"+fundId,fundCount, BigDecimal.valueOf(0));
                 fundTransactionDao.insertFundTransaction(userId,"SELL",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
+
             }
         }
     }
@@ -179,11 +198,27 @@ public class FundServiceImpl implements FundService {
             fundTransaction.setId(f.getId());
             fundTransaction.setUserId(f.getUserId());
             fundTransaction.setType(f.getType());
-            fundTransaction.setStatus(f.getStatus());
+
+            if(f.getStatus()==0){
+                fundTransaction.setTransactionStatus("待完成交易");
+
+            }else if(f.getStatus()==-1){
+                fundTransaction.setTransactionStatus("已撤销交易");
+            }else if(f.getStatus()==1){
+                fundTransaction.setTransactionStatus("完全成交");
+            }else {
+                fundTransaction.setTransactionStatus("");
+            };
             fundTransaction.setFundCount(f.getFundCount());
             fundTransaction.setFundId(f.getFundId());
+
+            FundPo fundPo=fundDao.getFundInfo(f.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundTransaction.setFundName(fundName);
+            }
             fundTransaction.setManagementCost(f.getManagementCost());
-            fundTransaction.setTransactionDate(f.getTransactionDate());
+            fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()));
             fundTransactions.add(fundTransaction);
 
         }
@@ -209,10 +244,15 @@ public class FundServiceImpl implements FundService {
             fundTransaction.setUserId(f.getUserId());
             fundTransaction.setType(f.getType());
             fundTransaction.setStatus(f.getStatus());
-            fundTransaction.setTraderMoney(f.getTraderMoney());
+            fundTransaction.setFundCount(f.getFundCount());
             fundTransaction.setFundId(f.getFundId());
             fundTransaction.setManagementCost(f.getManagementCost());
-            fundTransaction.setTransactionDate(f.getTransactionDate());
+            fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()));
+            FundPo fundPo=fundDao.getFundInfo(f.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundTransaction.setFundName(fundName);
+            }
             fundTransactions.add(fundTransaction);
 
         }
@@ -236,7 +276,12 @@ public class FundServiceImpl implements FundService {
             fundTransaction.setTraderMoney(f.getTraderMoney());
             fundTransaction.setFundId(f.getFundId());
             fundTransaction.setManagementCost(f.getManagementCost());
-            fundTransaction.setTransactionDate(f.getTransactionDate());
+            fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()));
+            FundPo fundPo=fundDao.getFundInfo(f.getFundId());
+            if (fundPo!=null){
+                String fundName=fundPo.getFundName();
+                fundTransaction.setFundName(fundName);
+            }
             fundTransactions.add(fundTransaction);
 
         }
@@ -248,11 +293,13 @@ public class FundServiceImpl implements FundService {
     public void revokeFundTransaction(Integer transactionId,String type) {
         synchronized (this) {
             FundTransactionPo fundTransactionPo = fundTransactionDao.findRevokeFundTransactionInfo(transactionId, type, 0);
+            String fundId="FUND_"+fundTransactionPo.getFundId();
+            if(fundTransactionPo.getType().equalsIgnoreCase("BUY")) {
 
-            if(fundTransactionPo.getType()=="BUY") {
                 walletDao.revokeMoney(fundTransactionPo.getUserId(), "RMB", fundTransactionPo.getTraderMoney());
-
-                walletDao.revokeFund(fundTransactionPo.getUserId(), "FUND_" + fundTransactionPo.getFundId(), fundTransactionPo.getTraderMoney());
+                walletDao.revokeFund(fundTransactionPo.getUserId(), fundId, fundTransactionPo.getTraderMoney(), BigDecimal.valueOf(0));
+            }if (fundTransactionPo.getType().equalsIgnoreCase("SELL")){
+                walletDao.revokeFund(fundTransactionPo.getUserId(), fundId, BigDecimal.valueOf(0),fundTransactionPo.getFundCount());
             }
             fundTransactionDao.updateFundTransactionStatus(transactionId);
 
@@ -297,13 +344,7 @@ public class FundServiceImpl implements FundService {
                 }
 
             }
-            if (userWalletPo.getType().equalsIgnoreCase("FUND_4")) {
-                FundPo fundInfo = fundDao.getFundInfo(4);
-                if (fundInfo!=null) {
-                    userWallet.setType(fundInfo.getFundName());
-                }
 
-            }
             userWallets.add(userWallet);
         }
         return userWallets;
@@ -313,7 +354,7 @@ public class FundServiceImpl implements FundService {
     @Override
     public void sellMoney(Integer userId,String type ,BigDecimal money) {
 
-        walletDao.sellCount(userId,type,money);
+        walletDao.sellCount(userId,type,money,money);
         walletDao.exchangeHist(userId,type,"RMB",money,0);
     }
 }

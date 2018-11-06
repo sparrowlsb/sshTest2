@@ -7,6 +7,7 @@ package com.world.ico.service;
 public interface LoginService {
 
     public int findUser(String  email,String password);
+
     public int findEmailIdByEmail(String eamil);
 
     public void addUser(String eamil,String password);

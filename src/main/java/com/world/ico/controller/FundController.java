@@ -46,38 +46,38 @@ public class FundController extends BaseImpl {
         int i=0;
         for (int j=0;j<=5;j++){
             if(fundPriceArrayList.get(j).getFundId().equals(fundId)){
-                i=j;
-                break;
+                HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
+                fundDailyPriceMap.put("fund",fundPriceArrayList.get(i));
+                String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
+                jsonObject=JSON.parseObject(jsArr);
+                return getSuccess(jsonObject, "");
+
             }
         }
-        HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
-        fundDailyPriceMap.put("fund",fundPriceArrayList.get(i));
-        String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
-        jsonObject=JSON.parseObject(jsArr);
-        return getSuccess(jsonObject, "");
+       return getError(jsonObject,"no find the fund");
     }
 
 
     @RequestMapping(value = "fundInfo", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject fundInfo(HttpSession session) {
+    public JSONObject fundInfo(Integer fundId ,HttpSession session) {
 
-        List<FundPrice> fundPriceArrayList=fundService.getFundInfo(1);
+        List<FundPrice> fundPriceArrayList=fundService.getFundInfo(fundId);
 
         String data[][]=new String[fundPriceArrayList.size()][6];
         int j=0;
         for (FundPrice fundPrice:fundPriceArrayList){
             data[j][0]=fundPrice.getFundDate();
-            data[j][1]=String.valueOf(fundPrice.getFundId());
+            data[j][1]=String.valueOf(fundPrice.getFundName());
             data[j][2]=String.valueOf(fundPrice.getFundPrice());
             data[j][3]=String.valueOf(fundPrice.getFundTotalMoney());
             data[j][4]=String.valueOf(fundPrice.getFundInMoney());
             data[j][5]=String.valueOf(fundPrice.getFundOutMoney());
+
             j++;
             System.out.println("基金id："+fundPrice.getFundId()+"基金价格："+fundPrice.getFundPrice()+"基金交易量："+fundPrice.getFundTotalMoney()+"基金卖出："+fundPrice.getFundOutMoney()+"基金买入："+fundPrice.getFundInMoney()+"时间："+fundPrice.getFundDate());
         }
 
-        System.out.print(data);
         return getDataSuccess(data, "");
     }
 
@@ -113,11 +113,12 @@ public class FundController extends BaseImpl {
         jsonObject.put("totalcount",totalcount);
         return  getSuccess(jsonObject,"");
     }
+
     @RequestMapping(value = "fundsDetails", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject fundsDetails( HttpSession session) {
         JSONObject jsonObject=new JSONObject();
-        String email = "1158362548@qq.com";
+        String email = (String) session.getAttribute("email");
         if (email==null){
             return getError(jsonObject,"please login first");
 
@@ -131,6 +132,7 @@ public class FundController extends BaseImpl {
 
         jsonObject.put("totalPages",1);
         jsonObject.put("totalCount",4);
+
         return  getSuccess(jsonObject,"");
     }
 
@@ -189,26 +191,27 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
-        Integer userId=loginService.findEmailIdByEmail("1158362548@qq.com");
+        Integer userId=loginService.findEmailIdByEmail(email);
         ArrayList<FundTransaction> buyFundHists=fundService.getDailyBuyFundTransaction(userId);
 
-        String data[][]=new String[buyFundHists.size()][6];
+        String data[][]=new String[buyFundHists.size()][7];
         int j=0;
         for (FundTransaction fundHist:buyFundHists){
             data[j][0]= String.valueOf(fundHist.getId());
             data[j][1]=String.valueOf(fundHist.getType());
             data[j][2]=String.valueOf(fundHist.getFundId());
-            data[j][3]=String.valueOf(fundHist.getTraderMoney());
+            data[j][3]=String.valueOf(fundHist.getFundName());
+            data[j][4]=String.valueOf(fundHist.getTraderMoney());
             if(fundHist.getStatus()==0){
-                data[j][4]="待完成交易";
+                data[j][5]="待完成交易";
             }else if(fundHist.getStatus()==-1){
-                data[j][4]="已撤销交易";
+                data[j][5]="已撤销交易";
             }else if(fundHist.getStatus()==1){
-                data[j][4]="完全成交";
+                data[j][5]="完全成交";
             }else {
-                data[j][4]="";
+                data[j][5]="";
             };
-            data[j][5]=String.valueOf(fundHist.getTransactionDate());
+            data[j][6]=String.valueOf(fundHist.getTransactionDate());
             j++;
         }
         System.out.print("getDailyBuyHistory"+data);
@@ -227,18 +230,27 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
-        Integer userId=loginService.findEmailIdByEmail("1158362548@qq.com");
+        Integer userId=loginService.findEmailIdByEmail(email);
         ArrayList<FundTransaction> sellFundHists=fundService.getDailySellFundTransaction(userId);
 
-        String data[][]=new String[sellFundHists.size()][6];
+        String data[][]=new String[sellFundHists.size()][7];
         int j=0;
         for (FundTransaction fundHist:sellFundHists){
             data[j][0]= String.valueOf(fundHist.getId());
             data[j][1]=String.valueOf(fundHist.getType());
             data[j][2]=String.valueOf(fundHist.getFundId());
-            data[j][3]=String.valueOf(fundHist.getTraderMoney());
-            data[j][4]=String.valueOf(fundHist.getStatus());
-            data[j][5]=String.valueOf(fundHist.getTransactionDate());
+            data[j][3]=String.valueOf(fundHist.getFundName());
+            data[j][4]=String.valueOf(fundHist.getFundCount());
+            if(fundHist.getStatus()==0){
+                data[j][5]="待完成交易";
+            }else if(fundHist.getStatus()==-1){
+                data[j][5]="已撤销交易";
+            }else if(fundHist.getStatus()==1){
+                data[j][5]="完全成交";
+            }else {
+                data[j][5]="";
+            };
+            data[j][6]=String.valueOf(fundHist.getTransactionDate());
             j++;
         }
         System.out.print("getDailySellHistory"+data);

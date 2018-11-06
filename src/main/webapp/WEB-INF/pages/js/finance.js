@@ -156,12 +156,13 @@ $.ajax({
         buyDataSet=data.data;
         $('#buytable').DataTable( {
             searching:false,
-            'order' : [5,'desc'],
+            'order' : [6,'desc'],
             data: buyDataSet,
             columns: [
                 {title: "订单号"},
                 {title: "类型"},
                 {title: "基金编号"},
+                {title: "基金名称"},
                 {title: "订单金额"},
                 {title: "订单状态"},
                 {title: "交易时间"},
@@ -169,7 +170,7 @@ $.ajax({
             ],
             "columnDefs": [{
                 // 定义操作列
-                "targets": 6,
+                "targets": 7,
                 "data": null,
                 "render": function(data, type, row) {
                     var html = '<a href="javascript:void(0);"  class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> 撤销</a>'
@@ -244,20 +245,21 @@ $.ajax({
         sellDataSet=data.data;
         console.log(111+data.data);
         $('#selltable').DataTable( {
-            'order' : [5,'desc'],
+            'order' : [6,'desc'],
             data: sellDataSet,
             columns: [
                 {title: "订单号"},
                 {title: "类型"},
                 {title: "基金编号"},
-                {title: "订单金额"},
+                {title: "基金名称"},
+                {title: "订单数量"},
                 {title: "订单状态"},
                 {title: "交易时间"},
                 {title: "操作"}
             ],
             "columnDefs": [{
                 // 定义操作列
-                "targets": 6,
+                "targets": 7,
                 "data": null,
                 "render": function(data, type, row) {
                     var html = '<a href="javascript:void(0);"  class="delete btn btn-default btn-xs"><i class="fa fa-times"></i> 撤销</a>'

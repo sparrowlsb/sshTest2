@@ -22,8 +22,8 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
     ArrayList<UserWalletPo> getFundsDetails(@Param("user_id") Integer user_id);
 
     @Modifying
-    @Query(value = "update USER_WALLET set count=count-:count,money=money-:count where user_id=:user_id and type=:type ", nativeQuery = true)
-    void sellCount(@Param("user_id") Integer user_id, @Param("type") String type, @Param("count") BigDecimal count);
+    @Query(value = "update USER_WALLET set count=count-:count,money=money-:money where user_id=:user_id and type=:type ", nativeQuery = true)
+    void sellCount(@Param("user_id") Integer user_id, @Param("type") String type, @Param("count") BigDecimal count,@Param("money") BigDecimal money);
 
     @Modifying
     @Query(value = "Insert into CURB_EXCHANGE(user_id,exchange_type,type,money,status) values(:user_id,:exchange_type,:type,:money,:status)", nativeQuery = true)
@@ -39,7 +39,7 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
     void revokeMoney(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") BigDecimal money);
 
     @Modifying
-    @Query(value = "update USER_WALLET set money=money-:money where user_id=:user_id and type=:type ", nativeQuery = true)
-    void revokeFund(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") BigDecimal money);
+    @Query(value = "update USER_WALLET set money=money-:money ,count=count+:count where user_id=:user_id and type=:type ", nativeQuery = true)
+    void revokeFund(@Param("user_id") Integer user_id, @Param("type") String type, @Param("money") BigDecimal money,@Param("count") BigDecimal count);
 
 }
