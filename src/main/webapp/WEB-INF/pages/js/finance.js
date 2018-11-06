@@ -5,7 +5,26 @@ var histDataSet
 var myWallet = new Vue({
     el: '#myWallet',
     data: {
-        wallets: [{num:1000,wallet:"usdt"},{num:1000,wallet:"基金1"},{num:1000,wallet:"基金2"},{num:1000,wallet:"基金3"}]
+        wallets: []
+    },
+    methods: {
+        ajaxData: function () {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/fundsDetails",
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.wallets = data.data.fundsDetails;
+                    }
+                }
+            });
+        }
+    },
+    mounted: function(){
+        this.ajaxData()
     }
 })
 
@@ -67,71 +86,64 @@ var tradeRecord = new Vue({
     }
 })
 
-// var main = new Vue({
-//     el: '#main',
-//     data: {
-//         fund1: [],
-//         totalCount: 0,
-//
-//     },
-//
-// })
-
-$.ajax({
-    type: 'GET',
-    dataType: "json",
-    contentType: "application/json;charset=utf-8",
-    url: "/fund/fundDailyPrice?fundId=1",
-    success: function (data, textStatus) {
-        var dailyPrice=data.data;
-        var fundDailyPrice = new Vue({
-            el: '#fundDailyPrice',
-            data: dailyPrice
-        })
-        var price = new Vue({
-            el: '#daliyprice',
-            data: dailyPrice
-        })
-    }
-});
-
-
-
-$.ajax({
-    type: 'GET',
-    dataType: "json",
-    contentType: "application/json;charset=utf-8",
-    url: "/fund/totalCount?type=FUND_1",
-    success: function (data, textStatus) {
-        var totalCount=data.data;
-        if(totalCount==null) {
-            totalCount = JSON.stringify({"totalcount": 0});
+var main = new Vue({
+    el: '#main',
+    data: {
+        fundId: 1,
+        fund: {},
+        maxBuy: 0,
+        maxSell: 0
+    },
+    methods: {
+        getDailyPrice: function (fundId) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/fundDailyPrice?fundId="+fundId,
+                success: function (data, textStatus) {
+                    if (data.result == 1){
+                        self.fund = data.data.fund
+                    }
+                }
+            });
+        },
+        getMaxBuy: function (fundId) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/totalCount?type=RMB",
+                success: function (data, textStatus) {
+                    if (data.result == 1){
+                        self.maxBuy = data.data.totalcount;
+                    }
+                }
+            });
+        },
+        getMaxSell: function (fundId) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/totalCount?type=FUND_"+fundId,
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.maxSell = data.data.totalcount;
+                    }
+                }
+            });
         }
-        var count = new Vue({
-            el: '#totalFundCount',
-            data: totalCount
-        })
-
+    },
+    mounted: function(){
+        this.getDailyPrice(this.fundId);
+        this.getMaxSell(this.fundId);
+        this.getMaxBuy();
     }
-});
-
-$.ajax({
-    type: 'GET',
-    dataType: "json",
-    contentType: "application/json;charset=utf-8",
-    url: "/fund/totalCount?type=RMB",
-    success: function (data, textStatus) {
-        var totalCount=data.data;
-        if(totalCount==null) {
-            totalCount = JSON.stringify({"totalcount": 0});
-        }
-        var count = new Vue({
-            el: '#totalMoney',
-            data: totalCount
-        })
-
-    }
-});
+})
 
 var buyDataSet=null;
 $.ajax({

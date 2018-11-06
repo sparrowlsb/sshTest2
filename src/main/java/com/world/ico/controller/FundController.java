@@ -51,7 +51,7 @@ public class FundController extends BaseImpl {
             }
         }
         HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
-        fundDailyPriceMap.put("fund"+fundId,fundPriceArrayList.get(i));
+        fundDailyPriceMap.put("fund",fundPriceArrayList.get(i));
         String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
         jsonObject=JSON.parseObject(jsArr);
         return getSuccess(jsonObject, "");
