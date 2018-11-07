@@ -91,6 +91,8 @@ var main = new Vue({
     data: {
         fundId: 1,
         fund: {},
+        fund2: {},
+        fund3: {},
         maxBuy: 0,
         maxSell: 0
     },
@@ -101,10 +103,12 @@ var main = new Vue({
                 type: 'GET',
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
-                url: "/fund/fundDailyPrice?fundId="+fundId,
+                url: "/fund/fundDailyPrice",
                 success: function (data, textStatus) {
                     if (data.result == 1){
-                        self.fund = data.data.fund
+                        self.fund = data.data.fund1
+                        self.fund2 = data.data.fund2
+                        self.fund3 = data.data.fund3
                     }
                 }
             });

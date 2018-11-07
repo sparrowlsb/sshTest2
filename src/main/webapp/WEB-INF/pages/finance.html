@@ -92,22 +92,31 @@
 
   <ul class="sidebar-panel nav">
     <li class="sidetitle">基金信息</li>
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>基金1<span class="label label-default">2</span></a></li>
+    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund.fundName }}
+      <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
+      <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
+    </a></li>
 
 
   </ul>
   <ul class="sidebar-panel nav">
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>基金2<span class="label label-default">2</span></a></li>
+    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund2.fundName }}
+      <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
+      <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
+    </a></li>
 
 
   </ul>
   <ul class="sidebar-panel nav">
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>基金3<span class="label label-default">2</span></a></li>
+    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund3.fundName }}
+      <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
+      <span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+
+    </a></li>
 
 
   </ul>
   <ul class="sidebar-panel nav">
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>基金4<span class="label label-default">2</span></a></li>
 
 
   </ul>
@@ -190,12 +199,17 @@
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-dot-circle-o"></i> 今日价格</span>
           <h3> {{ fund.fundPrice }} rmb</h3>
-          <span class="diff"><b class="color-down"><i class="fa fa-caret-down"></i> 26%</b> 昨日</span>
+          <span class="diff" v-show="fund.fundQuoteChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteChange }}% </b> 昨日</span>
+          <span class="diff" v-show="fund.fundQuoteChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteChange }}% </b> 历史</span>
+
+          <span class="diff" v-show="fund.fundQuoteHistChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteHistChange }}% </b> 昨日</span>
+          <span class="diff" v-show="fund.fundQuoteHistChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteHistChange }}% </b> 昨日</span>
+
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-shopping-cart"></i> 日成交量</span>
           <h3 class="color-up">{{ fund.fundTotalMoney }}</h3>
-          <span class="diff"><b class="color-up"><i class="fa fa-caret-up"></i> 26%</b> 昨日</span>
+
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-clock-o"></i> 更新时间</span>

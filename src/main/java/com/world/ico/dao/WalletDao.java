@@ -18,7 +18,7 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
     BigDecimal totalCount(@Param("user_id") Integer user_id, @Param("type") String type);
 
 
-    @Query(value = "select * from USER_WALLET t where user_id=:user_id  ", nativeQuery = true)
+    @Query(value = "select ID,user_id,money,type,count from USER_WALLET t where user_id=:user_id  ", nativeQuery = true)
     ArrayList<UserWalletPo> getFundsDetails(@Param("user_id") Integer user_id);
 
     @Modifying

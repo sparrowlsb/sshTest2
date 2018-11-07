@@ -23,6 +23,26 @@ public class FundPrice {
 
     String fundDate;
 
+    BigDecimal fundQuoteChange;
+
+    BigDecimal fundQuoteHistChange;
+
+    public BigDecimal getFundQuoteChange() {
+        return fundQuoteChange;
+    }
+
+    public void setFundQuoteChange(BigDecimal fundQuoteChange) {
+        this.fundQuoteChange = fundQuoteChange;
+    }
+
+    public BigDecimal getFundQuoteHistChange() {
+        return fundQuoteHistChange;
+    }
+
+    public void setFundQuoteHistChange(BigDecimal fundQuoteHistChange) {
+        this.fundQuoteHistChange = fundQuoteHistChange;
+    }
+
     public Integer getFundId() {
         return fundId;
     }

@@ -38,23 +38,23 @@ public class FundController extends BaseImpl {
 
     @RequestMapping(value = "fundDailyPrice", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject fundDailyPrice(Integer fundId ,HttpSession session) {
+    public JSONObject fundDailyPrice(HttpSession session) {
 
         JSONObject jsonObject = new JSONObject();
         List<FundPrice> fundPriceArrayList=fundService.getFundDailyPrice();
 
         int i=0;
-        for (int j=0;j<=5;j++){
-            if(fundPriceArrayList.get(j).getFundId().equals(fundId)){
-                HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
-                fundDailyPriceMap.put("fund",fundPriceArrayList.get(i));
-                String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
-                jsonObject=JSON.parseObject(jsArr);
-                return getSuccess(jsonObject, "");
+        HashMap<String,FundPrice>fundDailyPriceMap=new HashMap<>();
+        for (int j=1;j<=3;j++){
 
-            }
+            String fundId="fund"+j;
+            fundDailyPriceMap.put(fundId,fundPriceArrayList.get(j-1));
+
         }
-       return getError(jsonObject,"no find the fund");
+        String jsArr= JSON.toJSONString(fundDailyPriceMap, SerializerFeature.DisableCircularReferenceDetect);
+        jsonObject=JSON.parseObject(jsArr);
+
+        return getSuccess(jsonObject, "");
     }
 
 

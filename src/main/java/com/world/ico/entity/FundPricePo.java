@@ -10,9 +10,14 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="FUND_PRICE")
 public class FundPricePo {
+
+
     @Id
-    @Column(name = "fund_id")
+    @Column(name = "id")
     @GeneratedValue
+    Integer id;
+
+    @Column(name = "fund_id")
     Integer fundId;
 
     @Column(name = "today_price")
@@ -29,6 +34,14 @@ public class FundPricePo {
 
     @Column(name = "today_outmoney")
     BigDecimal todayOutmoney;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getFundId() {
         return fundId;
