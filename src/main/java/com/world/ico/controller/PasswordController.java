@@ -58,13 +58,13 @@ public class PasswordController extends BaseImpl {
         String email= (String)session.getAttribute("email");
         String userInfoEmail=(String)session.getAttribute("userInfoEmail");
         String userInfoCode=(String)session.getAttribute("userInfoCode");
-        if(email.isEmpty()){
+        if(email==null){
             return getError(jsonObject,"please login first");
         }
-        if(userInfoEmail.isEmpty()){
+        if(userInfoEmail==null){
             return getError(jsonObject,"please put the eamil address first");
         }
-        if(userInfoCode.isEmpty()){
+        if(userInfoCode==null){
             return getError(jsonObject,"please put the eamil code first");
 
         }
