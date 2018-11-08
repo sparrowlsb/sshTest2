@@ -287,15 +287,114 @@ jQuery(document).ready(function() {
 function change(type){
     if (type == 'login'){
         $('#reg_box').fadeOut().delay(1000);
+        $('#forget_box').fadeOut().delay(1000);
         setTimeout(function () {
             $('#login_box').fadeIn();
         },500)
 
-    }else {
+    }else if (type == 'reg') {
         $('#login_box').fadeOut();
+        $('#forget_box').fadeOut();
         setTimeout(function () {
             $('#reg_box').fadeIn();
         },500)
 
+    }else if (type == 'forget') {
+        $('#login_box').fadeOut();
+        $('#reg_box').fadeOut();
+        setTimeout(function () {
+            $('#forget_box').fadeIn();
+        },500)
+
+    }
+}
+
+function forgetPWD() {
+    //change login password
+    var email = $("input[name='forgetEmail']").val();
+    var pwd = $("input[name='forgetPwd']").val();
+    var emailPatt=new RegExp(/^\w+@\w+\.[a-zA-Z]+(\.[a-zA-Z]+)?$/);
+    if (!emailPatt.test(email)){
+        alert("填写邮箱格式不正确！");
+        return
+    }
+    if (pwd.length < 6){
+        alert("密码不能小于6位");
+        return
+    }
+    var code = $("input[name='forgetECode']").val();
+    if (!email || !pwd || !code){
+        alert("不能为空");
+        return
+    }
+    var url = config.api_prefix + config.api_changePwd;
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        contentType:"application/json;charset=utf-8",
+        url: url,
+
+        data: JSON.stringify({"verEmailCode": code,"email": email,"password": $.md5(pwd)}),
+        success: function (data) {
+            if(data.result==1){
+                alert("修改成功！");
+                window.location.reload();
+            }else if(data.result==0){
+                alert(data.message);
+            }
+        },
+        error: function (data, textStatus) {
+            alert("error");
+            console.log(data)
+        }
+    });
+}
+
+var InterValObj2; //timer变量，控制时间
+var curCount2;//当前剩余秒数
+function sendSMS1() {
+    var email = $("input[name='forgetEmail']").val();
+    var emailPatt=new RegExp(/^\w+@\w+\.[a-zA-Z]+(\.[a-zA-Z]+)?$/);
+    curCount2 = count;
+    if (!emailPatt.test(email )) {
+        alert(" 请输入有效的邮箱号");
+        return;
+    }
+    var url = config.api_prefix + config.api_sendEmailVerify;
+    $.ajax({
+        type: 'POST',
+        dataType: "json",
+        contentType:"application/json;charset=utf-8",
+        url: url,
+        data: JSON.stringify({address: email}),
+        success: function (data) {
+            // if(data=="success"){
+            alert("发送成功！请登陆邮箱查看验证码！");
+            // }else if(data=="error"){
+            //     alert("发送失败！");
+            // }
+        },
+        error: function (data) {
+            alert("error");
+            console.log(data)
+        }
+    });
+
+    //设置button效果，开始计时
+    $("#btnSendCode2").attr("disabled", "true");
+    $("#btnSendCode2").html( + curCount2 + "秒再获取");
+    InterValObj2 = window.setInterval(SetRemainTime2, 1000); //启动计时器，1秒执行一次
+    //向后台发送处理数据
+
+}
+function SetRemainTime2() {
+    if (curCount1 == 0) {
+        window.clearInterval(InterValObj2);//停止计时器
+        $("#btnSendCode2").removeAttr("disabled");//启用按钮
+        $("#btnSendCode2").html("重新发送");
+    }
+    else {
+        curCount2--;
+        $("#btnSendCode2").html( + curCount2 + "秒再获取");
     }
 }

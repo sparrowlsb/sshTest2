@@ -2727,3 +2727,13 @@ span.stButton_gradient,
   border-radius: 100%;
   margin: 10px 0;
 }
+
+.user-head{
+  margin-top: -10px;
+}
+
+.user-email{
+  position: absolute;
+  left:0;
+  bottom:0
+}

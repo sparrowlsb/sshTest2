@@ -191,8 +191,14 @@ ul.navbar-nav {
 
 .verifyImg{
 	width: 100%;
-	max-width: 200px;
+	height: 50px;
 	border: 3px solid #fff;
+}
+
+.user-email{
+	position: absolute;
+	left:0;
+	top:-20px
 }
 
 

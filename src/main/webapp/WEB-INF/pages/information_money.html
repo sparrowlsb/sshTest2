@@ -89,11 +89,16 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-7" >
+            <div class="col-md-9 col-sm-7" id="money-record">
                     <div class="col-md-12 col-sm-12">
 
                         <div class="col-md-12">
                             <h2>钱包金额：10000 USDT</h2>
+                            <ul style="padding: 0">
+                                <li v-for="w in wallets">
+                                    {{w.type}} : {{w.money}}
+                                </li>
+                            </ul>
                             <p>为了方便用户查看<p></p>充值的金额都会按照充值的当前汇率转化为usdt！<p></p>提现也会根据提现时的汇率转为rmb！</p>
                         </div>
 
@@ -131,6 +136,7 @@
                                             <span class="name">24小时平台充值-小淘（在线）</span><br/>
                                             <span class="num">464147349</span>
                                         </li></a>
+                                        <div style="clear: both"></div>
                                     </ul>
                                     <!--<div class="contact-form bottom" >-->
 
@@ -178,6 +184,7 @@
                                             <span class="name">24小时平台提现-小淘（在线）</span><br/>
                                             <span class="num">464147349</span>
                                         </li></a>
+                                        <div style="clear: both"></div>
                                     </ul>
 
 
@@ -206,7 +213,7 @@
                                     <!--<button type="button" class="btn btn-lg btn-danger">提现</button>                                            </div>-->
                             </div>
                         </div>
-                        <ul class="list-group col-md-7 money-record" id="money-record">
+                        <ul class="list-group col-md-7 money-record">
                             <li class="list-group-item list-group-item-success">充值提现记录</li>
                             <li class="list-group-item" v-for="r in moneyRecord">{{r.time}} {{r.type}} {{r.money}}元 {{r.status}}<br/>{{r.accountType}} {{r.account}}</li>
                             <nav aria-label="...">

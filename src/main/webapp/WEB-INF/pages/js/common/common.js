@@ -26,7 +26,7 @@ function removeCookie(name){
 if (!email || email == null){
     $("#header .nav").append("<li ><a href=\"login.html\">登录/注册</a></li>");
 }else {
-    $("#header .nav").append("<li ><a hidden href=\"information_user.html\" ><img href=\"blog.html\" height=\"60\" width=\"60\" src=\"images/home/heard.png\"></a></li>");
+    $("#header .nav").append("<li class='user-head'><a hidden href=\"information_user.html\" ><img href=\"blog.html\" height=\"60\" width=\"60\" src=\"images/home/heard.png\"></a><div class='user-email'>"+email+"</div></li>");
 }
 
 //退出登录
