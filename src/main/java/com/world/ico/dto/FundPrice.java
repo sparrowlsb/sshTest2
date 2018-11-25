@@ -11,6 +11,8 @@ public class FundPrice {
 
     String  fundName;
 
+    String  fundType;
+
     BigDecimal fundIncrease;
 
     BigDecimal fundPrice;
@@ -26,6 +28,14 @@ public class FundPrice {
     BigDecimal fundQuoteChange;
 
     BigDecimal fundQuoteHistChange;
+
+    public String getFundType() {
+        return fundType;
+    }
+
+    public void setFundType(String fundType) {
+        this.fundType = fundType;
+    }
 
     public BigDecimal getFundQuoteChange() {
         return fundQuoteChange;

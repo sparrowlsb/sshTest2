@@ -117,7 +117,9 @@ public class FundServiceImpl implements FundService {
             FundPo fundPo = fundDao.getFundInfo(fundPrice.getFundId());
             if (fundPo != null) {
                 String fundName = fundPo.getFundName();
+                String fundType = fundPo.getFundType();
                 fundPrice.setFundName(fundName);
+                fundPrice.setFundType(fundType);
             }
             fundPriceArrayList.add(fundPrice);
         }
