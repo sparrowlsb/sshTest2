@@ -26,7 +26,7 @@ function removeCookie(name){
 if (!email || email == null){
     $("#header .nav").append("<li ><a href=\"login.html\">登录/注册</a></li>");
 }else {
-    $("#header .nav").append("<li class='user-head'><a hidden href=\"information_user.html\" ><img href=\"blog.html\" height=\"60\" width=\"60\" src=\"images/home/heard.png\"></a><div class='user-email'>"+email+"</div></li>");
+    $("#header .nav").append("<li class='user-head'><a hidden href=\"information_user.html\" ><img href=\"blog.html\" src=\"images/home/heard.png\">&nbsp;&nbsp;&nbsp;&nbsp;"+email+"</a></li>");
 }
 
 //退出登录
@@ -34,3 +34,41 @@ function exit() {
     removeCookie("email");
     location.href = "/pages/index.html"
 }
+
+
+//qq 客服
+$(document).ready(function(){
+
+    /* ----- 侧边悬浮 ---- */
+    $(document).on("mouseenter", ".suspension .a", function(){
+        var _this = $(this);
+        var s = $(".suspension");
+        var isService = _this.hasClass("a-service");
+        var isServicePhone = _this.hasClass("a-service-phone");
+        var isQrcode = _this.hasClass("a-qrcode");
+        if(isService){ s.find(".d-service").show().siblings(".d").hide();}
+        if(isServicePhone){ s.find(".d-service-phone").show().siblings(".d").hide();}
+        if(isQrcode){ s.find(".d-qrcode").show().siblings(".d").hide();}
+    });
+    $(document).on("mouseleave", ".suspension, .suspension .a-top", function(){
+        $(".suspension").find(".d").hide();
+    });
+    $(document).on("mouseenter", ".suspension .a-top", function(){
+        $(".suspension").find(".d").hide();
+    });
+    $(document).on("click", ".suspension .a-top", function(){
+        $("html,body").animate({scrollTop: 0});
+    });
+    $(window).scroll(function(){
+        var st = $(document).scrollTop();
+        var $top = $(".suspension .a-top");
+        if(st > 400){
+            $top.css({display: 'block'});
+        }else{
+            if ($top.is(":visible")) {
+                $top.hide();
+            }
+        }
+    });
+
+});
