@@ -2745,7 +2745,7 @@ span.stButton_gradient,
 qq客服
  */
 /*reset*/
-html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu{
+h3{
   margin:0;
   padding:0;
 }
