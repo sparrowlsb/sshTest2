@@ -21,17 +21,15 @@ body, button, input, keygen, legend, select, textarea{
 h1, h2, h3, h4, h5, h6{font-weight:400;}
 li{list-style:none;}
 html, body, fieldset, img, iframe, abbr{border:0;}
-img{vertical-align:top;}
 a, button{cursor:pointer;}
 a{color:#333;outline:none;text-decoration:none;}
 a:focus{ color:#333;
-     outline:none; 
+     outline:none;
      -moz-outline:none;
-}  
+}
 
 
 /*common*/
-body{background:#F4F5F9;}
 a:hover{color:#fc8080;text-decoration:none;}
 a:-webkit-any-link{text-decoration:none;}
 .container{width:1200px;margin:0 auto;padding:0;}
