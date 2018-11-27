@@ -59,7 +59,6 @@ public class LoginController extends BaseImpl{
         JSONObject jsonObject=new JSONObject();
         System.out.println(user.getPassword());
         if(verCode.isEmpty()){
-
             return getError(jsonObject,"the vercode not get");
         }
         if(!user.getVerCode().equalsIgnoreCase(verCode)){
