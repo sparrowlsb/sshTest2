@@ -19,6 +19,8 @@
 <div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
 <!-- End Page Loading -->
 <!-- START TOP -->
+<!-- 顶栏+左侧菜单+主内容 -->
+<div id="main">
 <div id="top" class="clearfix">
 
   <!-- Start App Logo -->
@@ -73,12 +75,12 @@
 
 
     <li class="dropdown link">
-      <a href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>Jonathan Doe</b><span class="caret"></span></a>
+      <a href="/pages/login.html" v-show="!email">登录/注册</a> <a v-show="email" href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>{{email}}</b><span class="caret"></span></a>
       <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
         <li role="presentation" class="dropdown-header">Profile</li>
         <li><a href="index.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
         <li><a href="information_money.html"><i class="fa falist fa-money"></i> 充值</a></li>
-        <li><a href="#"><i class="fa falist fa-power-off"></i> 退出</a></li>
+        <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
       </ul>
     </li>
 
@@ -87,8 +89,6 @@
 
 </div>
 <!-- END TOP -->
-<!-- 左侧菜单+主内容 -->
-<div id="main">
 <div class="sidebar clearfix">
 
   <ul class="sidebar-panel nav">
@@ -246,7 +246,7 @@
         </div>
       </div>
       <!-- Start Top Stats -->
-      <div class="col-md-12" id="buyFundFunction">
+      <div class="col-md-12" id="buyFundFunction" v-show="email">
 
         <ul class="topstats clearfix">
           <div id="totalMoney">
@@ -306,7 +306,7 @@
     </div>
     <!-- Start Top Stats -->
 
-    <div class="row">
+    <div class="row" v-show="email">
       <div class="panel panel-transparent">
 
         <div class="panel-title">
@@ -870,6 +870,7 @@ Below codes are only for index widgets
 </script>
 <script src="js/fund.js"></script>
 <script src="js/common/config.js"></script>
+<script src="js/common/common.js"></script>
 <!--<script src="js/fundhist.js"></script>-->
 <script src="js/vue.min.js"></script>
 <script src="js/finance.js"></script>

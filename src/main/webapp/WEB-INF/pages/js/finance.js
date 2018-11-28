@@ -94,7 +94,8 @@ var main = new Vue({
         fund2: {},
         fund3: {},
         maxBuy: 0,
-        maxSell: 0
+        maxSell: 0,
+        email: email
     },
     methods: {
         getDailyPrice: function (fundId) {
