@@ -1,5 +1,6 @@
 package com.world.ico.service;
 
+import com.world.ico.dto.CurbExchange;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
 import com.world.ico.dto.UserWallet;
@@ -38,7 +39,10 @@ public interface FundService {
 
     public ArrayList<UserWallet> getFundsDetails(Integer userId);
 
-    public void sellMoney(Integer userId,String type ,BigDecimal money);
+    public void sellMoney(Integer userId,String type ,BigDecimal money,BigDecimal count);
 
+    public ArrayList<CurbExchange> getTransactionHist(Integer userId,Integer page1,Integer page2);
+
+    public Integer getTransactionHistoryCount(Integer userId);
 
 }

@@ -1,48 +1,25 @@
-package com.world.ico.entity;
+package com.world.ico.dto;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
- * Created by lsb on 2018/10/27.
+ * Created by lsb on 2018/11/29.
  */
-@Entity
-@Table(name="CURB_EXCHANGE")
-public class CurbExchangePo {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue
+public class CurbExchange {
+
     Integer id;
 
-    @Column(name = "user_id")
-    Integer userId;
-
-    @Column(name = "exchange_date")
     String exchangeDate;
 
-    @Column(name = "exchange_platform")
-    String  exchangePlatform;
-
-    @Column(name = "exchange_type")
     String  exchangeType;
 
+    String  exchangePlatform;
 
-    @Column(name = "type")
     String type;
 
-    @Column(name = "money")
     BigDecimal money;
 
-    @Column(name = "status")
-    Integer status;
-
-    public String getExchangePlatform() {
-        return exchangePlatform;
-    }
-
-    public void setExchangePlatform(String exchangePlatform) {
-        this.exchangePlatform = exchangePlatform;
-    }
+    String status;
 
     public Integer getId() {
         return id;
@@ -50,14 +27,6 @@ public class CurbExchangePo {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
     }
 
     public String getExchangeDate() {
@@ -76,6 +45,14 @@ public class CurbExchangePo {
         this.exchangeType = exchangeType;
     }
 
+    public String getExchangePlatform() {
+        return exchangePlatform;
+    }
+
+    public void setExchangePlatform(String exchangePlatform) {
+        this.exchangePlatform = exchangePlatform;
+    }
+
     public String getType() {
         return type;
     }
@@ -92,11 +69,11 @@ public class CurbExchangePo {
         this.money = money;
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 }

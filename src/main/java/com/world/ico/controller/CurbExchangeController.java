@@ -1,6 +1,7 @@
 package com.world.ico.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.world.ico.dto.CurbExchange;
 import com.world.ico.dto.UserWallet;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 /**
  * Created by lsb on 2018/10/27.
@@ -48,8 +50,8 @@ public class CurbExchangeController extends BaseImpl {
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
-        BigDecimal count= totalMoney.subtract(userWallet.getSellMoney());
-        fundService.sellMoney(userId,"RMB",count);
+        BigDecimal count= userWallet.getSellMoney();
+        fundService.sellMoney(userId,"SELL",userWallet.getSellMoney(),count);
         return getSuccess(jsonObject,"" );
 
 
@@ -76,7 +78,46 @@ public class CurbExchangeController extends BaseImpl {
             return getError(jsonObject, "total money not enough");
         }
         BigDecimal count= totalMoney.subtract(userWallet.getSellMoney());
-        fundService.sellMoney(userId,"RMB",count);
+        fundService.sellMoney(userId,"SELL",userWallet.getSellMoney(),count);
+        return getSuccess(jsonObject,"" );
+
+
+    }
+
+    @RequestMapping(value = "getHist", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getHist(Integer page,HttpSession session) {
+
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email.isEmpty()){
+            return getError(jsonObject,"please login first");
+
+        }
+
+        Integer userId=loginService.findEmailIdByEmail(email);
+        Integer page1=5*(page-1);
+        Integer page2=5;
+
+        if (userId!=0){
+
+            ArrayList<CurbExchange> transactionHist=fundService.getTransactionHist(userId,page1,page2);
+            Integer fundCount=fundService.getTransactionHistoryCount(userId);
+
+            Integer totalPages=(fundCount-1)/5+1;
+            Integer currentPage=page;
+            Integer pageSizes=5;
+            Integer totalCount=fundCount;
+
+
+            jsonObject.put("transactionHist",transactionHist);
+
+            jsonObject.put("totalPages",totalPages);
+            jsonObject.put("currentPage",currentPage);
+            jsonObject.put("pageSize",pageSizes);
+            jsonObject.put("totalCount",totalCount);
+
+        }
         return getSuccess(jsonObject,"" );
 
 

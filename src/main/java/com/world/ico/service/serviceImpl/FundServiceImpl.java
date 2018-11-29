@@ -1,13 +1,11 @@
 package com.world.ico.service.serviceImpl;
 
 import com.world.ico.dao.*;
+import com.world.ico.dto.CurbExchange;
 import com.world.ico.dto.FundPrice;
 import com.world.ico.dto.FundTransaction;
 import com.world.ico.dto.UserWallet;
-import com.world.ico.entity.FundPo;
-import com.world.ico.entity.FundPricePo;
-import com.world.ico.entity.FundTransactionPo;
-import com.world.ico.entity.UserWalletPo;
+import com.world.ico.entity.*;
 import com.world.ico.service.FundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,9 @@ public class FundServiceImpl implements FundService {
 
     @Autowired
     public FundDao fundDao;
+
+    @Autowired
+    public CurbExchangeDao curbExchangeDao;
 
     @Autowired
     public WalletDao walletDao;
@@ -371,7 +372,7 @@ public class FundServiceImpl implements FundService {
     @Override
     public BigDecimal totalMoney(Integer userId, String type) {
 
-        return walletDao.totalCount(userId,type);
+        return walletDao.totalMoney(userId,type);
     }
 
     @Override
@@ -419,9 +420,50 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void sellMoney(Integer userId,String type ,BigDecimal money) {
+    public void sellMoney(Integer userId,String type ,BigDecimal money,BigDecimal count) {
 
-        walletDao.sellCount(userId,type,money,money);
-        walletDao.exchangeHist(userId,type,"RMB",money,0);
+        walletDao.sellMoney(userId,"RMB",money);
+        curbExchangeDao.insertExchangeHist(userId,"支付宝",type,"RMB",count,0);
+    }
+
+    @Override
+    public ArrayList<CurbExchange> getTransactionHist(Integer userId,Integer page1,Integer page2) {
+        ArrayList<CurbExchangePo> curbExchangePos=curbExchangeDao.getExchangeHist(userId,page1,page2);
+        ArrayList<CurbExchange> curbExchanges=new ArrayList<>();
+
+        for (CurbExchangePo curbExchangePo:curbExchangePos){
+            CurbExchange curbExchange=new CurbExchange();
+            curbExchange.setId(curbExchangePo.getId());
+            curbExchange.setExchangeDate(curbExchangePo.getExchangeDate());
+            curbExchange.setExchangePlatform(curbExchangePo.getExchangePlatform());
+            if (curbExchangePo.getExchangeType().equalsIgnoreCase("buy")){
+                curbExchange.setExchangeType("充值");
+            }else if(curbExchangePo.getExchangeType().equalsIgnoreCase("sell")){
+                curbExchange.setExchangeType("提现");
+            }
+            curbExchange.setType(curbExchangePo.getType());
+            curbExchange.setMoney(curbExchangePo.getMoney());
+
+            if (curbExchangePo.getStatus()==0){
+                curbExchange.setStatus("正在交易中");
+            }else if(curbExchangePo.getStatus()==-1){
+                curbExchange.setStatus("交易失败，请联系客服");
+            }else if(curbExchangePo.getStatus()==1){
+                curbExchange.setStatus("交易完成");
+            }
+            curbExchanges.add(curbExchange);
+
+
+        }
+        return curbExchanges;
+    }
+
+    @Override
+    public Integer getTransactionHistoryCount(Integer userId) {
+
+        Integer exchangeHistCount =curbExchangeDao.getExchangeHistCount(userId);
+
+
+        return exchangeHistCount;
     }
 }
