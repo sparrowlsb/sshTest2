@@ -2749,51 +2749,14 @@ h3{
   margin:0;
   padding:0;
 }
-body{position:relative;font-size:14px;background-color:white;overflow:auto;}
-body, button, input, keygen, legend, select, textarea{
-  font-family:"Microsoft Yahei","HanHei SC",PingHei,"PingFang SC","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
-  font-weight:400;
-  color:#333;
-  outline:0;
-  speak:none;
-  -webkit-font-feature-settings:normal;
-  -moz-font-feature-settings:normal;
-  font-feature-settings:normal;
-  font-variant:normal;
-  text-transform:none;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-}
-h1, h2, h3, h4, h5, h6{font-weight:400;}
-li{list-style:none;}
-html, body, fieldset, img, iframe, abbr{border:0;}
 a, button{cursor:pointer;}
 a{color:#333;outline:none;text-decoration:none;}
 a:focus{ color:#333;
   outline:none;
   -moz-outline:none;
 }
-
-
-/*common*/
 a:hover{color:#fc8080;text-decoration:none;}
 a:-webkit-any-link{text-decoration:none;}
-.container{width:1200px;margin:0 auto;padding:0;}
-.container:after{content:"";display:block;clear:both;}
-.clearfix:after{content:"";display:block;clear:both;}
-.fl{float:left;}
-.fr{float:right;}
-.tl{text-align:left;}
-.tr{text-align:right;}
-.tc{text-align:center;}
-.color-white{color:white!important;}
-.red{color:#fc8080!important;}
-.fz12{font-size:12px;}
-.fz14{font-size:14px;}
-.wfs{width:100%;position:relative;}
-.p_r{position:relative;}
-
-
 /*悬浮链接*/
 .suspension{position:fixed;z-index:55;right:0;bottom:85px;width:70px;height:240px;}
 .suspension-box{position:relative;float:right;}
@@ -2826,7 +2789,6 @@ a:-webkit-any-link{text-decoration:none;}
 .suspension .d-service-item .text .number{font-family:Arial,"Microsoft Yahei","HanHei SC",PingHei,"PingFang SC","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;}
 .suspension .d-service-intro{padding-top:10px;}
 .suspension .d-service-intro p{float:left;line-height:27px;font-size:12px;width:50%;white-space:nowrap;color:#888;}
-.suspension .d-service-intro i{background:url(../images/side_con_icon01.png) no-repeat center center;height:27px;width:14px;margin-right:5px;vertical-align:top;display:inline-block;}
 .suspension .d-qrcode{text-align:center;}
 .suspension .d-qrcode .inner-box{padding:20px 0;}
 .suspension .d-qrcode p{font-size:16px;color:#93959c;}
