@@ -1,5 +1,5 @@
 var config = {
-    api_prefix: "http://localhost:8080/",
+    api_prefix: "http://192.168.2.103:8080/",
     api_getVerifyImg: "sms/VerifyCode",
     api_sendEmailVerify: "sms/VerifyEmailCode",
     api_regist: "login/registerUser",
