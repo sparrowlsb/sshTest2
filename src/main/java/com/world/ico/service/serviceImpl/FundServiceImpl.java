@@ -218,7 +218,7 @@ public class FundServiceImpl implements FundService {
         BigDecimal fundPrice =BigDecimal.valueOf(-1);
         BigDecimal fundCount =BigDecimal.valueOf(-1);
 
-        BigDecimal totalMoney=walletDao.totalCount(userId,"RMB");
+        BigDecimal totalMoney=walletDao.totalMoney(userId,"RMB");
         if(totalMoney.compareTo(traderMoney)>=0){
             synchronized (this){
                 walletDao.sellCount(userId,"RMB",traderMoney,traderMoney);
