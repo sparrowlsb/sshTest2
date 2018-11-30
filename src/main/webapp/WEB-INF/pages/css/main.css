@@ -2770,8 +2770,8 @@ a:-webkit-any-link{text-decoration:none;}
 .suspension .a-qrcode .i{background-position:-44px 0;}
 .suspension .a-cart .i{background-position:-88px 0;}
 .suspension .a-top .i{background-position:-132px 0;}
-.suspension .a-top{background:#D2D3D6;display:none;}
-.suspension .a-top:hover{background:#c0c1c3;}
+.suspension .a-top{display:none;}
+.suspension .a-top:hover{}
 .suspension .d{display:none;width:223px;background:#fff;position:absolute;right:67px;min-height:90px;border:1px solid #E0E1E5;border-radius:3px;box-shadow:0px 2px 5px 0px rgba(161, 163, 175, 0.11);}
 .suspension .d .arrow{position:absolute;width:8px;height:12px;background:url(../images/side_bg_arrow.png) no-repeat;right:-8px;top:31px;}
 .suspension .d-service{top:0;}

@@ -186,15 +186,17 @@
                 <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
                     <a href='finance.html'><img src="images/home/financebig3.png" class="img-responsive" alt=""></a>
                 </div>
-                <h2>{{ fund3.fundName }}</h2>
-                今日涨幅： <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
-                <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
-                <p></p>
-                历史涨幅： <span class="label label-success" v-show="fund3.fundQuoteHistChange >= 0">{{ fund3.fundQuoteHistChange }}%</span>
-                <span class="label label-danger" v-show="fund2.fundQuoteHistChange < 0">{{ fund3.fundQuoteHistChange }}%</span>
+                    <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
 
-                <P>{{ fund3.fundType }}</P>
+                    <h2>{{ fund3.fundName }}</h2>
+                    今日涨幅： <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
+                    <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+                    <p></p>
+                    历史涨幅： <span class="label label-success" v-show="fund3.fundQuoteHistChange >= 0">{{ fund3.fundQuoteHistChange }}%</span>
+                    <span class="label label-danger" v-show="fund2.fundQuoteHistChange < 0">{{ fund3.fundQuoteHistChange }}%</span>
 
+                    <P>{{ fund3.fundType }}</P>
+                </div>
             </div>
         </div>
     </div>
@@ -301,7 +303,7 @@
         <a href="#" class="a a-service "><i class="i"></i></a>
         <a href="javascript:;" class="a a-service-phone "><i class="i"></i></a>
         <a href="javascript:;" class="a a-qrcode"><i class="i"></i></a>
-        <a href="javascript:;" class="a a-top"><i class="i"></i></a>
+        <a href="javascript:;" class=" a-top"><img src="images/home/rocket.png" alt=""></a>
         <div class="d d-service">
             <i class="arrow"></i>
             <div class="inner-box">
