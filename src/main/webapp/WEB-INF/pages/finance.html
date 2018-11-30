@@ -25,7 +25,9 @@
 
   <!-- Start App Logo -->
   <div class="applogo">
-    <a href="index.html" class="logo">众庄交易大师</a>
+    <a class="logo" href="index.html">
+      <img height="60" width="160" src="images/home/logo2.png" ></h1>
+    </a>
   </div>
   <!-- End App Logo -->
 
@@ -93,7 +95,7 @@
 
   <ul class="sidebar-panel nav">
     <li class="sidetitle">基金信息</li>
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund.fundName }}
+    <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance1.png" alt=""></span>{{ fund.fundName }}
       <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
       <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
     </a></li>
@@ -101,7 +103,7 @@
 
   </ul>
   <ul class="sidebar-panel nav">
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund2.fundName }}
+    <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance2.png" alt=""></span>{{ fund2.fundName }}
       <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
       <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
     </a></li>
@@ -109,7 +111,7 @@
 
   </ul>
   <ul class="sidebar-panel nav">
-    <li><a href="finance.html"><span class="icon color5"><i class="fa fa-home"></i></span>{{ fund3.fundName }}
+    <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance3.png" alt=""></span>{{ fund3.fundName }}
       <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
       <span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
 
@@ -194,7 +196,7 @@
       <ul class="topstats clearfix" >
         <li class="arrow"></li>
         <li class="col-xs-3 col-lg-3">
-          <h1 >{{ fund.fundName }}</h1>
+          <h1 ><img height="60" width="60" src="images/home/finance1.png" alt=""> {{ fund.fundName }}</h1>
 
         </li>
         <li class="col-xs-3 col-lg-3">
