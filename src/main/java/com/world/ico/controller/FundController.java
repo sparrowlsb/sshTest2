@@ -154,9 +154,15 @@ public class FundController extends BaseImpl {
 
         }
         Integer userId=loginService.findEmailIdByEmail(email);
-        fundService.buyFund(userId,fundTransaction.getTraderMoney(),fundTransaction.getFundId());
 
+        Integer result=fundService.buyFund(userId,fundTransaction.getTraderMoney(),fundTransaction.getFundId());
+        if (result==-1){
+            return  getError(jsonObject,  "please entry the right transaction money");
+        }
         return  getSuccess(jsonObject,"");
+
+
+
     }
 
     @RequestMapping(value = "sellfund", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
@@ -177,14 +183,17 @@ public class FundController extends BaseImpl {
 
         }
         Integer userId=loginService.findEmailIdByEmail(email);
-        fundService.sellFund(userId,fundTransaction.getFundCount(),fundTransaction.getFundId());
-        return getSuccess(jsonObject, "");
+        Integer result=fundService.sellFund(userId,fundTransaction.getFundCount(),fundTransaction.getFundId());
+        if (result==-1){
+            return  getError(jsonObject,  "please entry the right transaction money");
+        }
+        return  getSuccess(jsonObject,"");
 
     }
 
     @RequestMapping(value = "getDailyBuyHistory", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getDailyBuyHistory( HttpSession session) {
+    public JSONObject getDailyBuyHistory(HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
         if (email==null){
@@ -203,7 +212,7 @@ public class FundController extends BaseImpl {
             data[j][3]=String.valueOf(fundHist.getFundName());
             data[j][4]=String.valueOf(fundHist.getTraderMoney());
             if(fundHist.getStatus()==0){
-                data[j][5]="待完成交易";
+                data[j][5]="待完成交易...";
             }else if(fundHist.getStatus()==-1){
                 data[j][5]="已撤销交易";
             }else if(fundHist.getStatus()==1){
@@ -214,7 +223,6 @@ public class FundController extends BaseImpl {
             data[j][6]=String.valueOf(fundHist.getTransactionDate());
             j++;
         }
-        System.out.print("getDailyBuyHistory"+data);
         return getDataSuccess(data, "");
 
 
@@ -242,7 +250,7 @@ public class FundController extends BaseImpl {
             data[j][3]=String.valueOf(fundHist.getFundName());
             data[j][4]=String.valueOf(fundHist.getFundCount());
             if(fundHist.getStatus()==0){
-                data[j][5]="待完成交易";
+                data[j][5]="待完成交易...";
             }else if(fundHist.getStatus()==-1){
                 data[j][5]="已撤销交易";
             }else if(fundHist.getStatus()==1){

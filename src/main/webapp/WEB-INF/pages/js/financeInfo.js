@@ -34,7 +34,7 @@ var main = new Vue({
                 type: 'GET',
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
-                url: "/fund/totalCount?type=RMB",
+                url: "/fund/totalCount?type=USDT",
                 success: function (data, textStatus) {
                     if (data.result == 1){
                         self.maxBuy = data.data.totalcount;

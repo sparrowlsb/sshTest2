@@ -46,7 +46,7 @@ public class CurbExchangeController extends BaseImpl {
         if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==-1){
             return getError(jsonObject, "please sell >0 money");
         }
-        BigDecimal totalMoney=fundService.totalMoney(userId,"RMB");
+        BigDecimal totalMoney=fundService.totalMoney(userId,"USDT");
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
@@ -73,7 +73,7 @@ public class CurbExchangeController extends BaseImpl {
         if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==0){
             return getError(jsonObject, "please sell >0 money");
         }
-        BigDecimal totalMoney=fundService.totalMoney(userId,"RMB");
+        BigDecimal totalMoney=fundService.totalMoney(userId,"USDT");
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }

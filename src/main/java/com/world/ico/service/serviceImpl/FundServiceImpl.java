@@ -51,17 +51,15 @@ public class FundServiceImpl implements FundService {
         HashMap<String, FundPricePo> map = new HashMap<>();
         HashSet<String> dateHash = new HashSet<>();
         HashSet<Integer> fundSize = new HashSet<>();
-        Integer size = 0;
+        Integer size=0;
         for (FundPricePo fundPricePo : fundPriceList) {
             map.put(fundPricePo.getFundId() + "_" + fundPricePo.getDate(), fundPricePo);
             dateHash.add(fundPricePo.getDate());
             fundSize.add(fundPricePo.getFundId());
 
         }
-        for (Integer i : fundSize) {
-            size++;
+        size=fundSize.size();
 
-        }
         String maxDateString = null;
         String minDateString = null;
         if (dateHash.size() != 0) {
@@ -211,46 +209,51 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
-    public void buyFund(Integer userId, BigDecimal traderMoney, Integer fundId) {
+    public Integer buyFund(Integer userId, BigDecimal traderMoney, Integer fundId) {
 
         BigDecimal managementFee= managementFeeDao.getManagementFee();
         BigDecimal managementCost=managementFee.multiply(traderMoney);
         BigDecimal fundPrice =BigDecimal.valueOf(-1);
         BigDecimal fundCount =BigDecimal.valueOf(-1);
 
-        BigDecimal totalMoney=walletDao.totalCount(userId,"RMB");
+        BigDecimal totalMoney=walletDao.totalCount(userId,"USDT");
         if(totalMoney.compareTo(traderMoney)>=0){
             synchronized (this){
-                walletDao.sellCount(userId,"RMB",traderMoney,traderMoney);
+                walletDao.sellCount(userId,"USDT",traderMoney,traderMoney);
                 walletDao.updateMoney(userId,"FUND_"+fundId,traderMoney);
                 fundTransactionDao.insertFundTransaction(userId,"BUY",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
+                return 1;
             }
+        }else {
+            return -1;
         }
 
         //整点时间定时更新insertFundTransaction 和walletDao中fund_id的price 和count；
         //以及walletDao扣除手续费之后的user_id下的tradermoney=今日price*fundcount
+
     }
 
     @Override
-    public void sellFund(Integer userId, BigDecimal fundCount, Integer fundId) {
+    public Integer sellFund(Integer userId, BigDecimal fundCount, Integer fundId) {
         BigDecimal managementFee = managementFeeDao.getManagementFee();
         BigDecimal totalCount = walletDao.totalCount(userId, "FUND_" + fundId);
 
         BigDecimal traderMoney = BigDecimal.valueOf(-1);
         BigDecimal fundPrice = BigDecimal.valueOf(-1);
-        BigDecimal managementCost = BigDecimal.valueOf(-1);
+        BigDecimal managementCost=managementFee.multiply(fundCount);
 
         if(totalCount.compareTo(fundCount)>=0){
-
             synchronized (this){
                 walletDao.sellCount(userId,"FUND_"+fundId,fundCount, BigDecimal.valueOf(0));
                 fundTransactionDao.insertFundTransaction(userId,"SELL",0,traderMoney,fundId,fundPrice,fundCount,managementFee,managementCost);
-
+                return 1;
             }
+        }else {
+            return -1;
         }
     }
 
-        @Override
+    @Override
     public ArrayList<FundTransaction> getFundHistory(Integer userId,Integer page1,Integer page2) {
         ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findHistFundTransaction(userId,page1,page2);
         ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
@@ -278,6 +281,7 @@ public class FundServiceImpl implements FundService {
                 String fundName=fundPo.getFundName();
                 fundTransaction.setFundName(fundName);
             }
+            fundTransaction.setTraderMoney(f.getTraderMoney());
             fundTransaction.setManagementCost(f.getManagementCost());
             fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()));
             fundTransactions.add(fundTransaction);
@@ -356,8 +360,7 @@ public class FundServiceImpl implements FundService {
             FundTransactionPo fundTransactionPo = fundTransactionDao.findRevokeFundTransactionInfo(transactionId, type, 0);
             String fundId="FUND_"+fundTransactionPo.getFundId();
             if(fundTransactionPo.getType().equalsIgnoreCase("BUY")) {
-
-                walletDao.revokeMoney(fundTransactionPo.getUserId(), "RMB", fundTransactionPo.getTraderMoney());
+                walletDao.revokeMoney(fundTransactionPo.getUserId(), "USDT", fundTransactionPo.getTraderMoney());
                 walletDao.revokeFund(fundTransactionPo.getUserId(), fundId, fundTransactionPo.getTraderMoney(), BigDecimal.valueOf(0));
             }if (fundTransactionPo.getType().equalsIgnoreCase("SELL")){
                 walletDao.revokeFund(fundTransactionPo.getUserId(), fundId, BigDecimal.valueOf(0),fundTransactionPo.getFundCount());
@@ -372,7 +375,7 @@ public class FundServiceImpl implements FundService {
     @Override
     public BigDecimal totalMoney(Integer userId, String type) {
 
-        return walletDao.totalMoney(userId,type);
+        return walletDao.totalCount(userId,type);
     }
 
     @Override
@@ -407,11 +410,11 @@ public class FundServiceImpl implements FundService {
                 }
                 userWallet.setMoney(userWalletPo.getCount());
             }
-            if (userWalletPo.getType().equalsIgnoreCase("RMB")) {
+            if (userWalletPo.getType().equalsIgnoreCase("USDT")) {
 
-                userWallet.setType("RMB");
+                userWallet.setType("USDT");
 
-                userWallet.setMoney(userWalletPo.getMoney());
+                userWallet.setMoney(userWalletPo.getCount());
             }
             userWallets.add(userWallet);
         }
@@ -422,8 +425,8 @@ public class FundServiceImpl implements FundService {
     @Override
     public void sellMoney(Integer userId,String type ,BigDecimal money,BigDecimal count) {
 
-        walletDao.sellMoney(userId,"RMB",money);
-        curbExchangeDao.insertExchangeHist(userId,"支付宝",type,"RMB",count,0);
+        walletDao.sellMoney(userId,"USDT",money);
+        curbExchangeDao.insertExchangeHist(userId,"",type,"USDT",count,0);
     }
 
     @Override

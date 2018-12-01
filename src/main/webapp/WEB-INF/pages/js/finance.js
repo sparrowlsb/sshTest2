@@ -120,7 +120,7 @@ var main = new Vue({
                 type: 'GET',
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
-                url: "/fund/totalCount?type=RMB",
+                url: "/fund/totalCount?type=USDT",
                 success: function (data, textStatus) {
                     if (data.result == 1){
                         self.maxBuy = data.data.totalcount;
@@ -168,7 +168,7 @@ $.ajax({
                 {title: "类型"},
                 {title: "基金编号"},
                 {title: "基金名称"},
-                {title: "订单金额"},
+                {title: "订单金额(USDT)"},
                 {title: "订单状态"},
                 {title: "交易时间"},
                 {title: "操作"}
@@ -211,7 +211,7 @@ $.ajax({
         $('#buytable tbody').on('click', 'a.delete', function(e) {
             e.preventDefault();
 
-            if (confirm("确定要删除该属性？")) {
+            if (confirm("确定要删除该订单？")) {
                 var table = $('#buytable').DataTable();
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
@@ -227,7 +227,11 @@ $.ajax({
 
                     data: JSON.stringify({"id": id,"type":"BUY"}),
                     success: function (data, textStatus) {
-                        alert('撤销成功');
+                        if (data.result == 1) {
+                            alert('撤销成功');
+                        }else {
+                            alert('撤销失败');
+                        }
                     },
 
                     error:function(data){
@@ -300,7 +304,7 @@ $.ajax({
         $('#selltable tbody').on('click', 'a.delete', function(e) {
             e.preventDefault();
 
-            if (confirm("确定要删除该属性？")) {
+            if (confirm("确定要撤销该订单？")) {
                 var table = $('#selltable').DataTable();
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
@@ -316,7 +320,11 @@ $.ajax({
 
                     data: JSON.stringify({"id": id,"type":"SELL"}),
                     success: function (data, textStatus) {
-                        alert('撤销成功');
+                        if (data.result == 1) {
+                            alert('撤销成功');
+                        }else {
+                            alert('撤销失败');
+                        }
                     },
 
                     error:function(data){

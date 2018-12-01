@@ -81,7 +81,7 @@
       <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right">
         <li role="presentation" class="dropdown-header">Profile</li>
         <li><a href="index.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
-        <li><a href="information_money.html"><i class="fa falist fa-money"></i> 充值</a></li>
+        <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
         <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
       </ul>
     </li>
@@ -200,22 +200,22 @@
 
         </li>
         <li class="col-xs-3 col-lg-3">
-          <span class="title"><i class="fa fa-dot-circle-o"></i> 今日价格</span>
-          <h3> {{ fund.fundPrice }} rmb</h3>
+          <span class="title"><i class="fa fa-dot-circle-o"></i> 单位净值</span>
+          <h3> {{ fund.fundPrice }} USDT</h3>
           <span class="diff" v-show="fund.fundQuoteChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteChange }}% </b> 昨日</span>
-          <span class="diff" v-show="fund.fundQuoteChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteChange }}% </b> 历史</span>
+          <span class="diff" v-show="fund.fundQuoteChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteChange }}% </b> 昨日</span>
 
-          <span class="diff" v-show="fund.fundQuoteHistChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteHistChange }}% </b> 昨日</span>
-          <span class="diff" v-show="fund.fundQuoteHistChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteHistChange }}% </b> 昨日</span>
-
-        </li>
-        <li class="col-xs-3 col-lg-3">
-          <span class="title"><i class="fa fa-shopping-cart"></i> 日成交量</span>
-          <h3 class="color-up">{{ fund.fundTotalMoney }}</h3>
+          <span class="diff" v-show="fund.fundQuoteHistChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteHistChange }}% </b> 历史</span>
+          <span class="diff" v-show="fund.fundQuoteHistChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteHistChange }}% </b> 历史</span>
 
         </li>
         <li class="col-xs-3 col-lg-3">
-          <span class="title"><i class="fa fa-clock-o"></i> 更新时间</span>
+          <span class="title"><i class="fa fa-shopping-cart"></i> 当日成交量</span>
+          <h3 class="color-up">{{ fund.fundTotalMoney }} </h3>
+
+        </li>
+        <li class="col-xs-3 col-lg-3">
+          <span class="title"><i class="fa fa-clock-o"></i> 最近更新时间</span>
           <h3 class="color-up">{{ fund.fundDate }}  18:30</h3>
         </li>
       </ul>
@@ -239,7 +239,7 @@
             <div class="bigchart" id="container"></div>
           </div>
           <div class="right" style="height:450px;"  id="daliyprice">
-            <div class="top-label"><h2>{{ fund.fundPrice }}rmb</h2><h4>今日 价格</h4></div>
+            <div class="top-label"><h2>{{ fund.fundPrice }}usdt</h2><h4>最近更新价格</h4></div>
 
           <!-- end stats -->
           </div>
@@ -255,7 +255,7 @@
           <li class="arrow"></li>
           <li class="col-xs-3 col-lg-6"  >
             <i class="fa fa-calendar-o"></i>
-            <span class="diff"><b class="color-up">最大可买入金额 </b> <i class="fa fa-caret-up" id="totoalMoney">{{maxBuy}} rmb</i> </span>
+            <span class="diff"><b class="color-up">最大可买入金额 </b> <i class="fa fa-caret-up" id="totoalMoney">{{maxBuy}} USDT</i> </span>
 
             <p></p>
             <div class="panel-body">
@@ -329,7 +329,7 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="buyhist">
                 <div class="panel-title">
-                  今日买入交易历史
+                  今日买入待成交订单
                 </div>
                 <div class="panel-body table-responsive">
 
@@ -342,7 +342,7 @@
               </div>
               <div role="tabpanel" class="tab-pane" id="sellhist">
                 <div class="panel-title">
-                  今日卖出交易历史
+                  今日卖出待成交订单
                 </div>
                 <div class="panel-body table-responsive">
 
@@ -657,7 +657,10 @@
             <h4>交易订单： # {{r.id}}</h4>
             <h4>{{buySaleText(r.type)}}基金：{{r.fundName}}</h4>
             <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
-              <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.managementCost}} RMB</h4>
+            <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
+            <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
+            <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
+
             <h4>成交情况：{{r.transactionStatus}}</h4>
           </a>
         </li>

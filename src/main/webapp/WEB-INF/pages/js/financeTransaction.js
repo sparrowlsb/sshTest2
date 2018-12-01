@@ -14,9 +14,14 @@ function buyfunction() {
 
                 data: JSON.stringify({"traderMoney": buyNum, "fundId": 1}),
                 success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        alert('交易成功');
+                    }else {
+                        alert('交易失败');
+                    }
                     var table = $('#buytable').DataTable();
-                    table.draw( false );
-                    alert('交易成功');
+                    table.draw(false);
+
                 },
                 error: function (data, textStatus) {
                     alert("交易失败");
@@ -41,9 +46,14 @@ function sellfunction() {
 
                 data: JSON.stringify({"fundCount": sellNum, "fundId": 1}),
                 success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        alert('交易成功');
+                    }else {
+                        alert('交易失败');
+                    }
                     var table = $('#selltable').DataTable();
                     table.draw( false );
-                    alert('交易成功');
+
                 },
                 error: function (data, textStatus) {
                     alert("交易失败");

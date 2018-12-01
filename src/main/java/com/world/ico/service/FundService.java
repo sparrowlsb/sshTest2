@@ -21,9 +21,9 @@ public interface FundService {
 
     public List<FundPrice> getFundInfo(Integer fundId);
 
-    public void buyFund(Integer userId,BigDecimal traderMoney,Integer fundId);
+    public Integer buyFund(Integer userId, BigDecimal traderMoney, Integer fundId);
 
-    public void sellFund(Integer userId,BigDecimal fundCount,Integer fundId);
+    public Integer sellFund(Integer userId, BigDecimal fundCount, Integer fundId);
 
     public ArrayList<FundTransaction> getFundHistory(Integer userId,Integer page1,Integer page2);
 
