@@ -7,6 +7,7 @@
     <meta name="author" content="">
     <title>Home | Triangle</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/indexFunctionLogo.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/lightbox.css" rel="stylesheet">
@@ -17,57 +18,62 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="stylesheet" href="css/index/style.css">
+
+
+
 </head><!--/head-->
 
-<body>
-<header id="header" >
+<body data-spy="scroll" data-target=".navbar-collapse">
 
-    <div class="navbar navbar-inverse" role="banner">
-        <div class="container">
 
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+    <header id="header" >
 
-                <a class="navbar-brand" href="index.html">
-                    <h1><img img height="80" width="200" src="images/logo.png" alt="logo"></h1>
-                </a>
+        <div class="navbar navbar-inverse" role="banner">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <a class="navbar-brand" href="index.html">
+                        <h1><img  height="80" width="200" src="images/logo.png" alt="logo"></h1>
+                    </a>
+
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown"><a href="index.html">主页</a></li>
+                        <li class="dropdown"><a href="finance.html">基金项目</a>
+
+                        </li>
+                        <li class="dropdown"><a href="about_info.html">关于我们 <i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                <li><a href="about_info.html">关于众庄</a></li>
+                                <li><a href="about_finance.html">数字资产组合</a></li>
+                                <li><a href="about_service.html">服务条款</a></li>
+                                <li><a href="about_duty.html">免责声明</a></li>
+                                <li><a href="about_investor.html">投资者通知</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+
+
 
             </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="index.html">主页</a></li>
-                    <li class="dropdown"><a href="finance.html">基金项目</a>
-
-                    </li>
-                    <li class="dropdown"><a href="about_info.html">关于我们 <i class="fa fa-angle-down"></i></a>
-                        <ul role="menu" class="sub-menu">
-                            <li><a href="about_info.html">关于众庄</a></li>
-                            <li><a href="about_finance.html">数字资产组合</a></li>
-                            <li><a href="about_service.html">服务条款</a></li>
-                            <li><a href="about_duty.html">免责声明</a></li>
-                            <li><a href="about_investor.html">投资者通知</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </div>
-
-
-
         </div>
-    </div>
-</header>
+
+    </header>
+
+
 <!--/#header-->
+
 <div id="main" >
 <section id="home-slider">
 
@@ -76,7 +82,7 @@
         <div class="row">
             <div class="main-slider">
                 <div class="slide-text">
-                    <h1>致力于全球数字货币基金</h1>
+                    <h1 style="font-weight:bold">致力于全球数字货币基金</h1>
                     <p>挑选出专业的数字货币交易大师，24小时稳定的风控管理，使得数字货币投资稳定和简单化，稳定的收益和资金的安全是我们的首要目标。</p>
                     <a href="login.html" class="btn btn-common">登录/注册</a>
                 </div>
@@ -126,13 +132,16 @@
         </div>
     </div>
 </section>
+
+
 <section id="action" class="responsive">
+
     <div class="vertical-center">
         <div class="container">
             <div class="row">
                 <div class="action take-tour">
                     <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
-                        <h1 class="title">基金交易平台</h1>
+                        <h1 class="title" style="font-weight:bold">基金交易平台</h1>
                         <p>可以任意选购你喜欢的交易大师</p>
                     </div>
                     <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
@@ -145,17 +154,20 @@
         </div>
     </div>
 </section>
+
 <!--/#action-->
 
 <section id="features">
+
     <div class="container">
+
         <div class="row">
             <div class="single-features">
                 <div class="col-sm-5 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
                     <a href='finance.html'> <img src="images/home/financebig.png" class="img-responsive" alt=""></a>
                 </div>
                 <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
-                    <h2>{{ fund.fundName }}</h2>
+                    <h3>{{ fund.fundName }}</h3>
                     今日涨幅： <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
                     <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
                     <p></p>
@@ -167,7 +179,7 @@
             </div>
             <div class="single-features">
                 <div class="col-sm-6 col-sm-offset-1 align-right wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
-                    <h2>{{ fund2.fundName }}</h2>
+                    <h3>{{ fund2.fundName }}</h3>
                     今日涨幅： <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
                     <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
                     <p></p>
@@ -186,7 +198,7 @@
                 </div>
                     <div class="col-sm-6 wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
 
-                    <h2>{{ fund3.fundName }}</h2>
+                    <h3>{{ fund3.fundName }}</h3>
                     今日涨幅： <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
                     <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
                     <p></p>
@@ -201,85 +213,183 @@
 </section>
 <!--/#features-->
 
-<!--发展趋势-->
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
-            <div class="single-service">
-                <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
-                    <img src="images/home/1.0.jpg" alt="">
-                </div>
-                <h2>1.0</h2>
-                <p>屯币,个人信仰驱动<br/>2015年以前</p>
-            </div>
-        </div>
-        <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
-            <div class="single-service">
-                <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="600ms">
-                    <img src="images/home/2.0.jpg" alt="">
-                </div>
-                <h2>2.0</h2>
-                <p>ICO，短期炒作投机驱动<br/>2016-2017</p>
-            </div>
-        </div>
-        <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="900ms">
-            <div class="single-service">
-                <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="900ms">
-                    <img src="images/home/3.0.jpg" alt="">
-                </div>
-                <h2>3.0</h2>
-                <p>资产管理，资产配置+投资策略哲学+量化对冲<br/>2018-未来</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container" style="margin-bottom: 50px;">
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="page-header" style="text-align: center;padding-bottom: 20px;">技术平台</h2>
-        </div>
-        <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-            <div class="feature-inner">
-                <div class="icon-wrapper">
-                    <img src="images/home/icon_jishu/baasqukuailianfuwu.png" width="40"/>
-                </div>
-                <p>通过区块链技术实现投资决策的信号追随，让交易与获利在投资者与基金经理之间哦公开透明，让投资的策略追随简单便捷</p>
-            </div>
-        </div>
-        <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
-            <div class="feature-inner">
-                <div class="icon-wrapper">
-                    <img src="images/home/icon_jishu/zhinengsuanfa.png" width="40"/>
-                </div>
-                <p>通过数学建模与机器学习训练AI程序实现最优策略的量化交易</p>
-            </div>
-        </div>
-        <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="900ms">
-            <div class="feature-inner">
-                <div class="icon-wrapper">
-                    <img src="images/home/icon_jishu/gongkai.png" width="40"/>
-                </div>
-                <p>公开透明，并且专业安全的第三方资管方案，会与有信誉的资管方共同打造冷钱包存储方案与安全严格的操作流程，并随时向投资者披露资金的存储细节</p>
-            </div>
-        </div>
-        <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="1200ms">
-            <div class="feature-inner">
-                <div class="icon-wrapper">
-                    <img src="images/home/icon_jishu/fengkongchaxun.png" width="40"/>
-                </div>
-                <p>覆盖全平台的多级风控引擎，自动识别基金经理的任何不正常操作，7/24我们的风控团队会随时待命，在第一时间才去措施，避免任何损害投资人利益的行为</p>
-            </div>
-        </div>
-    </div>
-</div><!--/#feature-container-->
 
+
+<section id="function" >
+
+        <div class="col-md-12">
+            <h3 class="page-header" style="text-align: center;padding-bottom: 20px;font-weight:bold">区块链行业发展</h3>
+        </div>
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main-timeline">
+                        <div class="timeline  wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                            <div class="timeline-icon" ><span class="year">起始</span></div>
+                            <div class="timeline-content" >
+                                <h3 class="title">2008-2015 区块链1.0</h3>
+                                <p class="description">
+                                    以BTC为代表的区块链1.0 是区块链技术的基本版本，能够实现可编程货币，是与转账、汇款和数字化支付相关的密码学货币应用。通过这一层次的应用，首先起到搅动金融市场的作用
+
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timeline wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="600ms">
+                            <div class="timeline-icon"><span class="year">狂热</span></div>
+                            <div class="timeline-content">
+                                <h3 class="title">2016-2017 区块链2.0</h3>
+                                <p class="description">
+                                    以ETH为代表的区块链2.0 是区块链技术的基础之上，能够实现智能财产和智能合约。因为无数不良公司开发ICO，引起了用户投资的狂热，形成了巨大泡沫，最后致使散户损失惨重！
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="timeline   wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="900ms" >
+                            <div class="timeline-icon"><span class="year">理性</span></div>
+                            <div class="timeline-content">
+                                <h3 class="title">2018-未来 区块链3.0</h3>
+                                <p class="description">
+                                    区块链3.0 是区块链泡沫之后，用户理性投资，通过专业的风控团队，使用资产管理，资产配置+投资策略哲学+量化对冲的模式降低风险，并且使得区块链价值回归。
+                                </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--/#clients-->
+    </section>
+    <section id="about" class="about roomy-100">
+        <div class="col-md-12">
+            <h3 class="page-header" style="text-align: center;padding-bottom: 20px;font-weight:bold"></h3>
+        </div>
+        <div class="container">
+
+            <div class="row">
+                <div class="main_about">
+                    <div class="col-md-6">
+                        <div class="about_content">
+                            <h3 style="font-weight:bold">关于我们</h3>
+                            <div class="separator_left"></div>
+
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                                magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+                                quis nostrud exerci tation ullamcorper suscipit lobortis
+                                nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor
+                                sit amet, consectetuer adipiscing elit, sed diam nonummy nibh
+                                euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+                                Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                ullamcorper suscipit lobortis nisl ut aliquip
+                                ex ea commodo consequat. </p>
+
+                            <div class="about_btns m-top-40">
+                                <a href="" class="btn btn-primary">DOWNLOAD NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="about_accordion wow fadeIn">
+                            <div id="faq_main_content" class="faq_main_content">
+                                <h6><i class="fa fa-angle-right"></i> UNIQUE DESIGN </h6>
+                                <div>
+                                    <div class="content">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                                            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+
+                                    </div>
+                                </div> <!-- End off accordion item-1 -->
+
+                                <h6 class="open"><i class="fa fa-angle-right"></i> EXPERIENCE TEAM</h6>
+                                <div class="open">
+                                    <div class="content">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                                            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+                                    </div>
+                                </div> <!-- End off accordion item-2 -->
+
+                                <h6> <i class="fa fa-angle-right"></i> GREAT SERVICE </h6>
+                                <div>
+                                    <div class="content">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                                            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+                                    </div>
+                                </div> <!-- End off accordion item-3 -->
+
+                                <h6><i class="fa fa-angle-right"></i> FREE UPDATES </h6>
+                                <div>
+                                    <div class="content">
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore
+                                            magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+                                    </div>
+                                </div> <!-- End off accordion item-4 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--End off row-->
+        </div><!--End off container -->
+        <br />
+        <br />
+        <br />
+        <br />
+        <hr />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                    <div class="feature-inner">
+                        <div class="icon-wrapper">
+                            <img src="images/home/icon_jishu/baasqukuailianfuwu.png" width="40"/>
+                        </div>
+                        <p>通过区块链技术实现投资决策的信号追随，让交易与获利在投资者与基金经理之间哦公开透明，让投资的策略追随简单便捷</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="600ms">
+                    <div class="feature-inner">
+                        <div class="icon-wrapper">
+                            <img src="images/home/icon_jishu/zhinengsuanfa.png" width="40"/>
+                        </div>
+                        <p>通过数学建模与机器学习训练AI程序实现最优策略的量化交易</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="900ms">
+                    <div class="feature-inner">
+                        <div class="icon-wrapper">
+                            <img src="images/home/icon_jishu/gongkai.png" width="40"/>
+                        </div>
+                        <p>公开透明，并且专业安全的第三方资管方案，会与有信誉的资管方共同打造冷钱包存储方案与安全严格的操作流程，并随时向投资者披露资金的存储细节</p>
+                    </div>
+                </div>
+                <div class="col-sm-3 wow fadeInUp" data-wow-duration="500ms" data-wow-delay="1200ms">
+                    <div class="feature-inner">
+                        <div class="icon-wrapper">
+                            <img src="images/home/icon_jishu/fengkongchaxun.png" width="40"/>
+                        </div>
+                        <p>覆盖全平台的多级风控引擎，自动识别基金经理的任何不正常操作，7/24我们的风控团队会随时待命，在第一时间才去措施，避免任何损害投资人利益的行为</p>
+                    </div>
+                </div>
+            </div><!--End off row-->
+        </div><!--End off container -->
+    </section>
+
+</div>
 <section id="clients">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
                     <p><img src="images/home/clients.png" class="img-responsive" alt=""></p>
-                    <h1 class="title">快乐交易</h1>
+                    <h1 class="title" style="font-weight:bold">快乐交易</h1>
                     <p>投资原来如此简单<br>  </p>
                 </div>
 
@@ -287,9 +397,6 @@
         </div>
     </div>
 </section>
-
-<!--/#clients-->
-</div>
 <div class="col-sm-12 text-center bottom-separator">
     <img src="images/home/under.png" class="img-responsive inline" alt="">
 </div>
@@ -304,16 +411,16 @@
 
                         <div class="media-body">
 
-                            <blockquote>在别人贪婪时要保持警惕，而在别人警惕时就要贪婪</blockquote>
-                            <h3><a href="https://baike.baidu.com/item/沃伦·巴菲特/472378?fr=aladdin">- 巴菲特</a></h3>
+                            <blockquote>在别人贪婪时要保持警惕，而在别人警惕时就要贪婪                            <a href="https://baike.baidu.com/item/沃伦·巴菲特/472378?fr=aladdin">   - 巴菲特</a>
+                            </blockquote>
                         </div>
                     </div>
                     <div class="media">
 
                         <div class="media-body">
 
-                            <blockquote>世界经济史是一部基于假象和谎言的连续剧</blockquote>
-                            <h3><a href="https://baike.baidu.com/item/乔治·索罗斯/1654563?fr=aladdin">- 索罗斯</a></h3>
+                            <blockquote>世界经济史是一部基于假象和谎言的连续剧                            <a href="https://baike.baidu.com/item/乔治·索罗斯/1654563?fr=aladdin">- 索罗斯</a>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
@@ -321,14 +428,14 @@
 
             <div class="col-md-3 col-sm-6">
                 <div class="contact-info bottom">
-                    <h2>Contacts</h2>
+                    <h3>Contacts</h3>
                     <address>
                         E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br>
                         Phone: +1 (123) 456 7890 <br>
                         Fax: +1 (123) 456 7891 <br>
                     </address>
 
-                    <h2>Address</h2>
+                    <h3 >Address</h3>
                     <address>
                         Unit C2, St.Vincent's Trading Est., <br>
                         Feeder Road, <br>
@@ -339,14 +446,12 @@
             </div>
             <div class="col-md-5 col-sm-6">
                 <div class="contact-form bottom">
-                    <h2>Send a message</h2>
+                    <h3>Send a message</h3>
                     <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
                         <div class="form-group">
-                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
+                            <input type="text" name="name" class="form-control" required="required" placeholder="Email Id">
                         </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
-                        </div>
+
                         <div class="form-group">
                             <textarea name="message" id="message" required class="form-control" rows="8" placeholder="Your text here"></textarea>
                         </div>
@@ -423,5 +528,28 @@
 <script src="js/vue.min.js"></script>
 <script type="text/javascript" src="js/financeInfo.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
+
+<!----->
+
+<!-- JS includes -->
+
+
+<script src="js/index/jquery.magnific-popup.js"></script>
+<script src="js/index/jquery.easing.1.3.js"></script>
+<script src="js/index/slick.min.js"></script>
+<script src="js/index/jquery.collapse.js"></script>
+<script src="js/index/bootsnav.js"></script>
+
+
+<!-- paradise slider js -->
+
+
+
+
+
+
+<script src="js/index/plugins.js"></script>
+<script src="js/index/main.js"></script>
+
 </body>
 </html>
