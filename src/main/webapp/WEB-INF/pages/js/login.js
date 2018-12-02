@@ -88,7 +88,7 @@ function  loginUser() {
                     // alert("登录成功！");
                     //set cookie
                     setCookie('email',email,1);
-                    window.location.href="/pages/index.html";
+                    window.location.href="/pages/index_cn.html";
                 }else if(data.result==0){
                     alert("登录失败：账户密码错误！");
                     verifyClick()

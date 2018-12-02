@@ -25,8 +25,17 @@ function removeCookie(name){
 //导航栏 用户是否存在
 if (!email || email == null){
     $("#header .nav").append("<li ><a href=\"login.html\">登录/注册</a></li>");
+    $("#inMoney").append("<a  href=\"login.html\" class=\"btn btn-primary\">马上充值</a>");
+    $("#login").append("<a href=\"login.html\" class=\"btn1\"><i class=\"fa fa-user\"></i><span>登录/注册</span></a>");
+    $("#login2").append("<a href=\"login.html\" class=\"btn2\" data-animation=\"animated bounceInUp\">登录/注册</a>");
+
+
 }else {
     $("#header .nav").append("<li class='user-head'><a hidden href=\"information_user.html\" ><img href=\"blog.html\" src=\"images/home/heard.png\">&nbsp;&nbsp;&nbsp;&nbsp;"+email+"</a></li>");
+    $("#inMoney").append("<a  href=\"information_money.html\" class=\"btn btn-primary\">马上充值</a>");
+    $("#login").append("<a href=\"information_money.html\"><img width=\"40\" height=\"40\" src=\"images/home/heard.png\"> &nbsp;&nbsp;&nbsp;&nbsp; <font color=\"#fffffff\">"+email+"</font> </a>");
+    $("#login2").append("	<h4><a >欢迎回来！</a> <font color=\"#fffffff\">"+email+"</font> </a></h4>");
+
 }
 
 //退出登录

@@ -6,7 +6,7 @@ var vm = new Vue({
     data: {
         moneyRecord: [
                    ],
-        wallets:[{type:"FUND_1",money:"0"}],
+        wallets:[{type:"请先登录",money:""}],
         USDT:{type:"usdt",money:"0"},
         currentPage:0,
         pageSize:0,
