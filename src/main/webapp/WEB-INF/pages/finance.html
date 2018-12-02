@@ -154,35 +154,39 @@
 <div class="content">
   <div class="page-header">
     <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-        {
-            "symbols": [
-
-            {
-                "title": "BTC/USD",
-                "proName": "BITFINEX:BTCUSD"
-            },
-            {
-                "title": "ETH/USD",
-                "proName": "BITFINEX:ETHUSD"
-            },
-            {
-                "title": "EOS/USD",
-                "proName": "BITFINEX:EOSUSD"
-            },
-            {
-                "title": "XRP/USD",
-                "proName": "BITFINEX:XRPUSD"
-            },
-            {
-                "title": "EUR/USD",
-                "proName": "FX_IDC:EURUSD"
-            }
-
-        ],
-            "locale": "zh_CN"
-        }
-    </script>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+          {
+              "symbols": [
+              {
+                  "description": "",
+                  "proName": "COINBASE:BTCUSD"
+              },
+              {
+                  "description": "",
+                  "proName": "KRAKEN:ETHUSD"
+              },
+              {
+                  "description": "",
+                  "proName": "BITFINEX:EOSUSD"
+              },
+              {
+                  "description": "",
+                  "proName": "KRAKEN:XRPUSD"
+              },
+              {
+                  "description": "",
+                  "proName": "BITFINEX:XLMUSD"
+              }
+          ],
+              "locale": "zh_CN"
+          }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+    <!-- TradingView Widget END -->
   </div>
 
   <!--&lt;!&ndash; End Page Header &ndash;&gt;-->
