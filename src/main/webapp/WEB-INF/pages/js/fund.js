@@ -18,8 +18,6 @@ $.ajax({
         var app = {};
         option = null;
 
-        app.title = '基金走势图';
-
 
         function calculateMA(dayCount, data) {
             var result = [];
@@ -49,23 +47,11 @@ $.ajax({
         });
         option = {
             animation: false,
-            legend: {
-                data: [ '基金1',"成交量"],
-                inactiveColor: '#666',
-                textStyle: {
-                    color: '#22'
-                }
-            },
+
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {
-                    animation: false,
-                    type: 'cross',
-                    lineStyle: {
-                        color: '#376df4',
-                        width: 2,
-                        opacity: 1
-                    }
+                    type: 'line'
                 }
             },
 
@@ -79,14 +65,14 @@ $.ajax({
             grid: [
                 {
                     left: '10%',
-                    right: '8%',
-                    height: '50%'
+                    right: '10%',
+                    bottom: 200
                 },
                 {
                     left: '10%',
-                    right: '8%',
-                    top: '63%',
-                    height: '16%'
+                    right: '10%',
+                    height: 80,
+                    bottom: 80
                 }
             ],
             xAxis: [
