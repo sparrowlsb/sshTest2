@@ -1,6 +1,7 @@
 /**
  * Created by lsb on 2018/11/25.
  */
+
 var main = new Vue({
     el: '#main',
     data: {
