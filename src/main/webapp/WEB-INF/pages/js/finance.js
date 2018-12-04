@@ -1,6 +1,57 @@
 var histDataSet
 
+var charge = new Vue({
+    el: '#charge',
+    data: {
+        charges: [],
+        currentPage:0,
+        pageSize:0,
+        totalCount:0,
+        totalPages:0
+    },
+    methods: {
+        buySaleClass: function (type) {
+            if (type == "充值"){
+                return 'label-success'
+            }else if (type == "提现"){
+                return "label-danger"
+            }
+        },
+        nextPage: function () {
+            if (this.currentPage < this.totalPages) {
+                this.getExchangeHist(this.currentPage+1)
+            }
+        },
+        prePage: function () {
+            if (this.currentPage >1) {
+                this.getExchangeHist(this.currentPage-1)
+            }
+        },
+        ajaxData: function (page) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/curb/getHist?page="+page,
+                success: function (data, textStatus) {
+                    console.log(data.data)
+                    if (data.result == 1) {
 
+                        self.charges = data.data.transactionHist;
+                        self.currentPage = data.data.currentPage;
+                        self.pageSize = data.data.pageSize;
+                        self.totalCount = data.data.totalCount;
+                        self.totalPages = data.data.totalPages;
+                    }
+                }
+            });
+        }
+    },
+    mounted: function(){
+        this.ajaxData(1)
+    }
+})
 
 var myWallet = new Vue({
     el: '#myWallet',

@@ -27,7 +27,7 @@
   <!-- Start App Logo -->
   <div class="applogo">
     <a class="logo" href="index_cn.html">
-      <img height="60" width="160" src="images/home/logo2.png" ></h1>
+      <img style="margin-top: 5px;height: 50px;" src="images/home/logo2.png" ></h1>
     </a>
   </div>
   <!-- End App Logo -->
@@ -584,7 +584,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#myWallet" aria-controls="myWallet" role="tab" data-toggle="tab">我的钱包</a></li>
     <li role="presentation"><a href="#tradeRecord" aria-controls="tradeRecord" role="tab" data-toggle="tab">交易记录</a></li>
-    <!--<li role="presentation"><a href="#chat" aria-controls="chat" role="tab" data-toggle="tab">CHAT</a></li>-->
+    <li role="presentation"><a href="#charge" aria-controls="charge" role="tab" data-toggle="tab">充值提现</a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -609,7 +609,7 @@
           </a>
         </li>
       </ul>
-      <h1>充值中心</h1>
+      <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">充值中心</div>
       <div class="panel-body">
         <ul class="list-group qq-list">
           <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
@@ -675,36 +675,39 @@
         </nav>
       </ul>
     </div>
-    <!-- End Tasks -->
 
-    <!-- Start Chat -->
-    <!--<div role="tabpanel" class="tab-pane" id="chat">-->
+    <div role="tabpanel" class="tab-pane" id="charge">
 
-    <!--<div class="sidepanel-m-title">-->
-    <!--Friend List-->
-    <!--<span class="left-icon"><a href="#"><i class="fa fa-pencil"></i></a></span>-->
-    <!--<span class="right-icon"><a href="#"><i class="fa fa-trash"></i></a></span>-->
-    <!--</div>-->
+      <div class="sidepanel-m-title">
+        充值提现
+        <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+      </div>
+      <div class="gn-title">
 
-    <!--<div class="gn-title">ONLINE MEMBERS (3)</div>-->
-    <!--<ul class="group">-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status online"></span></li>-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg2.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status busy"></span></li>-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg3.png" alt="img"><b>Fred Stonefield</b>New York</a><span class="status away"></span></li>-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg4.png" alt="img"><b>Chris M. Johnson</b>California</a><span class="status online"></span></li>-->
-    <!--</ul>-->
+      </div>
 
-    <!--<div class="gn-title">OFFLINE MEMBERS (8)</div>-->
-    <!--<ul class="group">-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg5.png" alt="img"><b>Allice Mingham</b>Los Angeles</a><span class="status offline"></span></li>-->
-    <!--<li class="member"><a href="#"><img src="images/profileimg6.png" alt="img"><b>James Throwing</b>Las Vegas</a><span class="status offline"></span></li>-->
-    <!--</ul>-->
+      <ul class="list-w-title">
+        <li v-for="r in charges">
+          <a href="#">
+            <span class="label" v-bind:class="buySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
+            <span class="date">{{r.exchangeDate}}</span>
+            <h4>交易订单： # {{r.id}}</h4>
+            <h4>{{r.exchangeType}}方式：{{r.exchangePlatform}}</h4>
+            <h4>{{r.exchangeType}}金额：{{r.money}} USDT</h4>
 
-    <!--<form class="search">-->
-    <!--<input type="text" class="form-control" placeholder="Search a Friend...">-->
-    <!--</form>-->
-    <!--</div>-->
-    <!-- End Chat -->
+            <h4>交易状态：{{r.status}}</h4>
+          </a>
+        </li>
+
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+            <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
+      </ul>
+    </div>
 
   </div>
 
