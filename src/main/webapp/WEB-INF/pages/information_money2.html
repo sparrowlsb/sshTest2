@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+    <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+    <title>ZhongZhuang | Fund</title>
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+
+    <link href="finance/css/root.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/gm.css">
+    <link rel="stylesheet" type="text/css" href="css/finance.css">
+    <script type="text/javascript" src="js/gm.js"></script>
+</head>
+<body>
+
+<!-- Start Page Loading -->
+<div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
+<!-- End Page Loading -->
+<!-- START TOP -->
+<!-- 顶栏+左侧菜单+主内容 -->
+<div id="main">
+    <div id="top" class="clearfix">
+
+        <!-- Start App Logo -->
+        <div class="applogo">
+            <a class="logo" href="index_cn.html">
+                <img style="margin-top: 5px;height: 50px;" src="images/home/logo2.png" ></h1>
+            </a>
+        </div>
+        <!-- End App Logo -->
+
+        <!-- Start Sidebar Show Hide Button -->
+        <a href="#" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+        <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+        <!-- End Sidebar Show Hide Button -->
+
+
+
+        <!-- Start Sidepanel Show-Hide Button -->
+        <a href="#sidepanel" class="sidepanel-open-button"><i class="fa fa-outdent"></i></a>
+        <!-- End Sidepanel Show-Hide Button -->
+
+        <!-- Start Top Right -->
+        <ul class="top-right">
+
+
+            <li class="dropdown link">
+                <a href="/pages/login.html" v-show="!email">登录/注册</a> <a v-show="email" href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>{{email}}</b><span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right" style="z-index: 999999;">
+                    <li role="presentation" class="dropdown-header">Profile</li>
+                    <li><a href="index.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
+                    <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
+                    <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
+                </ul>
+            </li>
+
+        </ul>
+        <!-- End Top Right -->
+
+    </div>
+    <!-- END TOP -->
+    <div class="sidebar clearfix">
+
+        <ul class="sidebar-panel nav">
+            <li class="sidetitle">基金信息</li>
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance1.png" alt=""></span>{{ fund.fundName }}
+                <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
+            </a></li>
+
+
+        </ul>
+        <ul class="sidebar-panel nav">
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance2.png" alt=""></span>{{ fund2.fundName }}
+                <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
+            </a></li>
+
+
+        </ul>
+        <ul class="sidebar-panel nav">
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance3.png" alt=""></span>{{ fund3.fundName }}
+                <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+
+            </a></li>
+
+
+        </ul>
+
+        <ul class="sidebar-panel nav">
+            <li class="sidetitle">场外交易</li>
+            <li><a href="information_money2.html"><span class="icon color5">  <i class="fa falist fa-money"></i></span>场外交易中心
+
+            </a></li>
+
+
+        </ul>
+
+        <ul class="sidebar-panel nav">
+
+
+        </ul>
+
+
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                    "symbol": "BITFINEX:BTCUSD",
+                    "width": "100%",
+                    "height": "100%",
+                    "locale": "zh_CN",
+                    "dateRange": "1y",
+                    "colorTheme": "dark",
+                    "trendLineColor": "rgba(255, 152, 0, 1)",
+                    "underLineColor": "rgba(55, 166, 239, 0.15)",
+                    "isTransparent": false,
+                    "autosize": true,
+                    "largeChartUrl": ""
+                }
+            </script>
+        </div>
+
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <table id="example" class="display" style="color:rgb(0,0,0) " width="100%"></table>
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- START CONTENT -->
+    <div class="content">
+        <div class="page-header">
+            <div class="tradingview-widget-container__widget"></div>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                    {
+                        "symbols": [
+                        {
+                            "description": "",
+                            "proName": "COINBASE:BTCUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "KRAKEN:ETHUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "BITFINEX:EOSUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "KRAKEN:XRPUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "BITFINEX:XLMUSD"
+                        }
+                    ],
+                        "locale": "zh_CN"
+                    }
+                </script>
+            </div>
+            <!-- TradingView Widget END -->
+            <!-- TradingView Widget END -->
+        </div>
+
+        <!--&lt;!&ndash; End Page Header &ndash;&gt;-->
+
+
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- START CONTAINER -->
+        <div class="container-widget" >
+
+            <!-- Start Top Stats -->
+            <div class="col-md-12" id="fundDailyPrice">
+                <ul class="topstats clearfix" >
+                    <li class="arrow"></li>
+                    <li class="col-xs-3 col-lg-3">
+                        <h1 ><i class="fa falist fa-money"></i> 钱包金额</h1>
+
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><i class="fa fa-dot-circle-o"></i> USDT</span>
+                        <h3> {{ fund.fundPrice }} USDT</h3>
+
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><i class="fa fa-shopping-cart"></i> 基金一</span>
+                        <h3 class="color-up">{{ fund.fundTotalMoney }} </h3>
+
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><i class="fa fa-clock-o"></i> 基金二</span>
+                        <h3 class="color-up">{{ fund.fundDate }}  </h3>
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><i class="fa fa-clock-o"></i> 基金三</span>
+                        <h3 class="color-up">{{ fund.fundDate }}  </h3>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Top Stats -->
+
+
+            <!-- Start First Row -->
+
+
+                <!-- Start Top Stats -->
+            <div class="col-md-12" id="buyFundFunction">
+
+                    <ul class="topstats clearfix">
+                        <div id="totalMoney">
+                            <li class="arrow"></li>
+                            <li class="col-xs-3 col-lg-6"  >
+                                <i class="fa fa-calendar-o"></i>
+                                <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney">{{maxBuy}} USDT</i> </span>
+
+                                <p></p>
+                                <div class="panel-body">
+                                    <form class="form-horizontal">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label form-label">买入金额：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" placeholder="请输入买入金额" id="buyNum">
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <button onclick="buyfunction()" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
+
+                                </div>
+
+                            </li>
+                        </div>
+                        <div id="totalFundCount">
+                            <li class="col-xs-3 col-lg-6" >
+                                <i class="fa fa-calendar-o"></i>
+                                <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{maxSell}} USDT</i> </span>
+                                <p></p>
+                                <div class="panel-body" >
+                                    <form class="form-horizontal">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label form-label">卖出数量：</label>
+                                            <div class="col-sm-6">
+                                                <input type="text"  placeholder="请输入卖出数量" id="sellNum">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                    <button onclick="sellfunction()"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
+
+                                </div>
+
+
+                            </li>
+                        </div>
+
+
+                    </ul>
+                </div>
+
+
+                <!-- End Today Activity -->
+
+            <!-- Start Top Stats -->
+
+            <div class="col-md-12" id="inmooney">
+                <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">场外经销商</div>
+
+                <ul class="topstats clearfix" >
+                    <ul class="list-group qq-list">
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <div style="clear: both"></div>
+                    </ul>
+                </ul>
+            </div>
+
+
+            <div class="row" >
+                <div class="panel panel-transparent">
+
+                    <div class="panel-title">
+                        历史交易记录
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div role="tabpanel">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs tabcolor8-bg" role="tablist">
+                                <li role="presentation" class="active"><a href="#buyhist" aria-controls="buyhist" role="tab" data-toggle="tab">今日买入历史</a></li>
+                                <li role="presentation"><a href="#sellhist" aria-controls="sellhist" role="tab" data-toggle="tab">今日卖出历史</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="buyhist">
+                                    <div class="panel-title">
+                                        今日买入待成交订单
+                                    </div>
+                                    <div class="panel-body table-responsive">
+
+                                        <table id="buytable" class="table table-hover table-striped">
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="sellhist">
+                                    <div class="panel-title">
+                                        今日卖出待成交订单
+                                    </div>
+                                    <div class="panel-body table-responsive">
+
+                                        <table id="selltable" class="table table-hover table-striped">
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- End First Row -->
+
+
+        </div>
+        <!-- End Server Status -->
+
+
+</div>
+
+</div>
+<!-- End Content -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEPANEL -->
+<div role="tabpanel" class="sidepanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#myWallet" aria-controls="myWallet" role="tab" data-toggle="tab">我的钱包</a></li>
+        <li role="presentation"><a href="#tradeRecord" aria-controls="tradeRecord" role="tab" data-toggle="tab">交易记录</a></li>
+        <li role="presentation"><a href="#charge" aria-controls="charge" role="tab" data-toggle="tab">充值提现</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <!-- Start Today -->
+        <div role="tabpanel" class="tab-pane active" id="myWallet">
+
+            <div class="sidepanel-m-title">
+                我的钱包
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+            <ul class="list-w-title">
+                <li v-for="w in wallets">
+                    <a href="javascript:void(0)">
+
+                        <span class="label label-success">{{w.type}}</span>
+                        <span class="date">{{w.money}}</span>
+                    </a>
+                </li>
+            </ul>
+            <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">客服中心</div>
+            <div class="panel-body">
+                <ul class="list-group qq-list">
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <div style="clear: both"></div>
+                </ul>
+            </div>
+
+        </div>
+        <!-- End Today -->
+
+        <!-- Start Tasks -->
+        <div role="tabpanel" class="tab-pane" id="tradeRecord">
+
+            <div class="sidepanel-m-title">
+                历史成交记录
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+
+            <ul class="list-w-title">
+                <li v-for="r in records">
+                    <a href="#">
+                        <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
+                        <span class="date">{{r.transactionDate}}</span>
+                        <h4>交易订单： # {{r.id}}</h4>
+                        <h4>{{buySaleText(r.type)}}基金：{{r.fundName}}</h4>
+                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
+                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
+                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
+                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
+
+                        <h4>成交情况：{{r.transactionStatus}}</h4>
+                    </a>
+                </li>
+
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </ul>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="charge">
+
+            <div class="sidepanel-m-title">
+                充值提现
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+
+            <ul class="list-w-title">
+                <li v-for="r in charges">
+                    <a href="#">
+                        <span class="label" v-bind:class="buySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
+                        <span class="date">{{r.exchangeDate}}</span>
+                        <h4>交易订单： # {{r.id}}</h4>
+                        <h4>{{r.exchangeType}}方式：{{r.exchangePlatform}}</h4>
+                        <h4>{{r.exchangeType}}金额：{{r.money}} USDT</h4>
+
+                        <h4>交易状态：{{r.status}}</h4>
+                    </a>
+                </li>
+
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<!-- END SIDEPANEL -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+</body>
+</html>
+<script type="text/javascript" src="finance/js/jquery.min.js"></script>
+<script src="finance/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script type="text/javascript" src="finance/js/plugins.js"></script>
+
+<!-- ================================================
+Bootstrap Select
+================================================ -->
+<script type="text/javascript" src="finance/js/bootstrap-select/bootstrap-select.js"></script>
+
+<!-- ================================================
+Bootstrap Toggle
+================================================ -->
+<script type="text/javascript" src="finance/js/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+
+<!-- ================================================
+Flot Chart
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="finance/js/flot-chart/flot-chart.js"></script>
+<!-- time.js -->
+<script type="text/javascript" src="finance/js/flot-chart/flot-chart-time.js"></script>
+<!-- stack.js -->
+<script type="text/javascript" src="finance/js/flot-chart/flot-chart-stack.js"></script>
+<!-- pie.js -->
+<script type="text/javascript" src="finance/js/flot-chart/flot-chart-pie.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="finance/js/flot-chart/flot-chart-plugin.js"></script>
+
+
+<!-- ================================================
+Easy Pie Chart
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="finance/js/easypiechart/easypiechart.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="finance/js/easypiechart/easypiechart-plugin.js"></script>
+
+<!-- ================================================
+Sparkline
+================================================ -->
+<!-- main file -->
+<script type="text/javascript" src="finance/js/sparkline/sparkline.js"></script>
+<!-- demo codes -->
+<script type="text/javascript" src="finance/js/sparkline/sparkline-plugin.js"></script>
+
+<!-- ================================================
+Rickshaw
+================================================ -->
+<!-- d3 -->
+<script src="finance/js/rickshaw/d3.v3.js"></script>
+<!-- main file -->
+<script src="finance/js/rickshaw/rickshaw.js"></script>
+<!-- demo codes -->
+<script src="finance/js/rickshaw/rickshaw-plugin.js"></script>
+
+<!-- ================================================
+Moment.js
+================================================ -->
+<script type="text/javascript" src="finance/js/moment/moment.min.js"></script>
+<script type="text/javascript" src="finance/js/echarts.js"></script>
+<script type="text/javascript" src="finance/js/infographic.js"></script>
+
+<script src="js/datatables/datatables.min.js"></script>
+
+<!-- ================================================
+Below codes are only for index widgets
+================================================ -->
+<!-- Today Sales -->
+<script>
+
+    // set up our data series with 50 random data points
+
+    var seriesData = [ [], [], [] ];
+    var random = new Rickshaw.Fixtures.RandomData(20);
+
+    for (var i = 0; i < 110; i++) {
+        random.addData(seriesData);
+    }
+
+    // instantiate our graph!
+
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("todaysales"),
+        renderer: 'bar',
+        series: [
+            {
+                color: "#33577B",
+                data: seriesData[0],
+                name: 'Photodune'
+            }, {
+                color: "#77BBFF",
+                data: seriesData[1],
+                name: 'Themeforest'
+            }, {
+                color: "#C1E0FF",
+                data: seriesData[2],
+                name: 'Codecanyon'
+            }
+        ]
+    } );
+
+    graph.render();
+
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph,
+        formatter: function(series, x, y) {
+            var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
+            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+            var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+            return content;
+        }
+    } );
+
+</script>
+
+<!-- Today Activity -->
+<script>
+    // set up our data series with 50 random data points
+
+    var seriesData = [ [], [], [] ];
+    var random = new Rickshaw.Fixtures.RandomData(20);
+
+    for (var i = 0; i < 50; i++) {
+        random.addData(seriesData);
+    }
+
+    // instantiate our graph!
+
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("todayactivity"),
+        renderer: 'area',
+        series: [
+            {
+                color: "#9A80B9",
+                data: seriesData[0],
+                name: 'London'
+            }, {
+                color: "#CDC0DC",
+                data: seriesData[1],
+                name: 'Tokyo'
+            }
+        ]
+    } );
+
+    graph.render();
+
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graph,
+        formatter: function(series, x, y) {
+            var date = '<span class="date">' + new Date(x * 1000).toUTCString() + '</span>';
+            var swatch = '<span class="detail_swatch" style="background-color: ' + series.color + '"></span>';
+            var content = swatch + series.name + ": " + parseInt(y) + '<br>' + date;
+            return content;
+        }
+    } );
+</script>
+<script src="js/fund.js"></script>
+<script src="js/common/config.js"></script>
+<script src="js/common/common.js"></script>
+<!--<script src="js/fundhist.js"></script>-->
+<script src="js/vue.min.js"></script>
+<script src="js/finance.js"></script>
+<script src="js/financeTransaction.js"></script>

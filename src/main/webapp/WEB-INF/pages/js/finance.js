@@ -55,6 +55,7 @@ var charge = new Vue({
 
 var myWallet = new Vue({
     el: '#myWallet',
+
     data: {
         wallets: []
     },
@@ -78,7 +79,32 @@ var myWallet = new Vue({
         this.ajaxData()
     }
 })
+var myWallet2 = new Vue({
+    el: '#myWallet2',
 
+    data: {
+        wallets: []
+    },
+    methods: {
+        ajaxData: function () {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/fundsDetails",
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.wallets = data.data.fundsDetails;
+                    }
+                }
+            });
+        }
+    },
+    mounted: function(){
+        this.ajaxData()
+    }
+})
 var tradeRecord = new Vue({
     el: '#tradeRecord',
     data: {
