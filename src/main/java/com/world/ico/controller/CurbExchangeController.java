@@ -70,15 +70,7 @@ public class CurbExchangeController extends BaseImpl {
 
         Integer userId=loginService.findEmailIdByEmail(email);
 
-        if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==0){
-            return getError(jsonObject, "please sell >0 money");
-        }
-        BigDecimal totalMoney=fundService.totalMoney(userId,"USDT");
-        if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
-            return getError(jsonObject, "total money not enough");
-        }
-        BigDecimal count= totalMoney.subtract(userWallet.getSellMoney());
-        fundService.sellMoney(userId,"SELL",userWallet.getSellMoney(),count);
+        fundService.buyMoney(userId,"BUY",userWallet.getSellMoney(),userWallet.getSellMoney());
         return getSuccess(jsonObject,"" );
 
 
@@ -94,19 +86,24 @@ public class CurbExchangeController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
+        Integer pageSize = 5;
+        if (page == null){
+            page = 1;
+            pageSize = 99999;
+        }
 
         Integer userId=loginService.findEmailIdByEmail(email);
-        Integer page1=5*(page-1);
-        Integer page2=5;
+        Integer page1=pageSize*(page-1);
+        Integer page2=pageSize;
 
         if (userId!=0){
 
             ArrayList<CurbExchange> transactionHist=fundService.getTransactionHist(userId,page1,page2);
             Integer fundCount=fundService.getTransactionHistoryCount(userId);
 
-            Integer totalPages=(fundCount-1)/5+1;
+            Integer totalPages=(fundCount-1)/pageSize+1;
             Integer currentPage=page;
-            Integer pageSizes=5;
+            Integer pageSizes=pageSize;
             Integer totalCount=fundCount;
 
 

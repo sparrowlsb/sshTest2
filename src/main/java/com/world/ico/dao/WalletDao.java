@@ -31,6 +31,10 @@ public interface WalletDao extends PagingAndSortingRepository<UserWalletPo, Inte
     @Query(value = "update USER_WALLET set money=money-:money,count=count-:money where user_id=:user_id and type=:type ", nativeQuery = true)
     void sellMoney(@Param("user_id") Integer user_id, @Param("type") String type,@Param("money") BigDecimal money);
 
+    @Modifying
+    @Query(value = "update USER_WALLET set money=money+:money,count=count+:money where user_id=:user_id and type=:type ", nativeQuery = true)
+    void buyMoney(@Param("user_id") Integer user_id, @Param("type") String type,@Param("money") BigDecimal money);
+
 
     @Modifying
     @Query(value = "update USER_WALLET set money=money+:money where user_id=:user_id and type=:type ", nativeQuery = true)

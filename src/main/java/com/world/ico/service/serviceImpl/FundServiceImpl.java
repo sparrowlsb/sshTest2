@@ -430,6 +430,13 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
+    public void buyMoney(Integer userId,String type ,BigDecimal money,BigDecimal count) {
+
+//        walletDao.sellMoney(userId,"USDT",money);
+        curbExchangeDao.insertExchangeHist(userId,"",type,"USDT",count,0);
+    }
+
+    @Override
     public ArrayList<CurbExchange> getTransactionHist(Integer userId,Integer page1,Integer page2) {
         ArrayList<CurbExchangePo> curbExchangePos=curbExchangeDao.getExchangeHist(userId,page1,page2);
         ArrayList<CurbExchange> curbExchanges=new ArrayList<>();

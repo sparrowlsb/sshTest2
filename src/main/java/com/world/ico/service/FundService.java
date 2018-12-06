@@ -41,6 +41,8 @@ public interface FundService {
 
     public void sellMoney(Integer userId,String type ,BigDecimal money,BigDecimal count);
 
+    public void buyMoney(Integer userId,String type ,BigDecimal money,BigDecimal count);
+
     public ArrayList<CurbExchange> getTransactionHist(Integer userId,Integer page1,Integer page2);
 
     public Integer getTransactionHistoryCount(Integer userId);

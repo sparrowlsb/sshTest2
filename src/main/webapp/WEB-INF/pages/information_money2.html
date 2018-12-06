@@ -186,21 +186,21 @@
                     </li>
                     <li class="col-xs-2 col-lg-2">
                         <span class="title"><i class="fa fa-dot-circle-o"></i> USDT</span>
-                        <h3> {{ fund.fundPrice }} USDT</h3>
+                        <h3> {{ wallets[0].money }} USDT</h3>
 
                     </li>
                     <li class="col-xs-2 col-lg-2">
                         <span class="title"><i class="fa fa-shopping-cart"></i> 基金一</span>
-                        <h3 class="color-up">{{ fund.fundTotalMoney }} </h3>
+                        <h3 class="color-up">{{ wallets[1].money }} </h3>
 
                     </li>
                     <li class="col-xs-2 col-lg-2">
                         <span class="title"><i class="fa fa-clock-o"></i> 基金二</span>
-                        <h3 class="color-up">{{ fund.fundDate }}  </h3>
+                        <h3 class="color-up">{{ wallets[2].money }}  </h3>
                     </li>
                     <li class="col-xs-2 col-lg-2">
                         <span class="title"><i class="fa fa-clock-o"></i> 基金三</span>
-                        <h3 class="color-up">{{ fund.fundDate }}  </h3>
+                        <h3 class="color-up">{{ wallets[3].money }}  </h3>
                     </li>
                 </ul>
             </div>
@@ -211,27 +211,27 @@
 
 
                 <!-- Start Top Stats -->
-            <div class="col-md-12" id="buyFundFunction">
+            <div class="col-md-12" id="buyFundFunction" style="z-index:99">
 
                     <ul class="topstats clearfix">
                         <div id="totalMoney">
                             <li class="arrow"></li>
                             <li class="col-xs-3 col-lg-6"  >
                                 <i class="fa fa-calendar-o"></i>
-                                <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney">{{maxBuy}} USDT</i> </span>
+                                <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney"></i> </span>
 
                                 <p></p>
                                 <div class="panel-body">
                                     <form class="form-horizontal">
 
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label form-label">买入金额：</label>
+                                            <label class="col-sm-3 control-label form-label">充值金额：</label>
                                             <div class="col-sm-6">
-                                                <input type="text" placeholder="请输入买入金额" id="buyNum">
+                                                <input type="number" placeholder="请输入充值金额" id="buyMoney">
                                             </div>
                                         </div>
                                     </form>
-                                    <button onclick="buyfunction()" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
+                                    <button v-on:click="buyUSDT()" class="btn btn-success"><i class="fa fa-check"></i>充值</button>
 
                                 </div>
 
@@ -240,21 +240,21 @@
                         <div id="totalFundCount">
                             <li class="col-xs-3 col-lg-6" >
                                 <i class="fa fa-calendar-o"></i>
-                                <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{maxSell}} USDT</i> </span>
+                                <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{USDT.money}} USDT</i> </span>
                                 <p></p>
                                 <div class="panel-body" >
                                     <form class="form-horizontal">
 
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label form-label">卖出数量：</label>
+                                            <label class="col-sm-3 control-label form-label">提现数量：</label>
                                             <div class="col-sm-6">
-                                                <input type="text"  placeholder="请输入卖出数量" id="sellNum">
+                                                <input type="number"  placeholder="请输入提现数量" id="sellMoney">
                                             </div>
                                         </div>
 
 
                                     </form>
-                                    <button onclick="sellfunction()"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
+                                    <button v-on:click="sellUSDT()"  class="btn btn-danger"><i class="fa fa-warning"></i>提现</button>
 
                                 </div>
 
@@ -271,7 +271,7 @@
 
             <!-- Start Top Stats -->
 
-            <div class="col-md-12" id="inmooney">
+            <div class="col-md-12" id="inmooney" style="z-index:99">
                 <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">场外经销商</div>
 
                 <ul class="topstats clearfix" >
@@ -314,17 +314,17 @@
                         <div role="tabpanel">
 
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs tabcolor8-bg" role="tablist">
-                                <li role="presentation" class="active"><a href="#buyhist" aria-controls="buyhist" role="tab" data-toggle="tab">今日买入历史</a></li>
-                                <li role="presentation"><a href="#sellhist" aria-controls="sellhist" role="tab" data-toggle="tab">今日卖出历史</a></li>
-                            </ul>
+                            <!--<ul class="nav nav-tabs tabcolor8-bg" role="tablist">-->
+                                <!--<li role="presentation" class="active"><a href="#buyhist" aria-controls="buyhist" role="tab" data-toggle="tab">今日买入历史</a></li>-->
+                                <!--<li role="presentation"><a href="#sellhist" aria-controls="sellhist" role="tab" data-toggle="tab">今日卖出历史</a></li>-->
+                            <!--</ul>-->
 
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="buyhist">
-                                    <div class="panel-title">
-                                        今日买入待成交订单
-                                    </div>
+                                    <!--<div class="panel-title">-->
+                                        <!--今日买入待成交订单-->
+                                    <!--</div>-->
                                     <div class="panel-body table-responsive">
 
                                         <table id="buytable" class="table table-hover table-striped">
