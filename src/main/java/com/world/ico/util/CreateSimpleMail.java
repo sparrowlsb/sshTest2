@@ -26,7 +26,7 @@ public class CreateSimpleMail {
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
-        props.setProperty("mail.host", "smtp.qq.com");
+        props.setProperty("mail.host", "smtp.mxhichina.com");
         // 发送邮件协议名称
         props.setProperty("mail.transport.protocol", "smtp");
 
@@ -41,13 +41,13 @@ public class CreateSimpleMail {
         Message msg = new MimeMessage(session);
         msg.setSubject("众庄交易大师平台 验证码");
         StringBuilder builder = new StringBuilder();
-        builder.append(verifyCode);
+        builder.append("注册验证码是："+verifyCode);
         builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
-        msg.setFrom(new InternetAddress("2763021115@qq.com"));//**发送人的邮箱地址**
+        msg.setFrom(new InternetAddress("noreply@zhongzhuang.fund"));//**发送人的邮箱地址**
 
         Transport transport = session.getTransport();
-        transport.connect("smtp.qq.com","2763021115@qq.com","wzlajezdbzdxdgfd");
+        transport.connect("smtp.mxhichina.com","noreply@zhongzhuang.fund","superman.123");
 
         List<String> list=new ArrayList<>();
         //实现群发，下面的方法也是可以实现群发，但是不太理想
@@ -55,5 +55,8 @@ public class CreateSimpleMail {
 
         transport.close();
 
+    }
+    public static void main(String[] args) throws Exception {
+        mail("123","a1158362548@qq.com");
     }
 }
