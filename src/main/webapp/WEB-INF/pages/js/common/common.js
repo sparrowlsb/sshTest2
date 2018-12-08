@@ -31,7 +31,7 @@ if (!email || email == null){
 
 
 }else {
-    $("#header .nav").append("<li class='user-head'><a hidden href=\"information_user.html\" ><img href=\"blog.html\" src=\"images/home/heard.png\">&nbsp;&nbsp;&nbsp;&nbsp;"+email+"</a></li>");
+    $("#header .nav").append("<li class='user-head'><a hidden href=\"finance.html\" ><img href=\"blog.html\" src=\"images/home/heard.png\">&nbsp;&nbsp;&nbsp;&nbsp;"+email+"</a></li>");
     $("#inMoney").append("<a  href=\"information_money.html\" class=\"btn btn-primary\">马上充值</a>");
     $("#login").append("<a href=\"information_money.html\"><img width=\"40\" height=\"40\" src=\"images/home/heard.png\"> &nbsp;&nbsp;&nbsp;&nbsp; <font color=\"#fffffff\">"+email+"</font> </a>");
     $("#login2").append("	<h4><a >欢迎回来！</a> <font color=\"#fffffff\">"+email+"</font> </a></h4>");

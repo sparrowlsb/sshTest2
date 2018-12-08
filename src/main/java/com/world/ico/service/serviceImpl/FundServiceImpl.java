@@ -387,7 +387,7 @@ public class FundServiceImpl implements FundService {
         for (UserWalletPo userWalletPo:userWalletPos) {
             UserWallet userWallet = new UserWallet();
 
-            if (userWalletPo.getType().equalsIgnoreCase("FUND_1")) {
+            if (userWalletPo.getType().equalsIgnoreCase("FUND:1")) {
                 FundPo fundInfo = fundDao.getFundInfo(1);
                 if (fundInfo!=null) {
                     userWallet.setType(fundInfo.getFundName());
