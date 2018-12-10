@@ -194,7 +194,7 @@ public class FundServiceImpl implements FundService {
             fundPrice.setFundPrice(fundPricePo.getTodayPrice());
             fundPrice.setFundTotalMoney(fundPricePo.getTotalMoney());
             fundPrice.setFundInMoney(fundPricePo.getTodayInmoney());
-            fundPrice.setFundOutMoney(fundPricePo.getTodayInmoney());
+            fundPrice.setFundOutMoney(fundPricePo.getTodayOutmoney());
             fundPrice.setFundDate(fundPricePo.getDate());
             fundPriceArrayList.add(fundPrice);
             FundPo fundPo=fundDao.getFundInfo(fundPrice.getFundId());

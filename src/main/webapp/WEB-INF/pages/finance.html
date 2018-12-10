@@ -176,7 +176,7 @@
   <!-- START CONTAINER -->
   <div class="container-widget">
 
-
+    <!-- Start Top Stats -->
     <div class="col-md-12" id="fundDailyPrice">
       <ul class="topstats clearfix" >
         <li class="arrow"></li>
@@ -205,24 +205,26 @@
         </li>
       </ul>
     </div>
+    <!-- End Top Stats -->
 
 
+    <!-- Start First Row -->
+    <div class="row">
+
+      <!-- Start Chart Daily -->
       <div class="col-md-12 col-lg-12">
-        <div class=" panel-widget widget chart-with-stats clearfix" style="height:700px;">
+        <div class=" panel-widget widget chart-with-stats clearfix" style="height:800px;">
 
-          <div class="col-sm-12" align="center" style="height:700px;">
+          <div class="col-sm-12" align="center" style="height:800px;">
             <h4 class="title">行情<small>每天18：30更新</small></h4>
             <!--<div class="top-label"><h2>1.28</h2><h4>Today Total</h4></div>-->
             <!--<div class="bigchart" id="todaysales"></div>-->
             <p></p>
             <p></p>
-            <div class="bigchart" id="container"></div>
+            <div class="bigchart" id="kline"></div>
           </div>
-          <div class="right" style="height:450px;"  id="daliyprice">
-            <div class="top-label"><h2>{{ fund.fundPrice }}usdt</h2><h4>最近更新价格</h4></div>
+          <div class="top-label"><h2>{{ fund.fundPrice }}usdt</h2><h4>最近更新价格</h4></div>
 
-          <!-- end stats -->
-          </div>
 
 
         </div>
@@ -284,6 +286,8 @@
       </div>
 
 
+      <!-- End Today Activity -->
+    </div>
     <!-- Start Top Stats -->
 
     <div class="row" v-show="email">
@@ -563,14 +567,6 @@
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <!-- Start Footer -->
-<div class="row footer">
-  <div class="col-md-6 text-left">
-    Copyright © 2015 <a href="#" target="_blank">jq22</a> All rights reserved.
-  </div>
-  <div class="col-md-6 text-right">
-    Design and Developed by <a href="#" target="_blank">jq22</a>
-  </div>
-</div>
 <!-- End Footer -->
 
 
