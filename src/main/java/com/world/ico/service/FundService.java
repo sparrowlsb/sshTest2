@@ -27,6 +27,8 @@ public interface FundService {
 
     public ArrayList<FundTransaction> getFundHistory(Integer userId,Integer page1,Integer page2);
 
+    public ArrayList<FundTransaction> getSuccessFundHistory(Integer userId,Integer fundId);
+
     public Integer getFundHistoryCount(Integer userId);
 
     public ArrayList<FundTransaction> getDailySellFundTransaction(Integer userId);

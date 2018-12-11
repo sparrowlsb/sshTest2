@@ -318,6 +318,33 @@ public class FundController extends BaseImpl {
 
 
     }
+    @RequestMapping(value = "getSuccessHistory", produces = "application/json;charset=utf-8", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getSuccessHistory(Integer fundId,HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        String email = (String) session.getAttribute("email");
+        if (email==null){
+            return getError(jsonObject,"please login first");
 
+        }
+        Integer userId=loginService.findEmailIdByEmail(email);
+
+        ArrayList<FundTransaction> fundHists=fundService.getSuccessFundHistory(userId,fundId);
+
+        String data[][]=new String[fundHists.size()][3];
+        int j=0;
+        for (FundTransaction fundTransaction:fundHists){
+            data[j][0]=fundTransaction.getType();
+            data[j][1]=fundTransaction.getTransactionDate();
+            data[j][2]=String.valueOf(fundTransaction.getFundPrice());
+
+
+            j++;
+
+           }
+        return getDataSuccess(data, "");
+
+
+    }
 
 }

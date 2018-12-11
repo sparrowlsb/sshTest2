@@ -30,6 +30,8 @@ public class FundTransaction {
 
     String transactionDate;
 
+    String date;
+
     public String getFundName() {
         return fundName;
     }

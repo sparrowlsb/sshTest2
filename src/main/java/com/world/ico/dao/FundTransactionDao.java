@@ -17,8 +17,11 @@ public interface FundTransactionDao  extends PagingAndSortingRepository<FundTran
     @Query(value = "INSERT INTO FUND_TRANSACTION (user_id,type,money,status,trader_money,fund_id,fund_price,fund_count,management_fee,management_cost) values (:userId,:type,:traderMoney-:managementCost,:status,:traderMoney,:fundId,:fundPrice,:fundCount,:managementFee,:managementCost)", nativeQuery = true)
     void insertFundTransaction(@Param("userId") Integer userId, @Param("type") String type, @Param("status") Integer status, @Param("traderMoney") BigDecimal traderMoney, @Param("fundId") Integer fundId, @Param("fundPrice") BigDecimal fundPrice, @Param("fundCount") BigDecimal fundCount, @Param("managementFee") BigDecimal managementFee, @Param("managementCost") BigDecimal managementCost);
 
-    @Query(value = "SELECT id,fund_price,trader_money,management_fee,user_id,type,status,money,fund_count,fund_id,management_cost,transaction_date  from FUND_TRANSACTION where user_id=:userId order by  transaction_date desc limit :page1,:page2", nativeQuery = true)
+   @Query(value = "SELECT id,fund_price,trader_money,management_fee,user_id,type,status,money,fund_count,fund_id,management_cost,transaction_date  from FUND_TRANSACTION where user_id=:userId order by  transaction_date desc limit :page1,:page2", nativeQuery = true)
     ArrayList<FundTransactionPo> findHistFundTransaction(@Param("userId") Integer userId,@Param("page1") Integer page1,@Param("page2") Integer page2);
+
+    @Query(value = "SELECT id,fund_price,trader_money,management_fee,user_id,type,status,money,fund_count,fund_id,management_cost,transaction_date  from FUND_TRANSACTION where user_id=:userId and status=1 and fund_id=:fundId group by DATE_FORMAT(transaction_date,'%Y-%m-%d'),status order by  transaction_date desc", nativeQuery = true)
+    ArrayList<FundTransactionPo> findSuccessHistFundTransaction(@Param("userId") Integer userId,@Param("fundId") Integer fundId);
 
     @Query(value = "SELECT count(*)  from FUND_TRANSACTION where user_id=:userId order by  transaction_date desc", nativeQuery = true)
     Integer findHistFundTransactionCount(@Param("userId") Integer userId);

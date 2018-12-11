@@ -39,10 +39,10 @@ public class CreateSimpleMail {
         Session session = Session.getInstance(props);
 
         Message msg = new MimeMessage(session);
-        msg.setSubject("众庄交易大师平台 验证码");
+        msg.setSubject("众庄平台 验证码");
         StringBuilder builder = new StringBuilder();
         builder.append("注册验证码是："+verifyCode);
-        builder.append("\n时间 " + new Date());
+//        builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
         msg.setFrom(new InternetAddress("noreply@zhongzhuang.fund"));//**发送人的邮箱地址**
 

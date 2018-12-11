@@ -292,6 +292,25 @@ public class FundServiceImpl implements FundService {
     }
 
     @Override
+    public ArrayList<FundTransaction> getSuccessFundHistory(Integer userId,Integer fundId) {
+        ArrayList<FundTransactionPo> fundTransactionPos=fundTransactionDao.findSuccessHistFundTransaction(userId,fundId);
+        ArrayList<FundTransaction>fundTransactions=new ArrayList<>();
+        for (FundTransactionPo f :fundTransactionPos){
+            FundTransaction fundTransaction=new FundTransaction();
+            fundTransaction.setType(f.getType());
+            fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()).split(" ")[0]);
+            fundTransaction.setFundPrice(f.getFundPrice());
+
+
+
+            fundTransactions.add(fundTransaction);
+
+        }
+
+        return fundTransactions;
+    }
+
+    @Override
     public Integer getFundHistoryCount(Integer userId) {
         Integer fundTransactionCount=fundTransactionDao.findHistFundTransactionCount(userId);
 
@@ -387,7 +406,7 @@ public class FundServiceImpl implements FundService {
         for (UserWalletPo userWalletPo:userWalletPos) {
             UserWallet userWallet = new UserWallet();
 
-            if (userWalletPo.getType().equalsIgnoreCase("FUND:1")) {
+            if (userWalletPo.getType().equalsIgnoreCase("FUND_1")) {
                 FundPo fundInfo = fundDao.getFundInfo(1);
                 if (fundInfo!=null) {
                     userWallet.setType(fundInfo.getFundName());
