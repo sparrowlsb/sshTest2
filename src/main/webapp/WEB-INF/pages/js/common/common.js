@@ -19,7 +19,7 @@ function getCookie(name){
     return null;        //找不到就返回空字符串
 }
 function removeCookie(name){
-    setCookie(name,1,-1);    //-1表示昨天过期,系统自动删除
+    setCookie(name,null,-1);    //-1表示昨天过期,系统自动删除
 }
 
 //导航栏 用户是否存在
