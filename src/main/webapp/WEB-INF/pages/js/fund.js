@@ -39,8 +39,8 @@ $.when(ajax6).done(function (){
             var myLineChart = echarts.init(dom);
             var app = {};
             line = null;
-            var upColor = 'rgb(37,166,91)';
-            var downColor = 'rgb(199,62,49)';
+            var upColor = 'rgb(199,62,49)';
+            var downColor = 'rgb(37,166,91)';
 
 
             function splitData(rawData) {

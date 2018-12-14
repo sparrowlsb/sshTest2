@@ -33,7 +33,7 @@ function sendSMS() {
         data: JSON.stringify({address: mail}),
         success: function (data) {
             // if(data=="success"){
-                alert("发送成功！请登陆邮箱查看验证码！");
+                alert("发送成功！请登录邮箱查看验证码！");
             // }else if(data=="error"){
             //     alert("发送失败！");
             // }
@@ -166,7 +166,7 @@ function registerUser() {
                     alert("注册成功！");
                     //set cookie
                     setCookie('email',email,1);
-                    window.location.href="/pages/index.html";
+                    window.location.href="/pages/index_cn.html";
                 }else if(data.result==0){
                     alert(data.message);
                     verifyClick()
@@ -213,7 +213,7 @@ function forgetpassword() {
             data: JSON.stringify({"user": user, "password": password}),
             success: function (data, textStatus) {
                 if(data=="success"){
-                    window.location.href="/index";
+                    window.location.href="/index_cn";
 
                 }else if(data=="error"){
                     alert("账户密码错误！");
@@ -369,7 +369,7 @@ function sendSMS1() {
         data: JSON.stringify({address: email}),
         success: function (data) {
             // if(data=="success"){
-            alert("发送成功！请登陆邮箱查看验证码！");
+            alert("发送成功！请登录邮箱查看验证码！");
             // }else if(data=="error"){
             //     alert("发送失败！");
             // }
