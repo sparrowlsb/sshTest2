@@ -57,10 +57,6 @@ public class LoginServiceImpl implements LoginService{
 
     }
 
-    @Override
-    public void addUserInfo(Integer userId) {
-        loginDao.insertUserInfoByUserId(userId);
-    }
 
     @Override
     public void addUserWallet(Integer userId) {

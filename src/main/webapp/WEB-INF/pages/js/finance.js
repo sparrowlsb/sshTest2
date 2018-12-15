@@ -35,7 +35,6 @@ var charge = new Vue({
                 contentType: "application/json;charset=utf-8",
                 url: "/curb/getHist?page="+page,
                 success: function (data, textStatus) {
-                    console.log(data.data)
                     if (data.result == 1) {
 
                         self.charges = data.data.transactionHist;
@@ -71,7 +70,6 @@ var myWallet = new Vue({
                     if (data.result == 1) {
                         self.wallets = data.data.fundsDetails;
                     }
-                    console.log(self.wallets)
                 }
             });
         }
@@ -142,7 +140,7 @@ var tradeRecord = new Vue({
 var main = new Vue({
     el: '#main',
     data: {
-        fundId: 1,
+        fundId: document.getElementById('fundId').innerHTML,
         fund: {},
         fund2: {},
         fund3: {},
@@ -154,7 +152,7 @@ var main = new Vue({
         pageSize:0,
         totalCount:0,
         totalPages:0,
-        wallets:[{type:"请先登录",money:""},{type:"请先登录",money:""},{type:"请先登录",money:""},{type:"请先登录",money:""}],
+        wallets:[{type:"请先登录",money:""},{type:"",money:""},{type:"",money:""},{type:"",money:""}],
         USDT:{type:"usdt",money:"0"},
     },
     methods: {
@@ -167,9 +165,11 @@ var main = new Vue({
                 url: "/fund/fundDailyPrice",
                 success: function (data, textStatus) {
                     if (data.result == 1){
-                        self.fund = data.data.fund1
-                        self.fund2 = data.data.fund2
-                        self.fund3 = data.data.fund3
+                        if (data.data!=null) {
+                            self.fund = data.data.fund1
+                            self.fund2 = data.data.fund2
+                            self.fund3 = data.data.fund3
+                        }
                     }
                 }
             });
@@ -210,7 +210,6 @@ var main = new Vue({
                 contentType: "application/json;charset=utf-8",
                 url: "/curb/getHist",
                 success: function (data, textStatus) {
-                    console.log(data.data)
                     if (data.result == 1) {
                         self.charges = data.data.transactionHist;
                     }
@@ -287,7 +286,6 @@ var main = new Vue({
                 success: function (data, textStatus) {
                     if (data.result == 1) {
                         self.wallets = data.data.fundsDetails;
-                        console.log(self.wallets)
                         self.USDT = data.data.fundsDetails[0];
 
                     }
@@ -367,7 +365,6 @@ $.ajax({
                 var table = $('#buytable').DataTable();
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
-                console.log("id"+id);
 
 
 
@@ -404,7 +401,6 @@ $.ajax({
 
     success: function (data, textStatus) {
         sellDataSet=data.data;
-        console.log(111+data.data);
         $('#selltable').DataTable( {
             'order' : [6,'desc'],
             data: sellDataSet,
@@ -460,8 +456,6 @@ $.ajax({
                 var table = $('#selltable').DataTable();
                 table.row($(this).parents('tr')).remove().draw();
                 var id = $('td', $(this).parents('tr')).eq(0).text();
-                console.log("id"+id);
-
 
 
                 $.ajax({

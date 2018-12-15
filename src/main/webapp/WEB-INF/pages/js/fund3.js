@@ -4,7 +4,7 @@ ajax6 = $.ajax({
     type: 'GET',
     dataType: "json",
     contentType: "application/json;charset=utf-8",
-    url: "/fund/getSuccessHistory?fundId=1",
+    url: "/fund/getSuccessHistory?fundId=3",
     success: function (data, textStatus) {
         var TransData=data.data;
 
@@ -29,7 +29,7 @@ $.when(ajax6).done(function (){
         type: 'GET',
         dataType: "json",
         contentType: "application/json;charset=utf-8",
-        url: "/fund/fundInfo?fundId=1",
+        url: "/fund/fundInfo?fundId=3",
 
         success: function (data, textStatus) {
 

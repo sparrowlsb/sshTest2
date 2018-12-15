@@ -11,6 +11,24 @@ public class User {
     String email;
     String verCode;
     String verEmailCode;
+    String usdtAddress;
+    String personCode;
+
+    public String getUsdtAddress() {
+        return usdtAddress;
+    }
+
+    public void setUsdtAddress(String usdtAddress) {
+        this.usdtAddress = usdtAddress;
+    }
+
+    public String getPersonCode() {
+        return personCode;
+    }
+
+    public void setPersonCode(String personCode) {
+        this.personCode = personCode;
+    }
 
     public String getEmail() {
         return email;

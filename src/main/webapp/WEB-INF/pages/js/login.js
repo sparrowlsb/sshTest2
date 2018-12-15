@@ -90,7 +90,13 @@ function  loginUser() {
                     setCookie('email',email,1);
                     window.location.href="/pages/index_cn.html";
                 }else if(data.result==0){
-                    alert("登录失败：账户密码错误！");
+                    if(data.message=="the vercode not get") {
+                        alert("请输入验证码！");
+                    }else if(data.message=="the vercode not right"){
+                        alert("验证码不正确！");
+                    }else if(data.message=="error"){
+                        alert("账号密码错误！");
+                    }
                     verifyClick()
                 }
             },

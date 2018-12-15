@@ -6,6 +6,7 @@ import com.world.ico.dto.UserWallet;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
 import com.world.ico.service.serviceImpl.BaseImpl;
+import com.world.ico.util.CreateSimpleMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,8 +51,17 @@ public class CurbExchangeController extends BaseImpl {
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
-        BigDecimal count= userWallet.getSellMoney();
-        fundService.sellMoney(userId,"SELL",userWallet.getSellMoney(),count);
+        synchronized (this) {
+            BigDecimal count = userWallet.getSellMoney();
+            fundService.sellMoney(userId, "SELL", userWallet.getSellMoney(), count);
+            try {
+                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"1158362548@qq.com");
+                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),email);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return getSuccess(jsonObject,"" );
 
 
@@ -67,10 +77,18 @@ public class CurbExchangeController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
+        synchronized (this) {
 
-        Integer userId=loginService.findEmailIdByEmail(email);
+            Integer userId=loginService.findEmailIdByEmail(email);
+            fundService.buyMoney(userId, "BUY", userWallet.getSellMoney(), userWallet.getSellMoney());
+            try {
+                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"1158362548@qq.com");
+                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),email);
 
-        fundService.buyMoney(userId,"BUY",userWallet.getSellMoney(),userWallet.getSellMoney());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return getSuccess(jsonObject,"" );
 
 

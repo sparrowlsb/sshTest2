@@ -1,7 +1,7 @@
 /**
  * Created by lsb on 2018/11/1.
  */
-function buyfunction() {
+function buyfunction(fundId) {
     if (confirm("确定要购买该基金？")) {
         var buyNum = $("#buyNum").val();
         if (buyNum != "" && buyNum > 0) {
@@ -12,10 +12,11 @@ function buyfunction() {
                 contentType: "application/json;charset=utf-8",
                 url: url,
 
-                data: JSON.stringify({"traderMoney": buyNum, "fundId": 1}),
+                data: JSON.stringify({"traderMoney": buyNum, "fundId": fundId}),
                 success: function (data, textStatus) {
                     if (data.result == 1) {
                         alert('交易成功');
+                        window.location.reload()
                     }else {
                         alert('交易失败');
                     }
@@ -33,7 +34,7 @@ function buyfunction() {
         }
     }
 }
-function sellfunction() {
+function sellfunction(fundId) {
     if (confirm("确定要卖出该基金？")) {
         var sellNum = $("#sellNum").val();
         if (sellNum != "" && sellNum > 0) {
@@ -44,10 +45,11 @@ function sellfunction() {
                 contentType: "application/json;charset=utf-8",
                 url: url,
 
-                data: JSON.stringify({"fundCount": sellNum, "fundId": 1}),
+                data: JSON.stringify({"fundCount": sellNum, "fundId": fundId}),
                 success: function (data, textStatus) {
                     if (data.result == 1) {
                         alert('交易成功');
+                        window.location.reload()
                     }else {
                         alert('交易失败');
                     }

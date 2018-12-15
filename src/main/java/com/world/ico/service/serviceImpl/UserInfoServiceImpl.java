@@ -16,23 +16,6 @@ public class UserInfoServiceImpl implements UserInfoService{
     @Autowired
     public UserInfoDao userInfoDao;
 
-    @Override
-    public int updateBankInfo(String bankName, String bankId,Integer userId) {
-        userInfoDao.updateBankInfo(bankName,bankId,userId);
-        return 1;
-    }
-
-    @Override
-    public int updateWechatInfo(String wechatName, String wechatId,Integer userId) {
-        userInfoDao.updateWechatInfo(wechatName,wechatId,userId);
-        return 1;
-    }
-
-    @Override
-    public int updateAlipayInfo(String alipayName, String alipayID,Integer userId) {
-        userInfoDao.updateAlipayInfo(alipayName,alipayID,userId);
-        return 1;
-    }
 
     @Override
     public String getPersonCode(String email) {

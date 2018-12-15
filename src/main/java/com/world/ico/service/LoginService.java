@@ -12,8 +12,6 @@ public interface LoginService {
 
     public void addUser(String eamil,String password);
 
-    public void addUserInfo(Integer userId);
-
     public void addUserWallet(Integer userId);
 
 //    public void addUserLog(String eamil, String  user,String password);

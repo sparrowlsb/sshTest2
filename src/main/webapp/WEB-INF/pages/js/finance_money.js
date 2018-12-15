@@ -57,33 +57,7 @@ var myWallet = new Vue({
     el: '#myWallet',
 
     data: {
-        wallets: []
-    },
-    methods: {
-        ajaxData: function () {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/fund/fundsDetails",
-                success: function (data, textStatus) {
-                    if (data.result == 1) {
-                        self.wallets = data.data.fundsDetails;
-                    }
-                }
-            });
-        }
-    },
-    mounted: function(){
-        this.ajaxData()
-    }
-})
-var myWallet2 = new Vue({
-    el: '#myWallet2',
-
-    data: {
-        wallets: []
+        wallets:[{type:"请先登录",money:"0"},{type:"请先登录",money:"0"},{type:"请先登录",money:"0"},{type:"请先登录",money:"0"}],
     },
     methods: {
         ajaxData: function () {
@@ -182,22 +156,7 @@ var main = new Vue({
         USDT:{type:"usdt",money:"0"},
     },
     methods: {
-        getDailyPrice: function (fundId) {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/fund/fundDailyPrice",
-                success: function (data, textStatus) {
-                    if (data.result == 1){
-                        self.fund = data.data.fund1
-                        self.fund2 = data.data.fund2
-                        self.fund3 = data.data.fund3
-                    }
-                }
-            });
-        },
+
         getMaxBuy: function (fundId) {
             var self = this;
             $.ajax({
@@ -255,7 +214,7 @@ var main = new Vue({
                 data: JSON.stringify({"sellMoney": money}),
 
                 error: function (request) {  //失败的话
-                    alert("Connection error");
+                    alert("请先注册登录账户！");
                     sellUSDT
                 },
                 success: function (data) {  //成功
@@ -285,7 +244,7 @@ var main = new Vue({
                 data: JSON.stringify({"sellMoney": money}),
 
                 error: function (request) {  //失败的话
-                    alert("Connection error");
+                    alert("请先注册登录账户！");
                     sellUSDT
                 },
                 success: function (data) {  //成功
@@ -311,7 +270,7 @@ var main = new Vue({
                 success: function (data, textStatus) {
                     if (data.result == 1) {
                         self.wallets = data.data.fundsDetails;
-                        console.log(self.wallets)
+
                         self.USDT = data.data.fundsDetails[0];
 
                     }

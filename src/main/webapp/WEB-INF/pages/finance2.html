@@ -21,7 +21,7 @@
 <!-- End Page Loading -->
 <!-- START TOP -->
 <!-- 顶栏+左侧菜单+主内容 -->
-<p hidden id="fundId">1</p>
+<p hidden id="fundId">2</p>
 <div id="main">
 <div id="top" class="clearfix">
 
@@ -182,27 +182,27 @@
       <ul class="topstats clearfix" >
         <li class="arrow"></li>
         <li class="col-xs-3 col-lg-3">
-          <h1 ><img height="60" width="60" src="images/home/finance1.png" alt=""> {{ fund.fundName }}</h1>
+          <h1 ><img height="60" width="60" src="images/home/finance2.png" alt=""> {{ fund2.fundName }}</h1>
 
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-dot-circle-o"></i> 单位净值</span>
-          <h3> {{ fund.fundPrice }} USDT</h3>
-          <span class="diff" v-show="fund.fundQuoteChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteChange }}% </b> 昨日</span>
-          <span class="diff" v-show="fund.fundQuoteChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteChange }}% </b> 昨日</span>
+          <h3> {{ fund2.fundPrice }} USDT</h3>
+          <span class="diff" v-show="fund2.fundQuoteChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund2.fundQuoteChange }}% </b> 昨日</span>
+          <span class="diff" v-show="fund2.fundQuoteChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund2.fundQuoteChange }}% </b> 昨日</span>
 
-          <span class="diff" v-show="fund.fundQuoteHistChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund.fundQuoteHistChange }}% </b> 历史</span>
-          <span class="diff" v-show="fund.fundQuoteHistChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund.fundQuoteHistChange }}% </b> 历史</span>
+          <span class="diff" v-show="fund2.fundQuoteHistChange >= 0"><b class="color-up"><i class="fa fa-caret-up"></i> {{ fund2.fundQuoteHistChange }}% </b> 历史</span>
+          <span class="diff" v-show="fund2.fundQuoteHistChange < 0"><b class="color-down"><i class="fa fa-caret-down"></i> {{ fund2.fundQuoteHistChange }}% </b> 历史</span>
 
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-shopping-cart"></i> 当日成交量</span>
-          <h3 class="color-up">{{ fund.fundTotalMoney }} </h3>
+          <h3 class="color-up">{{ fund2.fundTotalMoney }} </h3>
 
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-clock-o"></i> 最近更新时间</span>
-          <h3 class="color-up">{{ fund.fundDate }}  18:30</h3>
+          <h3 class="color-up">{{ fund2.fundDate }}  18:30</h3>
         </li>
       </ul>
     </div>
@@ -251,7 +251,7 @@
                   </div>
                 </div>
               </form>
-              <button onclick="buyfunction(1)" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
+              <button onclick="buyfunction(2)" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
 
             </div>
 
@@ -274,7 +274,7 @@
 
 
               </form>
-              <button onclick="sellfunction(1)"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
+              <button onclick="sellfunction(2)"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
 
             </div>
 
@@ -654,7 +654,7 @@ Plugin.js - Some Specific JS codes for Plugin Settings
 ================================================ -->
 <script type="text/javascript" src="finance/js/plugins.js"></script>
 
-<script src="js/fund.js"></script>
+<script src="js/fund2.js"></script>
 <script src="js/common/config.js"></script>
 <script src="js/common/common.js"></script>
 <!--<script src="js/fundhist.js"></script>-->

@@ -1,392 +1,549 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+    <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
     <title>ZhongZhuang | Fund</title>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link href="css/user-info.css" rel="stylesheet">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link href="css/lightbox.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-</head><!--/head-->
-
+    <link href="finance/css/root.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/gm.css">
+    <link rel="stylesheet" type="text/css" href="css/finance.css">
+    <script type="text/javascript" src="js/gm.js"></script>
+</head>
 <body>
-<header id="header">
-    <div class="navbar navbar-inverse" role="banner">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
 
-                <a class="navbar-brand" href="index.html">
-                    <h1><img height="80" width="200" src="images/logo.png" alt="logo"></h1>
-                </a>
+<!-- Start Page Loading -->
+<div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
+<!-- End Page Loading -->
+<!-- START TOP -->
+<!-- 顶栏+左侧菜单+主内容 -->
+<div id="main">
+    <div id="top" class="clearfix">
 
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="index_cn.html">主页</a></li>
-                    <li class="dropdown"><a href="finance.html">基金项目</a>
+        <!-- Start App Logo -->
+        <div class="applogo">
+            <a class="logo" href="index_cn.html">
+                <img style="margin-top: 5px;height: 50px;" src="images/home/logo2.png" ></h1>
+            </a>
+        </div>
+        <!-- End App Logo -->
 
-                    </li>
-                    <li class="dropdown"><a href="about_info.html">关于我们 <i class="fa fa-angle-down"></i></a>
-                        <ul role="menu" class="sub-menu">
-                            <li><a href="about_info.html">关于众庄</a></li>
-                            <li><a href="about_finance.html">数字资产组合</a></li>
-                            <li><a href="about_service.html">服务条款</a></li>
-                            <li><a href="about_duty.html">免责声明</a></li>
-                            <li><a href="about_investor.html">投资者通知</a></li>
-                        </ul>
-                    </li>
+        <!-- Start Sidebar Show Hide Button -->
+        <a href="#" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+        <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+        <!-- End Sidebar Show Hide Button -->
 
+
+
+        <!-- Start Sidepanel Show-Hide Button -->
+        <a href="#sidepanel" class="sidepanel-open-button"><i class="fa fa-outdent"></i></a>
+        <!-- End Sidepanel Show-Hide Button -->
+
+        <!-- Start Top Right -->
+        <ul class="top-right">
+
+
+            <li class="dropdown link">
+                <a href="/pages/login.html" v-show="!email">登录/注册</a> <a v-show="email" href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>{{email}}</b><span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right" style="z-index: 999999;">
+                    <li role="presentation" class="dropdown-header">Profile</li>
+                    <li><a href="index.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
+                    <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
+                    <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
                 </ul>
+            </li>
 
-            </div>
+        </ul>
+        <!-- End Top Right -->
 
-
-
-        </div>
     </div>
-</header>
-<!--/#header-->
+    <!-- END TOP -->
+    <div class="sidebar clearfix">
 
-<section id="page-breadcrumb">
-    <div class="vertical-center sun">
-        <div class="container">
-            <div class="row">
-                <div class="action">
-                    <div class="col-sm-12">
-                        <h1 class="title">个人资料</h1>
-                        <p>配置</p>
-                    </div>
-                </div>
-            </div>
+        <ul class="sidebar-panel nav">
+            <li class="sidetitle">基金信息</li>
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance1.png" alt=""></span>{{ fund.fundName }}
+                <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
+            </a></li>
+
+
+        </ul>
+        <ul class="sidebar-panel nav">
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance2.png" alt=""></span>{{ fund2.fundName }}
+                <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
+            </a></li>
+
+
+        </ul>
+        <ul class="sidebar-panel nav">
+            <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance3.png" alt=""></span>{{ fund3.fundName }}
+                <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
+                <span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+
+            </a></li>
+
+
+        </ul>
+
+        <ul class="sidebar-panel nav">
+            <li class="sidetitle">场外交易</li>
+            <li><a href="information_money.html"><span class="icon color5">  <i class="fa falist fa-money"></i></span>场外交易中心
+
+            </a></li>
+
+
+        </ul>
+
+        <ul class="sidebar-panel nav">
+
+
+        </ul>
+
+
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                    "symbol": "BITFINEX:BTCUSD",
+                    "width": "100%",
+                    "height": "100%",
+                    "locale": "zh_CN",
+                    "dateRange": "1y",
+                    "colorTheme": "dark",
+                    "trendLineColor": "rgba(255, 152, 0, 1)",
+                    "underLineColor": "rgba(55, 166, 239, 0.15)",
+                    "isTransparent": false,
+                    "autosize": true,
+                    "largeChartUrl": ""
+                }
+            </script>
         </div>
+
     </div>
-</section>
-<!--/#action-->
-
-<section id="blog" class="padding-top" >
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-5">
-                <div class="sidebar blog-sidebar">
-
-                    <div class="sidebar-item categories">
-                        <h3>信息设置</h3>
-                        <ul class="nav navbar-stacked">
-                            <li class="active"><a href="#">钱包<span class="pull-right"></span></a></li>
-                            <li><a href="./information_user.html">账号设置<span class="pull-right"></span></a></li>
-                            <li><a href="./information_changepass.html">修改密码<span class="pull-right"></span></a></li>
-                            <li><a href="javascript:void(0)" onclick="exit()">退出登录<span class="pull-right"></span></a></li>
-                        </ul>
-                    </div>
-
-                </div>
+    <!-- END SIDEBAR -->
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <table id="example" class="display" style="color:rgb(0,0,0) " width="100%"></table>
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- START CONTENT -->
+    <div class="content">
+        <div class="page-header">
+            <div class="tradingview-widget-container__widget"></div>
+            <!-- TradingView Widget BEGIN -->
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                    {
+                        "symbols": [
+                        {
+                            "description": "",
+                            "proName": "COINBASE:BTCUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "KRAKEN:ETHUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "BITFINEX:EOSUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "KRAKEN:XRPUSD"
+                        },
+                        {
+                            "description": "",
+                            "proName": "BITFINEX:XLMUSD"
+                        }
+                    ],
+                        "locale": "zh_CN"
+                    }
+                </script>
             </div>
+            <!-- TradingView Widget END -->
+            <!-- TradingView Widget END -->
+        </div>
 
-            <div class="col-md-9 col-sm-9" id="money-record">
-                    <div class="col-md-12 col-sm-12">
+        <!--&lt;!&ndash; End Page Header &ndash;&gt;-->
 
-                        <div class="col-md-12">
-                            <ul style="padding: 0">
 
-                                <h2 >钱包金额：</h2>
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- START CONTAINER -->
+        <div class="container-widget" >
 
-                            </ul>
+            <!-- Start Top Stats -->
+            <div class="col-md-12" id="fundDailyPrice">
+                <ul class="topstats clearfix" >
+                    <li class="arrow"></li>
+                    <li class="col-xs-3 col-lg-3">
+                        <h1 ><i class="fa falist fa-money"></i> 钱包金额</h1>
 
-                            <ul style="padding: 0">
-                                <li v-for="w in wallets">
-                                    <span class="label label-success" > {{w.type}}</span> : {{w.money}}
-                                    <p></p>
-                                </li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><img height="30" src="images/home/usdt.png"> USDT</span>
+                        <h3 > {{ wallets[0].money }} </h3>
 
-                        <div class="col-md-9">
-                            <ul id="tab1" class="nav nav-tabs">
-                                <li class="active"><a href="#tab1-item1" data-toggle="tab">充值</a></li>
-                                <li><a href="#tab1-item2" data-toggle="tab">提现</a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane fade active in" id="tab1-item1">
-                                    <div class="panel panel-default must-text">
-                                        <div class="panel-heading">合作承兑商充币须知</div>
-                                        <div class="panel-body">
-                                            炒币有风险，投资需谨慎！
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><img height="30" src="images/home/finance1.png"></i> 空多交易</span>
+                        <h3 >{{ wallets[1].money }} </h3>
+
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><img height="30" src="images/home/finance2.png"> 短线交易</span>
+                        <h3 >{{ wallets[2].money }}  </h3>
+                    </li>
+                    <li class="col-xs-2 col-lg-2">
+                        <span class="title"><img height="30" src="images/home/finance3.png"> 长线交易</span>
+                        <h3 >{{ wallets[3].money }}  </h3>
+                    </li>
+                </ul>
+            </div>
+            <!-- End Top Stats -->
+
+
+            <!-- Start First Row -->
+
+
+                <!-- Start Top Stats -->
+            <div class="col-md-12" id="buyFundFunction" style="z-index:99">
+
+                    <ul class="topstats clearfix">
+                        <div id="totalMoney">
+                            <li class="arrow"></li>
+                            <li class="col-xs-3 col-lg-6"  >
+                                <i class="fa fa-calendar-o"></i>
+                                <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney"></i> </span>
+
+                                <p></p>
+                                <div class="panel-body">
+                                    <form class="form-horizontal">
+
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label form-label">充值金额：</label>
+                                            <div class="col-sm-6">
+                                                <input type="number" placeholder="请输入充值金额" id="buyMoney">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="panel-body">
-                                    <ul class="list-group qq-list">
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <div style="clear: both"></div>
-                                    </ul>
-                                    </div>
-                                    <!--<div class="contact-form bottom" >-->
-
-                                        <!--<p>支付方式：</p>-->
-                                        <!--<ul id="tab2" class="nav nav-pills">-->
-                                            <!--<li class="active"><a href="#tab2-item1" data-toggle="tab">银联</a></li>-->
-                                            <!--<li><a href="#tab2-item2" data-toggle="tab">支付宝</a></li>-->
-                                            <!--<li><a href="#tab2-item3" data-toggle="tab">微信</a></li>-->
-                                        <!--</ul>-->
-
-
-                                        <!--<h1></h1>-->
-
-                                        <!--<div class="form-group">-->
-                                            <!--<input type="text" name="name" class="form-control" required="required" placeholder="充值（金额）">-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<input type="email" name="email" class="form-control" required="required" placeholder="充值（支付密码）">-->
-                                        <!--</div>-->
-
-
-                                    <!--</div>-->
-                                    <!--<button type="button" class="btn btn-lg btn-success">充值</button>-->
+                                    </form>
+                                    <button v-on:click="buyUSDT()" class="btn btn-success"><i class="fa fa-check"></i>充值</button>
 
                                 </div>
-                                <div class="tab-pane fade" id="tab1-item2">
-                                    <div class="panel panel-default must-text">
-                                        <div class="panel-heading">合作承兑商提币须知</div>
-                                        <div class="panel-body">
-                                            提币之前先于客服联系，再进行提币操作。
-                                        </div>
-                                    </div>
-                                    <div class="panel-body">
-                                    <ul class="list-group qq-list">
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台提现-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台提现-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台提现-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-                                            <img src="images/qq-icon.png" />
-                                            <span class="name">24小时平台提现-小淘（在线）</span><br/>
-                                            <span class="num">464147349</span>
-                                        </li></a>
-                                        <div style="clear: both"></div>
-                                    </ul>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="col-md-11 col-sm-11">
-                                        <div class="contact-form bottom">
-                                            <p>最大可提币数量：<span class="label label-success" >{{USDT.money}} USDT</span></p>
 
-                                            <div class="form-group">
-                                                <input id="sellMoney" type="text" name="name" class="form-control" required="required" placeholder="输入要提的usdt数量">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <input id="sellUSDT" type="button" name="submit" onclick="sellUSDT()" class="btn btn-submit" value="提现">
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    </div>
-                                    </div>
-                        </div>
-                        <ul class="list-group col-md-12 money-record">
-                            <li class="list-group-item list-group-item-success">充值提现记录</li>
-                            <li class="list-group-item" v-for="r in moneyRecord">
-                                交易订单:#{{r.id}} 交易日期:{{r.exchangeDate}} {{r.exchangeType}}:{{r.money}}USDT {{r.exchangeType}}方式:{{r.exchangePlatform}} <br/>交易状态:{{r.status}}
                             </li>
-                            <nav aria-label="...">
-                                <ul class="pager">
-                                    <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-                                    <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
-                                    <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
-                                </ul>
-                            </nav>
+                        </div>
+                        <div id="totalFundCount">
+                            <li class="col-xs-3 col-lg-6" >
+                                <i class="fa fa-calendar-o"></i>
+                                <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{USDT.money}} USDT</i> </span>
+                                <p></p>
+                                <div class="panel-body" >
+                                    <form class="form-horizontal">
 
-                        </ul>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label form-label">提现数量：</label>
+                                            <div class="col-sm-6">
+                                                <input type="number"  placeholder="请输入提现数量" id="sellMoney">
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+                                    <button v-on:click="sellUSDT()"  class="btn btn-danger"><i class="fa fa-warning"></i>提现</button>
+
+                                </div>
+
+
+                            </li>
+                        </div>
+
+
+                    </ul>
+                </div>
+
+
+                <!-- End Today Activity -->
+
+            <!-- Start Top Stats -->
+
+            <div class="col-md-12" id="inmooney" style="z-index:99">
+                <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">场外经销商</div>
+
+                <ul class="topstats clearfix" >
+                    <ul class="list-group qq-list">
+                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                            <img src="images/qq-icon.png" />
+                            <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                            <span class="num">464147349</span>
+                        </li></a>
+                        <div style="clear: both"></div>
+                    </ul>
+                </ul>
+            </div>
+
+
+            <div class="row" >
+                <div class="panel panel-transparent">
+
+                    <div class="panel-title">
+                        历史交易记录
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--/#blog-->
 
+                    <div class="panel-body">
 
-<div class="col-sm-12 text-center bottom-separator">
-    <img src="images/home/under.png" class="img-responsive inline" alt="">
-</div>
-<footer id="footer">
-    <div  class="container" >
-        <div class="row">
-            <div class="col-md-4 col-sm-6">
-                <div class="testimonial bottom">
+                        <div role="tabpanel">
 
-                    <div class="media">
+                            <!-- Nav tabs -->
+                            <!--<ul class="nav nav-tabs tabcolor8-bg" role="tablist">-->
+                                <!--<li role="presentation" class="active"><a href="#buyhist" aria-controls="buyhist" role="tab" data-toggle="tab">今日买入历史</a></li>-->
+                                <!--<li role="presentation"><a href="#sellhist" aria-controls="sellhist" role="tab" data-toggle="tab">今日卖出历史</a></li>-->
+                            <!--</ul>-->
 
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="buyhist">
+                                    <!--<div class="panel-title">-->
+                                        <!--今日买入待成交订单-->
+                                    <!--</div>-->
+                                    <div class="panel-body table-responsive">
 
-                        <div class="media-body">
+                                        <table id="buytable" class="table table-hover table-striped">
 
-                            <blockquote>在别人贪婪时要保持警惕，而在别人警惕时就要贪婪</blockquote>
-                            <h3><a href="https://baike.baidu.com/item/沃伦·巴菲特/472378?fr=aladdin">- 巴菲特</a></h3>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="sellhist">
+                                    <div class="panel-title">
+                                        今日卖出待成交订单
+                                    </div>
+                                    <div class="panel-body table-responsive">
+
+                                        <table id="selltable" class="table table-hover table-striped">
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
+
                     </div>
-                    <div class="media">
 
-                        <div class="media-body">
-
-                            <blockquote>世界经济史是一部基于假象和谎言的连续剧</blockquote>
-                            <h3><a href="https://baike.baidu.com/item/乔治·索罗斯/1654563?fr=aladdin">- 索罗斯</a></h3>
-                        </div>
-                    </div>
                 </div>
-            </div>
 
-            <div class="col-md-3 col-sm-6">
-                <div class="contact-info bottom">
-                    <h2>Contacts</h2>
-                    <address>
-                        E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br>
-                        Phone: +1 (123) 456 7890 <br>
-                        Fax: +1 (123) 456 7891 <br>
-                    </address>
 
-                    <h2>Address</h2>
-                    <address>
-                        Unit C2, St.Vincent's Trading Est., <br>
-                        Feeder Road, <br>
-                        Bristol, BS2 0UY <br>
-                        United Kingdom <br>
-                    </address>
-                </div>
-            </div>
-            <div class="col-md-5 col-sm-6">
-                <div class="contact-form bottom">
-                    <h2>Send a message</h2>
-                    <form id="main-contact-form" name="contact-form" method="post" action="sendemail.php">
-                        <div class="form-group">
-                            <input type="text" name="name" class="form-control" required="required" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <input type="email" name="email" class="form-control" required="required" placeholder="Email Id">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="message" id="message" required class="form-control" rows="8" placeholder="Your text here"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
-                        </div>
-                    </form>
-                </div>
             </div>
 
 
-            <div class="col-sm-12">
-                <div class="copyright-text text-center">
-                    <p>&copy; ZhongZhuang Fund 2018. All Rights Reserved.</p>
-                    <p>Designed by <a target="_blank" href="https://www.zhongzhuang.fund">http://www.zhongzhuang.fund</a></p>
-                </div>
-            </div>
+            <!-- End First Row -->
+
+
         </div>
-    </div>
-</footer>
+        <!-- End Server Status -->
 
-<!--/#footer-->
-<!-- qq 客服-->
-<div class="suspension">
-    <div class="suspension-box">
-        <a href="#" class="a a-service "><i class="i"></i></a>
-        <a href="javascript:;" class="a a-service-phone "><i class="i"></i></a>
-        <a href="javascript:;" class="a a-qrcode"><i class="i"></i></a>
-        <a href="javascript:;" class=" a-top"><img height="90" width="40" src="images/home/rocket.png" alt=""></a>
-        <div class="d d-service">
-            <i class="arrow"></i>
-            <div class="inner-box">
-                <div class="d-service-item clearfix">
-                    <a href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes" target="_blank" class="clearfix"><span class="circle"><i class="i-qq"></i></span><h3>咨询在线客服</h3></a>
-                </div>
-            </div>
-        </div>
-        <div class="d d-service-phone">
-            <i class="arrow"></i>
-            <div class="inner-box">
-                <div class="d-service-item clearfix">
-                    <a href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes" target="_blank" class="circle"><i class="i-qq"></i></a>
-                    <div class="text">
-                        <a href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes" target="_blank">充值服务</a>
-                        <a href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes" target="_blank" class="number">464147349</a>
-                    </div>
-                </div>
-                <div class="d-service-intro clearfix">
-                    <p><i></i>如何充值</p>
-                    <p><i></i>如何买入</p>
-                    <p><i></i>如何卖出</p>
-                    <p><i></i>如何提现</p>
-                </div>
-            </div>
-        </div>
-        <div class="d d-qrcode">
-            <i class="arrow"></i>
-            <div class="inner-box">
-                <div class="qrcode-img"><img src="images/side_ewm.jpg" alt=""></div>
-                <p>微信服务号</p>
-            </div>
-        </div>
 
-    </div>
 </div>
 
-<script src="assets/js/jquery-1.11.1.min.js"></script>
+</div>
+<!-- End Content -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<div class="row footer">
+    <div class="col-md-6 text-left">
+        Copyright 2018.<a href="#" target="_blank">&copy; ZhongZhuang Fund</a> All Rights Reserved.
+    </div>
+    <div class="col-md-6 text-right">
+        Design and Developed by <a href="#" target="_blank">&copy; ZhongZhuang Fund</a>
+    </div>
+</div>
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEPANEL -->
+<div role="tabpanel" class="sidepanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#myWallet" aria-controls="myWallet" role="tab" data-toggle="tab">我的钱包</a></li>
+        <li role="presentation"><a href="#tradeRecord" aria-controls="tradeRecord" role="tab" data-toggle="tab">交易记录</a></li>
+        <li role="presentation"><a href="#charge" aria-controls="charge" role="tab" data-toggle="tab">充值提现</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+        <!-- Start Today -->
+        <div role="tabpanel" class="tab-pane active" id="myWallet">
+
+            <div class="sidepanel-m-title">
+                我的钱包
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+            <ul class="list-w-title">
+                <li v-for="w in wallets">
+                    <a href="javascript:void(0)">
+
+                        <span class="label label-success">{{w.type}}</span>
+                        <span class="date">{{w.money}}</span>
+                    </a>
+                </li>
+            </ul>
+            <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">客服中心</div>
+            <div class="panel-body">
+                <ul class="list-group qq-list">
+                    <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+                        <img src="images/qq-icon.png" />
+                        <span class="name">24小时平台充值-小淘（在线）</span><br/>
+                        <span class="num">464147349</span>
+                    </li></a>
+                    <div style="clear: both"></div>
+                </ul>
+            </div>
+
+        </div>
+        <!-- End Today -->
+
+        <!-- Start Tasks -->
+        <div role="tabpanel" class="tab-pane" id="tradeRecord">
+
+            <div class="sidepanel-m-title">
+                历史成交记录
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+
+            <ul class="list-w-title">
+                <li v-for="r in records">
+                    <a href="#">
+                        <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
+                        <span class="date">{{r.transactionDate}}</span>
+                        <h4>交易订单： # {{r.id}}</h4>
+                        <h4>{{buySaleText(r.type)}}基金：{{r.fundName}}</h4>
+                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
+                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
+                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
+                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
+
+                        <h4>成交情况：{{r.transactionStatus}}</h4>
+                    </a>
+                </li>
+
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </ul>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="charge">
+
+            <div class="sidepanel-m-title">
+                充值提现
+                <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+            </div>
+            <div class="gn-title">
+
+            </div>
+
+            <ul class="list-w-title">
+                <li v-for="r in charges">
+                    <a href="#">
+                        <span class="label" v-bind:class="buySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
+                        <span class="date">{{r.exchangeDate}}</span>
+                        <h4>交易订单： # {{r.id}}</h4>
+                        <h4>{{r.exchangeType}}方式：{{r.exchangePlatform}}</h4>
+                        <h4>{{r.exchangeType}}金额：{{r.money}} USDT</h4>
+
+                        <h4>交易状态：{{r.status}}</h4>
+                    </a>
+                </li>
+
+                <nav aria-label="...">
+                    <ul class="pager">
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                    </ul>
+                </nav>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+<!-- END SIDEPANEL -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+</body>
+
+<!-- Start Footer -->
+<!-- End Footer -->
+</html>
+<script type="text/javascript" src="finance/js/jquery.min.js"></script>
+<script src="finance/js/bootstrap/bootstrap.min.js"></script>
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script type="text/javascript" src="finance/js/plugins.js"></script>
+
+<!-- ================================================
+Moment.js
+================================================ -->
+<script type="text/javascript" src="finance/js/infographic.js"></script>
+
+<script src="js/datatables/datatables.min.js"></script>
+
+
+<!--<script src="js/fund.js"></script>-->
 <script src="js/common/config.js"></script>
 <script src="js/common/common.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!--<script src="js/fundhist.js"></script>-->
 <script src="js/vue.min.js"></script>
-<script type="text/javascript" src="js/user-money.js"></script>
-</body>
-</html>
+<script src="js/finance_money.js"></script>

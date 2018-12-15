@@ -157,7 +157,6 @@ public class LoginController extends BaseImpl{
         synchronized (this) {
             loginService.addUser(user.getEmail(),user.getPassword());
             Integer emailId = loginService.findEmailIdByEmail(user.getEmail());
-            loginService.addUserInfo(emailId);
             loginService.addUserWallet(emailId);
             session.setAttribute("email", user.getEmail());
         }

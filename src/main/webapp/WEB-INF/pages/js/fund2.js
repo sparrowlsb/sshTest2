@@ -4,7 +4,7 @@ ajax6 = $.ajax({
     type: 'GET',
     dataType: "json",
     contentType: "application/json;charset=utf-8",
-    url: "/fund/getSuccessHistory?fundId=1",
+    url: "/fund/getSuccessHistory?fundId=2",
     success: function (data, textStatus) {
         var TransData=data.data;
 
@@ -29,7 +29,7 @@ $.when(ajax6).done(function (){
         type: 'GET',
         dataType: "json",
         contentType: "application/json;charset=utf-8",
-        url: "/fund/fundInfo?fundId=1",
+        url: "/fund/fundInfo?fundId=2",
 
         success: function (data, textStatus) {
 
@@ -60,6 +60,7 @@ $.when(ajax6).done(function (){
                     if(i==0){
                         volumes.push([i,rawData[i][1],1]);
                     }else {
+
                         volumes.push([i, rawData[i][1], rawData[i][0] > rawData[i - 1][0] ? 1 : -1]);
                     }
                 }

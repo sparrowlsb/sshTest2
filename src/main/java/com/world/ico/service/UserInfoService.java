@@ -5,9 +5,6 @@ package com.world.ico.service;
  */
 public interface UserInfoService {
 
-    public int updateBankInfo(String bankName,String bankId,Integer userId);
-    public int updateWechatInfo(String  wechatName,String wechatId,Integer userId);
-    public int updateAlipayInfo(String  alipayName,String alipayID,Integer userId);
     public String getPersonCode(String  email);
     public void setPersonCode(String personCode,String  email);
 }

@@ -57,25 +57,13 @@ public class UserInfoController extends BaseImpl{
 
             }
             session.removeAttribute("userInfoEmail");
-            if(userInfo.getUserId()==userId && userInfo.getEmail().equals(email)){
-                if(!userInfo.getBankId().isEmpty()&&!userInfo.getBankName().isEmpty()){
-                    userInfoService.updateBankInfo(userInfo.getBankName(),userInfo.getBankId(),userId);
-                }
-                if(!userInfo.getAlipayId().isEmpty()&&!userInfo.getAllipayName().isEmpty()){
-                    userInfoService.updateAlipayInfo(userInfo.getAllipayName(),userInfo.getAlipayId(),userId);
 
-                }
-                if(!userInfo.getWechatId().isEmpty()&&!userInfo.getWechatName().isEmpty()){
-                    userInfoService.updateWechatInfo(userInfo.getWechatName(),userInfo.getWechatId(),userId);
-
-                }
                 return getSuccess(jsonObject,"");
-            }
+
 
         }catch (Exception e){
             return getError(jsonObject,e.toString());
         }
-        return getError(jsonObject,"");
 
     }
     @RequestMapping(value = "setPersonCode", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
