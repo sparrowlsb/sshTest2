@@ -109,7 +109,7 @@
 
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" sync>
         {
             "symbol": "BITFINEX:BTCUSD",
             "width": "100%",
@@ -134,11 +134,11 @@
 <!-- START CONTENT -->
 <div class="content">
   <div class="page-header">
-    <div class="tradingview-widget-container__widget"></div>
+    <!--<div class="tradingview-widget-container__widget"></div>-->
     <!-- TradingView Widget BEGIN -->
     <div class="tradingview-widget-container">
       <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" sync>
           {
               "symbols": [
               {
