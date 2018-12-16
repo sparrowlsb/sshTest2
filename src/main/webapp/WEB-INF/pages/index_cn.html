@@ -280,11 +280,11 @@
 								<div class="content">
 									<h3><font color="#fffff">{{ fund3.fundName }}</font></h3>
 									今日涨幅： <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
-									<span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+									<span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
 									<p></p>
 									历史涨幅：
 									<span class="label label-success" v-show="fund3.fundQuoteHistChange >= 0">{{ fund3.fundQuoteHistChange }}%</span>
-									<span class="label label-danger" v-show="fund2.fundQuoteHistChange < 0">{{ fund3.fundQuoteHistChange }}%</span>
+									<span class="label label-danger" v-show="fund3.fundQuoteHistChange < 0">{{ fund3.fundQuoteHistChange }}%</span>
 
 									<p>{{ fund3.fundType }}</p>
 									<a href="finance.html" class="blog-btn">马上购买 <i class="fa  fa-arrow-circle-o-right"></i></a>
