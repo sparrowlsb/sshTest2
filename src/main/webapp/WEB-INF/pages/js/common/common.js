@@ -81,3 +81,10 @@ $(document).ready(function(){
     });
 
 });
+
+var qqList = [
+    {qq:1158362548,nick:"24小时平台充值-鸟哥的私房菜"},
+    {qq:2763021115,nick:"24小时平台充值-super man"},
+    {qq:464147349,nick:"24小时平台充值-Arthur"},
+    {qq:908966762,nick:"24小时平台充值-古月HU"}
+];

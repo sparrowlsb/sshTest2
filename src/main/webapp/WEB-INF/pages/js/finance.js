@@ -19,12 +19,12 @@ var charge = new Vue({
         },
         nextPage: function () {
             if (this.currentPage < this.totalPages) {
-                this.getExchangeHist(this.currentPage+1)
+                this.ajaxData(this.currentPage+1)
             }
         },
         prePage: function () {
             if (this.currentPage >1) {
-                this.getExchangeHist(this.currentPage-1)
+                this.ajaxData(this.currentPage-1)
             }
         },
         ajaxData: function (page) {
@@ -56,7 +56,8 @@ var myWallet = new Vue({
     el: '#myWallet',
 
     data: {
-        wallets: []
+        wallets: [],
+        qqList: qqList
     },
     methods: {
         ajaxData: function () {

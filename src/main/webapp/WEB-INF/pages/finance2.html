@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta https-equiv="X-UA-Compatible" content="IE=edge">
@@ -539,25 +539,10 @@
       <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">充值中心</div>
       <div class="panel-body">
         <ul class="list-group qq-list">
-          <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
+          <a target="_blank" v-bind:href="'https://wpa.qq.com/msgrd?v=3&uin='+qq.qq+'&site=qq&menu=yes'" v-for="qq in qqList"><li class="list-group-item">
             <img src="images/qq-icon.png" />
-            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-            <span class="num">464147349</span>
-          </li></a>
-          <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-            <img src="images/qq-icon.png" />
-            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-            <span class="num">464147349</span>
-          </li></a>
-          <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-            <img src="images/qq-icon.png" />
-            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-            <span class="num">464147349</span>
-          </li></a>
-          <a target="_blank" href="https://wpa.qq.com/msgrd?v=3&uin=464147349&site=qq&menu=yes"><li class="list-group-item">
-            <img src="images/qq-icon.png" />
-            <span class="name">24小时平台充值-小淘（在线）</span><br/>
-            <span class="num">464147349</span>
+            <span class="name">{{qq.nick}}</span><br/>
+            <span class="num">{{qq.qq}}</span>
           </li></a>
           <div style="clear: both"></div>
         </ul>
@@ -656,8 +641,8 @@ Plugin.js - Some Specific JS codes for Plugin Settings
 
 <script src="js/fund2.js"></script>
 <script src="js/common/config.js"></script>
+<script src="js/vue.min.js"></script>
 <script src="js/common/common.js"></script>
 <!--<script src="js/fundhist.js"></script>-->
-<script src="js/vue.min.js"></script>
 <script src="js/finance.js"></script>
 <script src="js/financeTransaction.js"></script>
