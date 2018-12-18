@@ -19,6 +19,11 @@ import java.util.Properties;
  */
 
 public class CreateSimpleMail {
+
+    private final static String host = "smtp.mxhichina.com"; //163的服务器
+    private final static String formName = "noreply@btcome.top";//你的邮箱
+    private final static String password = "superman123."; //授权码
+
     public static void mail(String verifyCode,String emailAddress) throws Exception {
         Properties props = new Properties();
 
@@ -27,7 +32,7 @@ public class CreateSimpleMail {
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
-        props.setProperty("mail.host", "smtp.mxhichina.com");
+        props.setProperty("mail.host", host);
         // 发送邮件协议名称
         props.setProperty("mail.transport.protocol", "smtp");
 
@@ -40,15 +45,15 @@ public class CreateSimpleMail {
         Session session = Session.getInstance(props);
 
         Message msg = new MimeMessage(session);
-        msg.setSubject("众庄平台 验证码");
+        msg.setSubject("BTCome 验证码");
         StringBuilder builder = new StringBuilder();
-        builder.append("注册验证码是："+verifyCode);
+        builder.append("亲爱的用户，你好！\n请核对你的注册验证码："+verifyCode+"\n如果你未申请我们的服务，请忽略该邮件。\n如果仍有问题，请联系我们的服务专线 \nE-mail: support@btcome.top \n再次感谢你的支持和理解！");
 //        builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
-        msg.setFrom(new InternetAddress("noreply@zhongzhuang.fund"));//**发送人的邮箱地址**
+        msg.setFrom(new InternetAddress(formName));//**发送人的邮箱地址**
 
         Transport transport = session.getTransport();
-        transport.connect("smtp.mxhichina.com","noreply@zhongzhuang.fund","superman.123");
+        transport.connect("smtp.mxhichina.com",formName,password);
 
         List<String> list=new ArrayList<>();
         //实现群发，下面的方法也是可以实现群发，但是不太理想
@@ -65,7 +70,7 @@ public class CreateSimpleMail {
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
-        props.setProperty("mail.host", "smtp.mxhichina.com");
+        props.setProperty("mail.host", host);
         // 发送邮件协议名称
         props.setProperty("mail.transport.protocol", "smtp");
 
@@ -78,15 +83,15 @@ public class CreateSimpleMail {
         Session session = Session.getInstance(props);
 
         Message msg = new MimeMessage(session);
-        msg.setSubject("众庄平台 订单信息");
+        msg.setSubject("BTCome 验证码");
         StringBuilder builder = new StringBuilder();
         builder.append("订单邮箱是："+mail+"\n交易类型:"+transactionType+"\n交易金额:"+transactionCount+"USDT");
 //        builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
-        msg.setFrom(new InternetAddress("noreply@zhongzhuang.fund"));//**发送人的邮箱地址**
+        msg.setFrom(new InternetAddress(formName));//**发送人的邮箱地址**
 
         Transport transport = session.getTransport();
-        transport.connect("smtp.mxhichina.com","noreply@zhongzhuang.fund","superman.123");
+        transport.connect("smtp.mxhichina.com",formName,password);
 
         List<String> list=new ArrayList<>();
         //实现群发，下面的方法也是可以实现群发，但是不太理想
@@ -103,7 +108,7 @@ public class CreateSimpleMail {
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名
-        props.setProperty("mail.host", "smtp.mxhichina.com");
+        props.setProperty("mail.host", host);
         // 发送邮件协议名称
         props.setProperty("mail.transport.protocol", "smtp");
 
@@ -116,15 +121,15 @@ public class CreateSimpleMail {
         Session session = Session.getInstance(props);
 
         Message msg = new MimeMessage(session);
-        msg.setSubject("众庄平台 订单信息");
+        msg.setSubject("BTCome 验证码");
         StringBuilder builder = new StringBuilder();
         builder.append("订单邮箱是："+mail+"\n交易类型:"+transactionType+"\n交易金额"+transactionCount+"USDT");
 //        builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
-        msg.setFrom(new InternetAddress("noreply@zhongzhuang.fund"));//**发送人的邮箱地址**
+        msg.setFrom(new InternetAddress(formName));//**发送人的邮箱地址**
 
         Transport transport = session.getTransport();
-        transport.connect("smtp.mxhichina.com","noreply@zhongzhuang.fund","superman.123");
+        transport.connect("smtp.mxhichina.com",formName,password);
 
         List<String> list=new ArrayList<>();
         //实现群发，下面的方法也是可以实现群发，但是不太理想
