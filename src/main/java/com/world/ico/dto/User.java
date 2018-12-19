@@ -7,12 +7,48 @@ package com.world.ico.dto;
 public class User {
 
     String name;
+
     String password;
+
     String email;
+
     String verCode;
+
     String verEmailCode;
+
     String usdtAddress;
+
     String personCode;
+
+    String idCardOn;
+
+    String idCardUnder;
+
+    String status;
+
+    public String getIdCardOn() {
+        return idCardOn;
+    }
+
+    public void setIdCardOn(String idCardOn) {
+        this.idCardOn = idCardOn;
+    }
+
+    public String getIdCardUnder() {
+        return idCardUnder;
+    }
+
+    public void setIdCardUnder(String idCardUnder) {
+        this.idCardUnder = idCardUnder;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getUsdtAddress() {
         return usdtAddress;

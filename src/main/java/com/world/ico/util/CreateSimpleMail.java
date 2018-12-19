@@ -47,7 +47,7 @@ public class CreateSimpleMail {
         Message msg = new MimeMessage(session);
         msg.setSubject("BTCome 验证码");
         StringBuilder builder = new StringBuilder();
-        builder.append("亲爱的用户，你好！\n请核对你的注册验证码："+verifyCode+"\n如果你未申请我们的服务，请忽略该邮件。\n如果仍有问题，请联系我们的服务专线 \nE-mail: support@btcome.top \n再次感谢你的支持和理解！");
+        builder.append("亲爱的用户，你好！\n请核对你的邮箱验证码："+verifyCode+"\n如果你未申请我们的服务，请忽略该邮件。\n如果仍有问题，请联系我们的服务专线 \nE-mail: support@btcome.top \n再次感谢你的支持和理解！");
 //        builder.append("\n时间 " + new Date());
         msg.setText(builder.toString());
         msg.setFrom(new InternetAddress(formName));//**发送人的邮箱地址**
@@ -83,7 +83,13 @@ public class CreateSimpleMail {
         Session session = Session.getInstance(props);
 
         Message msg = new MimeMessage(session);
-        msg.setSubject("BTCome 验证码");
+        String type="";
+        if (transactionType.equalsIgnoreCase("BUY")){
+            type="充值";
+        }else {
+            type="提现";
+        }
+        msg.setSubject("BTCome "+type+"订单");
         StringBuilder builder = new StringBuilder();
         builder.append("订单邮箱是："+mail+"\n交易类型:"+transactionType+"\n交易金额:"+transactionCount+"USDT");
 //        builder.append("\n时间 " + new Date());

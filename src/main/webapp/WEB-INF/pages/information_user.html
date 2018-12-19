@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html >
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -152,39 +152,57 @@
             </div>
             <div class="col-md-9 col-sm-7">
                 <div class="tab-pane fade active in" id="tab1-item1">
-                    <div class="contact-form bottom" id="user-info">
+                    <div class="contact-form bottom" id="userinfo">
                         <div class="panel panel-default head-info">
                             <div class="panel-body">
                                 请认真填写您的真实身份信息，一经确认不可更改！
                             </div>
                         </div>
                         <div class="form-group">
-                            邮箱: <input type="email" name="email" class="form-control" disabled="disabled" v-model="user.email">
+                            邮箱:
+                            <input  type="email" name="email" class="form-control" disabled="disabled" v-model="user.email">
                         </div>
                         <div class="form-group">
-                            实名认证: <input type="text" name="name" class="form-control" v-bind:disabled="user.name" placeholder="真实姓名" v-model="user.name">
+                            实名认证:
+                            <font color="#FF0000">*
+                            </font><input v-show="user.status == 0" type="text" id="name" name="name" class="form-control"  placeholder="真实姓名"  v-model="user.name">
+                            </font><input v-show="user.status == 1" type="text"  name="name" class="form-control"  placeholder="真实姓名" v-bind:disabled="user.name" v-model="user.name">
                         </div>
                         <div class="form-group">
-                            身份证号: <input type="text" name="id" class="form-control"v-bind:disabled="user.id" placeholder="身份证号" v-model="user.id">
-                        </div>
-                        <div class="form-group">
-                            USDT钱包地址: <input type="text" name="id" class="form-control"v-bind:disabled="user.id" placeholder="USDT钱包地址" v-model="user.id">
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="form-group">
-                            身份证照片验证:
-                        </div>
-                        <div class="form-group box"  ></div>
-                        <div class="form-group "  ><img src="images/idcardOn.jpg"></div>
-                        <div class=" form-group box2"></div>
-                        <div class="form-group "  ><img src="images/idcardUnder.jpg"></div>
+                            身份证号:
+                            <font color="#FF0000">*
+                            </font><input v-show="user.status == 0" type="text" id="id" name="id" class="form-control" placeholder="身份证号"   v-model="user.personCode">
+                            </font><input v-show="user.status == 1" type="text"  name="id" class="form-control" placeholder="身份证号" v-bind:disabled="user.personCode" v-model="user.personCode">
 
+                        </div>
 
+                        <div class="form-group">
+
+                            USDT钱包地址:
+                            <font color="#FF0000">*
+                            </font>  <input v-show="user.status == 0" type="text" id="usdtAddress" name="usdtAddress" class="form-control" placeholder="USDT钱包地址" v-model="user.usdtAddress">
+                            </font>  <input v-show="user.status == 1" type="text"  name="usdtAddress" class="form-control" placeholder="USDT钱包地址"  v-bind:disabled="user.usdtAddress" v-model="user.usdtAddress">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div v-show="user.status == 0">
+                            <div  class="form-group">
+
+                                身份证照片验证:
+                            </div>
+                            <div class="form-group box"  ></div>
+                            <div class="form-group "  ><img width="50%" src="images/idcardOn.jpg"></div>
+                            <div class=" form-group box2"></div>
+                            <div class="form-group "  ><img width="50%" src="images/idcardUnder.jpg"></div>
+
+                            <br>
+                            <br>
+                            <button  class="btn btn-lg btn-success" v-on:click="updateInfo()">保存</button>
+                         </div>
+                        <p></p>
                     </div>
-                        <button type="button" class="btn btn-lg btn-success" v-on:click="save()">保存</button>
-                    <p></p>
+
                 </div>
             </div>
         </div>
@@ -195,6 +213,7 @@
 <div class="col-sm-12 text-center bottom-separator">
     <img src="images/home/under.png" class="img-responsive inline" alt="">
 </div>
+
 <footer id="footer">
     <div  class="container" >
         <div class="row">
@@ -315,34 +334,13 @@
 <script type="text/javascript" src="js/wow.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script src="js/vue.min.js"></script>
-<script type="text/javascript" src="js/user-info.js"></script>
 <script type="text/javascript" src="js/imgFileupload.js"></script>
-<script type="text/javascript">
-    var imgFile = new ImgUploadeFiles('.box',function(e){
-        this.init({
-            TYPE:1,
-            MAX : 1, //限制个数
-            MH : 5800, //像素限制高度
-            MW : 5900, //像素限制宽度
-            callback : function(arr){
-                console.log(arr)
-            }
-        });
-    });
-    var imgFile1 = new ImgUploadeFiles('.box2',function(e){
-        this.init({
-            TYPE:2,
-            MAX : 1,
-            MH : 5800, //像素限制高度
-            MW : 5900, //像素限制宽度
-            callback : function(arr){
-                console.log(arr)
-            }
-        });
-    });
 
+<script type="text/javascript" src="js/user-info.js"></script>
 
+<script>
 
 </script>
+
 </body>
 </html>

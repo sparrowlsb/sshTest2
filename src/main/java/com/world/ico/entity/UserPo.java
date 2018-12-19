@@ -11,7 +11,7 @@ public class UserPo {
     @Id
     @Column(name = "user_id")
     @GeneratedValue
-    Integer user_id;
+    Integer userId;
 
     @Column(name = "email")
     String email;
@@ -22,12 +22,45 @@ public class UserPo {
     @Column(name = "password")
     String password;
 
-    public Integer getUser_id() {
-        return user_id;
+    @Column(name = "person_code")
+    String personCode;
+
+    @Column(name = "usdt_address")
+    String usdtAddress;
+
+    @Column(name = "status")
+    Integer status;
+
+    public String getPersonCode() {
+        return personCode;
     }
 
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
+    public void setPersonCode(String personCode) {
+        this.personCode = personCode;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getUsdtAddress() {
+        return usdtAddress;
+    }
+
+    public void setUsdtAddress(String usdtAddress) {
+        this.usdtAddress = usdtAddress;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {

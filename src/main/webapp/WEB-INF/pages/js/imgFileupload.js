@@ -169,7 +169,7 @@
 		var _self = this;
 		this.dom = document.createElement('li');
 		this.dom.innerHTML = 
-							'    <img src="img/login.gif" alt="" data-src="'+this.imgSrc +'" class="imsg">'+
+							'    <img src="../images/login.gif" alt="" data-src="'+this.imgSrc +'" class="imsg">'+
 							'    <i class="delImg">'+
 							'        X'+
 							'    </i>';

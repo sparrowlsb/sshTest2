@@ -1,44 +1,30 @@
 package com.world.ico.dto;
 
 /**
- * Created by lsb on 2018/9/26.
+ * Created by lsb on 2018/12/19.
  */
 public class UserInfo {
-
-    String personCode;
-
-    Integer userId;
+    String name;
 
     String email;
 
-    String alipayId;
+    String usdtAddress;
 
-    String allipayName;
+    String personCode;
 
-    String wechatId;
+    String idCardOn;
 
-    String wechatName;
+    String idCardUnder;
 
-    String bankId;
+    Integer status;
 
-    String bankName;
 
-    String userInfoCode;
-
-    public String getPersonCode() {
-        return personCode;
+    public String getName() {
+        return name;
     }
 
-    public void setPersonCode(String personCode) {
-        this.personCode = personCode;
-    }
-
-    public String getUserInfoCode() {
-        return userInfoCode;
-    }
-
-    public void setUserInfoCode(String userInfoCode) {
-        this.userInfoCode = userInfoCode;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -49,59 +35,43 @@ public class UserInfo {
         this.email = email;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUsdtAddress() {
+        return usdtAddress;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUsdtAddress(String usdtAddress) {
+        this.usdtAddress = usdtAddress;
     }
 
-    public String getAlipayId() {
-        return alipayId;
+    public String getPersonCode() {
+        return personCode;
     }
 
-    public void setAlipayId(String alipayId) {
-        this.alipayId = alipayId;
+    public void setPersonCode(String personCode) {
+        this.personCode = personCode;
     }
 
-    public String getAllipayName() {
-        return allipayName;
+    public String getIdCardOn() {
+        return idCardOn;
     }
 
-    public void setAllipayName(String allipayName) {
-        this.allipayName = allipayName;
+    public void setIdCardOn(String idCardOn) {
+        this.idCardOn = idCardOn;
     }
 
-    public String getWechatId() {
-        return wechatId;
+    public String getIdCardUnder() {
+        return idCardUnder;
     }
 
-    public void setWechatId(String wechatId) {
-        this.wechatId = wechatId;
+    public void setIdCardUnder(String idCardUnder) {
+        this.idCardUnder = idCardUnder;
     }
 
-    public String getWechatName() {
-        return wechatName;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setWechatName(String wechatName) {
-        this.wechatName = wechatName;
-    }
-
-    public String getBankId() {
-        return bankId;
-    }
-
-    public void setBankId(String bankId) {
-        this.bankId = bankId;
-    }
-
-    public String getBankName() {
-        return bankName;
-    }
-
-    public void setBankName(String bankName) {
-        this.bankName = bankName;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

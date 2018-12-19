@@ -55,8 +55,10 @@ public class CurbExchangeController extends BaseImpl {
             BigDecimal count = userWallet.getSellMoney();
             fundService.sellMoney(userId, "SELL", userWallet.getSellMoney(), count);
             try {
-                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"1158362548@qq.com");
                 CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),email);
+                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"1158362548@qq.com");
+                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"464147349@qq.com");
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -82,8 +84,10 @@ public class CurbExchangeController extends BaseImpl {
             Integer userId=loginService.findEmailIdByEmail(email);
             fundService.buyMoney(userId, "BUY", userWallet.getSellMoney(), userWallet.getSellMoney());
             try {
-                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"1158362548@qq.com");
                 CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),email);
+                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"1158362548@qq.com");
+                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"464147349@qq.com");
+
 
             } catch (Exception e) {
                 e.printStackTrace();
