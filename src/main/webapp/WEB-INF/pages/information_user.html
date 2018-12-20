@@ -164,24 +164,19 @@
                         </div>
                         <div class="form-group">
                             实名认证:
-                            <font color="#FF0000">*
-                            </font><input v-show="user.status == 0" type="text" id="name" name="name" class="form-control"  placeholder="真实姓名"  v-model="user.name">
-                            </font><input v-show="user.status == 1" type="text"  name="name" class="form-control"  placeholder="真实姓名" v-bind:disabled="user.name" v-model="user.name">
+                            <font color="#FF0000">*</font><input type="text" id="name"  name="name" class="form-control"  placeholder="真实姓名" v-bind:disabled="user.status!=0" v-model="user.name">
                         </div>
                         <div class="form-group">
                             身份证号:
-                            <font color="#FF0000">*
-                            </font><input v-show="user.status == 0" type="text" id="id" name="id" class="form-control" placeholder="身份证号"   v-model="user.personCode">
-                            </font><input v-show="user.status == 1" type="text"  name="id" class="form-control" placeholder="身份证号" v-bind:disabled="user.personCode" v-model="user.personCode">
+                            <font color="#FF0000">*</font><input type="text" id="id" name="id" class="form-control" placeholder="身份证号" v-bind:disabled="user.status!=0" v-model="user.personCode">
 
                         </div>
 
                         <div class="form-group">
 
                             USDT钱包地址:
-                            <font color="#FF0000">*
-                            </font>  <input v-show="user.status == 0" type="text" id="usdtAddress" name="usdtAddress" class="form-control" placeholder="USDT钱包地址" v-model="user.usdtAddress">
-                            </font>  <input v-show="user.status == 1" type="text"  name="usdtAddress" class="form-control" placeholder="USDT钱包地址"  v-bind:disabled="user.usdtAddress" v-model="user.usdtAddress">
+                            <font color="#FF0000">*</font>
+                            <input type="text" id="usdtAddress" name="usdtAddress" class="form-control" placeholder="USDT钱包地址"  v-bind:disabled="user.status!=0" v-model="user.usdtAddress">
                         </div>
                         <br>
                         <br>

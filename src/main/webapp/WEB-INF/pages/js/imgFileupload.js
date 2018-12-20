@@ -1,5 +1,5 @@
 ~(function(win){
-	var htmls = '<input type="file" name="" id="" class="imgFiles" style="display: none" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple>'+
+	var htmls = '<input type="file" name="" id="image1" class="imgFiles" style="display: none" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple>'+
 				'<div class="header">'+
 				'    <span class="imgTitle">'+
 				'        请上传身份证正面照片'+
@@ -17,7 +17,7 @@
 				'    <ul>'+
 				'    </ul>'+
 				'</div>';
-    var htmls2 = '<input type="file" name="" id="" class="imgFiles" style="display: none" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple>'+
+    var htmls2 = '<input type="file" name="" id="image2" class="imgFiles" style="display: none" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" multiple>'+
         '<div class="header">'+
         '    <span class="imgTitle">'+
         '        请上传身份证背面照片'+

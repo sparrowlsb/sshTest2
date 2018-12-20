@@ -59,12 +59,25 @@ var main = new Vue({
                 data: JSON.stringify({"name": name,"personCode": idCard,"idCardOn": idCardOn[0]["src"],"idCardUnder": idCardUnder[0]["src"],"usdtAddress": usdtAddress}),
                 success: function (data, textStatus) {
                     if (data.result == 1){
-                        alert("成功更新用户信息，等待审核确认。。。。")
+                        alert("成功更新用户信息，等待审核确认。。。。");
+                        location.reload()
                     }else{
                         alert(data.message)
                     }
                 }
             });
+
+            var url =config.api_prefix+config.api_uploadImage;
+            var formData = new FormData();
+            formData.append('image', $('#image1')[0].files[0]);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false
+            })
         }
     },
 
