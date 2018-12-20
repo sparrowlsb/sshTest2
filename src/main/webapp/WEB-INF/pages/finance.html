@@ -53,6 +53,7 @@
       <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right" style="z-index: 999999;">
         <li role="presentation" class="dropdown-header">Profile</li>
         <li><a href="index_cn.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
+        <li><a href="information_user.html"><i class="fa falist fa-newspaper-o"></i> 个人中心</a></li>
         <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
         <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
       </ul>
@@ -285,7 +286,24 @@
 
         </ul>
       </div>
+      <div class="col-md-12"  style="z-index:99" v-show="!email">
 
+        <ul class="topstats clearfix">
+          <div >
+            <li class="arrow"></li>
+            <li class="col-xs-6 col-lg-12"  >
+
+              <a href="/pages/login.html" class="btn-rounded btn btn-xl">登录/注册</a>
+            </li>
+
+
+          </div>
+
+
+
+        </ul>
+
+      </div>
 
       <!-- End Today Activity -->
     </div>

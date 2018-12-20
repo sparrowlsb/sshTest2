@@ -37,7 +37,7 @@ public class CurbExchangeController extends BaseImpl {
 
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
@@ -75,7 +75,7 @@ public class CurbExchangeController extends BaseImpl {
 
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }
@@ -104,7 +104,7 @@ public class CurbExchangeController extends BaseImpl {
 
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }

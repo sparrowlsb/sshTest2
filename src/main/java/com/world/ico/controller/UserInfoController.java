@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -50,7 +51,7 @@ public class UserInfoController extends BaseImpl{
 
     @RequestMapping(value = "updateInfo", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject setUserInfo(@RequestBody UserInfo userInfo,HttpSession session) {
+    public JSONObject setUserInfo(@RequestBody UserInfo userInfo,@RequestBody MultipartFile filedata, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email= (String) session.getAttribute("email");
         if (email==null){

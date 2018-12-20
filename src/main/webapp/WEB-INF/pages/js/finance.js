@@ -141,6 +141,7 @@ var tradeRecord = new Vue({
 var main = new Vue({
     el: '#main',
     data: {
+        status:0,
         fundId: document.getElementById('fundId').innerHTML,
         fund: {},
         fund2: {},
@@ -157,6 +158,23 @@ var main = new Vue({
         USDT:{type:"usdt",money:"0"},
     },
     methods: {
+        getUserInfo: function () {
+            var self = this;
+            var url=config.api_prefix+config.api_getUser;
+            $.ajax({
+
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: url,
+                success: function (data, textStatus) {
+
+                    self.status=data.result
+
+
+                }
+            });
+        },
         getDailyPrice: function (fundId) {
             var self = this;
             $.ajax({
@@ -295,6 +313,7 @@ var main = new Vue({
         },
     },
     mounted: function(){
+        this.getUserInfo();
         this.getDailyPrice(this.fundId);
         this.getMaxSell(this.fundId);
         this.getMaxBuy();

@@ -34,12 +34,21 @@ public class LoginController extends BaseImpl{
         return "redirect:pages/login.html";
     }
 
-    @RequestMapping(value = "loginUser", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
+
+    @RequestMapping(value = "loginOut", produces = "application/json;charset=utf-8" , method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject loginOut(HttpSession session) {
+        JSONObject jsonObject=new JSONObject();
+        session.removeAttribute("email");
+        return getSuccess(jsonObject,"success login out");
+    }
+
+    @RequestMapping(value = "loginUser", produces = "application/json;charset=utf-8" , method = RequestMethod.GET)
     @ResponseBody
     public JSONObject loginUser(HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email = (String) session.getAttribute("email");
-        if (email.isEmpty()){
+        if (email==null){
             return getError(jsonObject,"please login first");
 
         }

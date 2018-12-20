@@ -1,6 +1,24 @@
 /**
  * Created by Jayson on 2018/10/17.
  */
+
+var url=config.api_prefix+config.api_getUser;
+$.ajax({
+
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: url,
+    success: function (data, textStatus) {
+        if (data.result==1){
+
+        }
+        else if (data.result==0){
+            window.location.href = '/pages/404.html';
+        }
+
+    }
+});
 var count = 60; //间隔函数，1秒执行
 var InterValObj1; //timer变量，控制时间
 var curCount1;//当前剩余秒数

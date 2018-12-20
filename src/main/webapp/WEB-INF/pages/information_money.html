@@ -48,10 +48,12 @@
 
 
             <li class="dropdown link">
+
                 <a href="/pages/login.html" v-show="!email">登录/注册</a> <a v-show="email" href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>{{email}}</b><span class="caret"></span></a>
                 <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right" style="z-index: 999999;">
                     <li role="presentation" class="dropdown-header">Profile</li>
                     <li><a href="index.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
+                    <li><a href="information_user.html"><i class="fa falist fa-newspaper-o"></i> 个人中心</a></li>
                     <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
                     <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
                 </ul>
@@ -63,7 +65,6 @@
     </div>
     <!-- END TOP -->
     <div class="sidebar clearfix">
-
         <ul class="sidebar-panel nav">
             <li class="sidetitle">基金信息</li>
             <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance1.png" alt=""></span>{{ fund.fundName }}
@@ -213,62 +214,80 @@
 
 
                 <!-- Start Top Stats -->
-            <div class="col-md-12" id="buyFundFunction" style="z-index:99">
+            <div class="col-md-12" id="buyFundFunction" style="z-index:99" v-show="status == 1">
 
-                    <ul class="topstats clearfix">
-                        <div id="totalMoney">
-                            <li class="arrow"></li>
-                            <li class="col-xs-3 col-lg-6"  >
-                                <i class="fa fa-calendar-o"></i>
-                                <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney"></i> </span>
+            <ul class="topstats clearfix">
+                <div id="totalMoney">
+                    <li class="arrow"></li>
+                    <li class="col-xs-3 col-lg-6"  >
+                        <i class="fa fa-calendar-o"></i>
+                        <span class="diff"><b class="color-up">充值 </b> <i class="fa fa-caret-up" id="totoalMoney"></i> </span>
 
-                                <p></p>
-                                <div class="panel-body">
-                                    <form class="form-horizontal">
+                        <p></p>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
 
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label form-label">充值金额：</label>
-                                            <div class="col-sm-6">
-                                                <input type="number" placeholder="请输入充值金额" id="buyMoney">
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <button v-on:click="buyUSDT()" class="btn btn-success"><i class="fa fa-check"></i>充值</button>
-
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label form-label">充值金额：</label>
+                                    <div class="col-sm-6">
+                                        <input type="number" placeholder="请输入充值金额" id="buyMoney">
+                                    </div>
                                 </div>
+                            </form>
+                            <button v-on:click="buyUSDT()" class="btn btn-success"><i class="fa fa-check"></i>充值</button>
 
-                            </li>
                         </div>
-                        <div id="totalFundCount">
-                            <li class="col-xs-3 col-lg-6" >
-                                <i class="fa fa-calendar-o"></i>
-                                <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{USDT.money}} USDT</i> </span>
-                                <p></p>
-                                <div class="panel-body" >
-                                    <form class="form-horizontal">
 
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label form-label">提现数量：</label>
-                                            <div class="col-sm-6">
-                                                <input type="number"  placeholder="请输入提现数量" id="sellMoney">
-                                            </div>
-                                        </div>
+                    </li>
+                </div>
+                <div id="totalFundCount">
+                    <li class="col-xs-3 col-lg-6" >
+                        <i class="fa fa-calendar-o"></i>
+                        <span class="diff"><b class="color-down">提现 </b><i class="fa fa-caret-down" id="totoalFundCount">{{USDT.money}} USDT</i> </span>
+                        <p></p>
+                        <div class="panel-body" >
+                            <form class="form-horizontal">
 
-
-                                    </form>
-                                    <button v-on:click="sellUSDT()"  class="btn btn-danger"><i class="fa fa-warning"></i>提现</button>
-
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label form-label">提现数量：</label>
+                                    <div class="col-sm-6">
+                                        <input type="number"  placeholder="请输入提现数量" id="sellMoney">
+                                    </div>
                                 </div>
 
 
-                            </li>
+                            </form>
+                            <button v-on:click="sellUSDT()"  class="btn btn-danger"><i class="fa fa-warning"></i>提现</button>
+
                         </div>
 
 
-                    </ul>
+                    </li>
                 </div>
 
 
+            </ul>
+
+        </div>
+
+        <div class="col-md-12"  style="z-index:99" v-show="status == 0">
+
+            <ul class="topstats clearfix">
+                <div >
+                    <li class="arrow"></li>
+                    <li class="col-xs-6 col-lg-12"  >
+
+                        <a href="/pages/login.html" class="btn-rounded btn btn-xl">登录/注册</a>
+                    </li>
+
+
+                </div>
+
+
+
+            </ul>
+
+        </div>
                 <!-- End Today Activity -->
 
             <!-- Start Top Stats -->
@@ -290,7 +309,7 @@
 
 
             <div class="row" >
-                <div class="panel panel-transparent">
+                <div class="panel panel-transparent" >
 
                     <div class="panel-title">
                         历史交易记录

@@ -1,3 +1,6 @@
+
+
+
 var histDataSet
 
 var charge = new Vue({
@@ -167,6 +170,7 @@ var tradeRecord = new Vue({
 var main = new Vue({
     el: '#main',
     data: {
+        status:0,
         fundId: 1,
         fund: {},
         fund2: {},
@@ -184,6 +188,23 @@ var main = new Vue({
         qqList: qqList
     },
     methods: {
+        getUserInfo: function () {
+            var self = this;
+            var url=config.api_prefix+config.api_getUser;
+            $.ajax({
+
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: url,
+                success: function (data, textStatus) {
+
+                    self.status=data.result
+
+
+                }
+            });
+        },
         getDailyPrice: function (fundId) {
             var self = this;
             $.ajax({
@@ -265,7 +286,7 @@ var main = new Vue({
                         alert("提现成功，联系兑换商提现！")
                         window.location.reload()
                     } else if (data.result == 0) {
-                        alert("提现失败，确认提现额度！");
+                        alert("提现失败，确认提现额度或是否已经登录！");
 
 
                     }
@@ -295,7 +316,7 @@ var main = new Vue({
                         alert("充值成功，联系兑换商充值！")
                         window.location.reload()
                     } else if (data.result == 0) {
-                        alert("充值失败，确认充值额度！");
+                        alert("充值失败，确认是否登录！");
 
 
                     }
@@ -320,8 +341,10 @@ var main = new Vue({
                 }
             });
         },
+
     },
     mounted: function(){
+        this.getUserInfo();
         this.getDailyPrice(this.fundId);
         this.getMaxSell(this.fundId);
         this.getMaxBuy();

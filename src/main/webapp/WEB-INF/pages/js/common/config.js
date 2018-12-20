@@ -9,6 +9,7 @@ var config = {
     api_changePwd: "password/passwordForget",
     api_changeFinaPwd: "password/financePasswordSet",
     api_getInfo: "userInfo/getUserInfo",
+    api_getUser: "login/loginUser",
     api_updateUser: "password/updateInfo",
     api_updateUserInfo: "userInfo/updateInfo",
     api_buyFund: "fund/buyfund",
