@@ -57,13 +57,45 @@ public class UploadUtil {
         File file = null;
         if (fileTypes.contains(ext)) {                      //如果扩展名属于允许上传的类型，则创建文件
             fileName = nowTime + '.' + ext;
-            file = new File(fileName);
+            file = this.creatFolder(typeName, brandName, fileName);
             try {
                 imgFile.transferTo(file);                   //保存上传的文件
             } catch (IllegalStateException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+        return file;
+    }
+
+    private File creatFolder(String typeName, String brandName, String fileName) {
+        File file = null;
+        typeName = typeName.replaceAll("/", "");               //去掉"/"
+        typeName = typeName.replaceAll(" ", "");               //替换半角空格
+        typeName = typeName.replaceAll(" ", "");               //替换全角空格
+
+        brandName = brandName.replaceAll("/", "");             //去掉"/"
+        brandName = brandName.replaceAll(" ", "");             //替换半角空格
+        brandName = brandName.replaceAll(" ", "");             //替换全角空格
+
+        File firstFolder = new File(typeName);         //一级文件夹
+        if (firstFolder.exists()) {                             //如果一级文件夹存在，则检测二级文件夹
+            File secondFolder = new File(firstFolder, brandName);
+            if (secondFolder.exists()) {                        //如果二级文件夹也存在，则创建文件
+                file = new File(secondFolder, fileName);
+            } else {                                            //如果二级文件夹不存在，则创建二级文件夹
+                secondFolder.mkdir();
+                file = new File(secondFolder, fileName);        //创建完二级文件夹后，再合建文件
+            }
+        } else {                                                //如果一级不存在，则创建一级文件夹
+            firstFolder.mkdir();
+            File secondFolder = new File(firstFolder, brandName);
+            if (secondFolder.exists()) {                        //如果二级文件夹也存在，则创建文件
+                file = new File(secondFolder, fileName);
+            } else {                                            //如果二级文件夹不存在，则创建二级文件夹
+                secondFolder.mkdir();
+                file = new File(secondFolder, fileName);
             }
         }
         return file;

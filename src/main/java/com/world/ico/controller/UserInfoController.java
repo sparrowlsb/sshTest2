@@ -51,7 +51,7 @@ public class UserInfoController extends BaseImpl{
 
     @RequestMapping(value = "updateInfo", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject setUserInfo(@RequestBody UserInfo userInfo,@RequestBody MultipartFile filedata, HttpSession session) {
+    public JSONObject setUserInfo(@RequestBody UserInfo userInfo, HttpSession session) {
         JSONObject jsonObject=new JSONObject();
         String email= (String) session.getAttribute("email");
         if (email==null){

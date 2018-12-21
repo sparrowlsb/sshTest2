@@ -36,7 +36,55 @@ var main = new Vue({
             });
         },
         updateInfo: function () {
-            var self = this;
+
+            //上传图片
+            var retImgUrl1,retImgUrl2;
+            var uploadStatus = true;
+            var url =config.api_prefix+config.api_uploadImage;
+            //图片1
+            var formData = new FormData();
+            formData.append('image', $('#image1')[0].files[0]);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function (data) {
+                    if (data.result == 1){
+                        retImgUrl1 = data.url;
+                    }else{
+                        alert(data.message);
+                        uploadStatus = false
+                    }
+                }
+            });
+            //图片2
+            formData = new FormData();
+            formData.append('image', $('#image2')[0].files[0]);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function (data) {
+                    if (data.result == 1){
+                        retImgUrl2 = data.url;
+                    }else{
+                        alert(data.message);
+                        uploadStatus = false
+                    }
+                }
+            });
+            if (!uploadStatus){
+                return;
+            }
+            //更新用户信息
             var url =config.api_prefix+config.api_updateUserInfo;
             var name=document.getElementById('name').value;
             var idCard=document.getElementById('id').value;
@@ -56,7 +104,7 @@ var main = new Vue({
                 dataType: "json",
                 contentType: "application/json;charset=utf-8",
                 url: url,
-                data: JSON.stringify({"name": name,"personCode": idCard,"idCardOn": idCardOn[0]["src"],"idCardUnder": idCardUnder[0]["src"],"usdtAddress": usdtAddress}),
+                data: JSON.stringify({"name": name,"personCode": idCard,"idCardOn": retImgUrl1,"idCardUnder": retImgUrl2,"usdtAddress": usdtAddress}),
                 success: function (data, textStatus) {
                     if (data.result == 1){
                         alert("成功更新用户信息，等待审核确认。。。。");
@@ -66,18 +114,6 @@ var main = new Vue({
                     }
                 }
             });
-
-            var url =config.api_prefix+config.api_uploadImage;
-            var formData = new FormData();
-            formData.append('image', $('#image1')[0].files[0]);
-            $.ajax({
-                url: url,
-                type: 'POST',
-                cache: false,
-                data: formData,
-                processData: false,
-                contentType: false
-            })
         }
     },
 

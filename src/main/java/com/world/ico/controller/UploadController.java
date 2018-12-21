@@ -27,9 +27,10 @@ public class UploadController {
             String path2 = "UploadFiles";//保存的文件夹
             String bigImg = uploadImages.upLoadImage(request, image, path1, path2);
             if (bigImg != null){
-                result.put("result",0);
-            }else {
                 result.put("result",1);
+                result.put("url",bigImg);
+            }else {
+                result.put("result",0);
                 result.put("message","上传错误");
             }
         }

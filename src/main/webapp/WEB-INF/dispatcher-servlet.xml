@@ -45,17 +45,12 @@
     <mvc:default-servlet-handler />
 
 
-    <!--<mvc:interceptors>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller &ndash;&gt;-->
-            <!--<mvc:mapping path="/pages/information_user" />-->
-            <!--<bean class="com.world.ico.controller.LoginController"/>-->
-        <!--</mvc:interceptor>-->
-        <!--<mvc:interceptor>-->
-            <!--&lt;!&ndash; 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller &ndash;&gt;-->
-            <!--<mvc:mapping path="/v2/spider/**" />-->
-            <!--<bean class="com.cloutech.controller.caextend.spider.ChangeDBAspect"/>-->
-        <!--</mvc:interceptor>-->
-        <!--&lt;!&ndash; 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 &ndash;&gt;-->
-    <!--</mvc:interceptors>-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+            <mvc:mapping path="/**" />
+            <bean class="com.world.ico.auth.TWebSecurityContext"/>
+        </mvc:interceptor>
+        <!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+    </mvc:interceptors>
 </beans>
