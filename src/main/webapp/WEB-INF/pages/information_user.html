@@ -143,7 +143,7 @@
                             <!--<li><a href="./information_money.html">钱包<span class="pull-right"></span></a></li>-->
                             <li class="active"><a href="#">账号设置<span class="pull-right"></span></a></li>
                             <li><a href="./information_changepass.html">修改密码<span class="pull-right"></span></a></li>
-                            <li><a href="javascript:void(0)" onclick="exit()">退出登录<span class="pull-right"></span></a></li>
+                            <li><a  onclick="exit()">退出登录<span class="pull-right"></span></a></li>
 
                         </ul>
                     </div>
@@ -157,6 +157,14 @@
                             <div class="panel-body">
                                 请认真填写您的真实身份信息，一经确认不可更改！
                             </div>
+                        </div>
+                        <div class="form-group">
+
+                            <span class="label label-danger" v-show="user.status == 0">未通过实名认证</span>
+                            <span class="label label-warning" v-show="user.status == 1">实名认证审核中。。。。。</span>
+                            <span class="label label-success" v-show="user.status == 2">实名认证已审核通过！</span>
+
+
                         </div>
                         <div class="form-group">
                             邮箱:

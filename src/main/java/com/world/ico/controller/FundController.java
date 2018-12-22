@@ -174,7 +174,7 @@ public class FundController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
-        if (fundTransaction.getFundCount().compareTo(BigDecimal.valueOf(0.0))==0){
+        if (fundTransaction.getFundCount().compareTo(BigDecimal.valueOf(0))<=0){
             return  getError(jsonObject,"please entry the trader fund count");
 
         }

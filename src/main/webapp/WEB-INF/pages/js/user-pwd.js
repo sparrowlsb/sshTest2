@@ -1,7 +1,6 @@
 /**
  * Created by Jayson on 2018/10/17.
  */
-
 var url=config.api_prefix+config.api_getUser;
 $.ajax({
 

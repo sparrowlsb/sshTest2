@@ -4,6 +4,8 @@ package com.world.ico.dto;
  * Created by lsb on 2018/12/19.
  */
 public class UserInfo {
+    Integer userId;
+
     String name;
 
     String email;
@@ -18,6 +20,13 @@ public class UserInfo {
 
     Integer status;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;

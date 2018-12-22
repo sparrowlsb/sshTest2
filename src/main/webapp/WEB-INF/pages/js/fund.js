@@ -17,7 +17,7 @@ ajax6 = $.ajax({
         }
     },
     error: function (data, textStatus) {
-        alert("error");
+
 
     }
 
@@ -591,7 +591,7 @@ $.when(ajax6).done(function (){
             }
         },
         error: function (data, textStatus) {
-            alert("error");
+
 
         }
 

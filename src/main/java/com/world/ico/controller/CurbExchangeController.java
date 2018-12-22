@@ -1,10 +1,13 @@
 package com.world.ico.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.world.ico.dao.UserInfoDao;
 import com.world.ico.dto.CurbExchange;
+import com.world.ico.dto.UserInfo;
 import com.world.ico.dto.UserWallet;
 import com.world.ico.service.FundService;
 import com.world.ico.service.LoginService;
+import com.world.ico.service.UserInfoService;
 import com.world.ico.service.serviceImpl.BaseImpl;
 import com.world.ico.util.CreateSimpleMail;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,9 @@ public class CurbExchangeController extends BaseImpl {
     private LoginService loginService;
 
     @Autowired
+    private UserInfoService userInfoService;
+
+    @Autowired
     private FundService fundService;
 
     @RequestMapping(value = "sellMoney", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
@@ -42,28 +48,30 @@ public class CurbExchangeController extends BaseImpl {
 
         }
 
-        Integer userId=loginService.findEmailIdByEmail(email);
+        UserInfo userInfo=userInfoService.getPersonInfo(email);
 
-        if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))==-1){
+        if (userInfo.getStatus()!=2){
+            return getError(jsonObject, "Please confirm the real-name authentication first");
+
+        }
+
+        if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))<=0){
             return getError(jsonObject, "please sell >0 money");
         }
-        BigDecimal totalMoney=fundService.totalMoney(userId,"USDT");
+        BigDecimal totalMoney=fundService.totalMoney(userInfo.getUserId(),"USDT");
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");
         }
         synchronized (this) {
             BigDecimal count = userWallet.getSellMoney();
-            fundService.sellMoney(userId, "SELL", userWallet.getSellMoney(), count);
-            try {
-                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),email);
-                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"1158362548@qq.com");
-                CreateSimpleMail.sendTransactionMail(email,"SELL",userWallet.getSellMoney(),"464147349@qq.com");
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            fundService.sellMoney(userInfo.getUserId(), "SELL", userWallet.getSellMoney(), count);
         }
+
+        CreateSimpleMail.sendEmail(email,"SELL",userWallet.getSellMoney(),email);
+        CreateSimpleMail.sendEmail(email,"SELL",userWallet.getSellMoney(),"1158362548@qq.com");
+        CreateSimpleMail.sendEmail(email,"SELL",userWallet.getSellMoney(),"464147349@qq.com");
+
+
         return getSuccess(jsonObject,"" );
 
 
@@ -79,20 +87,24 @@ public class CurbExchangeController extends BaseImpl {
             return getError(jsonObject,"please login first");
 
         }
+        UserInfo userInfo=userInfoService.getPersonInfo(email);
+        if (userInfo.getStatus()!=2){
+            return getError(jsonObject, "Please confirm the real-name authentication first");
+
+        }
+
         synchronized (this) {
 
-            Integer userId=loginService.findEmailIdByEmail(email);
+            Integer userId=userInfo.getUserId();
             fundService.buyMoney(userId, "BUY", userWallet.getSellMoney(), userWallet.getSellMoney());
-            try {
-                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),email);
-                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"1158362548@qq.com");
-                CreateSimpleMail.sendTransactionMail(email,"BUY",userWallet.getSellMoney(),"464147349@qq.com");
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
+
+        CreateSimpleMail.sendEmail(email,"BUY",userWallet.getSellMoney(),email);
+        CreateSimpleMail.sendEmail(email,"BUY",userWallet.getSellMoney(),"1158362548@qq.com");
+        CreateSimpleMail.sendEmail(email,"BUY",userWallet.getSellMoney(),"464147349@qq.com");
+
+
+
         return getSuccess(jsonObject,"" );
 
 

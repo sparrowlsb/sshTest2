@@ -1,7 +1,23 @@
 /**
  * Created by Jayson on 2018/10/11.
  */
+var url=config.api_prefix+config.api_getUser;
+$.ajax({
 
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: url,
+    success: function (data, textStatus) {
+        if (data.result==1){
+
+        }
+        else if (data.result==0){
+            window.location.href = '/pages/404.html';
+        }
+
+    }
+});
 var idCardOn="";
 var idCardUnder="";
 
@@ -75,9 +91,11 @@ var main = new Vue({
                 success: function (data) {
                     if (data.result == 1){
                         retImgUrl2 = data.url;
+                        console.log(retImgUrl2)
                     }else{
                         alert(data.message);
                         uploadStatus = false
+                        console.log(retImgUrl2)
                     }
                 }
             });
@@ -99,6 +117,9 @@ var main = new Vue({
                 alert("身份证输入不合法");
                 return  false;
             }
+            console.log(retImgUrl1);
+            console.log(retImgUrl2);
+
             $.ajax({
                 type: 'POST',
                 dataType: "json",

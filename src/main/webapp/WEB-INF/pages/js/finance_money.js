@@ -265,64 +265,80 @@ var main = new Vue({
             });
         },
         sellUSDT: function() {
-            var money= $("#sellMoney").val();
-            if (!money || money > this.USDT.money){
-                alert("提现金额不能为空或者超过最大提现金额！");
-                return
-            }
-            $.ajax({
-                type: "POST",   //提交的方法
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/curb/sellMoney/", //提交的地址
-                data: JSON.stringify({"sellMoney": money}),
+            if (confirm("确定要提现usdt？")) {
+                var money = $("#sellMoney").val();
+                if (!money||money <= 0 || money > this.USDT.money) {
+                    alert("提现金额不能为0或者超过最大提现金额！");
+                    return
+                }
+                $.ajax({
+                    type: "POST",   //提交的方法
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    url: "/curb/sellMoney/", //提交的地址
+                    data: JSON.stringify({"sellMoney": money}),
 
-                error: function (request) {  //失败的话
-                    alert("Connection error");
-                    sellUSDT
-                },
-                success: function (data) {  //成功
-                    if (data.result == 1) {
-                        alert("提现成功，联系兑换商提现！")
-                        window.location.reload()
-                    } else if (data.result == 0) {
-                        alert("提现失败，确认提现额度或是否已经登录！");
+                    error: function (request) {  //失败的话
+                        alert("Connection error");
+                        sellUSDT
+                    },
+                    success: function (data) {  //成功
 
+                        if (data.result == 1) {
+                            alert("提现成功，联系兑换商提现！")
+                            window.location.reload()
+                        } else if (data.result == 0) {
+                            if (data.message = "Please confirm the real-name authentication first")
+                                alert("提现失败，请先到个人中心进行实名认证！");
+                            else if (data.message = "please sell >0 money")
+                                alert("提现失败，提现金额需要大于0usdt！");
+                            else if (data.message = "total money not enough")
+                                alert("提现失败，钱包usdt金额不足");
+                            else
+                                alert("提现失败，需要先登录用户");
+
+                        }
 
                     }
-
-                }
-            });
+                });
+            }
         },
         buyUSDT: function() {
-            var money= $("#buyMoney").val();
-            if (!money || money <= 0){
-                alert("提现金额不能为空或者为0！");
-                return
-            }
-            $.ajax({
-                type: "POST",   //提交的方法
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/curb/buyMoney/", //提交的地址
-                data: JSON.stringify({"sellMoney": money}),
+            if (confirm("确定要充值usdt？")) {
 
-                error: function (request) {  //失败的话
-                    alert("Connection error");
-                    sellUSDT
-                },
-                success: function (data) {  //成功
-                    if (data.result == 1) {
-                        alert("充值成功，联系兑换商充值！")
-                        window.location.reload()
-                    } else if (data.result == 0) {
-                        alert("充值失败，确认是否登录！");
+                var money = $("#buyMoney").val();
+                if (!money || money <= 0) {
+                    alert("充值金额不能为空或者为0！");
+                    return
+                }
+                $.ajax({
+                    type: "POST",   //提交的方法
+                    dataType: "json",
+                    contentType: "application/json;charset=utf-8",
+                    url: "/curb/buyMoney/", //提交的地址
+                    data: JSON.stringify({"sellMoney": money}),
 
+                    error: function (request) {  //失败的话
+                        alert("Connection error");
+                        sellUSDT
+                    },
+                    success: function (data) {  //成功
+                        if (data.result == 1) {
+                            alert("充值成功，联系兑换商充值！")
+                            window.location.reload()
+                        } else if (data.result == 0) {
+
+                            if (data.message = "Please confirm the real-name authentication first")
+                                alert("充值失败，请先到个人中心进行实名认证！");
+                            else
+                                alert("充值失败，确认是否登录！");
+
+
+                        }
 
                     }
-
-                }
-            });
+                });
+            }
         },
         getWallets: function () {
             var self = this;

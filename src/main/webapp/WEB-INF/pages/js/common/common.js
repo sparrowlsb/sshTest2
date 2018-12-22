@@ -40,24 +40,19 @@ if (!email || email == null){
 
 //退出登录
 function exit() {
-    removeCookie("email");
-    location.href = "/pages/index_cn.html";
 
+    removeCookie("email");
     $.ajax({
         type: 'POST',
         dataType: "text",
         contentType:"application/json;charset=utf-8",
         url: "/login/loginOut",
         success: function (data, textStatus) {
-            if(data.result==1){
-                console.log("success login out");
+            window.location.href = "/pages/index_cn.html";
 
-            }else if(data=="error"){
-                console.log("failed login out");
-            }
         },
         error: function (data, textStatus) {
-            alert("error");
+
             console.log(data)
 
         }

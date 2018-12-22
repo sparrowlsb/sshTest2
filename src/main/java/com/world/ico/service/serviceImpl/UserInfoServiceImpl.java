@@ -29,6 +29,7 @@ public class UserInfoServiceImpl implements UserInfoService{
             return null;
         }
         else {
+            userInfo.setUserId(userPo.getUserId());
             userInfo.setEmail(userPo.getEmail());
             userInfo.setName(userPo.getName());
             userInfo.setPersonCode(userPo.getPersonCode());

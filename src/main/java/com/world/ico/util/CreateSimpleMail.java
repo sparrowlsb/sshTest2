@@ -23,7 +23,19 @@ public class CreateSimpleMail {
     private final static String host = "smtp.mxhichina.com"; //163的服务器
     private final static String formName = "noreply@btcome.top";//你的邮箱
     private final static String password = "superman123."; //授权码
-
+    public static void sendEmail(final String mail, final String transactionType, final BigDecimal transactionCount, final String emailAddress) {
+        Thread sendEmailThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    sendTransactionMail(mail, transactionType, transactionCount,emailAddress);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        sendEmailThread.start();
+    }
     public static void mail(String verifyCode,String emailAddress) throws Exception {
         Properties props = new Properties();
 
