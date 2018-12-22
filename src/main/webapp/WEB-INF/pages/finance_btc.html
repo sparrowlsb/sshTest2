@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta https-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kode is a Premium Bootstrap Admin Template, It's responsive, clean coded and mobile friendly">
+  <meta name="keywords" content="bootstrap, admin, dashboard, flat admin template, responsive," />
+  <title>BTCome | Fund</title>
+  <link rel="shortcut icon" href="images/ico/favicon.ico">
+
+  <link href="finance/css/root.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/gm.css">
+  <link rel="stylesheet" type="text/css" href="css/finance.css">
+  <script type="text/javascript" src="js/gm.js"></script>
+</head>
+<body>
+
+<!-- Start Page Loading -->
+<div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
+<!-- End Page Loading -->
+<!-- START TOP -->
+<!-- 顶栏+左侧菜单+主内容 -->
+<p hidden id="fundId">1</p>
+<div id="main">
+  <div id="top" class="clearfix">
+
+    <!-- Start App Logo -->
+    <div class="applogo">
+      <a class="logo" href="index_cn.html">
+        <img style="margin-top: 5px;height: 50px;" src="images/logo.png" ></h1>
+      </a>
+    </div>
+    <!-- End App Logo -->
+
+    <!-- Start Sidebar Show Hide Button -->
+    <a href="#" class="sidebar-open-button"><i class="fa fa-bars"></i></a>
+    <a href="#" class="sidebar-open-button-mobile"><i class="fa fa-bars"></i></a>
+    <!-- End Sidebar Show Hide Button -->
+
+
+
+    <!-- Start Sidepanel Show-Hide Button -->
+    <a href="#sidepanel" class="sidepanel-open-button"><i class="fa fa-outdent"></i></a>
+    <!-- End Sidepanel Show-Hide Button -->
+
+    <!-- Start Top Right -->
+    <ul class="top-right">
+
+
+      <li class="dropdown link">
+        <a href="/pages/login.html" v-show="!email">登录/注册</a> <a v-show="email" href="#" data-toggle="dropdown" class="dropdown-toggle profilebox"><img src="images/heard.png" alt="img"><b>{{email}}</b><span class="caret"></span></a>
+        <ul class="dropdown-menu dropdown-menu-list dropdown-menu-right" style="z-index: 999999;">
+          <li role="presentation" class="dropdown-header">Profile</li>
+          <li><a href="index_cn.html"><i class="fa falist fa-inbox"></i>返回主页</a></li>
+          <li><a href="information_user.html"><i class="fa falist fa-newspaper-o"></i> 个人中心</a></li>
+          <li><a href="information_money.html"><i class="fa falist fa-money"></i> 场外交易</a></li>
+          <li><a href="javascript:exit()"><i class="fa falist fa-power-off"></i> 退出</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    <!-- End Top Right -->
+
+  </div>
+  <!-- END TOP -->
+  <div class="sidebar clearfix">
+
+    <ul class="sidebar-panel nav">
+      <li class="sidetitle">基金信息</li>
+      <li><a href="finance.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance1.png" alt=""></span>{{ fund.fundName }}
+        <span class="label label-success" v-show="fund.fundQuoteChange >= 0">{{ fund.fundQuoteChange }}%</span>
+        <span class="label label-danger" v-show="fund.fundQuoteChange < 0">{{ fund.fundQuoteChange }}%</span>
+      </a></li>
+
+
+    </ul>
+    <ul class="sidebar-panel nav">
+      <li><a href="finance2.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance2.png" alt=""></span>{{ fund2.fundName }}
+        <span class="label label-success" v-show="fund2.fundQuoteChange >= 0">{{ fund2.fundQuoteChange }}%</span>
+        <span class="label label-danger" v-show="fund2.fundQuoteChange < 0">{{ fund2.fundQuoteChange }}%</span>
+      </a></li>
+
+
+    </ul>
+    <ul class="sidebar-panel nav">
+      <li><a href="finance3.html"><span class="icon color5"><img height="20" width="20" src="images/home/finance3.png" alt=""></span>{{ fund3.fundName }}
+        <span class="label label-success" v-show="fund3.fundQuoteChange >= 0">{{ fund3.fundQuoteChange }}%</span>
+        <span class="label label-danger" v-show="fund3.fundQuoteChange < 0">{{ fund3.fundQuoteChange }}%</span>
+
+      </a></li>
+
+
+    </ul>
+    <ul class="sidebar-panel nav">
+      <li class="sidetitle">数字货币实时行情</li>
+      <li><a href="finance_btc.html"><span class="icon color5"><img height="20" width="20" src="index/images/media/btc.png" alt=""></span>实时行情
+      </a></li>
+
+
+    </ul>
+    <ul class="sidebar-panel nav">
+      <li class="sidetitle">场外交易</li>
+      <li><a href="information_money.html"><span class="icon color5">  <i class="fa falist fa-money"></i></span>场外交易中心
+
+      </a></li>
+
+
+    </ul>
+
+    <ul class="sidebar-panel nav">
+
+
+    </ul>
+
+
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" sync>
+          {
+              "symbol": "OKCOIN:BTCUSD",
+              "width": "100%",
+              "height": "100%",
+              "locale": "zh_CN",
+              "dateRange": "1y",
+              "colorTheme": "dark",
+              "trendLineColor": "rgba(255, 152, 0, 1)",
+              "underLineColor": "rgba(55, 166, 239, 0.15)",
+              "isTransparent": false,
+              "autosize": true,
+              "largeChartUrl": ""
+          }
+      </script>
+    </div>
+
+  </div>
+  <!-- END SIDEBAR -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+  <table id="example" class="display" style="color:rgb(0,0,0) " width="100%"></table>
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+  <!-- START CONTENT -->
+  <div class="content">
+    <div class="page-header">
+      <!--<div class="tradingview-widget-container__widget"></div>-->
+      <!-- TradingView Widget BEGIN -->
+      <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" sync>
+            {
+                "symbols": [
+                {
+                    "description": "",
+                    "proName": "OKCOIN:BTCUSD"
+                },
+                {
+                    "description": "",
+                    "proName": "OKCOIN:ETHUSD"
+                },
+                {
+                    "description": "",
+                    "proName": "BITFINEX:EOSUSD"
+                },
+                {
+                    "description": "",
+                    "proName": "BITFINEX:XRPUSD"
+                },
+                {
+                    "description": "",
+                    "proName": "BITFINEX:XLMUSD"
+                }
+            ],
+                "locale": "zh_CN"
+            }
+        </script>
+      </div>
+      <!-- TradingView Widget END -->
+      <!-- TradingView Widget END -->
+    </div>
+
+    <!--&lt;!&ndash; End Page Header &ndash;&gt;-->
+
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+    <!-- START CONTAINER -->
+    <div class="container-widget">
+
+
+      <!-- Start First Row -->
+      <div class="row">
+        <div class=" panel-widget widget chart-with-stats clearfix" style="height:610px;width: 100%">
+          <!-- TradingView Widget BEGIN -->
+          <div class="tradingview-widget-container">
+            <div id="tradingview_312e6"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+            <script type="text/javascript">
+                new TradingView.widget(
+                    {
+                        "width": 1150,
+                        "height": 610,
+                        "symbol": "OKCOIN:BTCUSD",
+                        "interval": "D",
+                        "timezone": "Etc/UTC",
+                        "theme": "Light",
+                        "style": "1",
+                        "locale": "zh_CN",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "hide_side_toolbar": false,
+                        "allow_symbol_change": true,
+                        "news": [
+                            "headlines"
+                        ],
+                        "studies": [
+                            "MACD@tv-basicstudies",
+                            "TripleEMA@tv-basicstudies"
+                        ],
+                        "container_id": "tradingview_312e6"
+                    }
+                );
+            </script>
+          </div>
+          <!-- TradingView Widget END -->
+
+        </div>
+        <!-- Start Top Stats -->
+
+      </div>
+      <!-- End Server Status -->
+
+      <!-- Start Fourth Row -->
+      <div class="row">
+
+        <!-- Start Profile Widget -->
+        <div class="col-md-12 col-lg-5">
+          <div class="panel panel-widget" >
+            <div class="panel-title">
+              <span class="label label-default">技术分析</span>
+              <ul class="panel-tools ">
+                <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+                <li><a class="icon"><i class="fa fa-refresh"></i></a></li>
+                <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+              </ul>
+            </div>
+            <div class="panel-body table-responsive">
+
+              <!-- TradingView Widget BEGIN -->
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-technical-analysis.js" async>
+                    {
+                        "width": "100%",
+                        "height": 410,
+                        "symbol": "OKCOIN:BTCUSD",
+                        "locale": "zh_CN",
+                        "interval": "1D"
+                    }
+                </script>
+              </div>
+              <!-- TradingView Widget END -->
+            </div>
+          </div>
+        </div>
+
+        <!-- End Profile Widget -->
+
+        <!-- Start Orders -->
+        <div class="col-md-12 col-lg-7">
+          <div class="panel panel-widget">
+            <div class="panel-title">
+              <span class="label label-warning">交易理念</span>
+              <ul class="panel-tools">
+                <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+                <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+                <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+              </ul>
+            </div>
+
+
+            <div class="panel-body table-responsive">
+
+              <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">本平台结合基金管理人对宏观经济周期和金融市场运行趋势的判断,自上而下进行宏观分析,自下而上精选投资标的,通过灵活的资产配置策略和积极主动的投资管理,在控制下行风险的前提下,力争为投资者提供长期稳健的投资回报。</p>
+
+
+            </div>
+          </div>
+        </div>
+        <!-- End Orders -->
+
+
+        <!-- Start Inbox -->
+        <div class="col-md-12 col-lg-7">
+          <div class="panel panel-widget" >
+            <div class="panel-title">
+              <span class="label label-danger">平台声明</span>
+              <ul class="panel-tools">
+                <li><a class="icon minimise-tool"><i class="fa fa-minus"></i></a></li>
+                <li><a class="icon expand-tool"><i class="fa fa-expand"></i></a></li>
+                <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
+              </ul>
+            </div>
+            <div class="panel-body">
+
+
+              <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">
+                本数字货币资产管理平台，是一个理性的，稳定的数字货币基金平台，投资者有完全的权利选择他的管理经理<br>
+                我们不会直接或者间接给投资者引导用户，也不会在平台一下私自募集投资者的数字资产<br>
+                在此，再次声明，数字资产投资需谨慎。
+              </p>
+
+            </div>
+          </div>
+        </div>
+        <!-- End Inbox -->
+
+      </div>
+      <!-- End Fourth Row -->
+
+
+
+      <!-- End Second Row -->
+
+
+
+
+    </div>
+  </div>
+  <!-- END 左侧菜单+主内容 -->
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Start Footer -->
+
+  <div class="row footer">
+    <div class="col-md-6 text-left">
+      Copyright 2018.<a href="#" target="_blank">&copy; BTCome Fund</a> All Rights Reserved.
+    </div>
+    <div class="col-md-6 text-right">
+      Design and Developed by <a href="#" target="_blank">&copy; BTCome Fund</a>
+    </div>
+  </div>
+  <!-- End Footer -->
+
+
+</div>
+<!-- End Content -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+<!-- START SIDEPANEL -->
+<div role="tabpanel" class="sidepanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#myWallet" aria-controls="myWallet" role="tab" data-toggle="tab">我的钱包</a></li>
+    <li role="presentation"><a href="#tradeRecord" aria-controls="tradeRecord" role="tab" data-toggle="tab">交易记录</a></li>
+    <li role="presentation"><a href="#charge" aria-controls="charge" role="tab" data-toggle="tab">充值提现</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+    <!-- Start Today -->
+    <div role="tabpanel" class="tab-pane active" id="myWallet">
+
+      <div class="sidepanel-m-title">
+        我的钱包
+        <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+      </div>
+      <div class="gn-title">
+
+      </div>
+      <ul class="list-w-title">
+        <li v-for="w in wallets">
+          <a href="javascript:void(0)">
+
+            <span class="label label-success">{{w.type}}</span>
+            <span class="date">{{w.money}}</span>
+          </a>
+        </li>
+      </ul>
+      <div style="font-size: 15px;text-align: center;margin: 10px 0;padding-bottom:10px;border-bottom: 1px solid #eee">充值中心</div>
+      <div class="panel-body">
+        <ul class="list-group qq-list">
+          <a target="_blank" v-bind:href="'https://wpa.qq.com/msgrd?v=3&uin='+qq.qq+'&site=qq&menu=yes'" v-for="qq in qqList"><li class="list-group-item">
+            <img src="images/qq-icon.png" />
+            <span class="name">{{qq.nick}}</span><br/>
+            <span class="num">{{qq.qq}}</span>
+          </li></a>
+          <div style="clear: both"></div>
+        </ul>
+      </div>
+
+    </div>
+    <!-- End Today -->
+
+    <!-- Start Tasks -->
+    <div role="tabpanel" class="tab-pane" id="tradeRecord">
+
+      <div class="sidepanel-m-title">
+        历史成交记录
+        <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+      </div>
+      <div class="gn-title">
+
+      </div>
+
+      <ul class="list-w-title">
+        <li v-for="r in records">
+          <a href="#">
+            <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
+            <span class="date">{{r.transactionDate}}</span>
+            <h4>交易订单： # {{r.id}}</h4>
+            <h4>{{buySaleText(r.type)}}基金：{{r.fundName}}</h4>
+            <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
+            <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
+            <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
+            <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
+
+            <h4>成交情况：{{r.transactionStatus}}</h4>
+          </a>
+        </li>
+
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+            <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
+      </ul>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="charge">
+
+      <div class="sidepanel-m-title">
+        充值提现
+        <span class="left-icon"><a href="#"><i class="fa fa-refresh"></i></a></span>
+      </div>
+      <div class="gn-title">
+
+      </div>
+
+      <ul class="list-w-title">
+        <li v-for="r in charges">
+          <a href="#">
+            <span class="label" v-bind:class="buySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
+            <span class="date">{{r.exchangeDate}}</span>
+            <h4>交易订单： # {{r.id}}</h4>
+            <h4>{{r.exchangeType}}方式：{{r.exchangePlatform}}</h4>
+            <h4>{{r.exchangeType}}金额：{{r.money}} USDT</h4>
+
+            <h4>交易状态：{{r.status}}</h4>
+          </a>
+        </li>
+
+        <nav aria-label="...">
+          <ul class="pager">
+            <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
+            <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+<!-- END SIDEPANEL -->
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+</body>
+</html>
+<script type="text/javascript" src="finance/js/jquery.min.js"></script>
+<script src="finance/js/bootstrap/bootstrap.min.js"></script>
+<script src="js/datatables/datatables.min.js"></script>
+<script src="js/echarts.js"></script>
+
+<!-- ================================================
+Plugin.js - Some Specific JS codes for Plugin Settings
+================================================ -->
+<script type="text/javascript" src="finance/js/plugins.js"></script>
+
+<script src="js/fund.js"></script>
+<script src="js/common/config.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/common/common.js"></script>
+<!--<script src="js/fundhist.js"></script>-->
+<script src="js/finance.js"></script>
+<script src="js/financeTransaction.js"></script>
