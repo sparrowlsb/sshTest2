@@ -1,6 +1,5 @@
 var config = {
     api_prefix: "/",
-    // api_prefix: "http://localhost:8080/",
     api_getVerifyImg: "sms/VerifyCode",
     api_sendEmailVerify: "sms/VerifyEmailCode",
     api_regist: "login/registerUser",
@@ -13,5 +12,7 @@ var config = {
     api_updateUser: "password/updateInfo",
     api_updateUserInfo: "userInfo/updateInfo",
     api_buyFund: "fund/buyfund",
-    api_sellFund: "fund/sellfund"
+    api_sellFund: "fund/sellfund",
+
+    api_uploadImage: "upload/image"
 };
