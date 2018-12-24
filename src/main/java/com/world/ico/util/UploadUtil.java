@@ -46,7 +46,7 @@ public class UploadUtil {
             savePath = file.getName();
         }
 
-        return "/" + path2 + "/" + path3 + "/" +userId+"/"+ savePath;
+        return path1 + "/" + path2 + "/" + path3 + "/" +userId+"/"+ savePath;
     }
 
     private File getFile(MultipartFile imgFile, String typeName, String brandName,Integer userId, List fileTypes) {
@@ -59,7 +59,7 @@ public class UploadUtil {
 
         File file = null;
         if (fileTypes.contains(ext)) {                      //如果扩展名属于允许上传的类型，则创建文件
-            fileName = userId+"*"+nowTime + '.' + ext;
+            fileName = userId+"-"+nowTime + '.' + ext;
             file = this.creatFolder(typeName, brandName, fileName,userId);
             try {
                 imgFile.transferTo(file);                   //保存上传的文件

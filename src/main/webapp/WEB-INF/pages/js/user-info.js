@@ -53,6 +53,19 @@ var main = new Vue({
         },
         updateInfo: function () {
 
+            var name=document.getElementById('name').value;
+            var idCard=document.getElementById('id').value;
+            var usdtAddress=document.getElementById('usdtAddress').value;
+            if (!name || !idCard||!idCardOn||!idCardUnder||!usdtAddress){
+                alert("不能为空");
+                return
+            }
+            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if(reg.test(idCard) === false)
+            {
+                alert("身份证输入不合法");
+                return  false;
+            }
             //上传图片
             var retImgUrl1,retImgUrl2;
             var uploadStatus = true;
@@ -102,24 +115,9 @@ var main = new Vue({
             if (!uploadStatus){
                 return;
             }
-            //更新用户信息
-            var url =config.api_prefix+config.api_updateUserInfo;
-            var name=document.getElementById('name').value;
-            var idCard=document.getElementById('id').value;
-            var usdtAddress=document.getElementById('usdtAddress').value;
-            if (!name || !idCard||!idCardOn||!idCardUnder||!usdtAddress){
-                alert("不能为空");
-                return
-            }
-            var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-            if(reg.test(idCard) === false)
-            {
-                alert("身份证输入不合法");
-                return  false;
-            }
-            console.log(retImgUrl1);
-            console.log(retImgUrl2);
 
+            //更新用户信息
+            url =config.api_prefix+config.api_updateUserInfo;
             $.ajax({
                 type: 'POST',
                 dataType: "json",
