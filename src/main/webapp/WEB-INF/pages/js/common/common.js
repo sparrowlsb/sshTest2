@@ -1,7 +1,26 @@
 /**
  * Created by Jayson on 2018/10/11.
  */
+//判断用户是否登录
+var url=config.api_prefix+config.api_getUser;
+$.ajax({
+    type: 'GET',
+    dataType: "json",
+    contentType: "application/json;charset=utf-8",
+    url: url,
+    async: false,
+    success: function (data, textStatus) {
+        if (data.result==0){
+            removeCookie("email");
+            var uri = window.location.pathname;
+            if (uri == "/pages/information_user.html"){
+                window.location.href = '/pages/404.html';
+            }
+        }
+    }
+});
 var email = getCookie("email");
+
 function setCookie(name,value,days){    //封装一个设置cookie的函数
     var oDate=new Date();
     oDate.setDate(oDate.getDate()+days);   //days为保存时间长度

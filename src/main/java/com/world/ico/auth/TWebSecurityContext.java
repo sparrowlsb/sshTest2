@@ -25,9 +25,11 @@ public class TWebSecurityContext  extends HandlerInterceptorAdapter {
             String host = request.getRemoteHost();//返回发出请求的客户机的主机名
             int port = request.getRemotePort();//返回发出请求的客户机的端口号。
 
-            String[] uris = uri.split("/");
-            if ("UploadFiles".equals(uris[1])){
-                request.getRequestDispatcher("/pages/404.html").forward(request, response);
+            //未登录
+            if (request.getSession().getAttribute("email") == null){
+//                if ("/pages/information_user.html".equals(uri)){
+//                    request.getRequestDispatcher("/pages/404.html").forward(request, response);
+//                }
             }
 //        System.out.println(ip);
 //        System.out.println(url);
