@@ -406,32 +406,16 @@ public class FundServiceImpl implements FundService {
         for (UserWalletPo userWalletPo:userWalletPos) {
             UserWallet userWallet = new UserWallet();
 
-            if (userWalletPo.getType().equalsIgnoreCase("FUND_1")) {
-                FundPo fundInfo = fundDao.getFundInfo(1);
+            if (userWalletPo.getType().split("_").length>=2){
+                FundPo fundInfo = fundDao.getFundInfo(Integer.valueOf(userWalletPo.getType().split("_")[1]));
                 if (fundInfo!=null) {
                     userWallet.setType(fundInfo.getFundName());
                 }
                 userWallet.setMoney(userWalletPo.getCount());
 
 
-            }
-            if (userWalletPo.getType().equalsIgnoreCase("FUND_2")) {
-                FundPo fundInfo = fundDao.getFundInfo(2);
-                if (fundInfo!=null) {
-                    userWallet.setType(fundInfo.getFundName());
-                }
-                userWallet.setMoney(userWalletPo.getCount());
-            }
-            if (userWalletPo.getType().equalsIgnoreCase("FUND_3")) {
-                FundPo fundInfo = fundDao.getFundInfo(3);
-                if (fundInfo!=null) {
-                    userWallet.setType(fundInfo.getFundName());
-                }
-                userWallet.setMoney(userWalletPo.getCount());
-            }
-            if (userWalletPo.getType().equalsIgnoreCase("USDT")) {
-
-                userWallet.setType("USDT");
+            } else {
+                userWallet.setType(userWalletPo.getType());
 
                 userWallet.setMoney(userWalletPo.getCount());
             }
