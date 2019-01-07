@@ -123,3 +123,7 @@ var qqList = [
     {qq:908966762,nick:"24小时平台充值-古月HU"},
     {qq:1019074999,nick:"24小时平台充值-bobo"}
 ];
+var qqList2 = [
+    {qq:1158362548,nick:"BTCome官方客服"},
+
+];
