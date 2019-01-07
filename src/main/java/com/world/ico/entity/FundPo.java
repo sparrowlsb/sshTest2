@@ -29,7 +29,7 @@ public class FundPo {
     BigDecimal fundPrice;
 
     @Column(name = "fund_start_date")
-    Timestamp fundStartDate;
+    String fundStartDate;
 
     public Integer getFundId() {
         return fundId;
@@ -71,11 +71,11 @@ public class FundPo {
         this.fundPrice = fundPrice;
     }
 
-    public Timestamp getFundStartDate() {
+    public String getFundStartDate() {
         return fundStartDate;
     }
 
-    public void setFundStartDate(Timestamp fundStartDate) {
+    public void setFundStartDate(String fundStartDate) {
         this.fundStartDate = fundStartDate;
     }
 }

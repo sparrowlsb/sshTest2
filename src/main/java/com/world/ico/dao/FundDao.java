@@ -14,7 +14,7 @@ import java.util.List;
 public interface FundDao extends PagingAndSortingRepository<FundPo, Integer> {
 
 
-    @Query(value = "SELECT fund_id,fund_name,fund_manage_id,fund_type,fund_price,fund_start_date FROM FUND where fund_id=:fundId", nativeQuery = true)
+    @Query(value = "SELECT fund_id,fund_name,fund_manage_id,fund_type,fund_price,DATE_FORMAT(fund_start_date,'%Y-%m-%d') fund_start_date FROM FUND where fund_id=:fundId", nativeQuery = true)
     FundPo getFundInfo(@Param("fundId") Integer fundId);
 
 }

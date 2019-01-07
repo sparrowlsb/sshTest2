@@ -29,6 +29,9 @@ public class FundServiceImpl implements FundService {
     public FundDao fundDao;
 
     @Autowired
+    public FundManageDao fundManageDao;
+
+    @Autowired
     public CurbExchangeDao curbExchangeDao;
 
     @Autowired
@@ -117,8 +120,17 @@ public class FundServiceImpl implements FundService {
             if (fundPo != null) {
                 String fundName = fundPo.getFundName();
                 String fundType = fundPo.getFundType();
+                FundManagePo fundManageInfo = fundManageDao.getFundManageInfo(fundPo.getFundManageId());
                 fundPrice.setFundName(fundName);
                 fundPrice.setFundType(fundType);
+                fundPrice.setFundStartDate(fundPo.getFundStartDate());
+
+                fundPrice.setFundManageName(fundManageInfo.getManageName());
+                fundPrice.setFundManageAge(fundManageInfo.getManageAge());
+                fundPrice.setFundManageSex(fundManageInfo.getManageSex());
+                fundPrice.setFundManageInfo(fundManageInfo.getManageInfo());
+                fundPrice.setFundManageSpeciality(fundManageInfo.getManageSpeciality());
+
             }
             fundPriceArrayList.add(fundPrice);
         }

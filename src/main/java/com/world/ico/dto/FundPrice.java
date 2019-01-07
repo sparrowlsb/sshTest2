@@ -13,6 +13,18 @@ public class FundPrice {
 
     String  fundType;
 
+    String  fundStartDate;
+
+    String  fundManageName;
+
+    String  fundManageSex;
+
+    Integer  fundManageAge;
+
+    String  fundManageSpeciality;
+
+    String  fundManageInfo;
+
     BigDecimal fundIncrease;
 
     BigDecimal fundPrice;
@@ -28,6 +40,55 @@ public class FundPrice {
     BigDecimal fundQuoteChange;
 
     BigDecimal fundQuoteHistChange;
+
+    public String getFundStartDate() {
+        return fundStartDate;
+    }
+
+    public void setFundStartDate(String fundStartDate) {
+        this.fundStartDate = fundStartDate;
+    }
+
+    public String getFundManageName() {
+        return fundManageName;
+    }
+
+    public void setFundManageName(String fundManageName) {
+        this.fundManageName = fundManageName;
+    }
+
+    public String getFundManageSex() {
+        return fundManageSex;
+    }
+
+    public void setFundManageSex(String fundManageSex) {
+        this.fundManageSex = fundManageSex;
+    }
+
+
+    public Integer getFundManageAge() {
+        return fundManageAge;
+    }
+
+    public void setFundManageAge(Integer fundManageAge) {
+        this.fundManageAge = fundManageAge;
+    }
+
+    public String getFundManageSpeciality() {
+        return fundManageSpeciality;
+    }
+
+    public void setFundManageSpeciality(String fundManageSpeciality) {
+        this.fundManageSpeciality = fundManageSpeciality;
+    }
+
+    public String getFundManageInfo() {
+        return fundManageInfo;
+    }
+
+    public void setFundManageInfo(String fundManageInfo) {
+        this.fundManageInfo = fundManageInfo;
+    }
 
     public String getFundType() {
         return fundType;

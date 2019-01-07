@@ -209,7 +209,7 @@
         </li>
         <li class="col-xs-3 col-lg-3">
           <span class="title"><i class="fa fa-clock-o"></i> 最近更新时间</span>
-          <h3 class="color-up">{{ fund3.fundDate }}  18:30</h3>
+          <h3 class="color-up">{{ fund3.fundDate }}  21:30</h3>
         </li>
       </ul>
     </div>
@@ -431,9 +431,16 @@
           <li><a class="icon closed-tool"><i class="fa fa-times"></i></a></li>
         </ul>
         <div class="panel-body table-responsive">
-        <div class="widget profile-widget" style="height:300px;">
-          <img src="images/profileimg.png" class="profile-image" alt="img">
-          <h1>Jonathan Doe</h1>
+        <div class="widget profile-widget" style="height:400px;">
+          <img src="images/profileimg4.png" class="profile-image" alt="img">
+          <h1>{{fund3.fundManageName}}</h1>
+          <h1>擅长领域{{fund3.fundManageSpeciality}}</h1>
+          <ul class="stats widget-inline-list clearfix">
+            <li class="col-4"><span>{{fund3.fundManageSex}}</span>性别</li>
+            <li class="col-4"><span>{{fund3.fundManageAge}}</span>年龄</li>
+            <li class="col-4"><span>{{fund3.fundStartDate}}</span>基金成立日期</li>
+
+          </ul>
           <!--<p><i class="fa fa-map-marker"></i> London</p>-->
           <!--<a href="#" class="btn btn-sm">Follow</a>-->
           <!--<ul class="stats widget-inline-list clearfix">-->
@@ -463,7 +470,7 @@
 
         <div class="panel-body table-responsive">
 
-          <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">本基金结合基金管理人对宏观经济周期和金融市场运行趋势的判断,自上而下进行宏观分析,自下而上精选投资标的,通过灵活的资产配置策略和积极主动的投资管理,在控制下行风险的前提下,力争为投资者提供长期稳健的投资回报。</p>
+          <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">{{fund3.fundType}}</p>
 
 
         </div>
@@ -486,7 +493,7 @@
         <div class="panel-body">
 
 
-          <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">数字货币有了几年的投资经验，擅长突破操作</p>
+          <p class="wow  fadeIn animated" data-wow-duration="1.3s" style="visibility: visible; animation-duration: 1.3s; animation-name: fadeIn;">{{fund3.fundManageInfo}}</p>
 
         </div>
       </div>
