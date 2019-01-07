@@ -31,11 +31,25 @@ public class UploadUtil {
         path1 += path2;
         String path3 = new SimpleDateFormat("yyyyMMdd").format(new Date());//创建文件夹路径
         String savePath = "";
-        fileTypes.add("gif");
-        fileTypes.add("jpeg");
-        fileTypes.add("svg");
+        fileTypes.add("bmp");
         fileTypes.add("jpg");
         fileTypes.add("png");
+        fileTypes.add("tif");
+        fileTypes.add("gif");
+        fileTypes.add("pcx");
+        fileTypes.add("tga");
+        fileTypes.add("exif");
+        fileTypes.add("fpx");
+        fileTypes.add("svg");
+        fileTypes.add("psd");
+        fileTypes.add("cdr");
+        fileTypes.add("pcd");
+        fileTypes.add("dxf");
+        fileTypes.add("ufo");
+        fileTypes.add("eps");
+        fileTypes.add("ai");
+        fileTypes.add("raw");
+        fileTypes.add("webp");
         // 保存文件
         if (!(image.getOriginalFilename() == null || "".equals(image.getOriginalFilename()))) {
                     /*
