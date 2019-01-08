@@ -127,7 +127,7 @@ function checkEmailExists() {
                     $("#regEmail").removeClass('input-error');
                 }else if(data.result==0){
                     $("#regEmail").addClass('input-error');
-                    alert(data.message)
+                    // alert(data.message)
                 }
             },
             error: function (data, textStatus) {

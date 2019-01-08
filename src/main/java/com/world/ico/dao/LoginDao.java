@@ -24,7 +24,7 @@ public interface LoginDao extends PagingAndSortingRepository<UserPo, Integer> {
     List<Integer> getUserIdByEmail( @Param("email") String email);
 
     @Modifying
-    @Query(value = "INSERT INTO USER (email,password) values (:email,:password) ", nativeQuery = true)
+    @Query(value = "INSERT INTO USER (email,password,create_date,update_date) values (:email,:password,now(),now()) ", nativeQuery = true)
     void insertUserByEmailNameAndPassword(@Param("email") String email,@Param("password") String password);
 
     @Modifying

@@ -12,13 +12,13 @@ import org.springframework.data.repository.query.Param;
 public interface PasswordDao extends PagingAndSortingRepository<UserPo, Integer> {
 
     @Modifying
-    @Query(value = "UPDATE  USER t set t.password = :password where t.email=:email", nativeQuery = true)
+    @Query(value = "UPDATE  USER t set t.password = :password,t.update_date=now() where t.email=:email", nativeQuery = true)
     void updatePassword(@Param("password") String password, @Param("email") String email);
 
 
 
     @Modifying
-    @Query(value = "UPDATE  USER t set t.passwordFinance = :passwordFinance where t.email=:email", nativeQuery = true)
+    @Query(value = "UPDATE  USER t set t.passwordFinance = :passwordFinance,t.update_date=now() where t.email=:email", nativeQuery = true)
     void updateFinancePassword(@Param("passwordFinance") String password, @Param("email") String email);
 
 

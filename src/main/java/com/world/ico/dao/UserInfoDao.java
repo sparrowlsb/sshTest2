@@ -16,7 +16,7 @@ public interface UserInfoDao extends PagingAndSortingRepository<UserPo, Integer>
     UserPo getUserInfoByEmail(@Param("email") String email);
 
     @Modifying
-    @Query(value = "update USER set name=:name,person_code=:personCode,id_card_on=:idCardOn,id_card_under=:idCardUnder,usdt_address=:usdtAddress,status=1,update_date=CURRENT_TIMESTAMP where email = :email", nativeQuery = true)
+    @Query(value = "update USER set name=:name,person_code=:personCode,id_card_on=:idCardOn,id_card_under=:idCardUnder,usdt_address=:usdtAddress,status=1,update_date=now() where email = :email", nativeQuery = true)
     void updateUserInfoByEmail(@Param("email") String email,@Param("name") String name,@Param("personCode") String personCode,@Param("idCardOn") String idCardOn,@Param("idCardUnder") String idCardUnder,@Param("usdtAddress") String usdtAddress);
 
 
