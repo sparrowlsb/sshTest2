@@ -287,7 +287,7 @@ var main = new Vue({
                             alert("提现成功，联系兑换商提现！")
                             window.location.reload()
                         } else if (data.result == 0) {
-                            alert(data.message)
+
                             if (data.message == "Please confirm the real-name authentication first")
                                 alert("提现失败，请先到个人中心进行实名认证！");
                             else if (data.message == "please sell >0 money")
