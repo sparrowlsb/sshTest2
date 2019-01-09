@@ -67,7 +67,7 @@ public class LoginController extends BaseImpl{
 
         JSONObject jsonObject=new JSONObject();
         System.out.println(user.getPassword());
-        if(verCode.isEmpty()){
+        if(verCode==""){
             return getError(jsonObject,"the vercode not get");
         }
         if(!user.getVerCode().equalsIgnoreCase(verCode)){
@@ -77,7 +77,7 @@ public class LoginController extends BaseImpl{
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
 
-        if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()){
+        if(user.getEmail()==""&&user.getPassword()==""){
             return getError(jsonObject,"enter email or password is empty");
         }
         if(!m.matches()){
@@ -107,7 +107,7 @@ public class LoginController extends BaseImpl{
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
 
-        if(user.getEmail().isEmpty()){
+        if(user.getEmail()==""){
             return getError(jsonObject,"email is empty");
         }
         if(!m.matches()){
@@ -128,12 +128,11 @@ public class LoginController extends BaseImpl{
         JSONObject jsonObject=new JSONObject();
         String verCode=(String) session.getAttribute("verCode");
         String verEamilCode=(String) session.getAttribute("verEmailCode");
-        String verEamil=(String) session.getAttribute("verEmail");
 
-        if(verCode.isEmpty()){
+        if(user.getVerCode()==""){
             return getError(jsonObject,"the vercode not get");
         }
-        if(verEamilCode.isEmpty()){
+        if(verEamilCode==null){
             return getError(jsonObject,"the verEmailCode not get");
         }
         if(!user.getVerCode().equalsIgnoreCase(verCode)){
@@ -144,14 +143,11 @@ public class LoginController extends BaseImpl{
 
             return getError(jsonObject,"the verEmailCode not right");
         }
-        if(!user.getEmail().equalsIgnoreCase(verEamil)){
 
-            return getError(jsonObject,"the verEmail not right");
-        }
 
         Pattern p = Pattern.compile(RULE_EMAIL);
         Matcher m = p.matcher(user.getEmail());
-        if(user.getEmail().isEmpty()&&user.getPassword().isEmpty()&&user.getName().isEmpty()){
+        if(user.getEmail()==""&&user.getPassword()==""&&user.getName()==""){
             return getError(jsonObject,"enter email or password is empty");
         }
         if(!m.matches()){

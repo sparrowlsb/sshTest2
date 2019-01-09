@@ -64,7 +64,7 @@ public class LoginServiceImpl implements LoginService{
         loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND_1",BigDecimal.valueOf(0.0));
         loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND_2",BigDecimal.valueOf(0.0));
         loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"FUND_3",BigDecimal.valueOf(0.0));
-        loginDao.insertUserWallet(userId,BigDecimal.valueOf(1000.0),"BCM",BigDecimal.valueOf(1000.0));
+        loginDao.insertUserWallet(userId,BigDecimal.valueOf(0.0),"BCM",BigDecimal.valueOf(1000.0));
     }
 
 

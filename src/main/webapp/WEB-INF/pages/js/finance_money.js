@@ -287,14 +287,15 @@ var main = new Vue({
                             alert("提现成功，联系兑换商提现！")
                             window.location.reload()
                         } else if (data.result == 0) {
-                            if (data.message = "Please confirm the real-name authentication first")
+                            alert(data.message)
+                            if (data.message == "Please confirm the real-name authentication first")
                                 alert("提现失败，请先到个人中心进行实名认证！");
-                            else if (data.message = "please sell >0 money")
+                            else if (data.message == "please sell >0 money")
                                 alert("提现失败，提现金额需要大于0usdt！");
-                            else if (data.message = "total money not enough")
+                            else if (data.message == "total money not enough")
                                 alert("提现失败，钱包usdt金额不足");
-                            else if (data.message="Successful completion of a fund transaction before withdrawal"){
-                                alert("成功完成一次基金交易才能提现")
+                            else if (data.message=="Successful completion of a fund transaction before withdrawal"){
+                                alert("提现失败，成功完成一次基金交易才能提现");
                             }
                             else
                                 alert("提现失败，需要先登录用户");
@@ -330,7 +331,7 @@ var main = new Vue({
                             window.location.reload()
                         } else if (data.result == 0) {
 
-                            if (data.message = "Please confirm the real-name authentication first")
+                            if (data.message == "Please confirm the real-name authentication first")
                                 alert("充值失败，请先到个人中心进行实名认证！");
                             else
                                 alert("充值失败，确认是否登录！");

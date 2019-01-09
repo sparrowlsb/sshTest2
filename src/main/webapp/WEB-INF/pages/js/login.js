@@ -174,13 +174,25 @@ function registerUser() {
                     setCookie('email',email,1);
                     window.location.href="/pages/index_cn.html";
                 }else if(data.result==0){
-                    alert(data.message);
+                    if(data.message=="the vercode not get") {
+                        alert("请输入验证码！");
+                    }else if(data.message=="the verCode not right"){
+                        alert("验证码不正确！");
+                    }else if(data.message=="the verEmailCode not get"){
+                        alert("请发送邮箱验证码！");
+                    }else if(data.message=="error email"){
+                        alert("邮箱地址不正确！");
+                    }else if(data.message=="the verEmailCode not right"){
+                        alert("邮箱验证码不正确！");
+                    }else if(data.message=="emailExistence"){
+                        alert("邮箱已被注册！");
+                    }
                     verifyClick()
                 }
+
             },
             error: function (data, textStatus) {
-                alert("error");
-                console.log(data)
+
                 verifyClick()
 
             }
