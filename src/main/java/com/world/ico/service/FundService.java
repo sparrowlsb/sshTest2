@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface FundService {
 
+    public Integer haveFundTransactionRecord(Integer userId);
+
     public List<FundPrice> getFundDailyPrice();
 
     public HashMap<Integer,ArrayList<FundPrice>> getFundNarrowInfo();

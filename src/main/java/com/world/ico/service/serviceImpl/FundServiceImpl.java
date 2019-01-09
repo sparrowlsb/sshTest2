@@ -45,6 +45,12 @@ public class FundServiceImpl implements FundService {
 
 
     @Override
+    public Integer haveFundTransactionRecord(Integer userId) {
+        Integer count=fundTransactionDao.haveFundTransactionRecord(userId);
+        return count;
+    }
+
+    @Override
     public List<FundPrice> getFundDailyPrice() {
 
         ArrayList<FundPricePo> fundPriceList = fundPriceDao.getFundDailyPrice();

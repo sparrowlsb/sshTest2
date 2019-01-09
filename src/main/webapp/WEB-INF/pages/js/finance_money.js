@@ -279,8 +279,7 @@ var main = new Vue({
                     data: JSON.stringify({"sellMoney": money}),
 
                     error: function (request) {  //失败的话
-                        alert("Connection error");
-                        sellUSDT
+
                     },
                     success: function (data) {  //成功
 
@@ -294,6 +293,9 @@ var main = new Vue({
                                 alert("提现失败，提现金额需要大于0usdt！");
                             else if (data.message = "total money not enough")
                                 alert("提现失败，钱包usdt金额不足");
+                            else if (data.message="Successful completion of a fund transaction before withdrawal"){
+                                alert("成功完成一次基金交易才能提现")
+                            }
                             else
                                 alert("提现失败，需要先登录用户");
 

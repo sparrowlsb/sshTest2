@@ -50,10 +50,10 @@ public class CurbExchangeController extends BaseImpl {
 
         UserInfo userInfo=userInfoService.getPersonInfo(email);
 
-        if (userInfo.getStatus()!=2){
-            return getError(jsonObject, "Please confirm the real-name authentication first");
-
-        }
+//        if (userInfo.getStatus()!=2){
+//            return getError(jsonObject, "Please confirm the real-name authentication first");
+//
+//        }
 
         if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))<=0){
             return getError(jsonObject, "please sell >0 money");
@@ -88,11 +88,14 @@ public class CurbExchangeController extends BaseImpl {
 
         }
         UserInfo userInfo=userInfoService.getPersonInfo(email);
-        if (userInfo.getStatus()!=2){
-            return getError(jsonObject, "Please confirm the real-name authentication first");
-
+//        if (userInfo.getStatus()!=2){
+//            return getError(jsonObject, "Please confirm the real-name authentication first");
+//
+//        }
+        Integer count=fundService.haveFundTransactionRecord(userInfo.getUserId());
+        if (count==0){
+            return getError(jsonObject,"Successful completion of a fund transaction before withdrawal" );
         }
-
         synchronized (this) {
 
             Integer userId=userInfo.getUserId();

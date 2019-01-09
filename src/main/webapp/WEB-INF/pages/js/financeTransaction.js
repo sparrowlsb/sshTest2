@@ -4,7 +4,7 @@
 function buyfunction(fundId) {
     if (confirm("确定要购买该基金？")) {
         var buyNum = $("#buyNum").val();
-        if (buyNum != "" && buyNum > 0) {
+        if (buyNum != "" && buyNum >= 10) {
             var url = config.api_prefix + config.api_buyFund;
             $.ajax({
                 type: 'POST',
@@ -31,7 +31,10 @@ function buyfunction(fundId) {
                 }
 
             });
+        }else{
+            alert("最小交易额 10USDT")
         }
+
     }
 }
 function sellfunction(fundId) {
