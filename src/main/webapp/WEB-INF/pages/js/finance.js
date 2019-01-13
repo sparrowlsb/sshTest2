@@ -138,7 +138,7 @@ var tradeRecord = new Vue({
     }
 })
 
-var main = new Vue({
+var finance_main = new Vue({
     el: '#main',
     data: {
         status:0,

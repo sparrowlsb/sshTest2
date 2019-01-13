@@ -4,7 +4,7 @@
 function buyfunction(fundId) {
     if (confirm("确定要购买该基金？")) {
         var buyNum = $("#buyNum").val();
-        if (buyNum != "" && buyNum >= 10) {
+        if (buyNum != "" && buyNum >= 0) {
             var url = config.api_prefix + config.api_buyFund;
             $.ajax({
                 type: 'POST',
@@ -16,9 +16,18 @@ function buyfunction(fundId) {
                 success: function (data, textStatus) {
                     if (data.result == 1) {
                         alert('交易成功');
+
                         window.location.reload()
                     }else {
-                        alert('交易失败');
+                        if (data.message=="the minimum trader money 10 USDT"){
+                            alert("交易失败，最小买入金额 10USDT")
+                        }
+                        else if (data.message=="please entry the trader money"){
+                            alert("交易失败，输入大于0的交易金额")
+                        } else if (data.message=="please entry the right transaction money"){
+                            alert("交易失败，交易金额不足")
+                        }
+
                     }
                     var table = $('#buytable').DataTable();
                     table.draw(false);
@@ -31,8 +40,6 @@ function buyfunction(fundId) {
                 }
 
             });
-        }else{
-            alert("最小交易额 10USDT")
         }
 
     }

@@ -32,6 +32,7 @@ var vm = new Vue({
                 contentType: "application/json;charset=utf-8",
                 url: "/fund/fundsDetails",
                 success: function (data, textStatus) {
+                    alert("success")
                     if (data.result == 1) {
                         self.wallets = data.data.fundsDetails;
                         self.USDT = data.data.fundsDetails[0];

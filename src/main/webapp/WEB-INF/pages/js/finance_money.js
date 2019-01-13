@@ -167,7 +167,7 @@ var tradeRecord = new Vue({
     }
 })
 
-var main = new Vue({
+var m = new Vue({
     el: '#main',
     data: {
         status:0,
@@ -267,7 +267,7 @@ var main = new Vue({
         sellUSDT: function() {
             if (confirm("确定要提现usdt？")) {
                 var money = $("#sellMoney").val();
-                if (!money||money <= 0 || money > this.USDT.money) {
+                if (!money||money < 0 || money > this.USDT.money) {
                     alert("提现金额不能为0或者超过最大提现金额！");
                     return
                 }
@@ -296,6 +296,9 @@ var main = new Vue({
                                 alert("提现失败，钱包usdt金额不足");
                             else if (data.message=="Successful completion of a fund transaction before withdrawal"){
                                 alert("提现失败，成功完成一次基金交易才能提现");
+                            }
+                            else if (data.message=="the minimum trader money 10 USDT"){
+                                alert("提现失败，最小提现金额 10USDT");
                             }
                             else
                                 alert("提现失败，需要先登录用户");

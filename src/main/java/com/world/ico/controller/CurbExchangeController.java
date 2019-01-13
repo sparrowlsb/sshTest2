@@ -61,6 +61,10 @@ public class CurbExchangeController extends BaseImpl {
         if(userWallet.getSellMoney().compareTo(BigDecimal.valueOf(0.0))<=0){
             return getError(jsonObject, "please sell >0 money");
         }
+
+        if (userWallet.getSellMoney().compareTo(BigDecimal.valueOf(10.0))<0){
+            return  getError(jsonObject,"the minimum trader money 10 USDT");
+        }
         BigDecimal totalMoney=fundService.totalMoney(userInfo.getUserId(),"USDT");
         if(totalMoney.compareTo(userWallet.getSellMoney())==-1){
             return getError(jsonObject, "total money not enough");

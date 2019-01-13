@@ -149,9 +149,9 @@ public class FundController extends BaseImpl {
             return  getError(jsonObject,"please entry the trader money");
 
         }
-        if (fundTransaction.getTraderMoney().compareTo(BigDecimal.valueOf(10.0))<=0){
-            return  getError(jsonObject,"the minimum trader money 10 USDT");
-        }
+//        if (fundTransaction.getTraderMoney().compareTo(BigDecimal.valueOf(10.0))<0){
+//            return  getError(jsonObject,"the minimum trader money 10 USDT");
+//        }
         if (fundTransaction.getFundId()==0){
             return getError(jsonObject,"please entry the fundId");
 
