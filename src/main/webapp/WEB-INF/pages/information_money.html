@@ -14,14 +14,14 @@
     <link rel="stylesheet" type="text/css" href="css/finance.css">
     <script type="text/javascript" src="js/gm.js"></script>
 </head>
-<body>
+<div id="main">
 
 <!-- Start Page Loading -->
 <div class="loading"><img src="images/loading.gif" alt="loading-img"></div>
 <!-- End Page Loading -->
 <!-- START TOP -->
 <!-- 顶栏+左侧菜单+主内容 -->
-<div id="main">
+<div>
     <div id="top" class="clearfix">
 
         <!-- Start App Logo -->
@@ -458,16 +458,16 @@
             </div>
 
             <ul class="list-w-title">
-                <li v-for="r in records">
+                <li v-for="r in tradeRecords">
                     <a href="#">
-                        <span class="label" v-bind:class="buySaleClass(r.type)">{{buySaleText(r.type)}}</span>
+                        <span class="label" v-bind:class="tradeBuySaleClass(r.type)">{{tradeBuySaleText(r.type)}}</span>
                         <span class="date">{{r.transactionDate}}</span>
                         <h4>交易订单： # {{r.id}}</h4>
-                        <h4>{{buySaleText(r.type)}}基金：{{r.fundName}}</h4>
-                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
-                        <h4 v-show="r.type == 'SELL'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
-                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
-                        <h4 v-show="r.type == 'BUY'">{{buySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
+                        <h4>{{tradeBuySaleText(r.type)}}基金：{{r.fundName}}</h4>
+                        <h4 v-show="r.type == 'SELL'">{{tradeBuySaleText(r.type)}}数量：{{r.fundCount}} 个</h4>
+                        <h4 v-show="r.type == 'SELL'">{{tradeBuySaleText(r.type)}}手续费：{{r.managementCost}} 个</h4>
+                        <h4 v-show="r.type == 'BUY'">{{tradeBuySaleText(r.type)}}金额：{{r.traderMoney}} USDT</h4>
+                        <h4 v-show="r.type == 'BUY'">{{tradeBuySaleText(r.type)}}手续费：{{r.managementCost}} USDT</h4>
 
                         <h4>成交情况：{{r.transactionStatus}}</h4>
                     </a>
@@ -475,9 +475,9 @@
 
                 <nav aria-label="...">
                     <ul class="pager">
-                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
-                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="tradePrePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{tradeCurrentPage}}/{{tradeTotalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="tradeNextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
                     </ul>
                 </nav>
             </ul>
@@ -496,7 +496,7 @@
             <ul class="list-w-title">
                 <li v-for="r in charges">
                     <a href="#">
-                        <span class="label" v-bind:class="buySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
+                        <span class="label" v-bind:class="chargeBuySaleClass(r.exchangeType)">{{r.exchangeType}}</span>
                         <span class="date">{{r.exchangeDate}}</span>
                         <h4>交易订单： # {{r.id}}</h4>
                         <h4>{{r.exchangeType}}方式：{{r.exchangePlatform}}</h4>
@@ -508,9 +508,9 @@
 
                 <nav aria-label="...">
                     <ul class="pager">
-                        <li class="previous"><a href="javascript:void(0)" v-on:click="prePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
-                        <li class="page-num-text">{{currentPage}}/{{totalPages}}</li>
-                        <li class="next"><a href="javascript:void(0)" v-on:click="nextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+                        <li class="previous"><a href="javascript:void(0)" v-on:click="chargePrePage()"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+                        <li class="page-num-text">{{chargeCurrentPage}}/{{chargeTotalPages}}</li>
+                        <li class="next"><a href="javascript:void(0)" v-on:click="chargeNextPage()">下一页 <span aria-hidden="true">&rarr;</span></a></li>
                     </ul>
                 </nav>
             </ul>
@@ -521,7 +521,7 @@
 </div>
 <!-- END SIDEPANEL -->
 <!-- //////////////////////////////////////////////////////////////////////////// -->
-
+</div>
 </body>
 
 <!-- Start Footer -->

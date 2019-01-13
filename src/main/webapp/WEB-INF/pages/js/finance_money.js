@@ -1,172 +1,3 @@
-
-
-
-var histDataSet
-
-var charge = new Vue({
-    el: '#charge',
-    data: {
-        charges: [],
-        currentPage:0,
-        pageSize:0,
-        totalCount:0,
-        totalPages:0
-    },
-    methods: {
-        buySaleClass: function (type) {
-            if (type == "充值"){
-                return 'label-success'
-            }else if (type == "提现"){
-                return "label-danger"
-            }
-        },
-        nextPage: function () {
-            if (this.currentPage < this.totalPages) {
-                this.ajaxData(this.currentPage+1)
-            }
-        },
-        prePage: function () {
-            if (this.currentPage >1) {
-                this.ajaxData(this.currentPage-1)
-            }
-        },
-        ajaxData: function (page) {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/curb/getHist?page="+page,
-                success: function (data, textStatus) {
-                    console.log(data.data)
-                    if (data.result == 1) {
-
-                        self.charges = data.data.transactionHist;
-                        self.currentPage = data.data.currentPage;
-                        self.pageSize = data.data.pageSize;
-                        self.totalCount = data.data.totalCount;
-                        self.totalPages = data.data.totalPages;
-                    }
-                }
-            });
-        }
-    },
-    mounted: function(){
-        this.ajaxData(1)
-    }
-})
-
-var myWallet = new Vue({
-    el: '#myWallet',
-
-    data: {
-        wallets: [],
-        qqList: qqList
-    },
-    methods: {
-        ajaxData: function () {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/fund/fundsDetails",
-                success: function (data, textStatus) {
-                    if (data.result == 1) {
-                        self.wallets = data.data.fundsDetails;
-                    }
-                }
-            });
-        }
-    },
-    mounted: function(){
-        this.ajaxData()
-    }
-})
-var myWallet2 = new Vue({
-    el: '#myWallet2',
-
-    data: {
-        wallets: []
-    },
-    methods: {
-        ajaxData: function () {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/fund/fundsDetails",
-                success: function (data, textStatus) {
-                    if (data.result == 1) {
-                        self.wallets = data.data.fundsDetails;
-                    }
-                }
-            });
-        }
-    },
-    mounted: function(){
-        this.ajaxData()
-    }
-})
-var tradeRecord = new Vue({
-    el: '#tradeRecord',
-    data: {
-        records: [],
-        currentPage:0,
-        pageSize:0,
-        totalCount:0,
-        totalPages:0
-    },
-    methods: {
-        buySaleClass: function (type) {
-            if (type == "BUY"){
-                return 'label-success'
-            }else if (type == "SELL"){
-                return "label-danger"
-            }
-        },
-        buySaleText: function (type) {
-            if (type == "BUY"){
-                return "买入"
-            }else if (type == "SELL"){
-                return "卖出"
-            }
-        },
-        nextPage: function () {
-            if (this.currentPage < this.totalPages) {
-                this.ajaxData(this.currentPage+1)
-            }
-        },
-        prePage: function () {
-            if (this.currentPage >1) {
-                this.ajaxData(this.currentPage-1)
-            }
-        },
-        ajaxData: function (page) {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/fund/getHistory?page="+page,
-                success: function (data, textStatus) {
-                    if (data.result == 1) {
-                        self.records = data.data.HIST;
-                        self.currentPage = data.data.currentPage;
-                        self.pageSize = data.data.pageSize;
-                        self.totalCount = data.data.totalCount;
-                        self.totalPages = data.data.totalPages;
-                    }
-                }
-            });
-        }
-    },
-    mounted: function(){
-        this.ajaxData(1)
-    }
-})
-
 var m = new Vue({
     el: '#main',
     data: {
@@ -185,7 +16,24 @@ var m = new Vue({
         totalPages:0,
         wallets:[{type:"请先登录",money:""},{type:"请先登录",money:""},{type:"请先登录",money:""},{type:"请先登录",money:""}],
         USDT:{type:"usdt",money:"0"},
-        qqList: qqList
+        qqList: qqList,
+        //历史交易记录字段
+        tradeRecords: [],
+        tradeCurrentPage:0,
+        tradePageSize:0,
+        tradeTotalCount:0,
+        tradeTotalPages:0,
+        //充值提现记录
+        charges: [],
+        chargeCurrentPage:0,
+        chargePageSize:0,
+        chargeTotalCount:0,
+        chargeTotalPages:0,
+
+        qqList: qqList,
+
+        //charge table
+        chargeTable: {}
     },
     methods: {
         getUserInfo: function () {
@@ -265,6 +113,7 @@ var m = new Vue({
             });
         },
         sellUSDT: function() {
+            var self = this;
             if (confirm("确定要提现usdt？")) {
                 var money = $("#sellMoney").val();
                 if (!money||money < 0 || money > this.USDT.money) {
@@ -285,7 +134,14 @@ var m = new Vue({
 
                         if (data.result == 1) {
                             alert("提现成功，联系兑换商提现！")
-                            window.location.reload()
+                            //更新信息
+                            // this.getUserInfo();
+                            // this.getDailyPrice(this.fundId);
+                            // this.getMaxSell(this.fundId);
+                            // self.getMaxBuy();
+                            // self.getWallets();
+                            self.chargeAjaxData(1);
+                            self.historyTable();
                         } else if (data.result == 0) {
 
                             if (data.message == "Please confirm the real-name authentication first")
@@ -310,6 +166,7 @@ var m = new Vue({
             }
         },
         buyUSDT: function() {
+            var self = this;
             if (confirm("确定要充值usdt？")) {
 
                 var money = $("#buyMoney").val();
@@ -331,7 +188,14 @@ var m = new Vue({
                     success: function (data) {  //成功
                         if (data.result == 1) {
                             alert("充值成功，联系兑换商充值！")
-                            window.location.reload()
+                            //更新信息
+                            // this.getUserInfo();
+                            // this.getDailyPrice(this.fundId);
+                            // this.getMaxSell(this.fundId);
+                            // self.getMaxBuy();
+                            // self.getWallets();
+                            self.chargeAjaxData(1);
+                            self.historyTable();
                         } else if (data.result == 0) {
 
                             if (data.message == "Please confirm the real-name authentication first")
@@ -364,6 +228,149 @@ var m = new Vue({
             });
         },
 
+        //历史交易记录method
+        tradeBuySaleClass: function (type) {
+            if (type == "BUY"){
+                return 'label-success'
+            }else if (type == "SELL"){
+                return "label-danger"
+            }
+        },
+        tradeBuySaleText: function (type) {
+            if (type == "BUY"){
+                return "买入"
+            }else if (type == "SELL"){
+                return "卖出"
+            }
+        },
+        tradeNextPage: function () {
+            if (this.tradeCurrentPage < this.tradeTotalPages) {
+                this.tradeAjaxData(this.tradeCurrentPage+1)
+            }
+        },
+        tradePrePage: function () {
+            if (this.tradeCurrentPage >1) {
+                this.tradeAjaxData(this.tradeCurrentPage-1)
+            }
+        },
+        tradeAjaxData: function (page) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/fund/getHistory?page="+page,
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.tradeRecords = data.data.HIST;
+                        self.tradeCurrentPage = data.data.currentPage;
+                        self.tradePageSize = data.data.pageSize;
+                        self.tradeTotalCount = data.data.totalCount;
+                        self.tradeTotalPages = data.data.totalPages;
+                    }
+                }
+            });
+        },
+        //历史交易记录表格
+        historyTable: function () {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/curb/getHist",
+
+                success: function (data, textStatus) {
+                    var buyDataSet=data.data.transactionHist;
+                    console.log(buyDataSet)
+                    self.chargeTable = $('#buytable').DataTable( {
+                        searching:false,
+                        order: [5,'desc'],
+                        data: buyDataSet,
+                        destroy: true,
+                        retrieve:true,
+                        columns: [
+                            {title: "订单号",data:"id"},
+                            {
+                                title: "类型",
+                                data:"exchangeType",
+                                render: function(data,type,row,meta){
+                                    if (data=="提现"){
+                                        return '<span style="color:red">'+data+'</span>';
+                                    }else {
+                                        return '<span style="color:green">'+data+'</span>';
+                                    }
+                                }
+                            },
+                            {title: "交易方式",data:"exchangePlatform"},
+                            {title: "交易金额",data:"money"},
+                            {title: "订单状态",data:"status"},
+                            {title: "交易时间",data:"exchangeDate"}
+                        ],
+                        language: {
+                            "processing": "处理中...",
+                            "lengthMenu": "显示 _MENU_ 项结果",
+                            "zeroRecords": "没有匹配结果",
+                            "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "infoPostFix": "",
+                            "search": "搜索:",
+                            "url": "",
+                            "emptyTable": "表中数据为空",
+                            "loadingRecords": "载入中...",
+                            "infoThousands": ",",
+                            "paginate": {
+                                "first": "首页",
+                                "previous": "上页",
+                                "next": "下页",
+                                "last": "末页"
+                            },
+                            "aria": {
+                                "sortAscending": ": 以升序排列此列",
+                                "sortDescending": ": 以降序排列此列"
+                            }
+                        }
+                    } );
+                }
+            })
+        },
+        //充值提现记录
+        chargeBuySaleClass: function (type) {
+            if (type == "充值"){
+                return 'label-success'
+            }else if (type == "提现"){
+                return "label-danger"
+            }
+        },
+        chargeNextPage: function () {
+            if (this.chargeCurrentPage < this.totalPages) {
+                this.chargeAjaxData(this.chargeCurrentPage+1)
+            }
+        },
+        chargePrePage: function () {
+            if (this.chargeCurrentPage >1) {
+                this.chargeAjaxData(this.chargeCurrentPage-1)
+            }
+        },
+        chargeAjaxData: function (page) {
+            var self = this;
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json;charset=utf-8",
+                url: "/curb/getHist?page="+page,
+                success: function (data, textStatus) {
+                    if (data.result == 1) {
+                        self.charges = data.data.transactionHist;
+                        self.chargeCurrentPage = data.data.currentPage;
+                        self.chargePageSize = data.data.pageSize;
+                        self.chargeTotalCount = data.data.totalCount;
+                        self.chargeTotalPages = data.data.totalPages;
+                    }
+                }
+            });
+        },
     },
     mounted: function(){
         this.getUserInfo();
@@ -371,66 +378,14 @@ var m = new Vue({
         this.getMaxSell(this.fundId);
         this.getMaxBuy();
         this.getWallets();
+
+        //历史交易记录获取
+        this.tradeAjaxData(1);
+        //历史交易记录表格
+        this.historyTable();
+        //充值提现记录
+        this.chargeAjaxData(1)
     }
 })
 
-var buyDataSet=null;
-$.ajax({
-    type: 'GET',
-    dataType: "json",
-    contentType: "application/json;charset=utf-8",
-    url: "/curb/getHist",
-
-    success: function (data, textStatus) {
-        buyDataSet=data.data.transactionHist;
-        console.log(buyDataSet)
-        $('#buytable').DataTable( {
-            searching:false,
-            'order' : [5,'desc'],
-            data: buyDataSet,
-            columns: [
-                {title: "订单号",data:"id"},
-                {
-                    title: "类型",
-                    data:"exchangeType",
-                    render: function(data,type,row,meta){
-                        if (data=="提现"){
-                            return '<span style="color:red">'+data+'</span>';
-                        }else {
-                            return '<span style="color:green">'+data+'</span>';
-                        }
-                    }
-                },
-                {title: "交易方式",data:"exchangePlatform"},
-                {title: "交易金额",data:"money"},
-                {title: "订单状态",data:"status"},
-                {title: "交易时间",data:"exchangeDate"}
-            ],
-            language: {
-                "processing": "处理中...",
-                "lengthMenu": "显示 _MENU_ 项结果",
-                "zeroRecords": "没有匹配结果",
-                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                "infoFiltered": "(由 _MAX_ 项结果过滤)",
-                "infoPostFix": "",
-                "search": "搜索:",
-                "url": "",
-                "emptyTable": "表中数据为空",
-                "loadingRecords": "载入中...",
-                "infoThousands": ",",
-                "paginate": {
-                    "first": "首页",
-                    "previous": "上页",
-                    "next": "下页",
-                    "last": "末页"
-                },
-                "aria": {
-                    "sortAscending": ": 以升序排列此列",
-                    "sortDescending": ": 以降序排列此列"
-                }
-            }
-        } );
-    }
-})
 
