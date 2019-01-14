@@ -46,6 +46,17 @@ public class FundTransactionPo {
     @Column(name = "transaction_date")
     Timestamp transactionDate;
 
+    @Column(name = "buy_date")
+    String buyDate;
+
+    public String getBuyDate() {
+        return buyDate;
+    }
+
+    public void setBuyDate(String buyDate) {
+        this.buyDate = buyDate;
+    }
+
     public Integer getId() {
         return id;
     }

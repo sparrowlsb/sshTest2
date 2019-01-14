@@ -316,7 +316,7 @@ public class FundServiceImpl implements FundService {
         for (FundTransactionPo f :fundTransactionPos){
             FundTransaction fundTransaction=new FundTransaction();
             fundTransaction.setType(f.getType());
-            fundTransaction.setTransactionDate(String.valueOf(f.getTransactionDate()).split(" ")[0]);
+            fundTransaction.setTransactionDate(String.valueOf(f.getBuyDate()));
             fundTransaction.setFundPrice(f.getFundPrice());
 
 
