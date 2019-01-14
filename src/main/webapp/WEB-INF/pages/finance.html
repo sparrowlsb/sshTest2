@@ -22,7 +22,7 @@
 <!-- End Page Loading -->
 <!-- START TOP -->
 <!-- 顶栏+左侧菜单+主内容 -->
-<p hidden id="fundId">1</p>
+<p hidden="hidden" id="fundId">1</p>
 <div id="top" class="clearfix">
 
   <!-- Start App Logo -->
@@ -258,7 +258,7 @@
                   </div>
                 </div>
               </form>
-              <button v-on:click="buyfunction(1)" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
+              <button v-on:click="buyfunction()" class="btn btn-success"><i class="fa fa-check"></i>买入</button>
 
             </div>
 
@@ -281,7 +281,7 @@
 
 
               </form>
-              <button v-on:click="sellfunction(1)"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
+              <button v-on:click="sellfunction()"  class="btn btn-danger"><i class="fa fa-warning"></i>卖出</button>
 
             </div>
 
@@ -660,4 +660,3 @@ Plugin.js - Some Specific JS codes for Plugin Settings
 <script src="js/common/common.js"></script>
 <!--<script src="js/fundhist.js"></script>-->
 <script src="js/finance.js"></script>
-<!--<script src="js/financeTransaction.js"></script>-->

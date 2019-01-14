@@ -1,5 +1,6 @@
 package com.world.ico.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.world.ico.dao.UserInfoDao;
 import com.world.ico.dto.CurbExchange;
@@ -128,18 +129,20 @@ public class CurbExchangeController extends BaseImpl {
 
         }
         Integer pageSize = 5;
+        Boolean isPage = true;
         if (page == null){
             page = 1;
             pageSize = 99999;
+            isPage = false;
         }
 
         Integer userId=loginService.findEmailIdByEmail(email);
         Integer page1=pageSize*(page-1);
         Integer page2=pageSize;
-
+        ArrayList<CurbExchange> transactionHist = new ArrayList<>();
         if (userId!=0){
 
-            ArrayList<CurbExchange> transactionHist=fundService.getTransactionHist(userId,page1,page2);
+            transactionHist=fundService.getTransactionHist(userId,page1,page2);
             Integer fundCount=fundService.getTransactionHistoryCount(userId);
 
             Integer totalPages=(fundCount-1)/pageSize+1;
@@ -156,7 +159,11 @@ public class CurbExchangeController extends BaseImpl {
             jsonObject.put("totalCount",totalCount);
 
         }
-        return getSuccess(jsonObject,"" );
+        if (isPage){
+            return getSuccess(jsonObject,"" );
+        }else {
+            return getSuccess(transactionHist,"" );
+        }
 
 
     }

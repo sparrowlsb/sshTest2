@@ -133,15 +133,16 @@ var m = new Vue({
                     success: function (data) {  //成功
 
                         if (data.result == 1) {
-                            alert("提现成功，联系兑换商提现！")
+                            $("#sellMoney").val(null);
+                            alert("提现成功，联系兑换商提现！");
                             //更新信息
                             // this.getUserInfo();
                             // this.getDailyPrice(this.fundId);
                             // this.getMaxSell(this.fundId);
                             // self.getMaxBuy();
-                            // self.getWallets();
+                            self.getWallets();
                             self.chargeAjaxData(1);
-                            self.historyTable();
+                            self.chargeTable.ajax.reload();
                         } else if (data.result == 0) {
 
                             if (data.message == "Please confirm the real-name authentication first")
@@ -187,7 +188,8 @@ var m = new Vue({
                     },
                     success: function (data) {  //成功
                         if (data.result == 1) {
-                            alert("充值成功，联系兑换商充值！")
+                            $("#buyMoney").val(null);
+                            alert("充值成功，联系兑换商充值！");
                             //更新信息
                             // this.getUserInfo();
                             // this.getDailyPrice(this.fundId);
@@ -195,7 +197,7 @@ var m = new Vue({
                             // self.getMaxBuy();
                             // self.getWallets();
                             self.chargeAjaxData(1);
-                            self.historyTable();
+                            self.chargeTable.ajax.reload();
                         } else if (data.result == 0) {
 
                             if (data.message == "Please confirm the real-name authentication first")
@@ -273,67 +275,55 @@ var m = new Vue({
         },
         //历史交易记录表格
         historyTable: function () {
-            var self = this;
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                contentType: "application/json;charset=utf-8",
-                url: "/curb/getHist",
-
-                success: function (data, textStatus) {
-                    var buyDataSet=data.data.transactionHist;
-                    console.log(buyDataSet)
-                    self.chargeTable = $('#buytable').DataTable( {
-                        searching:false,
-                        order: [5,'desc'],
-                        data: buyDataSet,
-                        destroy: true,
-                        retrieve:true,
-                        columns: [
-                            {title: "订单号",data:"id"},
-                            {
-                                title: "类型",
-                                data:"exchangeType",
-                                render: function(data,type,row,meta){
-                                    if (data=="提现"){
-                                        return '<span style="color:red">'+data+'</span>';
-                                    }else {
-                                        return '<span style="color:green">'+data+'</span>';
-                                    }
-                                }
-                            },
-                            {title: "交易方式",data:"exchangePlatform"},
-                            {title: "交易金额",data:"money"},
-                            {title: "订单状态",data:"status"},
-                            {title: "交易时间",data:"exchangeDate"}
-                        ],
-                        language: {
-                            "processing": "处理中...",
-                            "lengthMenu": "显示 _MENU_ 项结果",
-                            "zeroRecords": "没有匹配结果",
-                            "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                            "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                            "infoFiltered": "(由 _MAX_ 项结果过滤)",
-                            "infoPostFix": "",
-                            "search": "搜索:",
-                            "url": "",
-                            "emptyTable": "表中数据为空",
-                            "loadingRecords": "载入中...",
-                            "infoThousands": ",",
-                            "paginate": {
-                                "first": "首页",
-                                "previous": "上页",
-                                "next": "下页",
-                                "last": "末页"
-                            },
-                            "aria": {
-                                "sortAscending": ": 以升序排列此列",
-                                "sortDescending": ": 以降序排列此列"
+            this.chargeTable = $('#buytable').DataTable( {
+                searching:false,
+                order: [5,'desc'],
+                ajax : config.api_prefix + "curb/getHist",
+                destroy: true,
+                retrieve:true,
+                columns: [
+                    {title: "订单号",data:"id"},
+                    {
+                        title: "类型",
+                        data:"exchangeType",
+                        render: function(data,type,row,meta){
+                            if (data=="提现"){
+                                return '<span style="color:red">'+data+'</span>';
+                            }else {
+                                return '<span style="color:green">'+data+'</span>';
                             }
                         }
-                    } );
+                    },
+                    {title: "交易方式",data:"exchangePlatform"},
+                    {title: "交易金额",data:"money"},
+                    {title: "订单状态",data:"status"},
+                    {title: "交易时间",data:"exchangeDate"}
+                ],
+                language: {
+                    "processing": "处理中...",
+                    "lengthMenu": "显示 _MENU_ 项结果",
+                    "zeroRecords": "没有匹配结果",
+                    "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                    "infoPostFix": "",
+                    "search": "搜索:",
+                    "url": "",
+                    "emptyTable": "表中数据为空",
+                    "loadingRecords": "载入中...",
+                    "infoThousands": ",",
+                    "paginate": {
+                        "first": "首页",
+                        "previous": "上页",
+                        "next": "下页",
+                        "last": "末页"
+                    },
+                    "aria": {
+                        "sortAscending": ": 以升序排列此列",
+                        "sortDescending": ": 以降序排列此列"
+                    }
                 }
-            })
+            } );
         },
         //充值提现记录
         chargeBuySaleClass: function (type) {
@@ -344,7 +334,7 @@ var m = new Vue({
             }
         },
         chargeNextPage: function () {
-            if (this.chargeCurrentPage < this.totalPages) {
+            if (this.chargeCurrentPage < this.chargeTotalPages) {
                 this.chargeAjaxData(this.chargeCurrentPage+1)
             }
         },
